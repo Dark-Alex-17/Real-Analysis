@@ -23,6 +23,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
 \newtheorem{corollary}{Corollary}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem*{remark}{Remark}
@@ -33,6 +34,107 @@
 \begin{document}
 	\maketitle
 	\begin{enumerate}
+	\item For the following sequences, i) write out the first 5 terms, ii) Use the Monotone Sequence Property to show that the sequences converges.
+	\begin{enumerate}
+		\item \textbf{Section 3.3}
+		\begin{enumerate}
+			\item[2)] Let $x_1 > 1$ and $x_{n+1} := 2-1/x_n$ for $n \in \N$. Show that $(x_n)$ is bounded and monotone. Find the limit.
+			\\\\ The first five terms of this sequence are $x_1 >1,x_2 > \frac{3}{2}, x_3 >\frac{4}{5}, x_4 > \frac{5}{4}, x_5 > \frac{6}{5}$. This sequence appears to be decreasing.
+			\\\\Recall the Monotone Sequence Property:
+			\begin{theorem*}{Monotone Sequence Property}
+				A monotone sequence of real numbers is convergent if and only if it is bounded. Further,
+				\begin{enumerate}
+					\item If $X=(x_n)$ is a bounded increasing sequence, then
+					\[\lim (x_n) = \sup \{x_n:n \in \N\}\]
+					
+					\item If $Y=(y_n)$ is a bounded decreasing sequence, then
+					\[\lim (y_n) = \inf \{y_n : n \in \N \}\]
+				\end{enumerate}
+			\end{theorem*}
+		
+			To show that this sequence converges, we must first find the possible limit points (fixed points) of this sequence. So,
+			\begin{align*}
+				x&=2-\frac{1}{x} \\
+				x^2 &= 2x -1 \\
+				x^2 - 2x + 1 &= 0 \\
+				(x-1)^2 &= 0
+			\end{align*}
+			Thus, $x=1$ is a possible limit of this sequence.
+			\\\\Now, we will prove that $(x_n)$ is bounded by $1$, and since we hypothesized that $(x_n)$ is decreasing, we say that $(x_n)$ is bounded below by 1. 
+			\begin{proof}
+				We want to show that the sequence $(x_n)$ is bounded below by 1; that is, we want to show that $1 \leq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+				\\\\\textbf{Basis Step:} Let $n=1$. Then
+				\begin{align*}
+					x_n &\geq x_{n+1}, &\text{by the definition of decreasing,} \\
+					x_1 &\geq x_{1+1} \\
+					x_1 &\geq x_2
+				\end{align*}
+			\end{proof}
+			
+			\item[3)] Let $x_1 > 1$ and $x_{n+1} := 1 + \sqrt{x_n - 1}$ for $n \in \N$. Show that $(x_n)$ is decreasing and bounded below by $2$. Find the limit.
+			
+			\item[7)] Let $x_1 := a>0$ and $x_{n+1} := x_n+1/x_n$ for $n \in \N$. Determine whether $(x_n)$ converges or diverges.
+			
+			\item[8)] Let $(a_n)$ be an increasing sequence, $(b_n)$ be a decreasing sequence, and assume that $a_n \leq b_n$ for all $n \in \N$. Show that $\lim (a_n) \leq \lim (b_n)$, and thereby deduce the Nested Intervals Property 2.5.2 from the Monotone Convergence Theorem 3.3.2.
+		\end{enumerate}
+		\item $a_1 = 1,\ a_{n+1}=\frac{a_n^2+5}{2a_n}$
+		
+		\item $a_1 = 5,\ a_{n+1}=\sqrt{4+a_n}$		
+	\end{enumerate}
 	
+	\item 
+	\begin{enumerate}
+		\item Show $a_n=\frac{3 \cdot 5 \cdot 7 \cdot \dots (2n-1)}{2 \cdot 4 \cdot 6 \dots (2n)}$ converges to $A$ where $0 \leq A < 1/2$.
+		
+		\item Show $b_n = \frac{2 \cdot 4 \cdot 6 \dots (2n)}{3 \cdot 5 \cdot 7 \dots (2n+1)}$ converges to $B$ where $0 \leq B < 2/3$.
+	\end{enumerate}
+
+	\item \textbf{Section 3.4}
+	\begin{enumerate}
+		\item[1)] Give an example of an unbounded sequence that has a convergent subsequence.
+		
+		\item[3)] Let $(f_n)$ be the Fibonacci sequence of Example 3.1.2(d), and let $x_n := f_{n+1}/f_n$. Given that $\lim (x_n) =L$ exists, determine the value of $L$.
+		
+		\item[4a)] Show that the sequence $(1-(-1)^n+1/n)$ converges.
+		
+		\item[16)] Give an example to show that Theorem 3.4.9 fails if the hypothesis that $X$ is a bounded sequences is dropped.
+		
+		\item[18)] Show that if $(x_n)$ is a bounded sequence, then $(x_n)$ converges if and only if $\lim \sup (x_n) = \lim \inf (x_n)$.
+		
+		\item[19)] Show that if $(x_n)$ and $(y_n)$ are bounded sequences, then
+		\[\lim \sup (x_n + y_n) \leq \lim \sup (x_n) + \lim \sup (y_n).\]
+		Give an example in which the two sides are not equal.
+	\end{enumerate}
+	\item 
+	\begin{enumerate}
+		\item Show that $x_n=e^{\sin (5n)}$ has a convergent subsequence.
+		
+		\item Give an example of a bounded sequence with three subsequences converging to three different numbers.
+		
+		\item Give an example of a sequence $x_n$ with $\lim \sup x_n = 5$ and $\lim \sup x_n = -3$.
+		
+		\item Let $\lim \sup x_n = 2$. True or False: if $n$ is sufficiently large, then $x_n > 1.99$.
+		
+		\item Compute the infimum, supremum, limit infimum, and limit supremum for $a_n = 3 - (-1)^n - (-1)^n/n$. 
+	\end{enumerate}
+
+	\item 
+	\begin{enumerate}
+		\item If $a_n$ and $b_n$ are strictly increasing, then $a_n + b_n$ is strictly increasing.
+		
+		\item If $a_n$ and $b_n$ are strictly increasing, then $a_n \cdot b_n$ is strictly increasing.
+		
+		\item If $a_n$ and $b_n$ are monotonic, then $a_n + b_n$ is monotonic.
+		
+		\item If $a_n$ and $b_n$ are monotonic, then $a_n \cdot b_n$ is monotonic.
+		
+		\item If a monotone sequence is bounded, then it is convergent.
+		
+		\item If a bounded sequence is monotone, then it is convergent.
+		
+		\item If a convergent sequence is monotone, then it is bounded.
+		
+		\item If a convergent sequence is bounded, then it is monotone.
+	\end{enumerate}
 	\end{enumerate}
 \end{document}
