@@ -191,7 +191,7 @@
 		\end{enumerate}
 		
 		\item $a_1 = 1,\ a_{n+1}=\frac{a_n^2+5}{2a_n}$
-		\\\\The first 5 terms of this sequence are $1, 3, \frac{7}{3}, \frac{47}{21}, \frac{2207}{987}, \dots$. This is an increasing sequence.
+		\\\\The first 5 terms of this sequence are $1, 3, \frac{7}{3}, \frac{47}{21}, \frac{2207}{987}, \dots$. This is a decreasing sequence.
 		\\\\First, we must find the possible limits (fixed points) of the sequence. So,
 		\begin{align*}
 			a&=\frac{a^2+5}{2a} \\
@@ -200,18 +200,68 @@
 			a &= \pm \sqrt{5}
 		\end{align*}
 		Since we're given that $a_1=1$, we know that the most likely lower bound will be $\sqrt{5}$.
-		\\\\Now we want to show that $(a_n)$ is bounded below by $-\sqrt{5}$.
+		\\\\Now we want to show that $(a_n)$ is bounded below by $\sqrt{5}$.
 		\begin{proof}
-			We want to show that $a_n \leq \sqrt{5},\ \forall\ n \in \N$. We prove it by method of mathematical induction.
-			\\\\\textbf{Basis Step:} Since $1 \geq -\sqrt{5}$, we have that $a_1 \geq -\sqrt{5}$
-			\\\\\textbf{Inductive Step:} Assume that $a_n \geq -\sqrt{5}\ \forall\ n \in \N$.
-			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq -\sqrt{5}\ \forall\ n \in \N$. So, 
+			We want to show that $a_n \geq \sqrt{5},\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+			\\\\\textbf{Basis Step:} Since $1 \geq \sqrt{5}$, we have that $a_1 \geq \sqrt{5}$
+			\\\\\textbf{Inductive Step:} Assume that $a_n \geq \sqrt{5}\ \forall\ n \in \N$.
+			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq \sqrt{5}\ \forall\ n \in \N$. So, 
+			\[a_{n+1} = \frac{a_n^2 + 5}{2a_n}\]
 			\begin{align*}
-				a_{n+1} &= \frac{a_n^2 + 5}{2a_n}
+				(a_n-\sqrt{5})^2 &\geq 0 \\
+				a_n^2 -2\sqrt{5}a_n +5 &\geq 0 \\
+				a_n^2 +5 &\geq 2\sqrt{5}a_n \\
+				\Downarrow \\
+				\frac{a_n^2+5}{2a_n} &\geq \frac{2\sqrt{5}a_n}{2a_n} \\
+				\frac{a_n^2+5}{2a_n} &\geq \sqrt{5} \\
+				a_{n+1} \geq \sqrt{5}
 			\end{align*}
+			Thus we have that $(a_n)$ is bounded below by $\sqrt{5}$.
 		\end{proof}
+		Now we must show that $(a_n)$ is monotone decreasing.\\
+		\begin{proof}
+			We want to show that $(a_n)$ is monotone decreasing; that is, we want to show that $(a_2 \geq a_3 \geq \dots \geq a_n),\ \forall\ n \geq 2$. We prove it by method of mathematical induction.
+			\\\\\textbf{Basis Step:} Since $3 \geq \frac{7}{3}$, we have that $a_2 \geq a_3$.
+			\\\\\textbf{Inductive Step:} Assume that $a_n \geq a_{n+1},\ \forall\ n \geq 2$.
+			\\\\\textbf{Show:} We want to show that $a_{n+2} \leq a_{n+1},\ \forall\ n \geq 2$.
+			\\So,
+			\[a_{n+2} = \frac{a_{n+1}^2+5}{2a_{n+1}} \leq \frac{a_n^2+5}{2a_n}\]
+			Since we have:
+			\begin{align*}
+				a_{n+1} &\geq \sqrt{5}, &\text{by the previous proof of boundedness} \\
+				a_{n+1}^2 &\geq 5
+			\end{align*}
+			We can equivalently write the inequality as
+			\[\frac{a_{n+1}^2+5}{2a_{n+1}} \leq \frac{a_{n+1}^2+a_{n+1}^2}{2a_{n+1}}=a_{n+1}\]
+			Thus we have that $(a_n)$ is monotone decreasing.
+		\end{proof}
+		Since $(a_n)$ is both monotone decreasing and bounded, we have
+		\begin{align*}
+			\lim (a_n) &= \inf \{a_n:n \in \N\} \\
+			&= \sqrt{5}
+		\end{align*} 
 		
-		\item $a_1 = 5,\ a_{n+1}=\sqrt{4+a_n}$		
+		\item $a_1 = 5,\ a_{n+1}=\sqrt{4+a_n}$
+		\\\\The first 5 terms of this sequence are $5, \sqrt{5}, \sqrt{7}, \frac{\sqrt{57}}{3}, \frac{\sqrt{2751}}{21}, \dots$. This sequence is decreasing.
+		\\\\First, we must find the possible limits (fixed points) of the sequence. So,
+		\begin{align*}
+			a&=\sqrt{4+a} \\
+			a^2 &= 4 + a \\
+			a^2 -a - 4 &= 0 \\
+		\end{align*}
+		So we have that $a=\frac{1}{2} - \sqrt{17}$, or $a=\frac{1}{2}+\sqrt{17}$. Since we're given that $a_1=5$, we infer that $\frac{1}{2}+\sqrt{17}$ is a possible limit (fixed point) of $(a_n)$.
+		\\\\Now we want to show that $(a_n)$ is bounded below by $\frac{1}{2}+\sqrt{17}$.
+		\begin{proof}
+			We want to show that $a_n \geq \frac{1}{2}+\sqrt{17},\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+			\\\\\textbf{Basis Step:} $5 \geq \frac{1}{2}+\sqrt{17}$ yields that $a_1 \ge \frac{1}{2}+\sqrt{17}$
+			\\\\\textbf{Inductive Step:} Assume $a_n \geq \frac{1}{2}+\sqrt{17},\ \forall\ n \in \N$.
+			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq \frac{1}{2}+\sqrt{17},\ \forall\ n \in \N$.
+			\\So,
+			\begin{align*}
+				a_{n+1} \ge \sqrt{4+a_n}
+			\end{align*}
+			
+		\end{proof}
 	\end{enumerate}
 	
 	\item 
