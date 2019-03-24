@@ -1,0 +1,428 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{definition*}{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 11}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 1							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Give an example of nonconstant functions $f$ and $g$ such that $(fg)'=f'g'$.\\
+		
+		Let $f(x)=e^{2x}=g(x)$. Then
+		\begin{align*}
+			(fg)'&=f'g' \\
+			f'(x)g(x)+f(x)g'(x) &= f'(x)g'(x) \\
+			2e^{2x} \cdot e^{2x} + e^{2x} \cdot 2e^{2x} &= 2e^{2x} \cdot 2e^{2x} \\
+			2e^{4x}+2e^{4x} &= 4e^{4x} \\
+			4e^{4x} &= 4e^{4x}
+		\end{align*}
+		Thus we have that $(fg)'=f'g'$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 2							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+		\item Suppose that $f$ is differentiable at 2 and 4 with $f(2)=2,\ f(4)=3,\ f'(2)=\pi$, and $f'(4)=e$.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			\item If $g(x)=xf(x^2)$, find $g'(2)$.\\
+			
+			\begin{align*}
+				g'(x) &= (xf(x^2))' \\
+				&= x' \cdot f(x^2)+x \cdot f'(x^2) \cdot 2x &\text{by the } \textit{Product Rule} \text{ and the } \textit{Chain Rule} \\
+				&= 1 \cdot f(x^2) + x \cdot f'(x^2) \cdot 2x \\
+				&\Downarrow \\
+				g'(2) &= f(x^2) + x \cdot f'(x^2) \cdot 2x \\
+				&= f(2^2) + 2 \cdot f'(2^2) \cdot 2(2)\\
+				&= f(4)+2 \cdot f'(4) \cdot 2(2) \\
+				&= 3+2 \cdot e \cdot 4 \\
+				&= 3+8e
+			\end{align*}
+			So $g'(2) = 3+8e$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item If $g(x)=f^2(\sqrt{x})$, find $g'(4)$.\\
+			
+			\begin{align*}
+				g'(x) &= ([f(\sqrt{x})]^2)' \\
+				&= 2[f(\sqrt{x})] \cdot f'(\sqrt{x}) \cdot \frac{1}{2\sqrt{x}} &\text{by the } \textit{Chain Rule} \\
+				&\Downarrow \\
+				g'(4) &= 2[f(\sqrt{4})] \cdot f'(\sqrt{4}) \cdot \frac{1}{2 \sqrt{4}} \\
+				&= 2 \cdot f(2) \cdot f'(2) \cdot \frac{1}{2 \cdot 2} \\
+				&= 2 \cdot 2 \cdot \pi \cdot \frac{1}{4} \\
+				&= \frac{4\pi}{4} \\
+				&= \pi
+			\end{align*}
+			So $g'(4)=\pi$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item If $g(x)=x/f(x^3)$, find $g'(\sqrt[3]{2})$. \\
+			
+			\begin{align*}
+				g'(x) &= \left(\frac{x}{f(x^3)}\right)' \\
+				&= \frac{x' \cdot f(x^3) - x \cdot f'(x^3) \cdot 3x^2}{\left(f(x^3)\right)^2} &\text{by the } \textit{Quotient Rule} \\
+				&= \frac{1 \cdot f(x^3)-x \cdot f'(x^3) \cdot 3x^2}{(f(x^3))^2} \\
+				&\Downarrow \\
+				g'(\sqrt[3]{2}) &= \frac{f((\sqrt[3]{2})^3)-\sqrt[3]{2} \cdot f'((\sqrt[3]{2})^3) \cdot 3(\sqrt[3]{2})^2}{(f((\sqrt[3]{2})^3))^2} \\
+				&= \frac{f(2)-3(\sqrt[3]{2})^2\sqrt[3]{2} \cdot f'(2)}{(f(2))^2} \\
+				&= \frac{2-3\cdot 2 \cdot \pi}{2^2} \\
+				&= \frac{2-6 \cdot \pi}{4} \\
+				&= \frac{1-3 \cdot \pi}{2}
+			\end{align*}
+			So $g'(\sqrt[3]{2})=\frac{1-3\pi}{2}$.\\
+			
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 3							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\item Determine if each function is differentiable at the given point. If so, find its derivative. If not, explain why not.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item At $x=1$ for $f(x)=\begin{cases}
+				3x-2 &\text{if } x<1 \\
+				x^3 &\text{if } x \geq 1
+			\end{cases}$\\
+			
+			We note that $f(1)=1^3=1$. First, let us find $f'(x)$ for each part of the function. So when $x<1$:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{3(x+h)-2-(3x-2)}{h} \\
+				&= \lim\limits_{h \to 0} \frac{3x+3h-2-3x+2}{h} \\
+				&= \lim\limits_{h \to 0} \frac{3h}{h} \\
+				&= \lim\limits_{h \to 0} 3 \\
+				&= 3
+			\end{align*}
+			So $f'(x)=3$ when $x <1$
+			And when $x \geq 1$:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{(x+h)^3-x^3}{h} \\
+				&= \lim\limits_{h \to 0} \frac{h^3-3h^2x+3hx^2+x^3-x^3}{h} \\
+				&= \lim\limits_{h \to 0} \frac{h^3-3h^2x+3hx^2}{h} \\
+				&= \lim\limits_{h \to 0} \frac{h(h^2-3hx+3x^2)}{h} \\
+				&= \lim\limits_{h \to 0} h^2-3hx+3x^2 \\
+				&= 0^2+3(0)x+3x^2 \\
+				&= 0+0+3x^2 \\
+				&= 3x^2
+			\end{align*}
+			So $f'(x)=3x^2$ when $x \geq 1$.\\
+			
+			Now we must check for differentiability when $x=1$. So
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 1^+} \frac{x^3-1}{x-1} \\
+				&= \lim\limits_{x \to 1^+} \frac{\cancel{(x-1)}(x^2+x+1)}{\cancel{(x-1)}} \\
+				&= \lim\limits_{x \to 1^+} (x^2+x+1) \\
+				&= 1^2+1+1 \\
+				&= 1 + 1 + 1 \\
+				&= 3
+			\end{align*}
+			And
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 1^-} \frac{3x-2-1}{x-1} \\
+				&= \lim\limits_{x \to 1^-} \frac{3x-3}{x-1} \\
+				&= \lim\limits_{x \to 1^-} \frac{3\cancel{(x-1)}}{\cancel{(x-1)}} \\
+				&= \lim\limits_{x \to 1^-} 3 \\
+				&= 3
+			\end{align*}
+			So since $\lim\limits_{x \to 1^-} \frac{f(x)-f(c)}{x-c} = 3 = \lim\limits_{x \to 1^+} \frac{f(x)-f(c)}{x-c}$, we have that the limits are equal, and thus the limit exists which yields that $f$ is differentiable at $x=1$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item At $x=1$ for $f(x):=\begin{cases}
+				2x+1 &\text{if } x < 1 \\
+				x^2 &\text{if } x \geq 1
+			\end{cases}$\\
+			
+			In order for $f$ to be differentiable, it must also be continuous. So let us first ensure that $f$ is continuous.\\
+			
+			So we have
+			\[\lim\limits_{x \to 1^-} f(x)=\lim\limits_{x \to 1^-} 2x+1 =2(1)+1=3\]
+			and
+			\[\lim\limits_{x \to 1^+} f(x)=\lim\limits_{x \to 1^+} x^2 = 1^2=1\]
+			Since $\lim\limits_{x \to 1^-} f(x) = 3 \neq 1 = \lim\limits_{x \to 1^+} f(x)$, we have that $f$ is not continuous, and thus $f$ is not differentiable at $x=1$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item At $x=1$ for $f(x):=\begin{cases}
+				3x-2 &\text{if } x<1 \\
+				x^2 &\text{if } x \geq 1
+			\end{cases}$\\
+			
+			We will show that $f$ is \textbf{not} differentiable at $x=1$. We first note that $f(1)=1^2=1$. Now let us find the derivatives of $f$ for each part of the piece wise function. So for $x<1$:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{3(x+h)-2-(3x-2)}{h} \\
+				&= \lim\limits_{h \to 0} \frac{3x+3h-2-3x+2}{h} \\
+				&= \lim\limits_{h \to 0} \frac{3h}{h} \\
+				&= \lim\limits_{h \to 0} 3 \\
+				&= 3
+			\end{align*}
+			So $f'(x)=3$ when $x<1$.\\
+			
+			And for the case where $x \geq 1$:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{(x+h)^2-x^2}{h} \\
+				&= \lim\limits_{h \to 0} \frac{h^2+2hx+x^2-x^2}{h} \\
+				&= \lim\limits_{h \to 0} \frac{h(h+2x)}{h} \\
+				&= \lim\limits_{h \to 0} (h+2x) \\
+				&= 0+2x \\
+				&=2x
+			\end{align*}
+			So $f'(x)=2x$ for $x \geq 1$.\\
+			
+			Now we must show that $f$ is \textbf{not} differentiable at $x=1$. So
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 1^-} \frac{3x-2-1}{x-1} \\
+				&= \lim\limits_{x \to 1^-} \frac{3x-3}{x-1} \\
+				&= \lim\limits_{x \to 1^-} \frac{3\cancel{(x-1)}}{\cancel{x-1}} \\
+				&= \lim\limits_{x \to 1^-} 3 \\
+				&= 3
+			\end{align*}
+			And
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 1^+} \frac{x^2-1}{x-1} \\
+				&= \lim\limits_{x \to 1^+} \frac{\cancel{(x-1)}(x+1)}{\cancel{x-1}} \\
+				&= \lim\limits_{x \to 1^+} (x+1) \\
+				&= 1+1 \\
+				&= 2
+			\end{align*}
+			So since $\lim\limits_{x \to 1^-} f(x) = 3 \neq 2 = \lim\limits_{x \to 1^+} f(x)$, we have that the limit does not exist at $x=1$, and thus $f$ is not differentiable at $x=1$, but is continuous.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (d)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item (Sec. 6.1, pr. 4) At $x=0$ for $f(x):=\begin{cases}
+				x^2 &\text{if } x \text{ is rational} \\
+				0 &\text{if } x \text{ is irrational}
+			\end{cases}$\\
+			
+			First, we note that $0 \in \Q$ and $f(0)=0^2=0$.\\
+			
+			Let $g(x):=\frac{f(x)-f(0)}{x-0}=\frac{f(x)}{x}$. Then for $x \neq 0$:
+			\[g(x):=\begin{cases}
+				x, & x \in \Q \\
+				0, & x \in \R \setminus \Q
+			\end{cases}\]
+			So, we have that the given function is differentiable at 0 if and only if $\lim\limits_{x \to 0} g(x)$ exists. In this case, the limit is $f'(0)$.\\
+			
+			We note that $-|x| \leq g(x) \leq |x|$, and that $\lim\limits_{x \to 0} -|x|=\lim\limits_{x \to 0} |x|= 0$.\\
+			
+			Recall the \textit{Squeeze Theorem}:
+			\begin{theorem*}[\textbf{Squeeze Theorem}]
+				Let $A \subseteq \R$, let $f,g,h:A \rightarrow \R$, and let $c \in \R$ be a cluster point of $A$. If
+				\[f(x) \leq g(x) \leq h(x)\ \ \ \ \text{for all}\ \ \ \ x \in A,\ x \neq c,\]
+				and if $\lim\limits_{x\to c} f = L = \lim\limits_{x\to c} h$, then $\lim\limits_{x\to c} g =L$.
+			\end{theorem*}
+			By the \textit{Squeeze Theorem} $\lim\limits_{x \to 0} g(x)=0$. Thus we have that $f$ is differentiable at $x=0$ and $f'(0)=0$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (e)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item At $x=0$ for $f(x):=\begin{cases}
+				x &\text{if } x \text{ is rational} \\
+				0 &\text{if } x \text{ is irrational}
+			\end{cases}$ \\
+			
+			We want to show that $f(x)$ is \textbf{not} differentiable at $x=0$. First we note that $f(0)=0$. So let us first find the derivatives of $f(x)$ for each piece of the function. So for $x \in \Q$:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{x+h-x}{h} \\
+				&= \lim\limits_{h \to 0} \frac{h}{h} \\
+				&= \lim\limits_{h \to 0} 1 \\
+				&= 1
+			\end{align*}
+			So $f'(x)=1$ when $x \in \Q$.\\
+			
+			Now, for $x \in \R \setminus \Q$:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{0-0}{h} \\
+				&= \lim\limits_{h \to 0} 0 \\
+				&= 0
+			\end{align*}
+			So $f'(x)=0$ when $x \in \R\setminus\Q$.\\
+			
+			Now we want to show that $f$ is \textbf{not} differentiable at $x=0$. So there's four cases we must consider: $x$ approaches zero from the left along a sequence of rational numbers, $x$ approaches zero from the right along a sequence of rational numbers, $x$ approaches zero from the left along a sequence of irrational numbers, and $x$ approaches zero from the right along a sequence of irrational numbers.\\
+			
+			For the case where $x$ approaches 0 from the left along a sequence of rational numbers:
+			\begin{align*}
+				\lim\limits_{x \to c^-} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \in \Q \to 0^-} \frac{f(x)-f(0)}{x-0} \\
+				&=\lim\limits_{x \in \Q \to 0^-} \frac{x-0}{x} \\
+				&= \lim\limits_{x \in \Q \to 0^-} \frac{x}{x} \\
+				&= \lim\limits_{x \in \Q \to 0^-} 1 \\
+				&= 1
+			\end{align*}
+			And for $x$ approaches 0 from the right along a sequence of rational numbers:
+			\begin{align*}
+				\lim\limits_{x \to c^+} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \in \Q \to 0^+} \frac{f(x)-f(0)}{x-0} \\
+				&= \lim\limits_{x \in \Q \to 0^+} \frac{x-0}{x} \\
+				&= \lim\limits_{x \in \Q \to 0^+} \frac{x}{x} \\
+				&= \lim\limits_{x \in \Q \to 0+} 1 \\
+				&= 1
+			\end{align*}
+			For the case where $x$ approaches 0 from the left along a sequence of irrational numbers:
+			\begin{align*}
+				\lim\limits_{x \to c^-} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \in \R \setminus \Q \to 0^-} \frac{f(x)-f(0)}{x-0} \\
+				&= \lim\limits_{x \in \R \setminus \Q \to 0^-} \frac{0-0}{x} \\
+				&= \lim\limits_{x \in \R \setminus \Q \to 0^-} \frac{0}{x} \\
+				&= \lim\limits_{x \in \R \setminus \Q \to 0^-} 0 \\
+				&= 0
+			\end{align*}
+			And for $x$ approaching 0 from the right along a sequence of irrational numbers:
+			\begin{align*}
+				\lim\limits_{x \to c^+} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \in \R \setminus \Q \to 0^+} \frac{f(x)-f(0)}{x-0} \\
+				&= \lim\limits_{x \in \R \setminus \Q \to 0^+} \frac{0-0}{x} \\
+				&= \lim\limits_{x \in \R \setminus \Q \to 0^+} \frac{0}{x} \\
+				&= \lim\limits_{x \in \R \setminus \Q \to 0^+} 0 \\
+				&= 0
+			\end{align*}
+			So we have that
+			\[\lim\limits_{x \in \Q \to 0^-} \frac{f(x)-f(0)}{x}=\lim\limits_{x \in \Q \to 0^+} \frac{f(x)-f(0)}{x}=1\] 
+			and 
+			\[0 = \lim\limits_{x \in \R \setminus \Q \to 0^+} \frac{f(x)-f(0)}{x} = \lim\limits_{x \in \R \setminus \Q \to 0^-} \frac{f(x)-f(0)}{x}\]
+			However, since these limits are not equal to each other since $0 \neq 1$, we have that the limit does not exist at $x=0$, and thus $f$ is \textbf{not} differentiable at $x=0$ but is continuous.\\
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 4							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\item 
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Prove: If $f$ is differentiable on $\R$, then $f'(x)=\lim\limits_{h \to 0} \frac{f(x)-f(x-h)}{h}$\\
+			
+			\begin{proof}
+				Assume that $f:A \subseteq \R \to \R$ is differentiable on $\R$. Then we know that
+				\[f'(x):=\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} = \lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h}\]
+				Recall the definition of the derivative:
+				\theoremstyle{definition}
+				\begin{definition*}
+					Let $I \subseteq \R$ be an interval, let $f:I \rightarrow \R$, and let $ c \in I$. We say that a real number $L$ is the \textbf{derivative of $f$ at $c$}  if given any $\varepsilon > 0$ there exists $\delta (\varepsilon) > 0$ such that if $x \in I$ satisfies $0 < |x-c|<\delta (\varepsilon)$, then
+					\[\abs{\frac{f(x)-f(c)}{x-c}-L}<\varepsilon.\]
+					In this case we say that $f$ is \textbf{differentiable} at $c$, and we write $f'(c)$ for $L$. In other words, the derivative of $f$ at $c$ is given by the limit
+					\[f'(c) = \lim_{x\to c} \frac{f(x)-f(c)}{x-c}\]
+					provided this limit exists. (We allow the possibility that $c$ may be the endpoint of the interval.)
+				\end{definition*}
+				Assume $f'(x)=L$ for some $L \in \R$. Then
+				\[\forall\ \varepsilon > 0,\ \exists\ \delta(\varepsilon) > 0 \st [x \in A \st 0<|x-c|<\delta(\varepsilon)] \implies \abs{\frac{f(x)-f(c)}{x-c}-L}<\varepsilon\]
+				Now, let $h:=x-c$. Then $c=x-h$. So
+				\[\forall\ \varepsilon > 0,\ \exists\ \delta(\varepsilon) > 0 \st [x \in A \st 0<|h|<\delta(\varepsilon)] \implies \abs{\frac{f(x)-f(x-h)}{h}-L}<\varepsilon\]
+				\[\equiv\]
+				\[\lim\limits_{h \to 0} \frac{f(x)-f(x-h)}{h}=L\]
+				And thus
+				\[f'(x)=\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c}=\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h}=\lim\limits_{h \to 0} \frac{f(x)-f(x-h)}{h}\]
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item Show $f'(x)=\lim\limits_{h \to 0} \frac{3f(x+h)-f(x)-2f(x-h)}{5h}$\\
+			
+			\begin{align*}
+				f'(x) &= \lim\limits_{h \to 0} \frac{3f(x+h)-f(x)-2f(x-h)}{5h} \\
+				&= \frac{3}{5}\lim\limits_{h \to 0} \frac{f(x+h)}{h} - \frac{1}{5} \lim\limits_{h \to 0} \frac{f(x)}{h} - \frac{2}{5} \lim\limits_{h \to 0} \frac{f(x-h)}{h} \\
+				&= \frac{3}{5}\lim\limits_{h \to 0} \frac{f(x+h)}{h} - \frac{3}{5} \lim\limits_{h \to 0} \frac{f(x)}{h} + \frac{2}{5} \lim\limits_{h \to 0} \frac{f(x)}{h} - \frac{2}{5} \lim\limits_{h \to 0} \frac{f(x-h)}{h} \\
+				&= \frac{3}{5} \lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} + \frac{2}{5} \lim\limits_{h \to 0} \frac{f(x)-f(x-h)}{h} \\
+				&= \frac{3}{5} \cdot f'(x)+\frac{2}{5} \cdot f'(x) \\
+				&= f'(x)
+			\end{align*}
+			Thus $f'(x)=\lim\limits_{h \to 0} \frac{3f(x+h)-f(x)-2f(x-h)}{5h}$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item Find constant $c$ such that $f'(x)=\lim\limits_{h \to 0} \frac{5f(x+h)-f(x)-4f(x-h)}{ch}$\\
+			
+			Let $c=9$. Then we want to show that
+			\[f'(x)=\lim\limits_{h \to 0}\frac{5f(x+h)-f(x)-4f(x-h)}{9h}\]
+			So
+			\begin{align*}
+				f'(x)&= \lim\limits_{h \to 0}\frac{5f(x+h)-f(x)-4f(x-h)}{9h} \\
+				&= \frac{5}{9} \lim\limits_{h \to 0} \frac{f(x+h)}{h} - \frac{1}{9} \lim\limits_{h \to 0} \frac{f(x)}{h} - \frac{4}{9} \lim\limits_{h \to 0} \frac{f(x-h)}{h} \\
+				&= \frac{5}{9} \lim\limits_{h \to 0} \frac{f(x+h)}{h} - \frac{5}{9} \lim\limits_{h \to 0} \frac{f(x)}{h} + \frac{4}{9} \lim\limits_{h \to 0} \frac{f(x)}{h} - \frac{4}{9} \lim\limits_{h \to 0} \frac{f(x-h)}{h} \\
+				&= \frac{5}{9} \lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} + \frac{4}{9} \lim\limits_{h \to 0} \frac{f(x)-f(x-h)}{h} \\
+				&= \frac{5}{9} \cdot f'(x) + \frac{4}{9} \cdot f'(x) \\
+				&= f'(x)
+			\end{align*}
+			Thus $f'(x)=\lim\limits_{h \to 0}\frac{5f(x+h)-f(x)-4f(x-h)}{ch}$ for $c=9$.\\
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 5							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\item Prove, if true or provide a counterexample, if false.\\
+		\textbf{For all parts:} Let $A$ be an interval, $c \in A$ and $f,g:A \to \R$.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ and $g$ are differentiable at $c$, then $f+g$ is differentiable at $c$.\\
+			
+			This is true by \textit{Theorem 6.1.3}:
+			\begin{theorem*}
+				Let $I \subseteq \R$ be an interval, let $c \in I$ , and let $f:I \rightarrow \R$ and $g:I \rightarrow \R$ be functions that are differentiable at $c$. Then:
+				\begin{enumerate}
+					\item If $\alpha \in \R$, then the function $\alpha f$ is differentiable at $c$, and \[(\alpha f)'(c) = \alpha f'(c)\]
+					
+					\item The function $f+g$ is differentiable at $c$, and 
+					\[(f+g)'(c) = f'(c)+g'(c)\]
+					
+					\item (Product Rule) The function $fg$ is differentiable at $c$, and
+					\[(fg)'(c) = f'(c)g(c) + f(c)g'(c).\]
+					
+					\item (Quotient Rule) If $g(c) \neq 0$, then the function $f/g$ is differentiable at $c$, and
+					\[\left( \frac{f}{g}\right)'(c) = \frac{f'(c)g(c)-f(c)g'(c)}{(g(c))^2}\]
+				\end{enumerate}
+			\end{theorem*}	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item If $f$ and $g$ are differentiable at $c$, then $g \circ f$ is differentiable at $c$.\\
+			
+			This is a false statement. Consider $f(x):=x+1$. Then $f(c)=c+1$.\\
+			
+			Let $g(x):=\begin{cases}
+				1, &x\leq c+1 \\
+				4, &x > c+1
+			\end{cases}$\\
+			
+			Then we have that $g'(c+1)$ does not exist, and thus $g$ is not differentiable at $f(c)$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item If $f=g^2$ and $f$ is differentiable on $(a,b)$, then $g$ is differentiable on $(a,b)$.\\
+			
+			This is a false statement. Consider $g^2:(0,1) \to \R$ given by $g(x):=-1$. Then $f:(0,1) \to \R$ is $f(x):=-1$, which is differentiable on $(0,1)$. However, $g$ is not differentiable on $(0,1)$ since $g(x):=\sqrt{-1}=i \notin \R$, and thus $g$ is not differentiable on $(0,1)$ since $(0,1) \subset \R$, and $i \notin (0,1)$.
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

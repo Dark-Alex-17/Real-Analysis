@@ -1,0 +1,332 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{definition*}{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 6}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 3.5}
+		\begin{enumerate}
+			\item[2)a)] Show directly from the definition that $\left(\frac{n+1}{n}\right)$ is a Cauchy sequence.
+			
+			\begin{proof}
+				Let $a_n:=(\frac{n+1}{n})=(1+\frac{1}{n})$ be a sequence. We want to show that $\forall\ \varepsilon > 0,\ \exists\ H(\varepsilon) \in \N \st \forall\ x_n,x_m \in a_n,\ |x_n-x_m|<\varepsilon,\ \text{for } m,n \geq H(\varepsilon)$.
+				\\\\Recall that if $\varepsilon > 0,\ \exists\ n_\varepsilon \in \N \st 0<\frac{1}{n_\varepsilon}<\varepsilon$. So, we want to show that if we let $n_\varepsilon=H(\varepsilon)$, $\frac{1}{H(\varepsilon)}<\frac{\varepsilon}{2}$.
+				\\\\Let $m>n \geq H(\varepsilon)$.
+				\\\\So,
+				\begin{align*}
+					\abs{\frac{m+1}{m}-\frac{n+1}{n}}&=\abs{\frac{1}{m}-\frac{1}{n}} \\
+					&\leq \frac{1}{m}+\frac{1}{n} &\text{by the Triangle Inequality} \\
+					&\leq \frac{2}{n} &\text{since } m>n \Rightarrow \frac{1}{m}<\frac{1}{n} \\
+					&\leq \frac{2}{H(\varepsilon)} &\text{since } n \geq H(\varepsilon) \\
+					&< \varepsilon &\text{since } \frac{1}{H(\varepsilon)} < \frac{\varepsilon}{2}
+				\end{align*}
+				Thus, $a_n=(\frac{n+1}{n})$ is a Cauchy sequence.
+			\end{proof}
+			
+			\item[3)b)] Show directly from the definition that $\left(n+\frac{(-1)^n}{n}\right)$ is not a Cauchy sequence.
+			\\\\Let $x_n:=n+\frac{(-1)^n}{n}$, for $n \geq 1$.
+			\\\\Then we have the following:
+			\begin{align*}
+				x_{n+1}-x_n &= (n+1)+\frac{(-1)^{n+1}}{n+1}-n-\frac{(-1)^n}{n} \\
+				&=1+\frac{(-1)^{n+1}}{n+1}-\frac{(-1)^n}{n} \\
+				&=1+(-1)^{n+1}\left(\frac{1}{n+1}+\frac{1}{n}\right)
+			\end{align*}
+			So,
+			\begin{align*}
+				x_{2m+2}-x_{2m+1} &=1+(-1)^{2m+1+1}\left(\frac{1}{2m+2}+\frac{1}{2m+1}\right) \\
+				&=1 +\frac{1}{2m+2}+\frac{1}{2m+1}
+			\end{align*}
+			Thus, $|x_{2m+2}-x_{2m+1}|>1$. Hence, if we let $\varepsilon=\frac{1}{2}$, there doesn't exist $H(\varepsilon) \in \N \st |x_n-x_m|<\frac{1}{2},\ \forall\ m,n \geq H(\varepsilon)$. This is because 
+			\[\abs{x_{2H(\varepsilon)+2}-x_{2H(\varepsilon)+1}} = 1 + \frac{1}{2H(\varepsilon)+2}+\frac{1}{2H(\varepsilon)+1}>1>\frac{1}{2}\]
+			Thus, $\left(n+\frac{(-1)^n}{n}\right)$ is not a Cauchy sequence.\\
+			
+			\item[4)] Show directly from the definition that if $(x_n)$ and $(y_n)$ are Cauchy sequences, then $(x_n+y_n)$ and $(x_ny_n)$ are Cauchy sequences.
+			\begin{proof}
+				Recall \textit{Lemma 3.5.4}:
+				\begin{lemma*}
+					A Cauchy sequence of real numbers is bounded.
+				\end{lemma*}
+				Thus, we have that $(x_n)$ and $(y_n)$ are bounded. By the definition of boundedness, we know that there exists $M_1,M_2 \in \R$ such that the following hold:
+				\[\exists M_1>0 \st |x_n|\leq M_1\ \forall\ n \in \N\]
+				and
+				\[\exists M_2>0 \st |y_n| \leq M_2 \forall\ n \in \N\]
+				Let $M=\max \{M_1, M_2\}$.
+				\\\\Since $(x_n)$ and $(y_n)$ are Cauchy sequences, we have the following:
+				\[\forall\ \varepsilon>0,\ \exists\ H_1(\varepsilon) \in \N \st |x_n-x_m|<\frac{\varepsilon}{2},\ \forall\ m,n\geq H_1(\varepsilon)\]
+				\[\forall\ \varepsilon>0,\ \exists\ H_2(\varepsilon) \in \N \st |y_n-y_m|<\frac{\varepsilon}{2},\ \forall\ m,n\geq H_2(\varepsilon)\]
+				Thus, by the Triangle Inequality, we have
+				\[|(x_n+y_n)-(x_m+y_m)|\leq|x_n-x_m|+|y_n-y_m|\]
+				Let $H(\varepsilon) = \max \{H_1(\varepsilon), H_2(\varepsilon)\}$. Then we have that $|x_n-x_m| \leq \frac{\varepsilon}{2}$ and $|y_n-y_m| \leq \frac{\varepsilon}{2},\ \forall\ m,n \geq H(\varepsilon)$. Thus,
+				\[|(x_n+y_n)-(x_m-y_m)| \leq \frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon,\ \forall\ m,n \geq H(\varepsilon)\]
+				$\therefore\ (x_n+y_n)$ is Cauchy.
+				\\\\Similarly, to show that $x_ny_n$ is Cauchy, we have
+				\begin{align*}
+					|x_ny_n-x_my_m| &= |x_ny_n-y_nx_m+x_my_n-x_my_m| \\
+					&\leq |y_n||x_n-x_m|+|x_m||y_n-y_m| \\
+					&\leq M(|x_n-x_m|+|y_n-y_m|) \\
+					&\leq M \left(\frac{\varepsilon}{2}+\frac{\varepsilon}{2}\right), &\forall\ n,m\geq H(\varepsilon) \\
+					&= M_\varepsilon
+				\end{align*} 
+				Note that we can initially replace $\varepsilon$ by $\frac{\varepsilon}{M}$ to get $|x_ny_n-x_my_m|\leq \varepsilon,\ \forall\ n,m \geq H(\varepsilon)$.
+				\\\\Thus we have that $(x_ny_n)$ is also Cauchy.
+				
+			\end{proof}
+			
+			\item[5)] If $x_n:= \sqrt{n}$, show that $(x_n)$ satisfies $\lim |x_{n+1}-x_n|=0$, but that it is not a Cauchy sequence.
+			\\\\Note that $(x_n)$ is an unbounded sequence. By the \textit{Cauchy Convergence Criterion}, since $\sqrt{n}$ is not bounded, $(x_n)$ is not a Cauchy sequence. Now, we only must show that $|x_{n+1}-x_n|$ converges to 0. 
+			\\So,
+			\begin{align*}
+				|x_{n+1}-x_n| &= \sqrt{n+1}-\sqrt{n} \\
+				&= \frac{1}{\sqrt{n+1}+\sqrt{n}} \\
+				\Rightarrow \lim\limits_{n \to \infty} |x_{n+1}-x_n| &= \lim\limits_{n \to \infty} \frac{1}{\sqrt{n+1}+\sqrt{n}} \\
+				&=0
+			\end{align*}
+			Thus, we have that $\lim |x_{n+1}-x_n|=0$, but $(x_n)$ is not Cauchy.\\
+			
+			\item[12)] If $x_1>0$ and $x_{n+1}:=(2+x_n)^{-1}$ for $n \geq 1$, show that $(x_n)$ is a contractive sequence. Find the limit.
+			\begin{proof}
+				Recall the definition of a contractive sequence:
+				\theoremstyle{definition}
+				\begin{definition*}
+					We say that a sequence $(x_n)$ of real numbers is \textbf{contractive} if there exists a constant $C$, $0<C<1$, such that
+					\[|x_{n+2}-x_{n+1}| \leq C|x_{n+1}-x_n|\]
+					for all $n \in \N$. The number $C$ is called the \textbf{constant} of the contractive sequence.
+				\end{definition*}
+				For $(x_n)$, we have the following:
+				\begin{align*}
+					|x_{n+2}-x_{n+1}| &= |(2+x_{n+1})^{-1}-(2+x_n)^{-1}| \\
+					&= \abs{\frac{1}{2+x_{n+1}}-\frac{1}{2+x_n}} \\
+					&= \abs{\frac{2-x_n-(2+x_{n+1})}{(2+x_{n+1})(2+x_n)}} \\
+					&= \frac{|x_n-x_{n+1}|}{(2+x_{n+1})(2+x_n)} \\
+					&\leq \frac{|x_n-x_{n+1}|}{(2+0)(2+0)} \\
+					&= \frac{1}{4} \cdot |x_{n+1}-x_n|
+				\end{align*}
+				Thus, if we let $C=\frac{1}{4}$, then $(x_n)$ is a contractive sequence.
+			\end{proof}
+			Now we want to find the limit of $(x_n)$.
+			\\\\Recall \textit{Theorem 3.5.8}:
+			\begin{theorem*}
+				Every contractive sequence is a Cauchy sequence, and therefore is convergent.
+			\end{theorem*}
+			By \textit{Theorem 3.5.8}, we have that $\lim (x_n)=x$ exists, and since we know that $\lim (x_{n+1})=\lim (x_n)=x$, we have the following:
+			\begin{align*}
+				x_{n+1} &= (2+x_n)^{-1} \\
+				x_{n+1} &= \left.\frac{1}{2+x_n}\ \ \ \ \ \right| \lim \\
+				x &= \frac{1}{2+x}\ \ \ \ \ \left.\right| \cdot (2+x) \\
+				x^2+2x &=1 \\
+				x^2+2x-1 &= 0 \\
+				x &= \frac{-2 \pm \sqrt{4-4 \cdot 1 \cdot (-1)}}{2} \\
+				x_a &= -1-\sqrt{2} < 0 \\
+				x_b &= -1 + \sqrt{2}>0
+			\end{align*}
+			Since $x_n>0,\ \forall\ n$, we know that $x_a<0$ cannot be the limit, and thus we can conclude that $\lim (x_n)=-1+\sqrt{2}$.\\
+			
+			\item[13)] If $x_1:=2$ and $x_{n+1}:=2+1/x_n$ for $n \geq 1$, show that $(x_n)$ is a contractive sequence. What is the limit?
+			\begin{lemma}
+				We want to show that $x_n\geq 2\ \forall\ n \in \N$. We prove this by method of mathematical induction.
+				\\\\\textbf{Basis Step:} Let $n=1$. Then we have that $x_1=2 \geq 2$.
+				\\\\\textbf{Inductive Step:} Assume that $x_n \geq 2$ for arbitrary $n \in \N$.
+				\\\\\textbf{Show:} We want to now show that $x_{n+1} \geq 2,\ \forall\ n \in \N$. So we have the following:
+				\begin{align*}
+					x_{n+1} &= 2 + \frac{1}{x_n} \\
+					&\geq 2+0 \\
+					&=2
+				\end{align*}
+				$\therefore$ by mathematical induction, we have that $x_n\geq 2,\ \forall\ n \in \N$
+			\end{lemma}
+			
+			\begin{proof}
+				By the definition of a contractive sequence, we have the following:
+				\begin{align*}
+					|x_{n+2}-x_{n+1}| &= \abs{\left(2+\frac{1}{x_{n+1}}\right)- \left(2+\frac{1}{x_n}\right)} \\
+					&=\abs{\frac{1}{x_n+1}-\frac{1}{x_n}} \\
+					&= \abs{\frac{x_n-x_{n+1}}{x_{n+1} \cdot x_n}}
+					&\leq \abs{\frac{x_n-x_{n+1}}{2 \cdot 2}} &\text{by Lemma 0.1} \\
+					&= \frac{1}{4}|x_n-x_{n+1}|
+				\end{align*}
+				So, if we let $C=\frac{1}{4}$, then we have shown that by the definition of a contractive sequence, $(x_n)$ is contractive. 
+				
+			\end{proof}
+			Now we want to find the limit of $(x_n)$. By \textit{Theorem 3.5.8}, we have that since $(x_n)$ is contractive, it is also convergent. Thus, we know that $\lim (x_n)=x$ exists, and since we also know that $\lim (x_{n+1})=\lim (x_n)=x$, we have the following:
+			\begin{align*}
+				x_{n+1} &=2 + \frac{1}{x_n}\ \ \ \ \ \left.\right| \lim \\
+				x &=2+\frac{1}{x}\ \ \ \ \ \left.\right| \cdot x \\
+				x^2 &= 2x + 1 \\
+				x^2-2x-1 &= 0 \\
+				x &= \frac{2 \pm \sqrt{4 - 4 \cdot 1 \cdot (-1)}}{2} \\
+				x_a &= 1-\sqrt{2} < 2 \\
+				x_b &= 1+\sqrt{2}>2
+			\end{align*}
+			By \textit{Lemma 0.1}, we know that $x_n \geq 2,\ \forall\ n \in \N$, and thus we know that $x_a<2$ can't be the limit. Thus, we can conclude that $\lim (x_n)=1 +\sqrt{2}$.
+		\end{enumerate}
+	
+		\item Find examples of sequences of real numbers satisfying each set of properties:
+		\begin{enumerate}
+			\item Cauchy, but not monotone
+			\\\\Consider the sequence $a_n:=(1,\frac{1}{3},\frac{1}{2},\frac{1}{5},\frac{1}{4}, \dots)$. Notice that $\forall\ \varepsilon > 0,\ \exists\ H(\varepsilon) \in \N \st |a_n-a_m|<\varepsilon,\ \text{for}\ m,n \in \N,\ \forall\ m,n \geq H(\varepsilon)$. Thus, this sequence satisfies the definition of a Cauchy sequence, and thus it is a Cauchy sequence. However, notice that while it is decreasing overall, it is not decreasing in a way that coincides with the definition of monotone decreasing. 
+			\\\\That is, in order for this sequence to be considered monotone decreasing, we must have the following:
+			\[a_1 \geq a_2 \geq a_3 \geq a_4 \geq a_5 \geq \dots \geq a_n,\ \forall\ n \in \N\]
+			But, given the first five terms of this sequence, we have
+			\[1 \geq \frac{1}{3} \leq \frac{1}{2} \geq \frac{1}{5} \leq \frac{1}{4} \dots\]
+			Hence this sequence is Cauchy but not monotone.\\
+			
+			\item Monotone, but not Cauchy
+			\\\\Consider the sequence $a_n:=(1,4,9,16,25,\dots)=n^2$. This sequence is monotone, since it is an increasing sequence, however it is not Cauchy. Consider $\varepsilon=1$. Since $(a_n)$ is an increasing sequence, we have that for any two $m,n \in \N$, $|a_n-a_m| > 1$. Thus, $\nexists\ H(\varepsilon) \in \N \st \forall\ \varepsilon > 0,\ |a_n-a_m|<\varepsilon,\ \text{for}\ m,n\in \N,\ \forall\ m,n \geq H(\varepsilon)$. Thus $(a_n)$ is a monotone sequence but it is not a Cauchy sequence.\\
+			
+			\item (Section 3.5, Problem 1) Bounded, but not Cauchy
+			\\\\Consider the sequence $a_n:=(-1,1,-1,1,-1, \dots)=(-1)^n$. This sequence is bounded above by $1$ and is bounded below by $-1$, and thus this sequence is bounded. However, since $\forall\ m,n \in \N,\ |a_n-a_m|=|a_m-a_n|=2$, we have that the sequence is not Cauchy. Consider $\varepsilon = 1$. Then we have that $\nexists\ H(\varepsilon) \in \N \st |a_n-a_m|<\varepsilon,\ \text{for}\ m,n \in \N,\ \forall\ m,n\geq H(\varepsilon)$. Thus, we have a sequence that is bounded, but is not a Cauchy sequence.\\
+		\end{enumerate}
+		
+		\item
+		\begin{enumerate}
+			\item Let $a_n=\frac{1}{2}+\frac{1}{6}+ \dots + \frac{1}{n(n+1)}$. Show $a_n$ is Cauchy.
+			\begin{proof}
+				Let $a_n=\frac{1}{2}+\frac{1}{6}+ \dots + \frac{1}{n(n+1)}$. We want to show that $a_n$ is Cauchy. That is, we want to show that $\forall\ \varepsilon>0,\ \exists\ H(\varepsilon) \in \N, \st |a_m-a_n|<\varepsilon,\ \forall\ m,n\geq H(\varepsilon)$.
+				\\\\Let $\varepsilon >0$ be given. Without loss of generality, let $m \geq n$. Then we have that $0<a_m-a_n$, which yields the following:
+				\begin{align*}
+					&= \left(\frac{1}{2}+\frac{1}{6}+ \dots + \frac{1}{n(n+1)}+\frac{1}{(n+1)(n+2)}+ \dots + \frac{1}{m(m+1)}\right) - \left(\frac{1}{2} + \dots + \frac{1}{n(n+1)}\right) \\
+					&= \frac{1}{(n+1)(n+2)}+ \dots + \frac{1}{m(m+1)} \\
+					&= \left(\frac{1}{n+1}-\frac{1}{n+2}\right)+ \left(\frac{1}{n+2}-\frac{1}{n+3}\right) + \dots + \left(\frac{1}{m}-\frac{1}{m+1}\right) \\
+					&= \frac{1}{n+1}-\frac{1}{m+1} < \frac{1}{n+1} < \frac{1}{n}=\varepsilon
+				\end{align*}
+				So, if we let $H(\varepsilon)\geq \frac{1}{\varepsilon}$, we then have that $|a_m-a_n|<\varepsilon,\ \forall\ m,n\geq H(\varepsilon)$.
+				\\\\$\therefore\ a_n$ is Cauchy.
+			\end{proof}
+			
+			\item Let $a_n$ satisfy $|a_n-a_{n+1}| \leq 1/3^n$. Show $a_n$ converges.
+			\begin{proof}
+				First note that if we let $b_n:=\frac{1}{3^n}$, then we have the sequence $b_n=(\frac{1}{3}, \frac{1}{9}, \frac{1}{27})$. Notice that this sequence is a Cauchy sequence. This is because if we have the following:
+				\begin{align*}
+					3^n &< 3^{2n} \\
+					\Rightarrow \frac{1}{3^n} &> \frac{1}{3^{2n}}
+				\end{align*}
+				Thus we have that if we let $\varepsilon = \frac{1}{3^n}$, then $|a_n-a_{n+1}|<\frac{1}{3^2n}<\frac{1}{3^n}=\varepsilon$. So, if we let $H(\varepsilon)=\frac{\log (\frac{1}{\varepsilon})}{2 \log (3)}$, then $\forall\ n \geq H(\varepsilon),\ |a_n-a_{n+1}|<\varepsilon$. Consider if we let $m=n+1$. Then we can rewrite this as follows:
+				\[\forall\ \varepsilon>0,\ \exists\ H(\varepsilon) \in \N \st |a_n-a_m|<\varepsilon,\ \forall\ m,n \geq H(\varepsilon),\ \text{where}\ H(\varepsilon)=\frac{\log (\frac{1}{\varepsilon})}{2 \log (3)}\]
+				Thus we have that any sequence $a_n$ that satisfies this property must be a Cauchy Sequence. Thus by the \textit{Cauchy Convergence Criteria}, we have that $a_n$ is convergent since it is also Cauchy. Hence $\lim (a_n) = A$ exists.
+			\end{proof}
+			
+			\item Prove that if $a_n$ converges, then $\lim\limits_{n \to \infty} |a_{n+1}-a_n|=0$.
+			\begin{proof}
+				Suppose that $(a_n)$ is a convergent sequence. Then we have that by the \textit{Cauchy Convergence Criterion}, $(a_n)$ is a Cauchy sequence.
+				\\\\Recall \textit{Theorem 3.1.3}:
+				\begin{theorem*}
+					Let $X=(x_n:n \in \N)$ be a sequence of real numbers and let $m \in \N$. Then the $m$-tail $X_m=(x_{m+n}:n \in \N)$ of $X$ converges if and only if $X$ converges. In this case, $\lim X_m = \lim X$.
+				\end{theorem*}
+				Thus by \textit{Theorem 3.1.3}, we have that if we let $m=1$, then $a_{m+n}=a_{n+1}$ also converges since $a_n$ converges.
+				\\\\Also, recall \textit{Theorem 3.4.2}:
+				\begin{theorem*}
+					If a sequence $X=(x_n)$ of real numbers converges to a real number $x$, then any subsequence $X'=(x_{n_k})$ of $X$ also converges to $x$.
+				\end{theorem*}
+				Thus we have that since the sequence $(a_{n+1})$ is a subsequence of $(a_n)$, by \textit{Theorem 3.4.2}, the subsequence $(a_{n+1})$ also converges to $x$.
+				\\\\Let $\lim\limits_{n \to \infty} (a_n)=A$ and let $\lim\limits_{n \to \infty} (a_{n+1}) = B$, for $A,B \in \R$. 
+				\\\\Consider first the sequence generated by $(a_{n+1}-a_n)$.
+				\\\\Recall \textit{Theorem 3.2.3}:
+				\begin{theorem*}
+					\begin{enumerate}
+						\item Let $X=(x_n)$ and $Y=(y_n)$ be sequences of real numbers that converge to $x$ and $y$, respectively, and let $c \in \R$. Then t he sequences $X+Y, X-Y, X \cdot Y$, and $cX$ converge to $x+y, x-y, xy$, and $cx$, respectively.
+						
+						\item If $X=(x_n)$ converges to $x$ and $Z=(z_n)$ is a sequence of nonzero real numbers that converges to $z$ and if $z \neq 0$, then the quotient sequence $X/Z$ converges to $x/z$.
+					\end{enumerate}
+				\end{theorem*}
+			Thus, by \textit{Theorem 3.2.3}, we have
+			\[\lim\limits_{n \to \infty} (a_{n+1}-a_n)=B-A\]
+			However, since we have that $\lim\limits_{n \to \infty} (a_n)=x$ and by \textit{Theorem 3.4.2}, since $(a_{n+1})$ is a subsequence of $(a_n)$, we know that 
+			\[\lim\limits_{n \to \infty} (a_{n+1}) = \lim\limits_{n \to \infty} (a_n) = x\]
+			Which yields that $A=x=B$. So, we have
+			\[\lim\limits_{n \to \infty} (a_{n+1}-a_n)=B-A=A-A=B-B=x-x=0\]
+			Hence,
+			\[\lim\limits_{n \to \infty} |a_{n+1}-a_n|=|0|=0\]
+			$\therefore$ if $(a_n)$ converges, then $\lim\limits_{n \to \infty} |a_{n+1}-a_n| = 0$.
+			\end{proof}
+			
+			\item Give an example of a sequence $a_n$ where $\lim\limits_{n \to \infty}|a_{n+1}-a_n|=0$, but $a_n$ diverges.
+			\\\\Consider the sequence $a_n:=(\frac{1}{2}, 1, \frac{4}{3}, \frac{19}{12}, \frac{107}{60}, \frac{38}{20}, \dots)$ $\approx$ (0.5, 1, 1.3333, 1.583333, 1.783333, 1.9, $\dots$). Thus we note that this sequence is monotone increasing, and also is unbounded. Thus this is a divergent sequence. However, note the resulting sequence of $|a_{n+1}-a_n|$:
+			\[|a_{n+1}-a_n| = (\frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \frac{1}{5}, \frac{1}{6}, \dots)\]
+			We can note that the resulting sequence of $|a_{n+1}-a_n|$ is not only monotone decreasing, but also converges to 0. Thus we have defined a sequence $(a_n)$ such that $\lim\limits_{n \to \infty} (a_n) = \infty$, however $\lim\limits_{n \to \infty} |a_{n+1}-a_n| = 0$.\\
+			
+			\item Let $a_n$ satisfy $a_{n+1}=a_n^2$ for all $n \in \N$ where $0 < a_1 \leq 1/3$. Show $a_n$ is contractive.
+			\\\\To begin, we want to show that $a_{n+1} < \frac{1}{3}$. We prove it by method of mathematical induction.
+			\begin{lemma}
+				\textbf{Basis Step:} Let $n=1$. Then we have that $a_1 < \frac{1}{3}$
+				\\\\\textbf{Inductive Step:} Assume that $a_2 < \frac{1}{3}$ for arbitrary $n \in \N$.
+				\\\\\textbf{Show:} We want to now show that $a_{n+1} < \frac{1}{3},\ \forall\ n \in \N$. So,
+				\begin{align*}
+					a_{n+1} &= a_n^2 < \left(\frac{1}{3}\right)^2 &\text{by definition of } a_{n+1} \\
+					&= a_n^2 < \frac{1}{9} < \frac{1}{3}
+				\end{align*}
+				Thus, by mathematical induction, we have that $a_n < \frac{1}{3},\ \forall\ n \in \N$.
+			\end{lemma}
+			Now, we want to show that $a_n$ is contractive.
+			\begin{proof}
+				By the definition of a contractive sequence, we have the following:
+				\begin{align*}
+					|a_{n+2}-a_{n+1}| &= a_{n+1}^2-a_n^2| \\
+					&= |a_{n+1}-a_n||a_{n+1}+a_n| \\
+					&\leq |a_{n+1}-a_n|(|a_{n+1}|+|a_n|) \\
+					&\leq \frac{2}{3}|a_{n+1}-a_n|
+				\end{align*}
+			So, if we let $C=\frac{2}{3}$, then we have shown that by the definition of a contractive sequence, $(a_n)$ is contractive.
+			\end{proof}
+		\end{enumerate}
+	
+		\item Show that the following sequences are not Cauchy.
+		\begin{enumerate}
+			\item $a_n=n^2$.
+			\\\\Consider $\varepsilon=1$. Since $(a_n)$ is an increasing sequence, we have that for any two $m,n \in \N$, $|a_n-a_m| > 1$. Thus, $\nexists\ H(\varepsilon) \in \N \st \forall\ \varepsilon > 0,\ |a_n-a_m|<\varepsilon,\ \text{for}\ m,n\in \N,\ \forall\ m,n \geq H(\varepsilon)$. Thus $(a_n)$ is not a Cauchy sequence.\\
+			
+			\item (Section 3.5, Problem 2b) $a_n=n+\frac{(-1)^n}{n}$.
+			\\\\If we let $\varepsilon=\frac{1}{2}$, there doesn't exist $H(\varepsilon) \in \N \st |x_n-x_m|<\frac{1}{2},\ \forall\ m,n \geq H(\varepsilon)$. This is because 
+			\[\abs{x_{2H(\varepsilon)+2}-x_{2H(\varepsilon)+1}} = 1 + \frac{1}{2H(\varepsilon)+2}+\frac{1}{2H(\varepsilon)+1}>1>\frac{1}{2}\]
+			Thus, $\left(n+\frac{(-1)^n}{n}\right)$ is not a Cauchy sequence.\\
+		\end{enumerate}
+		
+		\item Prove or justify, if true. Provide a counterexample, if false.
+		\begin{enumerate}
+			\item If $a_n$ is Cauchy and $b_n$ is bounded, then $a_n \cdot b_n$ is Cauchy.
+			\\\\This is a false statement. Consider the sequences $(a_n):=1$, and $b_n:=(-1)^n$. We have that $a_n$ is a Cauchy sequence and we also have that $(b_n)$ is a bounded sequence since it is bounded below by $-1$ and it is bounded above by $1$. Then we have that the resulting sequence of $a_nb_n$ is 
+			\[a_n \cdot b_n = (-1,1,-1,1,-1, \dots)\]
+			Thus since this sequence oscillates between $-1$ and $1$, it is not a Cauchy sequence since by the \textit{Cauchy Convergence Criterion}, since this sequence doesn't converge, it isn't Cauchy.
+			
+			\item If $a_n$ is a monotone increasing sequence such that $a_{n+1}-a_n \leq 1/n$, then $a_n$ converges.
+			\\\\This is a false statement. Consider the following sequence: $a_n:=(-1, -\frac{1}{2}, -\frac{1}{3}, -\frac{1}{4}, \dots, -\frac{1}{n})$. Thus we have that this sequence is both monotone increasing and is a harmonic sequence. Also, note for $n=1$, we have
+			\[a_{n+1}-a_n = -\frac{1}{2}-(-1)= -\frac{1}{2}+1=\frac{1}{2} \leq \frac{1}{1}=1\]
+			However, if we let $\varepsilon=\frac{1}{3}$, then we have that $|a_2-a_1| \nless \varepsilon$, since $|a_2-a_1|=\frac{1}{2} \nless \frac{1}{3}$. Hence this sequence is not true for all $\varepsilon$.
+			
+			\item The Cauchy convergence criteria holds in $\Q$.
+			\\\\This is a false statement. Consider the sequence $a_n:= (1.4,1.41,1.414, \dots)$. We have that this sequence is indeed a Cauchy sequence, however this sequence does not converge to a value in $\Q$. Rather, this sequence converges to $\sqrt{2} \notin \Q$. Thus the Cauchy convergence criteria does not hold in $\Q$.
+		\end{enumerate}
+		
+	\end{enumerate}
+\end{document}

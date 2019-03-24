@@ -1,0 +1,547 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 9}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+		\item \textbf{Section 5.3}
+			\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.3 #1								%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[1.] Let $I:=[a,b]$ and let $f:I \to \R$ be a continuous function such that $f(x)>0$ for each $x$ in $I$. Prove that there exists a number $\alpha >0$ such that $f(x) \geq \alpha$ for all $x \in I$.
+				
+				\begin{proof}
+					Recall the \textit{Maximum-Minimum Theorem}:
+					\begin{theorem*}
+						Let $I := [a,b]$ be a closed bounded interval and let $f: I \rightarrow \R$ be continuous on $I$. Then $f$ has an absolute maximum and an absolute minimum on $I$.
+					\end{theorem*}
+					Since $f$ is continuous on the closed bounded interval $I$, by the \textit{Maximum-Minimum Theorem}, there exists $x_* \in I$ such that
+					\[f(x_*) \leq f(x),\ \forall\ x \in I\]
+					Since $f(x)>0$, for all $x \in I$, we have that $f(x_*)>0$. Thus, let $\alpha:=f(x_*)$.\\
+					
+					$\therefore f(x)\geq \alpha,\ \forall\ x \in I$.
+				\end{proof}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.3 #3								%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[3.] Let $I:=[a,b]$ and let $f:I \to \R$ be a continuous function on $I$ such that for each $x$ in $I$ there exists $y$ in $I$ such that $|f(y)| \leq \frac{1}{2}|f(x)|$. Prove that there exists a point $c$ in $I$ such that $f(c)=0$.
+				
+				\begin{proof}
+					Let $x_1 \in I$ be arbitrary. For $x_1,\ \exists\ x_2 \in I \st$
+					\[|f(x_2)|\leq \frac{1}{2}f(x_1)\]
+					By method of Mathematical Induction, we find a sequence $(x_n) \subseteq I$ such that
+					\[|f(x_{n+1})| \leq \frac{1}{2}|f(x_n)|,\ \forall\ n \in \N\]
+					Thus,
+					\[|f(x_{n+1})| \leq \frac{1}{2}|f(x_n)| \leq \left(\frac{1}{2}\right)^2 \leq \dots \leq \left(\frac{1}{2}\right)^n|f(x_1)|\ \ (1)\]
+					Recall the \textit{Bolzano-Weirstrass Theorem}:
+					\begin{theorem*}
+						A bounded sequence of real numbers has a convergent subsequence.
+					\end{theorem*}
+					Then, by the \textit{Bolzano-Wierstrass Theorem} there exists a subsequence $(x_{p(n)})$ of $(x_n)$ which converges to $c \in I$. Since $f$ is continuous, then $(f(x_{p(n)}))$ is also convergent and converges to $f(c)$. Because of $(1)$ we have
+					\[\lim\limits_{n \to \infty} f(x_{p(n)})=0\]
+					$\therefore f(c)=0\ \& \ c \in I$.
+				\end{proof}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.3 #6 								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[6.] Let $f$ be continuous on the interval $[0,1]$ to $\R$ and such that $f(0)=f(1)$. Prove that there exists a point $c$ in $[0, \frac{1}{2}]$ such that $f(c)=f(c+\frac{1}{2})$. (Hint: Consider $g(x)=f(x)-f(x+\frac{1}{2})$.) Conclude that there are, at any time, antipodal points on the earth's equator that have the same temperature.
+				
+				\begin{proof}
+					Let $g(x):=f(x)-f(x+\frac{1}{2})$. We note that $g$ is continuous, and thus yields
+					\begin{align*}
+						g(0) &= f(0)-f\left(\frac{1}{2}\right) \\
+						g\left(\frac{1}{2}\right) &= f\left(\frac{1}{2}\right) - f(1) \\
+						&= f\left(\frac{1}{2}\right)-f(0)
+					\end{align*}
+					We must now consider three separate cases: \textbf{1.} if $f(0) = f(\frac{1}{2})$, \textbf{2.} if $f(0)\neq f(\frac{1}{2})$ such that $f(0)>f(\frac{1}{2})$, and \textbf{3.} if $f(0) \neq f(\frac{1}{2})$ such that $f(0)<f(\frac{1}{2})$.\\
+					
+					\begin{case}
+						Let $f(0)=f(\frac{1}{2})$. Then if we let $c=0$, we are done.
+					\end{case}
+				
+					\begin{case}
+						Let $f(0) \neq f(\frac{1}{2})$ such that $f(0)>f(\frac{1}{2})$. Then we have
+						\[g(0)>0\ \text{and}\ g\left(\frac{1}{2}\right)<0\]
+						Recall the \textit{Location of Roots Theorem (Theorem 5.3.5)}:
+						\begin{theorem*}
+							Let $I=[a,b]$ and let $f:I \rightarrow \R$ be continuous on $I$. If $f(a) < 0 < f(b)$, or if $f(a) > 0 > f(b)$, then there exists a number $c \in (a,b)$ such that $f(c)=0$.
+						\end{theorem*}
+						By the \textit{Location of Roots Theorem} we know that $\exists\ c \in [0,\frac{1}{2}] \st g(c)=0$. Thus $f(c)=f(c+\frac{1}{2})$.
+					\end{case}
+				
+					\begin{case}
+						Let $f(0) \neq f(\frac{1}{2})$ such that $f(0)<f(\frac{1}{2})$. Then we have
+						\[g(0) < 0 \text{ and } g\left(\frac{1}{2}\right)>0\]
+						By the \textit{Location of Roots Theorem}, we know that $\exists\ c \in [0, \frac{1}{2}]$ such that $g(c)=0$. Thus $f(c)=f(c+\frac{1}{2})$.
+					\end{case}
+					We have thus proven that in any case there exists a point $c \in [0,\frac{1}{2}]$ such that $f(c)=f(c+\frac{1}{2})$.\\
+				\end{proof}
+				Now, we want to show that there are, at any time, antipodal points on the earth's equator that have the exact same temperature.\\
+				
+				\begin{proof}
+					Let $t:[0,2\pi] \to \R$ be the temperature at a point on the equator with angle $\rho$ from some predetermined point on the equator. We notice that $t$ is continuous in $\rho$ on $[0,2\pi]$ and that $t$ is a periodic function with a regular interval of $2\pi$.\\
+					
+					Now, let us define antipodal difference in temperatures as:
+					\[d:[0,2\pi] \to \R,\ \ d(\rho):=(\rho + \pi)-t(\rho)\]
+					Also, note that $d$ is also continuous on $[0,2\pi]$ and:
+					\[d(0)=t(\pi)-t(0) \text{ and } d(\pi)=t(2\pi)-t(\pi)\]
+					Hence since $t$ is $2\pi$ periodic:
+					\[d(0)=-d(\pi)\]
+					\begin{case}
+						Let $d(0)=0$. Then we have that we are done. We have thus found antipodal points with equal temperature.
+					\end{case}
+				
+					\begin{case}
+						Let $d(0) \neq 0$. Then without loss of generality, assume that $d(0)<0<d(\pi)$. Then since $d$ is continuous on $[0, \pi]$, we have that $[0,\pi] \subset [0,2\pi],\ \exists\ \delta \in [0, \pi] \st d(\delta)=0$.\\
+						
+						Thus, $d(\delta)=d(\delta + \pi)$, which means that we have found our antipodal points with equal temperature.
+					\end{case}
+					$\therefore$ We have shown that at any time, there are two points on the earth's equator that have the exact same temperature.
+				\end{proof}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.3 #8								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[8.] Show that the function $f(x):=2\ln x+\sqrt{x}-2$ has root in the interval $[1,2]$, Use the Bisection Method and a calculator to find the root with error less than $10^{-2}$.\\
+				
+				If we let $f(x)=2\ln x + \sqrt{x}-2$ over the interval $[1,2]$, then $f(x)$ is an increasing function taking on values $[-1,0.8005\dots]$. The following table shows the steps taken to calculate the root using the Bisection Method to successively narrow the interval containing the root. Note that after 7 iterations, the root is contained in the interval $(1.469, 1.484)$ and the error is less than $10^{-2}$.\\
+				
+				\[\begin{array}{|l|l|l|l|l|l|}
+					\hline
+					n & a_n & b_n & c_n &f(c_n) & \frac{1}{2}(b_n-a_n) \\
+					\hline
+					1 & 1 & 2 & 1.5 & 0.035675088 & 0.5 \\
+					\hline
+					2 & 1 & 1.5 & 1.25 & -0.435678909 & 0.25 \\
+					\hline
+					3 & 1.25 & 1.5 & 1.375 & -0.190488598 & 0.125 \\
+					\hline
+					4 & 1.375 & 1.5 & 1.4375 & -0.075231132 & 0.0625 \\
+					\hline
+					5 & 1.4375 & 1.5 & 1.46875 & -0.019256638 & 0.03125 \\
+					\hline
+					6 & 1.46875 & 1.5 & 1.484375 & 0.00833691 & 0.015625 \\
+					\hline
+					7 & 1.48675 & 1.484375 & 1.4765625 & -0.005427617 & 0.0078125\\
+					\hline
+				\end{array}\]
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.3 #15								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[15.] Examine which open [respectively, closed] intervals are mapped by $f(x):=x^2$ for $x \in \R$ onto open [respectively, closed] intervals.\\
+				
+				We first observe the open intervals. Take any open interval $I=(a,b)$ where $a<b$.\\
+				
+				If $0 \in I$, then $f(x)=x^2$ attains the absolute minimum value of $f(0)=0$. For any $x \in I,\ f(x) \geq 0\ f(I)=[0,\max \{a^2, b^2\}]$. Thus the image of $f$ on $(a,b)$ is not open at the end point $x=0$.\\
+				
+				Now, if $0 \notin I$, then both $a$ and $b$ are positive or negative.
+				\begin{itemize}
+					\item In the case where $0<a<b$, then $0 < a^2 < b^2$. Thus, $f((a,b))=(a^2,b^2)$ which is an open interval.
+					
+					\item In the case where $a < b < 0$, then $0 < b^2 < a^2$. Thus, $f((a,b))=(b^2,a^2)$ which is also an open interval.
+				\end{itemize}
+				Therefore open intervals that do not contain $0$ map to an open interval by the given function $f$.\\
+				
+				Now, consider the closed intervals. Let $I=[a,b]$ be a closed interval where $a<b$.\\
+				
+				If $0 \in I$, then $f(x) \geq 0\ \forall\ x \in I$ and $f(0)=0$.
+				\begin{align*}
+					&0 \leq x \leq b &a \leq x \leq 0 \\
+					&0 \leq x^2 \leq b^2 &0 \leq x^2 \leq a^2
+				\end{align*}
+				\[0\leq x^2 \leq \max \{a^2, b^2\}\]
+				\[f([a,b])=[0, \max \{a^2, b^2\}]\]
+				Now, if $0 \notin I$, then both $a$ and $b$ are positive or negative.
+				\begin{itemize}
+					\item In the case where $a>0,\ b>0$, then $0<a^2<b^2$. Thus $f([a,b])=[a^2,b^2]$.
+					
+					\item In the case where $a < b < 0$ then for all $x$ such that $a \leq x \leq b \implies b^2 \leq x^2 \leq a^2$. Thus $f([a,b])=[b^2,a^2]$
+				\end{itemize}
+				Therefore, in any case, closed intervals map to a closed interval by a given function $f$.
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item \textbf{Section 5.4}
+			\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.4 #2								%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[2.] Show that the function $f(x):= 1/x^2$ is uniformly continuous on $A:=[1, \infty)$, but that it is not uniformly continuous on $B:=(0,\infty)$.\\
+				
+				\begin{proof}
+					Let $x,y \in A$. Then
+					\begin{align*}
+						\abs{\frac{1}{x^2}-\frac{1}{y^2}} &= \frac{|x^2-y^2|}{xy} \\
+						&= \frac{|x-y||x+y|}{xy} \\
+						&= \left(\frac{1}{x}+\frac{1}{y}\right) \cdot |x-y|
+					\end{align*}
+					Since $x,y \in [1, \infty)$, it follows that $\frac{1}{x} \leq 1$ and $\frac{1}{y} \leq 1$ which means that
+					\[\left(\frac{1}{x}+\frac{1}{y}\right) \leq (1+1) \implies \left(\frac{1}{x}+\frac{1}{y}\right) \cdot |x-y| \leq (1+1) \cdot |x-y|\]
+					Now, we can write:
+					\[\abs{\frac{1}{x^2}-\frac{1}{y^2}}=\left(\frac{1}{x}+\frac{1}{y}\right) \cdot |x-y| \leq (1+1) \cdot |x-y|\]
+					\[\Downarrow\]
+					\[\abs{\frac{1}{x^2}-\frac{1}{y^2}} \leq 2 \cdot |x-y|\ \forall\ x,y \in A\]
+					Recall the definition of a Lipschitz function:
+					\theoremstyle{definition}
+					\begin{definition}
+						Let $A \subseteq \R$ and let $f:A \rightarrow \R$. If there exists a constant $K > 0$ such that 
+						\[(4)\ \ \ \ \ \ \ |f(x)-f(u)| \leq K|x-u|\]
+						for all $x,u \in A$, then $f$ is said to be a \textbf{Lipschitz function} (or to satisfy a \textbf{Lipschitz condition}) on $A$.\\
+						
+						The condition $(4)$ that a function $f:I \to \R$ on an interval $I$ is a Lipschitz function can be interpreted geometrically as follows. If we write the condition as
+						\[\abs{\frac{f(x)-f(u)}{x-u}}\leq K,\ \ x,u \in I,\ x \neq u,\]
+						then the quantity inside the absolute values is the slope of a line segment joining the points $(x,f(x))$ and $(u,f(u))$. Thus a function $f$ satisfies a Lipschitz condition if and only if the slopes of all line segments joining two points on the graph of $y=f(x)$ over $I$ are bounded by some number $K$.
+					\end{definition}
+					Also, recall \textit{Theorem 5.4.5}:
+					\begin{theorem*}
+						If $f:A \rightarrow \R$ is a Lipschitz function, then $f$ is uniformly continuous on $A$.
+					\end{theorem*}
+					So we have proven that by the definition of a Lipschitz function that the given function $f$ is a Lipschitz function, and thus by \textit{Theorem 5.4.5}, we can conclude that $f$ is uniformly continuous on $A$.
+				\end{proof}
+				Now, we will show that $f$ is not uniformly continuous on $(0, \infty)$.
+				\begin{proof}
+					Let $x_n,y_n \in B \st x_n=\frac{1}{\sqrt{n}} \text{ and } y_n=\frac{1}{\sqrt{n+1}}$. We note that $\lim\limits_{n \to \infty} (x_n-y_n)=0$.
+					\begin{align*}
+						\abs{\frac{1}{x^2}-\frac{1}{y^2}} &= |(\sqrt{n})^2 - (\sqrt{n+1})^2| \\
+						&=|n+1-n| \\
+						&=1
+					\end{align*}
+					Recall the \textit{Nonuniform Continuity Criteria (Theorem 5.4.2)}:
+					\begin{theorem*}
+						Let $A \subseteq \R$ and let $f:A \rightarrow \R$. Then the following statements are equivalent:
+						\begin{enumerate}
+							\item $f$ is not uniformly continuous on $A$.
+							
+							\item There exists an $\varepsilon_0 > 0$ such that for every $\delta > 0$ there are points $x_\delta, u_\delta$ in $A$ such that $|x_\delta - u_\delta|<\delta$ and $|f(x_\delta) - f(u_\delta)| \geq \varepsilon_0$.
+							
+							\item There exists an $\varepsilon_0 > 0$ and two sequences $(x_n)$ and $(u_n)$ in $A$ such that $\lim (x_n - u_n)=0$ and $|f(x_n)-f(u_n)|\geq \varepsilon_0=1$ for all $n \in \N$.
+						\end{enumerate}
+					\end{theorem*}
+					Thus we have shown that for $x_n, y_n \in B$, it's true that $\lim\limits_{n \to \infty} (x_n-y_n)=0$ but $|f(x_n)-f(y_n)|=1$ and thus by the \textit{Nonuniform Continuity Criteria}, we can conclude that $f$ is not uniformly continuous on $B$.
+				\end{proof}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.4 #3b								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[3. (b)] Use the Nonuniform Continuity Criterion 5.4.2 to show that $g(x):=\sin (1/x)$ is not uniformly continuous on $B:=(0, \infty)$.\\
+				
+				\begin{proof}
+					Let $(a_n)$ be the sequence defined by $a_n=(\frac{\pi}{2}+2n\pi)^{-1}$, and let $(b_n)$ be the sequence defined by $b_n=(2n\pi)^{-1}$. We notice that $(a_n) \subseteq B$ and $(b_n) \subseteq B$.\\
+					
+					We now want to show that $\lim\limits_{n \to \infty} (a_n-b_n)=0$. So,
+					\begin{align*}
+						\lim\limits_{n \to \infty} (a_n - b_n) &= \lim\limits_{n \to \infty} \left(\frac{1}{\frac{\pi}{2}+2n\pi}-\frac{1}{2n\pi}\right) \\
+						&= \lim\limits_{n \to \infty} \left(\frac{1}{\frac{\pi}{2}+2n\pi}\right)-\lim\limits_{n \to \infty} \left(\frac{1}{2n\pi}\right) \\
+						&= \frac{1}{\infty} - \frac{1}{\infty} \\
+						&= 0-0 \\
+						&= 0
+					\end{align*}
+					Now, we want to find the value of $|g(a_n)-g(b_n)|$ for the given function $g(x)=\sin \left(\frac{1}{x}\right)$
+					\begin{align*}
+						|g(a_n-b_n)| &= \abs{g\left(\frac{1}{\frac{\pi}{2}+2n\pi}\right)-g\left(\frac{1}{2n\pi}\right)} \\
+						&= |\sin(\frac{\pi}{2}+2n\pi)-\sin(2n\pi)| \\
+						&= |\cos (2n\pi) - \sin (2n\pi)| \\
+						&=1-0 \\
+						&= 1
+					\end{align*}
+					Thus we have that $\lim\limits_{n \to \infty} (a_n-b_n)=0$, but $|f(a_n)-f(b_n)|=1\ \forall\ n \in \N$ and therefore by the \textit{Nonuniform Continuity Criterion}, we have that $g$ is not uniformly continuous.
+				\end{proof}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.4 #5								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[5.] Show that if $f$ and $g$ are uniformly continuous on a subset $A$ of $\R$, then $f+g$ is uniformly continuous on $A$.\\
+				
+				\begin{proof}
+					Recall the definition of uniform continuity:\\
+					
+					We say a function $f$ is continuous if 
+					\[\forall\ \varepsilon > 0,\ \exists\ \delta > 0 \st |f(x)-f(y)|<\varepsilon\ \forall\ x,y \in \R \st |x-y|<\delta\]
+					Let $\varepsilon > 0$ be given, and choose $\delta_1,\ \delta_2 >0$ such that:
+					\begin{align*}
+						&|f(x)-f(y)|<\frac{\varepsilon}{2} &\text{for any    } |x-y|<\delta_1 \\
+						&|g(x)-g(y)|<\frac{\varepsilon}{2} &\text{for any    } |x-y|<\delta_2
+					\end{align*}
+					Choose $\delta=\min \{\delta_1, \delta_2\}$. Then $\forall\ x,y \in \R$:
+					\[|x-y|<\delta \implies |f(x)+g(x)-f(y)-g(y)|<|f(x)-f(y)|+|g(x)-g(y)|<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon\]
+					Therefore we have shown that $\forall\ |x-y|<\delta\ |(f+g)(x)-(f+g)(y)|<\varepsilon$.\\
+					
+					$\therefore\ f+g$ is uniformly continuous.
+				\end{proof}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 5.4 #6								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[6.] Show that if $f$ and $g$ are uniformly continuous on $A \subseteq \R$ and if they are \textit{both} bounded on $A$, then their product $fg$ is uniformly continuous on $A$.\\
+				
+				\begin{proof}
+					Functions $f$ and $g$ are both bounded on $A \subseteq \R$.\\
+					
+					Recall the definition of boundedness (\textit{Definition 5.3.1}):
+					\theoremstyle{definition}
+					\begin{definition}
+						A function $f:A \rightarrow \R$ is said to be \textbf{bounded on} $A$ if there exists a constant $M > 0$ such that $|f(x)| \leq M$ for all $x \in A$.
+					\end{definition}
+					Let $M$ be the maximum value obtained by either $|f|$ or $|g|$. That is to say that $\exists\ M > 0 \st |f(x)| < M$ and $|g(x)|<M\ \forall\ x \in A$.\\
+					
+					We have defined $M$ as a positive number, but what happens if $M=0$? For example, the constant function $c(x)=0\ \forall\ x$ is bounded by 0.\\
+					
+					If $M=0$, then $f=g=0$ and the function $f(x)g(x)=0$ is uniformly continuous. Now, assuming that $M>0$ we can divide by $M$.\\
+					
+					Let $\varepsilon>0$ be given. Then there exists $\delta_1, \delta_2 >0$ such that :
+					\begin{align*}
+						&|f(x)-f(y)| < \frac{\varepsilon}{2M} &\text{for any    } |x-y|<\delta_1 \\
+						&|g(x)-g(y)| < \frac{\varepsilon}{2M} &\text{for any    } |x-y|<\delta_2
+					\end{align*}
+					Choose $\delta=\min \{\delta_1, \delta_2\}$. Then $\forall\ x,y \in \R$:
+					\begin{align*}
+						|x-y|<\delta \implies |f(x)g(x)-f(y)g(y)| &= |f(x)g(x)-f(y)g(x)+f(y)g(x)-f(y)g(y)| \\
+						&\leq |g(x)||f(x)-f(y)| + |f(y)||g(x)-g(y)| \\
+						&\leq M|f(x)-f(y)| + M|g(x)-g(y)| \\
+						&\leq M\frac{\varepsilon}{2M} + M \frac{\varepsilon}{2M} \\
+						&= \varepsilon
+					\end{align*}
+					Thus we have shown that $\forall\ |x-y|<\delta,\ |(f \cdot g)(x) - (f \cdot g)(y)|<\varepsilon$.\\
+					
+					$\therefore\ fg$ is uniformly continuous by the definition of uniform continuity.
+				\end{proof}
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3								%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[3.] Prove or justify, if true; provide a counterexample, if false. For all parts, assume $f$ and $g$ are functions defined on the given intervals or sets.
+			\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (a)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+				\item If $f$ is bounded on $[a,b]$, then $f$ is continuous on $[a,b]$.\\
+				
+				This is a false statement. Consider the case $f:[-1,1] \to \R$ be given by $f(x):=\frac{1}{x}$. Then we have that $f$ is bounded on $[-1,1]$, but notice that $f$ is discontinuous at $x=0$, since $f$ is undefined at $x=0$. That is, $\frac{1}{0}$ is undefined.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (b)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f$ is continuous on $(a,b)$, then $f$ is bounded on $(a,b)$.\\
+				
+				This is a false statement. Consider $f:(-\infty, \infty) \to \R$ given by $f(x):=x$. Then we have that $f$ is continuous, but since $(-\infty, \infty)$ is an unbounded set, we have that this is a false statement.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (c)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $[f(x)]^2$ is continuous on $(a,b)$, then $f$ is continuous on $(a,b)$.\\
+				
+				This is a false statement. Consider the case where $f^2:(-\infty, \infty) \to (-\infty, \infty)$ given by $[f(x)]^2:=-1$. Then we have that since $[f(x)]^2$ is a constant function, and thus it is continuous, however since $f(x)=\sqrt{-1}$, since both our domain and range are the real numbers, we have that this function is undefined in the real numbers since $\sqrt{-1} \in \C$. Thus $f$ is not continuous on $(-\infty, \infty)$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (d)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f$ and $g$ are not continuous on $(a,b)$, then $f+g$ is not continuous on $(a,b)$.\\
+				
+				This is a false statement. Consider $f,g:(-5,5) \to (-5,5)$ given by $f(x):=\begin{cases}
+					1, & x \in \R \setminus \Q \\
+					0, & x \in \Q
+				\end{cases}$    and    $g(x):=\begin{cases}
+					0, & x \in \R \setminus \Q \\
+					1, & x \in \Q
+				\end{cases}$\\
+				Since these are both different variant forms of the Dirichlet function, we know that they're both discontinuous, however note that their sum yields
+				\[f(x)+g(x)=\begin{cases}
+					1+0, & x \in \R \setminus \Q \\
+					0+1, & x \in \Q
+				\end{cases}\ \ =\begin{cases}
+					1, & x \in \R \setminus \Q \\
+					1, & x \in \Q
+				\end{cases}\ \ = 1\ \forall\ x \in \R\]
+				which is a constant function, and thus is continuous.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (e)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f$ and $g$ are not continuous on $(a,b)$, then $fg$ is not continuous on $(a,b)$.\\
+				
+				This is a false statement. Consider $f,g:(-\infty,\infty) \to (-\infty,\infty)$ given by $f(x):=\begin{cases}
+					x, & x \neq \pi \\
+					0, & x = \pi
+				\end{cases}$ and $g(x):=\begin{cases}
+					x, & x = \pi \\
+					0, & x \neq \pi
+				\end{cases}$\\
+				Then we have that both of these functions are discontinuous, but their product yields
+				\[f(x)g(x)=\begin{cases}
+					x \cdot 0 \\
+					0 \cdot x
+				\end{cases} = \begin{cases}
+					0 \\
+					0
+				\end{cases} = 0\]
+				which is a constant function, which is always continuous.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (f)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f$ and $g$ are not continuous on $(a,b)$, then $f \circ g$ is not continuous on $(a,b)$.\\
+				
+				This is a false statement. Consider $f,g:(-\infty, \infty) \to (-\infty, \infty)$ given by $f(x)=\begin{cases}
+					1, & x \in \Q \\
+					-1, & x \in \R \setminus \Q
+				\end{cases}$ and $g(x):=\begin{cases}
+					-1, & x \in \Q \\
+					1, & x \in \R \setminus \Q
+				\end{cases}$\\
+				Then we have that both $f$ and $g$ are discontinuous, however $f \circ g$ is continuous everywhere. \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (g)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $fg$ and $f$ are continuous on $(a,b)$, then $g$ is continuous on $(a,b)$.\\
+				
+				This is a false statement. Consider $f,g:(-\infty, \infty) \to (-\infty, \infty)$ given by $f(x):=0$, $g(x):=\begin{cases}
+					1, & x \in \Q \\
+					0, & x \in \R \setminus \Q
+				\end{cases}$\\
+				Then we have that $fg=0$, which is a continuous function and $f(x)$ is continuous as well since they are both constant functions, however since $g$ is discontinuous $\forall x \in \R$, we have that this is a false statement.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (h)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f+g$ and $f$ are continuous on $(a,b)$, then $g$ is continuous on $(a,b)$.\\
+				
+				This is true. Recall \textit{Theorem 5.2.1}:
+				\begin{theorem*}
+					Let $A \subseteq \R$, let $f$ and $g$ be functions on $A$ to $\R$, and let $b \in \R$. Suppose that $c \in A$ and that $f$ and $g$ are continuous at $c$.
+					\begin{enumerate}
+						\item Then $f+g,\ f-g,\ fg$, and $bf$ are continuous at $c$.
+						
+						\item If $h:A \rightarrow \R$ is continuous at $c \in A$ and if $h(x) \neq 0$ for all $x \in A$, then the quotient $f/h$ is continuous at $c$.
+					\end{enumerate}
+				\end{theorem*}
+			
+				Thus, if we let $g=(f+g)-f$, we have that $g$ is also continuous by \textit{Theorem 5.2.1}.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (i)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $|f|$ is continuous on $(a,b)$, then $f$ is continuous on $(a,b)$.\\
+				
+				This is a false statement. Consider $f:(-\infty, \infty) \to (-\infty, \infty)$ given by $f(x):=\begin{cases}
+					1, & x > 0 \\
+					-1, & x \leq 0
+				\end{cases}$\\
+				Then we note that $|f(x)|=1$ is continuous, but $f(x)$ is not continuous.\\ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (j)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f(x)=\frac{\sin x}{x}$ and $g(x)=\frac{1}{x}$, then $f/g$ is continuous on $\R$.\\
+				
+				This is a false statement. Note that $f,g$ have a domain $\R \setminus \{0\}$. So, if we use $f,g$ to form $\frac{f}{g}$, we have that the domain of the quotient is also $\R \setminus \{0\}$, then the quotient is also not continuous on $\R$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (k)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item $f$ is continuous at $c \in A$ if and only if for all $\varepsilon > 0$, there exists a $\delta >0$ such that if $|x-c|<\delta$ and $x \in A$, then $|f(x)-f(c)|<\varepsilon$.\\
+				
+				This is a true statement, since this is the definition of continuity at a point $c$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (l)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f(A)$ is bounded, then $f$ is continuous on $A$.\\
+				
+				This is a false statement. Consider $f:(-5,5) \to (-1,1)$ given by $f(x):=\begin{cases}
+				1, & x > 0 \\
+				-1, & x \leq 0
+				\end{cases}$\\
+				Then we have that $f((-5,5))$ is bounded between $(-1,1)$. However, $f$ is not continuous. \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (m)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f$ is continuous at $c \in A$, and $x_n$ is a sequence in $A$, then $x_n \to c$ whenever $f(x_n) \to f(c)$.\\
+				
+				This is a false statement. Consider $f(x):=x^2$. Then note that $f$ is continuous at $x=2$. Also, let $(x_n):=(-1)^n \cdot 2=-2,2,-2,2, \dots$. Then we have that $f(x_n)=4\ \forall\ n \in \N$. Thus, $f(x_n) \to f(c)=4$ but $x_n$ is divergent.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (n)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $x_n$ is a Cauchy sequence in $A$, then $f(x_n)$ converges.\\
+				
+				This is a false statement. Consider the sequence $x_n=1, \frac{1}{2}, \frac{1}{3}, \dots$. Then, if we let $f: \R \to \R$ given by $f(x):=\frac{1}{x}$. Then we have that $f(x_n)$ diverges since $(f(x_n)) = 1, 2, 3, 4, \dots$.\\
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (o)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $f:\R \to \R$ is continuous at each irrational number, then $f$ is continuous on $\R$.\\
+				
+				This is a false statement. Consider the Thomae function, defined by \[f(x):= \begin{cases}
+					\frac{1}{q}, & x=\frac{p}{q},\ x \in \Q,\ p \in \Z,\ q \in \N \\
+					0, & x \in \R \setminus \Q
+				\end{cases}\]
+				Then we have that we know that the Thomae function is only continuous on the irrationals, but it is discontinuous on all of the rational numbers, thus the Thomae function is not continuous on $\R$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (p)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item There exists $x_1 \in A$ such that $f(x_1) \geq f(x)$ for all $x \in A$.\\
+				
+				This is a false statement. Consider $f:\R \to \R$ given by $f(x):=x$. Then $f(x)$ is not bounded. Thus by the \textit{Archimedian Property}, we have that there does not exist an $x_1 \in \R \st f(x_1) \geq f(x)\ \forall\ x \in \R$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (q)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item Let $A$ be a bounded subset of $\R$. Then $f(A)$ is bounded.\\
+				
+				This is a false statement. Consider $f:(0,1) \to \R$ given by $f(x):=\frac{1}{x}$. Then we have that $\lim\limits_{x \to 0^+} f(x) = \infty$, and thus the image $f((0,1))$ is unbounded.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (r)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item Let $A=[a,b]$ and $f(a)<0<f(b)$. Then there exists $c \in (a,b)$ such that $f(c)=0$.\\
+				
+				This is a false statement. Consider $f:[-1,1] \to \R$ given by $f(x):=\frac{1}{x}$. Then we have that $-1 < 0 < 1$, which satisfies the problem statement. However, since $f$ is discontinuous at $x=0$, we have that there does not exist $c \in (-1,1)$ such that $f(c)=0$, because $f$ is undefined at $x=0$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (s)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item Let $A=[a,b]$ and $f(a)<k<f(b)$. Then there exists $c \in [a,b]$ such that $f(c)=k$.\\
+				
+				This is a false statement. Consider $f:[-1,1] \to \R$ given by $f(x):=\frac{1}{x}$, and let $k=0$. Then we have that $-1 < 0 < 1$, which satisfies the problem statement. However, since $f$ is discontinuous at $x=0$, we have that there does not exist $c \in (-1,1)$ such that $f(c)=k$, because $f$ is undefined at $x=0$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (t)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item Let $A$ be bounded. Then $f$ assumes maximum and minimum values on $A$.\\
+				
+				This is a false statement. Consider $f:(0,1) \to \R$ given by $f(x):=\frac{1}{x}$. Then we have that since there exists an uncountably infinite number of values of $x \in (0,1)$, then it is not possible to choose an $x$ such that $f(x) \leq f(y)\ \forall\ y \in (0,1)$, and it is also not possible to find an $x$ such that $f(x) \geq f(y)\ \forall\ y \in (0,1)$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 (u)								%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item If $A$ is unbounded, then $f(A)$ is unbounded.\\
+				
+				This is a false statement. Consider $f:\R \to \R$ given by $f(x):=1$. Then we have that $\R$ is unbounded, however $f(\R)=1\ \forall\ x \in \R$. Thus $f(\R)$ is bounded between $[1,1]=[1]$.
+			\end{enumerate}
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,551 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{definition*}{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma*}{Lemma}
+\newtheorem{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 12}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 1							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item 
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item \textbf{Section 6.2 Problem 15} Let $I$ be an interval. Prove that if $f$ is differentiable on $I$ and if the derivative $f'$ is bounded on $I$, then $f$ satisfies a Lipschitz condition on $I$. (See Definition 5.4.4)
+			
+			\begin{proof}
+				Let $M>0$ be such that $|f'(c)| \leq M\ \forall\ c \in I$. This follows from the fact that $f'$ is bounded on $I$. For $x,y \in I$ such that $x<y$, we know that by the mean value theorem, $\exists\ c \in (x,y) \subseteq I \st f(y)-f(x)=f'(c)(y-x)$. This yields the following:
+				\begin{align*}
+					|f(x)-f(y)| &= |f'(c)||y-x| \leq M|x-y| \dots (\because\ c \in I) \\
+					\implies |f(x)-f(y)| &\leq M|x-y|\ \forall\ x,y \in I
+				\end{align*}
+				This holds since $M>0$ is true regardless of $x,y$. Thus we have that by the definition of a Lipschitz condition, $f$ satisfies a Lipshitz condition on $I$.\\
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item Suppose $f$ and $g$ are differentiable functions on $(a,b)$. Show that between two consecutive roots of $f$ there exists a root $f'+fg'$. (Hint: Apply Rolle's Theorem to the function $h(x)=f(x)e^{g(x)}$) \\
+			
+			\begin{proof}
+				Let $x_1,x_2 \in (a,b)$ with $x_1<x_2$, and $f(x_1)=f(x_2)=0$.\\
+				
+				Let $h(x)=f(x)^{g(x)}$.\\
+				
+				Then we have $h(x_1)=h(x_2)=0$ and $h$ is differentiable on $(a,b)$, and $h$ is continuous on $[x_1,x_2]$.\\
+				
+				Recall \textit{Rolle's Theorem}:
+				\begin{theorem*}[\textbf{Rolle's Theorem}]
+					Suppose that $f$ is continuous on a closed interval $I:= [a,b]$, that the derivative $f'$ exists at every point of the open interval $(a,b)$, and that $f(a)=f(b)=0$. Then there exists at least one point $c$ in $(a,b)$ such that $f'(c)=0$.
+				\end{theorem*}
+				Thus by \textit{Rolle's Theorem}, we know that there exists some $c \in (x_1,x_2) \st h'(c)=0$ and
+				\[h'(x)=f'(x)e^{g(x)}+f(x)\cdot g'(x)e^{g(x)}=[f'(x)+f(x)g'(x)]e^{g(x)}\]
+				So $h'(c)=[f'(c)+f(c)g'(c)]\cdot e^{g(c)}=0$ \\
+				
+				So $f'(c)+f(c)g'(c)=0$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item Suppose that $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f(a)=f(b)=0$. Prove that for each real number $\alpha$, there exists some $c \in (a,b)$ such that $f'(c)=\alpha f(c)$. (Hint: Apply Rolle's Theorem to the function $g(x)=e^{-\alpha x} f(x)$)
+			
+			\begin{proof}
+				Consider the function $g(x)=e^{-\alpha x} f(x)$. Since $f(a)=f(b)=0$, we know that $g(a)=e^{-\alpha(a)}f(a)=e^{-\alpha(b)}f(b)=g(b)$, and thus $g(a)= e^{-\alpha(a)}\cdot 0 = 0 = g(b)$. By \textit{Rolle's Theorem}, we know that since $f(a)=f(b)=0$, $f$ is continuous on $[a,b]$, and since $f$ is differentiable on $(a,b)$, then there exists some $c \in (a,b)$, such that $f'(c)=0$. Thus there exists one point $c \in (a,b)$, such that $g'(c)=0$, and
+				\begin{align*}
+					g'(x)&=-\alpha e^{-\alpha x}f(x)+e^{-\alpha x}f'(x) \\
+					0 &= e^{-\alpha x} \left(-\alpha f(x)+f'(x)\right) \\
+					0 &= -\alpha f(x)+f'(x) \\
+					\alpha f(x) &= f'(x)
+				\end{align*}
+				Thus we have that there exists some $c \in (a,b)$ such that $f'(c) = \alpha f(c)$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1 (d)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item Suppose that $f$ is differentiable on $(a,b)$ and $f'$ is bounded on $(a,b)$. Show that $f$ is uniformly continuous.
+			
+			\begin{proof}
+				Let $M>0$ satisfy $|f'(x)| \leq M\ \forall\ x \in (a,b)$. Recall the definition of differntiability:
+				\theoremstyle{definition}
+				\begin{definition*}
+					Let $I \subseteq \R$ be an interval, let $f:I \rightarrow \R$, and let $ c \in I$. We say that a real number $L$ is the \textbf{derivative of $f$ at $c$}  if given any $\varepsilon > 0$ there exists $\delta (\varepsilon) > 0$ such that if $x \in I$ satisfies $0 < |x-c|<\delta (\varepsilon)$, then
+					\[\abs{\frac{f(x)-f(c)}{x-c}-L}<\varepsilon.\]
+					In this case we say that $f$ is \textbf{differentiable} at $c$, and we write $f'(c)$ for $L$. In other words, the derivative of $f$ at $c$ is given by the limit
+					\[f'(c) = \lim\limits_{x\to c} \frac{f(x)-f(c)}{x-c}\]
+					provided this limit exists. (We allow the possibility that $c$ may be the endpoint of the interval.)
+				\end{definition*}
+				Thus since $f$ is differentiable on $(a,b)$, we know that given any $\varepsilon>0$, there exits $\delta(\varepsilon) >0 \st$ if $x \in (a,b)$ satisfies $0<|x-c|<\delta(\varepsilon)$, then $\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} = f'(c)$, for any $c \in (a,b)$.\\
+				
+				By result of $1\ (a)$, we know that since $f$ is differentiable on $(a,b)$, and since $f'$ is bounded on $(a,b)$, then $f'$ satisfies a Lipschitz condition on $(a,b)$.\\
+				
+				Recall \textit{Theorem 5.4.3}:
+				\begin{theorem*}
+					If $f:A \rightarrow \R$ is a Lipschitz function, then $f$ is uniformly continuous on $A$.
+				\end{theorem*}
+				Thus we have that by \textit{Theorem 5.4.3}, since $f$ is a Lipschitz function, $f$ is uniformly continuous on $(a,b)$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1 (e)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item Give an example of a function $f$ that is differentiable, uniformly continuous on $(a,b)$, but $f'$ is not bounded.\\
+			
+			Consider the function $f:(0,\infty) \to (-\infty,\infty)$ given by $f(x)=x\sin\left(\frac{1}{x}\right)$. First, we must show that $f$ is uniformly continuous, as follows:
+			\begin{align*}
+				|f(x)-f(c)| &= |x\sin\left(\frac{1}{x}\right) - c\sin\left(\frac{1}{c}\right)| \\
+				&\leq |x-c| &\because\ \max \abs{\sin\left(\frac{1}{x}\right)}=1,\text{ and } \max\abs{\sin\left(\frac{1}{c}\right)} = 1 \\
+				&<\varepsilon
+			\end{align*}
+			Thus let $\delta(\varepsilon)=\varepsilon$. Hence $f$ is uniformly continuous on $(-\infty, \infty)$. We also know that $f$ is differentiable on $(-\infty,\infty)$ since
+			\[f'(x)=1\cdot\sin\left(\frac{1}{x}\right)+x\cdot\cos\left(\frac{1}{x}\right)\cdot -\frac{1}{x^2}= \sin\left(\frac{1}{x}\right)-\frac{x}{x^2}\cos\left(\frac{1}{x}\right)=\sin\left(\frac{1}{x}\right)-\frac{1}{x}\cos\left(\frac{1}{x}\right)\]
+			However, since the maximum value of $\sin$ and $\cos$ is 1, and since $x \in (1,\infty)$, the derivative $f'(x)$ is unbounded, since $\sup \{(0,\infty)\} =\infty$, and $\max\{(0,\infty)\}=$ DNE, and $\lim\limits_{x \to 0^+} \frac{1}{x}=\infty$. Thus $\frac{1}{x}$ can be infinitely large, meaning $f'(x)$ is unbounded.\\
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 2							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\item Prove the given inequalities.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item $1+x \leq e^x$ for all $x \in \R$.
+			
+			\begin{proof}
+				Let $f:(0, \infty) \to \R$ given by $f(x):=e^x$. Then we know that $f'(x)=e^x$, which is greater than or equal to 1 since $f$ is defined on $\R^+$. Then we know by the \textit{Mean Value Theorem} that $\exists\ c \in (0,\infty) \st f'(c)=\frac{f(x)-f(0)}{x-0}=\frac{e^x-1}{x} \implies e^x-1 = f'(c) \cdot x \geq x$. Since $e^x \geq 1\ \forall\ x \in (0,\infty)$, we have that $e^x \geq x+1\ \forall\ x \in (0,\infty)$.\\
+				
+				For the case where $f:(-\infty,0) \to \R$, we have that $f'(x)=e^x \leq 1\ \forall\ x \in (-\infty, 0)$. Now, by the \textit{Mean Value Theorem}, we know that $\exists\ c \in (-\infty, 0) \st f'(c)=\frac{f(0)-f(x)}{0-x} = \frac{1-e^x}{-x}$. Thus we have that $1-e^x = f'(c) \cdot -x \leq 1$, which implies that $e^x-1=x\cdot-f'(c) \geq -1$. Thus $1+ x \leq e^x$.\\
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item $2x+0.7<e^x$ for all $x \geq 1$. \\
+			
+			\begin{proof}
+				Let $f(x)=e^x-2x-0.7$. Then $f'(x)=e^x-2>0\ \forall\ x \geq 1$. So $f$ is increasing on $[1,\infty)$. In particular, $f(x)=e^x-2x-0.7 \geq f(1) = e-2.7 > 0$.\\
+				
+				So $e^x>2x+0.7$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item $x^e \leq e^x$ for all $x > 0$.\\
+			
+			\begin{proof}
+				Let $f(x)=x^{\frac{1}{x}}=y$. Then we have
+				\begin{align*}
+					\ln(y) &= \frac{\ln(x)}{x} \\
+					\frac{1}{y}\cdot y' &= \frac{x\left(\frac{1}{x}-\ln(x)\right)}{x^2} \\
+					&=\frac{1-\ln(x)}{x^2} \\
+					&\Downarrow \\
+					y' &= \frac{y(1-\ln(x))}{x^2} \\
+					&= \frac{x^{\frac{1}{x}}(1-\ln(x))}{x^2}
+				\end{align*}
+				We note that $x=e$ is a critical point. Thus by the first derivative test, we know that $f$ is increasing at $e$.\\
+				
+				So $f(x)=x^{\frac{1}{x}} \leq e^\frac{1}{x}\ \forall\ x \in (0,\infty)$. Thus
+				\begin{align*}
+					\frac{ln(x)}{x} &\leq \frac{1}{e} \\
+					\ln(x) &\leq \frac{x}{e} \\
+					&(x \leq e^\frac{x}{e})^e \\
+					x^e &\leq e^x\ \forall\ x >0
+				\end{align*}
+			\end{proof}
+		\end{enumerate}
+	\textbf{Section 6.3 - L'Hôpital's Rule}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Question 3 Section 6.3						%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item \textbf{Section 6.3}
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 6.3 - 6 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[6.] \textbf{(a)} Evaluate $\lim\limits_{x \to 0} \frac{e^x+e^{-x}-2}{1-\cos x}$\\
+			
+			\begin{align*}
+				\lim\limits_{x \to 0} \frac{e^x+e^{-x}-2}{1-\cos (x)} &= \frac{e^0+e^{-0}-2}{1-\cos(0)} \\
+				&= \frac{1+1-2}{1-1} \\
+				&= \frac{0}{0}
+			\end{align*}
+			We note that this is in one of the indeterminate forms that L'Hopital's Rule accounts for.\\
+			
+			Recall L'Hopital's rules:
+			\begin{theorem*}[\textbf{L'Hopital's Rule, I}]
+				Let $-\infty \leq a < b \leq \infty$ and let $f,g$ be differentiable on $(a,b)$ such that $g'(x) \neq 0$ for all $x \in (a,b)$. Suppose that
+				\[\lim\limits_{x\to a+} f(x) = 0 = \lim\limits_{x\to a+} g(x)\]
+				
+				\begin{enumerate}
+					\item If $\lim\limits_{x\to a+} \frac{f'(x)}{g'(x)}=L \in \R$, then $\lim\limits_{x\to a+} \frac{f(x)}{g(x)}=L$.
+					
+					\item If $\lim\limits_{x\to a+} \frac{f'(x)}{g'(x)}=L \in \{-\infty, \infty\}$, then $\lim\limits_{x\to a+} \frac{f(x)}{g(x)}=L$.
+				\end{enumerate}
+			\end{theorem*}
+			
+			\begin{theorem*}[\textbf{L'Hopital's Rule, II}]
+				Let $-\infty \leq a < b \leq \infty$ and let $f,g$ be differentiable on $(a,b)$ such that $g'(x) \neq 0$ for all $x \in (a,b)$. Suppose that 
+				\[\lim\limits_{x\to a+} g(x) = \pm \infty\]
+				\begin{enumerate}
+					\item If $\lim\limits_{x\to a+} \frac{f'(x)}{g'(x)}=L \in \R$, then $\lim\limits_{x\to a+} \frac{f(x)}{g(x)}=L$.
+					
+					\item If $\lim\limits_{x\to a+} \frac{f'(x)}{g'(x)}=L \in \{-\infty, \infty\}$, then $\lim\limits_{x\to a+} \frac{f(x)}{g(x)}=L$.
+				\end{enumerate}
+			\end{theorem*}
+			Thus by utilizing L'Hopital's rule, we have
+			\begin{align*}
+				\lim\limits_{x \to 0} \frac{e^x+e^{-x}-2}{1-\cos(x)} &= \lim\limits_{x \to 0^+} \frac{\frac{d}{dx} (e^x+e^{-x}-2)}{\frac{d}{dx}(1-\cos (x))} \\
+				&= \lim\limits_{x \to 0^+} \frac{e^x-e^{-x}}{\sin (x)} \\
+				&= \frac{e^0-e^{-0}}{\sin(0)} \\
+				&= \frac{1-1}{0} \\
+				&= \frac{0}{0}
+			\end{align*}
+			And since this is once again in one of the indeterminate forms that L'Hopital's rule accounts for, we perform the rule again, thus
+			\begin{align*}
+				\lim\limits_{x \to 0^+} \frac{e^x-e^{-x}}{\sin (x)} &= \lim\limits_{x \to 0^+} \frac{\frac{d}{dx} (e^x-e^{-x})}{\frac{d}{dx} \sin(x)} \\
+				&= \lim\limits_{x \to 0^+} \frac{e^x+e^{-x}}{\cos (x)} \\
+				&= \frac{e^0+e^{-0}}{\cos (0)} \\
+				&= \frac{1+1}{1} \\
+				&= \frac{2}{1} \\
+				&= 2
+			\end{align*}
+			Thus we have
+			\[\lim\limits_{x \to 0} \frac{e^x+e^{-x}-2}{1-\cos(x)}=\lim\limits_{x \to 0^+} \frac{e^x-e^{-x}}{\sin (x)} = \lim\limits_{x \to 0^+} \frac{e^x+e^{-x}}{\cos (x)}=2\]
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 6.3 - 7 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[7.] \textbf{(a)} Evaluate $\lim\limits_{x \to 0^+} \frac{\ln (x+1)}{\sin x}$ where the domain of the quotient is $(0, \pi/2)$.\\
+			
+			\begin{align*}
+				\lim\limits_{x \to 0^+} \frac{\ln (x+1)}{\sin (x)} &= \frac{\ln (0+1)}{\sin (0)} \\
+				&= \frac{\ln (1)}{0} \\
+				&= \frac{0}{0}
+			\end{align*}
+			Since this is now in one of the indeterminate forms that L'Hopital's rule accounts for, we apply the rule as follows:
+			\begin{align*}
+				\lim\limits_{x \to 0^+} \frac{\ln(x+1)}{\sin (x)} &= \lim\limits_{x \to 0^+} \frac{\frac{d}{dx} \ln(x+1)}{\frac{d}{dx} \sin(x)} \\
+				&= \lim\limits_{x \to 0^+} \frac{\frac{1}{x+1} \cdot 1}{\cos (x)} \\
+				&= \lim\limits_{x \to 0^+} \frac{\frac{1}{x+1}}{\cos(x)} \\
+				&= \frac{\frac{1}{0+1}}{\cos(0)} \\
+				&= \frac{1}{1} \\
+				&= 1
+			\end{align*}
+			Thus we have that
+			\[\lim\limits_{x \to 0^+} \frac{\ln(x+1)}{\sin(x)}=\lim\limits_{x \to 0^+} \frac{\frac{1}{x+1}}{\cos(x)}=1\]
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 6.3 - 10							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[10.] Evaluate the following limits:
+			\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%				Section 6.3 - 10 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[(b)] $\lim\limits_{x \to 0} (1+3/x)^x$    $(0,\infty)$ \\
+				
+				\begin{align*}
+					\lim\limits_{x \to 0} \left(1+\frac{3}{x}\right)^x &= \left(1+\frac{3}{0}\right)^0 \\
+					&= \left(1+\infty\right)^0 \\
+					&= \infty^0
+				\end{align*}
+				Since this is in indeterminate form, we know that we need to somehow get it into the form in which it can be solved using L'Hopital's rule; So,
+				\begin{align*}
+					\lim\limits_{x \to 0} \left(1+\frac{3}{x}\right)^x &=\lim\limits_{x \to 0} e^{\ln \left(\left(1+\frac{3}{x}\right)^x\right)} \\
+					&= \lim\limits_{x \to 0} e^{x \cdot \ln \left(1+\frac{3}{x}\right)} \\
+					&= e^{0 \cdot \ln \left(1+\frac{3}{0}\right)} \\
+					&= 0 \cdot 0
+				\end{align*}
+				and thus we can now use L'Hopital's rule on the exponent; So
+				\begin{align*}
+					&\lim\limits_{x \to 0} \ln \left(1+\frac{3}{x}\right) \\
+					&= \lim\limits_{x \to 0} \left[\frac{\ln(1+\frac{3}{x})}{\left(\frac{1}{x}\right)}\right] \\
+					&= \lim\limits_{x \to 0} \left[\frac{\left(1+\frac{3}{x}\right)^{-1}\cdot \left(\frac{-3}{x^2}\right)}{\left(-\frac{1}{x^2}\right)}\right] \\
+					&= \lim\limits_{x \to 0} \left[\frac{3}{1+\frac{3}{x}}\right] \\
+					&= 0
+				\end{align*}
+				And thus
+				\[\lim\limits_{x \to 0} \left(1+\frac{3}{x}\right)^x=\lim\limits_{x \to 0} \left[e^{x \ln \left(1+\frac{3}{x}\right)}\right] = e^0=1\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%				Section 6.3 - 10 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[(c)] $\lim\limits_{x \to \infty} (1+3/x)^x$    $(0, \infty)$ \\
+				
+				We know from the previous problem that this will be in the indeterminate form of $1^\infty$, and thus we apply the same logic from step 2, we know that
+				\[\lim\limits_{x \to \infty} \left(1+\frac{3}{x}\right)^x = \lim\limits_{x \to 0} \left[e^{x \cdot \ln \left(1+\frac{3}{x}\right)}\right]\]
+				So
+				\begin{align*}
+					&\lim\limits_{x \to \infty} \ln \left(1+\frac{3}{x}\right) \\
+					&= \lim\limits_{x \to \infty} \left[\frac{\ln(1+\frac{3}{x})}{\left(\frac{1}{x}\right)}\right] \\
+					&= \lim\limits_{x \to \infty} \left[\frac{\left(1+\frac{3}{x}\right)^{-1}\cdot \left(\frac{-3}{x^2}\right)}{\left(-\frac{1}{x^2}\right)}\right] \\
+					&= \lim\limits_{x \to \infty} \left[\frac{3}{1+\frac{1}{x}}\right] \\
+					&= \frac{3}{1} \\
+					&= 3
+				\end{align*}
+				and thus
+				\[\lim\limits_{x \to \infty} \left(1+\frac{3}{x}\right)^x = \lim\limits_{x \to \infty} \left[e^{x \cdot \ln \left(1+\frac{3}{x}\right)}\right]=e^3\]
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 6.3 - 11							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[11.] Evaluate the following limits:
+			\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%				Section 6.3 - 11 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[(b)] $\lim\limits_{x \to 0^+} (\sin x)^x$    $(0, \pi)$\\
+				
+				We first note that
+				\[\lim\limits_{x \to 0^+} (\sin (x))^x=(\sin(0))^0 = 0^0\]
+				So we know that we need to get this into a form that can utilize L'Hopital's rule, so we consider
+				\[(\sin(x))^x=e^{\ln((\sin(x))^x)}=e^{x\cdot\ln(\sin(x))}\]
+				This yields an indeterminate form of $0 \cdot -\infty$, thus we can use L'Hopital's rule on the exponent; thus
+				\begin{align*}
+					&\lim\limits_{x \to 0^+} \left[\frac{\ln(\sin(x))}{\frac{1}{x}}\right] \\
+					&= \lim\limits_{x \to 0^+} \left[\frac{\frac{1}{\sin(x)}\cdot \cos(x)}{-\frac{1}{x^2}}\right] \\
+					&= \lim\limits_{x \to 0^+} \left[\frac{-x^2}{\tan(x)}\right] \\
+					&= \lim\limits_{x \to 0^+} \left[\frac{-2x}{\sec^2(x)}\right] \\
+					&= \frac{0}{1} \\
+					&= 0
+				\end{align*}
+				Which thus yields
+				\[\lim\limits_{x \to 0} (\sin(x))^x=\lim\limits_{x \to 0^+} e^{x \cdot \ln(\sin(x))}= e^0=1\]
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%				Section 6.3 - 11 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\item[(c)] $\lim\limits_{x \to 0^+} x^{\sin x}$    $(0, \infty)$\\
+				
+				We first note that
+				\[\lim\limits_{x \to 0} x^{\sin(x)}=0^{\sin(0)}=0^0\]
+				which is in indeterminate form, thus we know that we need to somehow get this into an indeterminate form that can utilize L'Hopital's rule. Thus we consider
+				\[x^{\sin(x)}=e^{\ln\left(x^{\sin(x)}\right)}=e^{\sin(x)\cdot\ln(x)}\]
+				Thus we can use L'Hopital's rule on the exponent as follows:
+				\begin{align*}
+					&\lim\limits_{x \to 0^+} \left[\frac{\ln(x)}{\csc(x)}\right] \\
+					&=\lim\limits_{x \to 0^+} \left[\frac{\frac{1}{x}}{-\csc(x)\cot(x)}\right] \\
+					&= \lim\limits_{x \to 0^+} \left[\frac{-\cos(x)\tan(x)-\sin(x)\sec^2(x)}{1}\right] \\
+					&= 0
+				\end{align*}
+				And thus we have that
+				\[\lim\limits_{x \to 0^+} x^{\sin(x)}=\lim\limits_{x \to 0^+} e^{\sin(x)\ln(x)}=e^0=1\]
+			\end{enumerate}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 4							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Suppose that the function $f$ is twice differentiable.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Prove $f''(x)=\lim\limits_{h \to 0} \frac{f(x+3h)-3f(x+h)+2f(x)}{3h^2}$
+			
+			\begin{proof}
+				\begin{align*}
+					\lim\limits_{h \to 0} \frac{f(x+3h)-3f(x+h)+2f(x)}{3h^2} &= \frac{f(x+3(0))-3f(x+0)+2f(x)}{3(0)^2} \\
+					&= \frac{f(x)-3f(x)+2f(x)}{0} \\
+					&= \frac{0}{0} \implies \text{ Use L'Hopital's Rule} \\
+					&\Downarrow \\
+					&= \lim\limits_{h \to 0} \frac{3f'(x+3h)-3f'(x+h)}{6h} \\
+					&= \frac{3f'(x+3(0))-3f'(x+0)}{6(0)} \\
+					&= \frac{3f'(x)-3f'(x)}{0} \\
+					&= \frac{0}{0} \implies \text{ Use L'Hopital's Rule} \\
+					&\Downarrow \\
+					&= \lim\limits_{h \to 0} \frac{9f''(x+3h)-3f''(x+h)}{6} \\
+					&= \frac{9f''(x+3(0))-3f''(x+(0))}{6} \\
+					&= \frac{9f''(x)-3f''(x)}{6} \\
+					&= \frac{6f''(x)}{6} \\
+					&= f''(x)
+				\end{align*}
+				Thus $f''(x)=\lim\limits_{h \to 0} \frac{f(x+3h)-3f(x+h)+2f(x)}{3h^2}$
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Prove $f''(x)=\lim\limits_{h \to 0} \frac{2f(x+3h)-3f(x+2h)+f(x)}{3h^2}$ \\
+			
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{2f(x+3h)-3f(x+2h)+f(x)}{3h^2} &= \frac{2f(x+3(0))-3f(x+2(0))+f(x)}{3(0)^2} \\
+				&= \frac{2f(x)-3f(x)+f(x)}{0} \\
+				&= \frac{0}{0} \implies \text{ Use L'Hopital's Rule} \\
+				&\Downarrow \\
+				&= \lim\limits_{h \to 0} \frac{6f'(x+3h)-6f'(x+2h)}{6h} \\
+				&= \lim\limits_{h \to 0} \frac{f'(x+3h)-f'(x+2h)}{h} \\
+				&= \frac{f'(x+3(0))-f'(x+2(0))}{0} \\
+				&= \frac{f'(x)-f'(x)}{0} \\
+				&= \frac{0}{0} \implies \text{ Use L'Hopital's Rule} \\
+				&\Downarrow \\
+				&= \lim\limits_{h \to 0} \frac{3f''(x+3h)-2f''(x+2h)}{1} \\
+				&= 3f''(x+3(0))-2f''(x+2(0)) \\
+				&= 3f''(x)-2f''(x) \\
+				&= f''(x)
+			\end{align*}
+			Thus $f''(x)=\lim\limits_{h \to 0} \frac{2f(x+3h)-3f(x+2h)+f(x)}{3h^2}$
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 5							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Prove, if true or provide a counterexample, if false.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ and $g$ are increasing on $[a,b]$, then $f+g$ is increasing on $[a,b]$.\\
+			
+			This is a true statement.
+			\begin{proof}
+				Recall \textit{Theorem 6.2.5}:
+				\begin{theorem*}
+					Let $f:I \rightarrow \R$ be differentiable on the interval $I$. Then:
+					\begin{enumerate}
+						\item $f$ is increasing on $I$ if and only if $f'(x) \geq 0$ for all $x \in I$.
+						\item $f$ is decreasing on $I$ if and only if $f'(x) \leq 0$ for all $x \in I$.
+					\end{enumerate}
+				\end{theorem*}
+				So we know that $f'(x) \geq 0\ \forall\ x \in [a,b]$, and $g'(x) \geq 0\ \forall\ x \in [a,b]$. Thus $f'(x)+g'(x)\geq 0\ \forall\ x \in [a,b]$, which implies that $f+g$ is increasing, by \textit{Theorem 6.2.5}.\\
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ and $g$ are increasing on $[a,b]$, then $fg$ is increasing on $[a,b]$.\\
+			
+			This is a false statement. Consider $f,g:[-6,-4] \to \R$ given by $f(x)=2x$, and $g(x)=3x$. Then both $f'(x)$ and $g'(x)$ are greater than 0 for any $x \in [-6,-4]$, since $f'(x)=2 \geq 0$ and $g'(x)=3 \geq 0$. However, their product $fg=2x\cdot3x=6x^2$, yet $fg'(x) \ngeq 0\ \forall\ x \in [-6,-4]$, since $fg'(x)=12x$, and $fg'(-6)=12(-6)=-72 \ngeq 0$. Thus $fg$ is not increasing.\\
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ and $g$ are differentiable on $[a,b]$ and $|f'(x)| \leq 1 \leq |g'(x)|$ for all $x \in (a,b)$, then $|f(x)-f(a)| \leq |g(x)-g(a)|$ for all $x \in [a,b]$.\\
+			
+			This is a true statement.
+			\begin{proof}
+				There's two cases that we must consider: $f'(x)=g'(x)$, and $f'(x)\neq g'(x)$. \\
+				\begin{case}
+					Let $f'(x)=g'(x)$ such that $|f'(x)|=1=|g'(x)|$. Recall \textit{Corollary 6.2.2}:
+					\begin{corollary*}
+						Suppose that $f$ and $g$ are continuous on $I:=[a,b]$, that they are differentiable on $(a,b)$, and that $f'(x)=g'(x)$ for all $x \in (a,b)$. Then there exists a constant $C$ such that $f=g+C$ on $I$.
+					\end{corollary*}
+					Thus we have that $|f'(x)| \leq 1 \leq |g'(x)|$, and by \textit{Corollary 6.2.2}, we know that there exists some constant $C$ such that $g=f+C$. Thus
+					\begin{align*}
+						|f(x)-f(a)| &\leq |g(x)-g(a)| \\
+						&\leq |(f(x)+C)-(f(a)+C)| &\text{By \textit{Corollary 6.2.2}} \\
+						&=|f(x)-f(a)|
+					\end{align*}
+					Thus if $f'(x)=g'(x)$, and $|f'(x)| \leq 1 \leq |g'(x)|\ \forall\ x \in (a,b)$, then $|f(x)-f(a)| \leq |g(x)-g(a)|$ for all $x \in [a,b]$.
+				\end{case}
+				\begin{case}
+					Now, let $f'(x) \neq g'(x)$ such that $|f'(x)| < 1 < |g'(x)|$. Since $f$ is differentiable on $[a,b]$, we know that the \textit{Mean Value Theorem} holds true. Thus we have
+					\begin{align*}
+						|f'(x)|&<1 \\
+						\abs{\frac{f(x)-f(c)}{x-c}} &<1 \\
+						\frac{|f(x)-f(c)|}{|x-c|} &< 1 \\
+						|f(x)-f(c)|&<|x-c|
+					\end{align*}
+					and
+					\begin{align*}
+						1 &< |g'(x)| \\
+						1 &< \abs{\frac{g(x)-g(c)}{x-c}} \\
+						1 &< \frac{|g(x)-g(c)}{|x-c|} \\
+						|x-c| &< |g(x)-g(c)|
+					\end{align*}
+					Let $c=a$; then we have that
+					\[|f(x)-f(a)|<|x-a|<|g(x)-g(a)|\]
+					and thus
+					\[|f(x)-f(a)|<|g(x)-g(a)|\]
+					for all $x \in [a,b]$.\\
+					
+					Hence we have that if $f'(x) \neq g'(x)$ satisfying $|f'(x)|<1<|g'(x)|$ for all $x \in (a,b)$, then $|f(x)-f(a)|<|g(x)-g(a)|$ for all $x \in [a,b]$.
+				\end{case}
+				Since both cases account for all possible outcomes of functions $f$ and $g$ whose derivatives satisfy the inequality $|f'(x)|\leq 1 \leq |g'(x)|\ \forall\ x \in (a,b)$, we have that this statement holds true.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (d)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item A continuous function defined on a bounded interval assumes its maximum and minimum values.\\
+			
+			This is a false statement. Consider the function $f:(-2,2) \to (-6,6)$ given by $f(x)=3x$. Then we have that $f$ is bounded on $(-2,2)$, since $|f(x)|< 2\ \forall\ x \in (-2,2)$. However, notice that $(f(-2),f(2))=(-6,6)$ is a bounded interval, yet $\min\{(-6,6)\}=$ DNE, and $\max \{(-6,6)\}=$ DNE, but $\inf \{(-6,6)\}=-6$, and $\sup \{(-6,6)\}=6$. Thus $f$ does not assume its minimum and maximum values since the minimum and maximum values do not exist.\\
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (e)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is continuous on $[a,b]$, then there exists a point $c \in (a,b)$ such that $f'(c)=\frac{f(b)-f(a)}{b-a}$.\\
+			
+			This is a false statement. Consider the function $f:\R \to (-1,1)$ given by $f(x):=\sin\left(\frac{1}{x}\right)$. We know that $f$ is not uniformly continuous, which thus means that $f$ cannot be differentiable, hence it does not satisfy the \textit{Mean Value Theorem}.\\
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 (f)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Suppose $f$ is differentiable on $(a,b)$. If $c \in (a,b)$ and $f'(c)=0$, then $f(c)$ is either the maximum or the minimum value of $f$ on $(a,b)$.\\
+			
+			This is false. Consider the function $f:(-\infty,\infty) \to \R$ given by $f(x)=x^3$. Then we note that the derivative of $x^3 = 3x^2$. If we let $3x^2=0$, then we have that $x=0$. However, the slope at $x=0$ is $0$, and thus we have that $x$ is not a maximum or a minimum of $f$.\\
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 6							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item \textbf{Not collected} The following is an outline of a proof that $e$ is irrational:
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 6 (a)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Show that $f(x)=e^x$ is strictly increasing on $\R$.
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 6 (b)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Use Taylor's Theorem about $x=0$ and the estimate $e < 3$ to show for all $n \in \N$,
+			\[0<e-\left(1+1+\frac{1}{2!}+\frac{1}{3!}+ \dots + \frac{1}{n!}\right)< \frac{3}{(n+1)!}\]
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 6 (c)							%%%%%%%%		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Suppose that $e$ is rational. Then $e=a/b$ for some $a,b \in \N$. Choose $n > \max \{b,3\}$. Substitute into part b) and show that this leads to the existence of an integer between 0 and 3/4.
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

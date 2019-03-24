@@ -1,0 +1,502 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\sgn}{\text{sgn}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 7}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 4.1}
+		\begin{enumerate}
+			\item[1.] Determine a condition on $|x-1|$ that will assure that:
+			\begin{enumerate}
+				\item[(a)] $|x^2-1|<\frac{1}{2}$
+				
+				We notice first that $|x^2-1|=|x-1||x+1|$.\\
+				
+				Consider the case where $|x-1|<1$. Then we have that $-1 < x-1<1$ and thus $-3<1<x+1<3$ and thus $|x+1|<3$.\\
+				
+				Hence we have that $|x^2-1|=|(x-1)(x+1)|=|x-1||x+1|<1 \cdot 3 = 3$.\\
+				
+				Now, since $\frac{1}{6}<1$, if $|x-1|<\frac{1}{6}$, then $|x+1|<3$ and thus $|x^2-1|=|(x-1)(x+1)|=|x-1||x+1|<\frac{1}{6} \cdot 3 = \frac{1}{2}$.\\
+				
+				$\therefore$ If we let $|x-1|<\frac{1}{6}$ then $|x^2-1|<\frac{1}{2}$.\\
+				
+				\item[(c)] $|x^2-1|<1/n$ for a given $n \in \N$.\\
+				
+				Notice that $0<\frac{1}{n}\leq 1$, and thus $0<\frac{1}{3n}\leq \frac{1}{3}<1$.\\
+				
+				So, by \textit{Part (a)}, we have that if $|x-1|<\frac{1}{3n}$, then $|x+1|< 3$. Hence, $|x^2-1|=|(x-1)(x+1)|=|x-1||x+1|<\frac{1}{3n} \cdot 3 = \frac{1}{n}$.\\
+				
+				$\therefore$ If $|x-1|<\frac{1}{3n}$, then $|x^2-1|<\frac{1}{n}$.
+			\end{enumerate}
+		
+			\item[7.] Show that $\lim\limits_{x \to c} x^3=c^3$ for any $c \in \R$. (Hint: Use $c=2$)\\
+			
+			Suppose $|x-2|<1$.
+			\begin{align*}
+				|x^3-8| &= |x-2||x^2+2x+4|
+			\end{align*}
+			So, we have 
+			\begin{align*}
+				|x^2+2x+4|=|(x^2-4x+4)+6x| \\
+				&=|(x-2)^2+6(x-2)+12| \\
+				&\leq |x-2|^2 + 6|x-2|+12 \\
+				&< 1 +6 + 12 = 19
+			\end{align*}
+			So we have that if we let $\delta=\min \{1, \frac{\varepsilon}{19}\}$, then we have that $\lim\limits_{x \to c}x^3 = c^3$, for $c=2$.\\
+			
+			More generally, we have the following:\\
+			
+			$\forall\ c \in \R$, let $b=|c|+1$. Then we have that if $|x|<b$, then
+			\[|x^2+cx+c^2| \leq |x|^2 + |c||x|+|c|^2 \leq 3b^2\]
+			Now, if we let $\varepsilon>0$ be arbitrary, we have that for $\delta = \frac{\varepsilon}{3b^2}$ and $x$ such that $|x-c|<\delta$, then
+			\begin{align*}
+				|x^3-c^3| &= |(x-c)(x^2+cx+c^2)| \\
+				&\leq |x-c||x^2+cx+c^2| \\
+				&\leq 3b^2|x-c| \\
+				&<3b^2 \frac{\varepsilon}{3b^2} \\
+				&= \varepsilon
+			\end{align*}
+			Hence we have that $\lim\limits_{x \to c} x^3 = c^3,\ \forall\ c \in \R$.
+			
+			\item[9.] Use either the $\varepsilon-\delta$ definition of the limit or the Sequential Criterion for limits, to establish the following limit:
+			\begin{enumerate}
+				\item[(b)] $\lim\limits_{x \to 1} \frac{x}{1+x}=\frac{1}{2}$\\
+				
+				Let $\varepsilon>0,\ \delta=\min \{\frac{1}{2},\varepsilon\}$. Now for $0<|x-1|<\delta\leq \frac{1}{2}$, we have:
+				\begin{align*}
+					\abs{\frac{x}{1+x}-\frac{1}{2}} &= \abs{\frac{2x-(1+x)}{2(1+x)}} \\
+					&=\abs{\frac{x-1}{2(1+x)}} \\
+					&< |x-1| &(|x-1|<\frac{1}{2} \implies x+1>\frac{3}{2}) \\
+					&<\delta \\
+					&<\varepsilon
+				\end{align*}
+				And thus by the $\varepsilon-\delta$ definition of the limit, we have
+				\[\lim\limits_{x \to 1} \frac{x}{1+x}=\frac{1}{2}\]
+			\end{enumerate}
+		
+			\item[10.] Use the definition of a limit to show that
+			\begin{enumerate}
+				\item[(a)] $\lim\limits_{x \to 2} (x^2+4x)=12$\\
+				
+				\begin{align*}
+					|x-2|<1 \implies |x^2+4x-12| &\leq |(x+6)(x-2)| \\
+					&\leq |x+6||x-2| \\
+					&= |x-2+8||x-2| \\
+					&\leq (|x-2|+8)|x-2| \\
+					&\leq (1+8)|x-2| &(|x-2|<1) \\
+					&=9|x-2|
+				\end{align*}
+				For $\delta=\min \{1,\frac{\varepsilon}{9}\}$ and $x$ such that $|x-2|<\delta$ we have that $|x^2+4x-12|<\varepsilon$.\\
+				
+				$\therefore\ \lim\limits_{x \to 2} x^2+4x=12$.
+				
+				\item[(b)] $\lim\limits_{x \to -1} \frac{x+5}{2x+3} = 4$
+				
+				\begin{align*}
+					\abs{\frac{x+5}{2x+3}-4} &= \abs{\frac{x+5-4(2x+3)}{2x+3}} \\
+					&=\abs{\frac{-7x-7}{2x+3}} \\
+					&= 7 \abs{\frac{x+1}{2x+3}} \\
+					&=\frac{7|x+1|}{|2x+3|}
+				\end{align*}
+				Now, if $|x+1|<\frac{1}{4}$, then
+				\begin{align*}
+					-\frac{5}{4}<x<-\frac{3}{4} &\implies \frac{1}{2}<2x+3<\frac{3}{2} \\
+					&\implies 0<\frac{1}{2x+3}<2 \\
+					\implies \abs{\frac{x+5}{2x+3}-4} &\leq \frac{7|x+1|}{|2x+3|} \\
+					&< 14|x+1|
+				\end{align*}
+				Thus, let $\delta:=\min \{\frac{1}{4}, \frac{\varepsilon}{14}\}$.\\
+				
+				$\therefore\ \lim\limits_{x \to -1} \frac{x+5}{2x+3}=4$
+			\end{enumerate}
+		
+			\item[15.] Let $f:\R \to \R$ be defined by the setting $f(x):=x$ if $x$ is rational, and $f(x)=0$ if $x$ is irrational.
+			\begin{enumerate}
+				\item[(a)] Show that $f$ has a limit at $x=0$.\\
+				
+				$\forall\ \varepsilon > 0$, choose $\delta = \varepsilon$. Then we have that $\forall\ x \in \R$ with $|x|<\delta$, we have
+				\[|f(x)-0|=|f(x)=\begin{cases}
+				|x|, & \text{if } x \text{ is rational} \\
+				0, & \text{if } x \text{ is irrational}
+				\end{cases}\]
+				\[\implies |f(x)|<\varepsilon\]
+				$\therefore$ We have that $f$ has a limit of $0$ at $x=0$.
+				
+				\item[(b)] Use a sequential argument to show that if $c \neq 0$, then $f$ does not have a limit at $c$.\\
+				
+				Let $\{x_n\}$ and $\{y_n\}$ be two sequences, both converging to $c \st x_n \in \R \setminus \Q$ and since the rationals and irrationals are dense in the set of real numbers, $y_n \in \Q\ \forall\ n \in \N$.\\
+				
+				Thus, $f(x_n)=0\ \forall\ n$ and $f(y_n)=y_n\ \forall\ n$. This yields that $f(x_n) \to 0$, but $f(y_n)=y_n \to c$. Thus we now have that $\lim\limits_{n \to \infty} f(x_n) \neq \lim\limits_{n \to \infty} f(y_n)$. Hence we have that $f$ does not have a limit at $x=c$.
+			\end{enumerate}
+		\end{enumerate}
+	\item Use the definition of a limit to establish the following limits:
+		\begin{enumerate}
+			\item $\lim\limits_{x \to 1} \frac{x^2-x-2}{2x-3}=2$\\
+			
+			We want to show the following $\forall\ \varepsilon > 0$:
+			\begin{align*}
+				\abs{\frac{x^2-x-2}{2x-3}-2} &= \abs{\frac{x^2-x-2-4x+6}{2x-3}} \\
+				&= \abs{\frac{x^2-5x+4}{2x-3}} \\
+				&= \frac{|x-4||x-1|}{|2x-3|} \\
+				&<\varepsilon
+			\end{align*}
+			So, we have for the numerator:
+			\begin{align*}
+				|x-4| &= |(x-1)-3| \\
+				&= |x-1|-3 \\
+				&\leq 1-3 \\
+				&= -2
+			\end{align*}
+			And for the denominator we have for $|x-1|$:
+			\begin{align*}
+				-1 &< x-1 < 1 \\
+				0 &< x < 2 \\
+				0 &< 2x < 4 \\
+				-3 &< 2x-3 < 1 \\
+				-\frac{1}{3} &> \frac{1}{2x-3} \\
+				\frac{1}{2x-3} &< -\frac{1}{3}
+			\end{align*}
+			This then yields that
+				\[\frac{|x-4||x-1|}{|2x-3|}<(-2)\cdot\left(-\frac{1}{3}\right)|x-1|<\varepsilon\]
+			Which then gives us that 
+			\[|x-1|<\frac{3\varepsilon}{2}\]
+			Hence if we let $\delta = \min \{1, \frac{3\varepsilon}{2}\}$, and x such that $|x-1|<\delta$ gives us that $\abs{\frac{x^2-x-2}{2x-3}-2}=\frac{|x-4||x-1|}{|2x-3|}< \varepsilon,\ \forall\ \varepsilon>0$.\\
+			
+			$\therefore\ \lim\limits_{x \to 1} \frac{x^2-x-2}{2x-3}=2$
+			
+			\item $\lim\limits_{x \to 5} (x^2-3x+1)=11$ \\
+			
+			We want to show the following $\forall\ \varepsilon>0$:
+			\begin{align*}
+				|x^2-3x+1-11| &= |x^2-3x-10| \\
+				&=|x-5||x+2| \\
+				&<\varepsilon
+			\end{align*}
+			So we have the following for $|x+2|$:
+			\begin{align*}
+				|x+2| &= |(x-5)+7| \\
+				&= |x-5|+7 \\
+				&\leq 1+7 \\
+				&= 8
+			\end{align*}
+			This then yields that $|x-5||x+2|<8|x-5|=\varepsilon$, and thus $|x-5|<\frac{\varepsilon}{8}$.\\
+			
+			So if we let $\delta=\min \{1, \frac{\varepsilon}{8}\}$, and $x$ such that $|x-5|<\delta$, we have that $|x^2-3x-1|=|x-5||x+2|<\varepsilon$.\\
+			
+			$\therefore\ \lim\limits_{x \to 5} (x^2-3x+1) = 11$
+		\end{enumerate}
+
+	\item Find a $\delta > 0$ so that $|x-2|<\delta$ implies that
+		\begin{enumerate}
+			\item $|x^2+x-6|<1$\\
+			
+			Note that $|x^2+x-6|=|x-2||x+3|$. So, we have that $|x+3|=|(x-2)+5|=|x-2|+5\leq 1+5=6$. Thus we have that $6|x-2|<1 \implies |x-2| < \frac{1}{6}$. So if we let $\delta = \min \{1, \frac{1}{6}\}=\frac{1}{6}$ gives us that $|x-2|<\delta$.\\
+			
+			\item $|x^2+x-6|<1/n$ for a given $n \in \N$\\
+			
+			By similar logic as the previous problem, we have that if we let $\delta=\min \{1,\frac{1}{6n}\}=\frac{1}{6n}$, we have that $|x-2|<\delta$.
+			
+			\item $|x^2+x-6|<\varepsilon$\\
+			
+			Suppose that $|x-2|<1$. Then we have that $|x+3|=|(x-2)+5|\leq |x-2|+5 < 6$. So we have that if we let $\delta=\min \{1,\frac{\varepsilon}{6}\}$, we have that $|x-2|<\delta$.
+		\end{enumerate}
+
+	\item Show that for any $a$, $\lim\limits_{x \to a} F(x)$ does not exist for $F(x) = \begin{cases}
+		1, & \text{if } x \text{ is rational} \\
+		0, & \text{if } x \text{ is irrational}
+	\end{cases}$\\
+	
+	Let $x_n=$ sequence of rationals $\rightarrow\ a$, and let $y_n=$ sequence of irrationals such that $\rightarrow\ a$. Then we have that $\lim f(x_n)=1$ and $\lim f(y_n)=0$. Thus by \textit{Theorem 4.1.9}, we have that $\lim f(x)$ does not exist.
+	
+	\item Let $f(x)=\begin{cases}
+	3x+2 & \text{if } x \text{ is rational} \\
+	6-x & \text{if } x \text{ is irrational}
+	\end{cases}$
+		\begin{enumerate}
+			\item Show $\lim\limits_{x \to 1} f(x)=5$\\
+			
+			Let $\varepsilon>0$ be given. Then we have the following for $|f(x)-L|$:
+			\begin{align*}
+				|f(x)-5| &= \begin{cases}
+					|(3x+2)-5| \\
+					|(6-x)-5|
+				\end{cases} \\
+				&= \begin{cases}
+					|3x-3| \\
+					|1-x|
+				\end{cases}\\
+				&= \begin{cases}
+					3|x-1| \\
+					|x-1|
+				\end{cases} \\
+				&= \varepsilon
+			\end{align*}
+			
+			Thus, let $\delta=\min \{\varepsilon, \frac{\varepsilon}{3}\}$, and we have that $\lim\limits_{x \to 1} f(x)=5$.
+			
+			\item Show $\lim\limits_{x \to a} f(x)$ does not exist if $a \neq 1$.\\
+			
+			Let $x_n$ be a sequence of rational numbers such that $x_n \neq a,\ \forall\ n \in \N$, and $\lim (x_n) =a$. Let $y_n$ be a sequence of irrational numbers such that $y_n \neq a,\ \forall\ n \in \N$, and $\lim (y_n)=a$. Then we have that $\lim\limits_{x \to a} f(x_n) = 3a+2$, and that $\lim\limits_{x \to a} f(y_n) = 6-a$. Thus, we have that if the limit exists, then $\lim\limits{x \to a} f(x_n) = \lim\limits_{x \to a} f(y_n)$. So,
+			\begin{align*}
+				3a+2 &= 6-a \\
+				4a+2 &= 6 \\
+				4a &= 4 \\
+				a &= 1
+			\end{align*}
+			However, since we have that $a \neq 1$, we have that by \textit{Theorem 4.1.8} (\textit{The Divergence Criteria}), we know that $3a+2 \neq 6-a \implies \lim\limits_{x \to a} f(x_n) \neq \lim\limits_{x \to a} f(y_n)$, and thus this limit does not exists if $a \neq 1$.
+		\end{enumerate}
+
+	\item Let $f:[-1,1] \to \R$ be given by, $f(x)=\begin{cases}
+	0, & \text{if } x=\pm\frac{1}{n} \text{ where } n \in \N \\
+	1, & \text{otherwise}
+	\end{cases}$\\
+	Find the limit, if it exists, using the definition of a limit.
+		\begin{enumerate}
+			\item $\lim\limits_{x \to \frac{3}{8}} f(x)$\\
+			
+			Notice first that the range of $f$ is $R(f):= \{0,1\}$. This yields that $\varepsilon = 0$, or $\varepsilon=1$. However, by the definition of a limit, we have that $\varepsilon>0$, and thus $\varepsilon=1$. This gives us a guarantee that $\varepsilon$ will always equal 1. Thus all we need to worry about is finding a $\delta$, that doesn't need to be in terms of $\varepsilon$.\\
+			
+			First, recall the definition of a limit when a function $f:A \to \R$ for $A \subseteq \R$, and $c$ is a cluster point of $A$:
+			\[\lim\limits_{x \to c} f(x)=L \implies \forall\ \varepsilon>0\ \exists\ \delta >0 \st x \in A \wedge 0<|x-c|<\delta \implies |f(x)-L|<\varepsilon\]
+			However, also recall the definition of a cluster point of $A$ for $c \in \R$:
+			\[\forall\ \delta > 0\ \exists\ x \in V_\delta (c):=\{x \in A:|x-c|<\delta\}=(c-\delta, c+\delta) \st x \neq c\]
+			So we have now that if we observe the different parts of the piecewise function that create the domain are the following sets: $B:=\{-1, -\frac{1}{2}, -\frac{1}{3}, \dots, \frac{1}{3}, \frac{1}{2}, 1\}$ and $C:= [-1,1] \setminus B$.\\
+			
+			We now note that since $c = \frac{3}{8}$, we know by evaluating the limit through substitution, $\lim\limits_{x \to \frac{3}{8}}=1$. Thus we also know that since $\frac{3}{8}$ is not of the form $\pm \frac{1}{n}$ for $n \in \N$, that by the corollaries to \textit{The Archimedian Property}, there exists a rational number between any two real numbers. Thus we have that there must exist two rational numbers $p,q \in \Q \st p < \frac{3}{8}<q$.\\
+				
+			We note by the elements of $B$ that if we let $p=\frac{1}{3}$ and let $q=\frac{1}{2}$ we have that $\frac{1}{3}<\frac{3}{8}<\frac{1}{2}$. So we now have that since $\delta$ must be defined such that $0<|x-c|<\delta$, we can solve for $\delta$ as being $\frac{3}{8} - \frac{1}{3}=\frac{1}{24}$, since $\frac{1}{3}<\frac{1}{2}$, and thus we have that if we let $\delta=\frac{1}{24}$, then $(c-\delta, c+\delta)$ is such that $|x-c|<\delta$.\\
+			
+			$\therefore\ \lim\limits_{x \to \frac{3}{8}} f(x)=1$ when $|x-\frac{3}{8}|<\delta$ for $\delta=\frac{1}{24}$
+			
+			\item $\lim\limits_{x \to -\frac{1}{3}} f(x)$\\
+			
+			By applying similar logic as the previous problem, we notice that since $-\frac{1}{2}<-\frac{1}{3}<-\frac{1}{4}$, since $\delta$ does not need to be defined in terms of $\varepsilon$ since $\varepsilon=1$, we have that we can let $\delta=|-\frac{1}{3}+\frac{1}{4}|=\frac{1}{12}$, since $\delta>0$. Thus, we have that the cluster point $-\frac{1}{3}$ is defined such that $|x+\frac{1}{3}|<\frac{1}{12}$. Hence $\lim\limits_{x \to -\frac{1}{3}} f(x)=0$.
+			
+			\item $\lim\limits_{x \to 0} f(x)$\\
+			
+			We have that the limit does not exist when $x=0$. We can see this if we let $x_n=\frac{1}{n} \to 0$, and $y_n=\frac{\sqrt{2}}{n} \to 0$. Then we have that $f(x_n)=0$ and $f(y_n)=1$. Thus we have that $\lim\limits_{x \to 0} f(x)$ does not exist.\\
+			
+		\end{enumerate}
+	
+	\item \textbf{Section 4.2}
+		\begin{enumerate}
+			\item[3.] Find $\lim\limits_{x \to 0} \frac{\sqrt{1+2x}-\sqrt{1+3x}}{x+2x^2}$ where $x>0$.\\
+			
+			Recall \textit{Theorem 4.2.4}:
+			\begin{theorem*}
+				let $A \subseteq \R$, let $f$ and $g$ be functions on $A$ to $\R$, and let $c \in \R$ be a cluster point of $A$. Further, let $b \in \R$.
+				\begin{enumerate}
+					\item If $\lim\limits_{x\to c} f = L$ and $\lim\limits_{x\to c} g = M$, then
+					\[\lim\limits_{x\to c} (f+g) = L+M,\]
+					\[\lim\limits_{x\to c} (f-g)=L-M,\]
+					\[\lim\limits_{x\to c} (fg) = LM,\]
+					\[\lim\limits_{x\to c} (bf) = bL.\]
+					
+					\item If $h: A \rightarrow \R$, if $h(x) \neq 0$ for all $x \in A$, and if $\lim\limits_{x\to c} h = H \neq 0$, then
+					\[\lim\limits_{x\to c} \left( \frac{f}{h} \right)= \frac{L}{H}\]
+				\end{enumerate}
+			\end{theorem*}
+			This yields the following:
+			\begin{align*}
+				\lim\limits_{x \to 0} \frac{\sqrt{1+2x}-\sqrt{1+3x}}{x+2x^2} &= \lim\limits_{x \to 0} \frac{(1+2x)-(1+3x)}{(x+2x^2)(\sqrt{1+2x}+\sqrt{1+3x})} \\
+				&= \lim\limits_{x \to 0} \frac{-x}{x(1+2x)(\sqrt{1+2x}+\sqrt{1+3x})} \\
+				&= \lim\limits_{x \to 0} \frac{-1}{(1+2x)(\sqrt{1+2x}+\sqrt{1+3x})} \\
+				&= \frac{-1}{(1+0)(\sqrt{1+0}+\sqrt{1+0})} &\text{by } \textit{Theorem 4.2.4} \\
+				&= \frac{-1}{1(2)} \\
+				&= \frac{-1}{2}
+			\end{align*}
+			Thus we have that $\lim\limits_{x \to 0} \frac{\sqrt{1+2x}-\sqrt{1+3x}}{x+2x^2}=-\frac{1}{2}$
+			
+			\item[4.] Prove that $\lim\limits_{x \to 0} \cos (1/x)$ does not exist but that $\lim\limits_{x \to 0} x \cos (1/x)=0$\\
+			
+			\begin{proof}
+				Let $x_n:=\left((2n+1)\frac{\pi}{2}\right)^{-1} \implies x_n \to 0$. And also let $y_n:=(2n\pi)^{-1}$. Then we have that $y_n \to 0$. We can now note that $\cos \left(\frac{1}{x_n}\right)=\cos \left((2n+1)\frac{\pi}{2}\right)=0$, and that $\cos \left(\frac{1}{y_n}\right) = \cos (2n\pi) = 1$. This yields that $\cos \left(\frac{1}{x_n}\right) \to 0$ and $\cos \left(\frac{1}{y_n}\right) \to 1$.\\
+				
+				Recall the \textit{Sequential Criterion}:
+				\begin{theorem*}[Sequential Criterion]
+					Let $f:A \rightarrow \R$ and let $c$ be a cluster point of $A$. Then the following are equivalent.
+					\begin{enumerate}
+						\item $\lim\limits_{x\to c} f=L$.
+						\item For every sequence $(x_n)$ in $A$ that converges to $c$ such that $x_n\neq c$ for all $n \in \N$, the sequence $(f(x_n))$ converges to $L$.
+					\end{enumerate}
+				\end{theorem*}
+				So we have that $\lim\limits_{x \to 0} \cos \left(\frac{1}{x}\right)$ doesn't exist. However, $\lim\limits_{x \to 0}x \cos \left(\frac{1}{x}\right)=0$. This is given to us by the fact that $\abs{x \cos \left(\frac{1}{x}\right)}\leq |x|$. Thus, if we let $\delta = \varepsilon$, we have that $\lim\limits_{x \to 0} x \cos \left(\frac{1}{x}\right)=0$.
+			\end{proof}
+			
+			\item[6.] Use the definition of the limit to prove the first assertion in Theorem 4.2.4(a).\\
+			
+			\begin{proof}
+				Let $\varepsilon>0$ be given.\\
+				
+				Since we have that $\lim\limits_{x \to c} f(x) = L$, by the definition of the limit, we know that $\exists\ \delta_f > 0 \st |x-c|<\delta_f \implies |f(x)-L|<\frac{\varepsilon}{2}$.\\
+				
+				Since $\lim\limits_{x \to c} g(x)=M$, then we have that by the definition of the limit, we know that $\exists\ \delta_g > 0 \st |x-c|<\delta_g \implies |g(x)-M|<\frac{\varepsilon}{2}$.\\
+				
+				Now, define $\delta=\max \{\delta_f, \delta_g\}$. Then we have that for $|x-c|<\delta$:
+				\begin{align*}
+					|(f(x)+g(x))-(L+M)| &= |(f(x)-L)+(g(x)-M)| \\
+					&\leq |f(x)-L| + |g(x)-M| \\
+					&< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} \\
+					&= \varepsilon
+				\end{align*}
+				This yields that by the definition of the limit again, we have that $\lim\limits_{x \to c} (f+g)(x) = L+M$.\\
+				
+				$\therefore$ We have that if $\lim\limits_{x \to c} f(x) = L$ and $\lim\limits_{x \to c} g(x) = M$, then $\lim\limits_{x \to c} (f+g)(x) = L + M$.\\
+				
+				A similar argument can be used to show the case for subtraction.
+			\end{proof}
+			
+			\item[9.] Let $f,g$ be defined on $A$ to $\R$ and let $c$ be a cluster point of $A$.
+				\begin{enumerate}
+					\item[(a)] Show that if both $\lim\limits_{x \to c} f$ and $\lim\limits_{x \to c}(f+g)$ exist, then $\lim\limits_{x \to c}$ exists.\\
+					
+					\begin{proof}
+						Since we have that $\lim\limits_{x \to c} f$ and $\lim\limits_{x \to c} (f+g)$ exist, by \textit{Theorem 4.2.4} we have that $\lim\limits_{x \to c} g=\lim\limits_{x \to c} ((f + g)-f)$ also exists.\\
+						
+						$\therefore\ \exists\ \lim\limits_{x \to c} f \wedge \exists\ \lim\limits_{x \to c} (f+g) \implies \exists\ \lim\limits_{x \to c} g$.
+					\end{proof}
+					
+					\item[(b)] If $\lim\limits_{x \to c} f$ and $\lim\limits_{x \to c} fg$ exist, does it follow that $\lim\limits_{x \to c} g$ exists?\\
+					
+					If we have that $\lim\limits_{x \to c} f$ and $\lim\limits_{x \to c} fg$ exist, then we have that $\lim\limits_{x \to c}g$ doesn't necessarily have to exist. Consider the following:\\
+					
+					Let $c=0, f(x)=x,g(x)=\frac{1}{x}$. Then we have that $\lim\limits_{x \to c} f(x)=\lim\limits_{x \to 0} x = 0$, and that $\lim\limits_{x \to c}fg(x) = \lim\limits_{x \to 0} x \cdot \frac{1}{x} = \lim\limits_{x \to 0} 1 = 1$. However, we have that $\lim\limits_{x \to c} g(x) = \lim\limits_{x \to 0} \frac{1}{x}$ does not exist.\\
+				\end{enumerate}
+			
+			\item[10.] Give examples of functions $f$ and $g$ such that $f$ and $g$ do not have limits at a point $c$, but such that both $f+g$ and $fg$ have limits at $c$.\\
+			
+			Consider the following: Let $c=0, f(x)=\sgn (x), g(x)=-\sgn(x)$. By the definition of the signum function, we know that $\lim\limits_{x \to 0} \sgn$ does not exist. This yields that $\lim\limits_{x \to 0} -\sgn$ also does not exit. However, we have that $(f+g)(x)=0$ and $(f \cdot g)(x)=-1$ for $x\neq 0$, and $(f \cdot g)(0)=0$. This gives us that $\lim\limits_{x \to 0} (f+g)(x)=0$ and that $\lim\limits_{x \to 0} (f \cdot g)(x) = -1$.\\
+			
+			\item[11.] Determine whether the follow limits exist in $\R$.
+				\begin{enumerate}
+					\item[(a)] $\lim\limits_{x \to 0} \sin (1/x^2)\ \ \ (x \neq 0)$\\
+					
+					$\lim\limits_{x \to 0} \sin \frac{1}{x^2}$ for $x \neq 0$ does not exist.\\
+					
+					Consider $f(x) = \sin \frac{1}{x^2}$, and $x \neq 0$. Also, let $x_n = \frac{1}{\sqrt{n\pi}}$ for $n \in \N$. Then we have that $\lim x_n = \frac{1}{\pi}\cdot \lim \frac{1}{\sqrt{n}}=0$. Thus $f(x_n) = \sin \frac{1}{x_n^2}=\sin \frac{1}{\frac{1}{n\pi}}=\sin n \pi = 0$. Which yields $\lim f(x_n)=0$.\\
+					
+					Now, let $y_n = \frac{1}{\sqrt{(4n+1)\frac{\pi}{2}}}=\sin (4n+1)\frac{\pi}{2}=1$. Thus $\lim f(y_n)=1$.\\
+					
+					Hence we have that $(x_n)$ and $(y_n)$ both converge to $0$, however the sequences $(f(x_n))$ and $(f(y_n))$ converge to two complete separate limits.\\
+					
+					$\therefore\ \lim\limits_{x \to 0} f(x) = \lim\limits_{x \to 0} \sin \frac{1}{x^2}$ does not exist.\\
+					
+					\item[(b)] $\lim\limits_{x \to 0} x \sin (1/x^2)\ \ \ (x \neq 0)$\\
+					
+					$\lim\limits_{x \to 0} x \sin \frac{1}{x^2}=0$.\\
+					
+					\begin{lemma}
+						Let $A \subseteq \R$, let $f,g:A \to \R$, and let $c$ be a cluster point of $A$. Suppose that $\lim\limits_{x \to c} g(x)=0$ and that $f$ is bounded on some neighborhood of $c$. We want to show that $\lim\limits_{x \to c}fg(x)=0$.\\
+						
+						Since $f$ is bounded on some neighborhood of $c$, we know that $\exists\ \delta_0>0$ and $M>0$ such that $|x-c|<\delta_0 \implies |f(x)|<M$.\\
+						
+						Let $\varepsilon >0$ be given. Since $\lim\limits_{x \to c} g(x)=0$, we know that $\exists\ \delta_1 >0$ such that $|x-c|<\delta_1 \implies |g(x)|=|g(x)-0|<\frac{\varepsilon}{M}$.\\
+						
+						Choose $\delta := \min \{\delta_0, \delta_1\}$. Thus we now have
+						\[|x-c|<\delta \implies |f(x)|<M \text{ and } |g(x)|<\frac{\varepsilon}{M} \implies |f(x)g(x)|<\varepsilon\]
+						Thus we have that by the definition of the limit, $\lim\limits_{x \to c} fg(x)=0$.\\
+						$\square$
+					\end{lemma}
+					\begin{proof}
+						Let $f(x)=\begin{cases}
+							\sin \frac{1}{x^2}, &x \neq 0\\
+							0, &x=0
+						\end{cases}$ \\
+						
+						and let $g(x)=x$ for $x \in \R$.\\
+						
+						Then we have that $|f(x)|\leq 1\ \forall\ x \in \R$. This gives us that $f$ is bounded in $\R$. Hence $\lim\limits_{x \to 0} g(x)=\lim\limits_{x \to 0} x = 0$. Thus we have that by \textit{Lemma 0.1}, we have that $\lim\limits_{x \to 0} f(x)=0 \implies \lim\limits_{x \to 0} x \sin \frac{1}{x^2}=0$.
+					\end{proof}
+				\end{enumerate}
+			
+			\item[13.] Functions $f$ and $g$ are defined on $R$ by $f(x):=x+1$ and $g(x):=2$ if $x \neq 1$ and $g(1):=0$.
+				\begin{enumerate}
+					\item[(a)] Find $\lim\limits_{x \to 1}g(f(x))$ and compare with the value of $g(\lim\limits_{x \to 1} f(x))$.\\
+					
+					We first note that $\lim\limits_{x \to 1} f(x) = \lim\limits_{x \to 1} (x+1)=2$. Thus we have that $g(\lim\limits_{x \to 1} f(x))=g(2)=2$.\\
+					
+					Now, $g(f(x))=g(x+1)=\begin{cases}
+					2 & x \neq 0 \\
+					0 & x=0
+					\end{cases}$\\
+					Thus we have that $\lim\limits_{x \to 1} g(f(x))=2$. Thus we have that $\lim\limits_{x \to 1} g(f(x))=2=g(\lim\limits_{x \to 1} f(x))$.
+					
+					\item[(b)] Find $\lim\limits_{x \to 1} f(g(x))$ and compare with the value of $f(\lim\limits_{x \to 1} g(x))$.\\
+					
+					$f(g(x))=\begin{cases}
+					f(2) & x \neq 1 \\
+					f(0) & x = 1
+					\end{cases} = \begin{cases}
+					3 & x \neq 1 \\
+					1 & x = 1
+					\end{cases}$\\
+					Thus we have that $\lim\limits_{x \to 1}f(g(x))=3$. Now $\lim\limits_{x \to 1} g(x)=2$, we have that $f(\lim\limits_{x \to 1} g(x))=f(2)=3$.\\
+					
+					$\therefore\ \lim\limits_{x \to 1}f(g(x))=f(\lim\limits_{x \to 1}g(x))$.
+				\end{enumerate}
+		\end{enumerate}
+	
+	\item Prove or justify if true. Provide a counterexample if false.
+		\begin{enumerate}
+			\item $\lim\limits_{x \to 3a} f(x) = 3 \lim\limits_{x \to a} f(x)$\\
+			
+			This is a false statement. Consider the function $f(x):=\frac{1}{x}$. Then we have that if $a=4$:
+			\[\lim\limits_{x \to 3(4)} f(x) = \lim\limits_{x \to 12} \frac{1}{x} = \frac{1}{12}\]
+			However, we also have the following:
+			\[3\lim\limits_{x \to 4} f(x) = 3\lim\limits_{x \to 4} \frac{1}{x} = \frac{3}{4}\]
+			Thus, we have that
+			\[\lim\limits_{x \to 3(4)} \frac{1}{x} = \frac{1}{12} \neq \frac{3}{4} = 3\lim\limits_{x \to 4} \frac{1}{x}\]
+			And thus
+			\[\lim\limits_{x \to 3a} f(x) \neq 3\lim\limits_{x \to a} f(x)\]
+			
+			\item $\lim\limits_{x \to a} f(3x) = 3 \lim\limits_{x \to a} f(x)$\\
+			
+			This is also a false statement. Consider $f(x)=\frac{1}{x}$ and $a=5$. Then we have
+			\[\lim\limits_{x \to 5} f(3x) = \lim\limits_{x \to 5} \frac{1}{3x} = \frac{1}{15}\]
+			But
+			\[3\lim\limits_{x \to 5} f(x) = 3\lim\limits_{x \to 5} \frac{1}{x} = \frac{3}{5}\]
+			Thus we have that
+			\[\lim\limits_{x \to 5} \frac{1}{3x} = \frac{1}{15} \neq \frac{3}{5} = 3\lim\limits_{x \to 5} \frac{1}{x}\]
+			Hence
+			\[\lim\limits_{x \to a} f(3x) \neq 3\lim\limits_{x \to a} f(x)\]
+			
+			\item $\lim\limits_{x \to 3a} f(x) = \lim\limits_{x \to a} f(3x)$\\
+			
+			This statement is true.
+			\begin{proof}
+				Let $y=\frac{x}{3}$. Then we have that $x = 3y$. Thus as $x \to 3a$, we get that $y \to a$. Thus $\lim\limits_{x \to 3a} f(x)=\lim\limits_{y \to a} f(3y) = \lim\limits_{x \to a} f(3a)$.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

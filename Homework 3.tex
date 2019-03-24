@@ -1,0 +1,208 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amsthm}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 3}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item Find the infimum and supremum, if they exist.
+		\begin{enumerate}
+			\item Section 2.3
+			\begin{enumerate}
+				\item[4)] Let $S_4 := \{1-\frac{(-1)^n}{n}: n \in \mathbb{N}\}$. 
+				\\$\inf S_4 = \frac{1}{2}$, $\sup S_4 = 2$
+				\item[5)] 
+				\begin{enumerate}
+					\item[a)]
+					\begin{align*}
+					A :&= \{x \in \mathbb{R}: 2x + 5 > 0\}
+					\\ &= \{x \in \mathbb{R}: 2x > -5\}
+					\\ &= \{x \in \mathbb{R}: x > \frac{-5}{2}\}
+					\end{align*}
+					So $\inf A$ exists. So $\inf A = \frac{-5}{2}$. But since $\nexists$ an upper bound or the upper bound of $A = \infty$, then either $\sup A = \infty$, or $\sup A = DNE$.
+					\item[b)]
+					\begin{align*}
+					B :&= \{x \in \mathbb{R}: x + 2 \geq x^2\}
+					\\ &= \{x \in \mathbb{R}: 0 \geq x^2-x-2\}
+					\\ &= \{x \in \mathbb{R}: 0 \geq (x-2)(x+1)\}
+					\\ &= [-1, 0]\cup[0,2]
+					\end{align*}
+					So the infimum and supremum exist. So $\inf B = -1$, and $\sup B = 2$.
+					\item[d)]
+					\begin{align*}
+					D :&= \{x \in \mathbb{R}: x ^2-2x-5 < 0\}
+					\\ &= \{x \in \mathbb{R}: (x-(1 + \sqrt{6}))(x-(1-\sqrt{6}))\}
+					\\ &= \{x \in \mathbb{R}: 1 -\sqrt{6} < x < 1 + \sqrt{6}\}
+					\\ &= (1-\sqrt{6}, 1+\sqrt{6})
+					\end{align*}
+					So both the $\inf D$ and $\sup D$ exist. So $\inf D = 1 - \sqrt{6}$ and $\sup D = 1 + \sqrt{6}$.
+				\end{enumerate}
+			\end{enumerate}
+			\item $A=\{x \in \mathbb{R}: x = \frac{1}{n} + (-1)^n$ for $n \in \mathbb{N}\}$
+			\\ $\Rightarrow \inf A = -1$, and $\sup A = \frac{3}{2}$.
+			\item $B = \{x \in \mathbb{R}: x = 2 - \dfrac{(-1)^n}{n^2}$ for $n \in \mathbb{N}\}$
+			\\ $\Rightarrow \inf B = \frac{7}{4}$, $\sup B = 3$
+		\end{enumerate}
+	\item Section 2.3
+	\begin{enumerate}
+		\item[9)] Let $S \subseteq \mathbb{R}$ be nonempty. Show that if $u = \sup S$, then for every number $n \in \mathbb{N}$, the number $\frac{u-1}{n}$ is not an upper bound of $S$, but the number $\frac{u+1}{n}$ is an upper bound of $S$. (The converse is also true; see Exercise 2.4.3)
+		\begin{proof}
+			Let $S \subseteq \mathbb{R}$ be nonempty. We want to show that if $u = \sup S$, then for every number $n \in \mathbb{N}$, the number $\frac{u-1}{n}$ is not an upper bound of $S$, but the number $\frac{u+1}{n}$ is an upper bound of $S$.
+			\\\\Let $u = \sup S$. Recall the definition of the supremum:
+			$$\alpha = \sup S \iff (i)\ x \leq \alpha\  \forall x \in S,\ \wedge\ (ii)\ \forall \epsilon \in S, \exists x \in S\  \text{s.t.}\  x > \alpha - \epsilon$$
+			$u$ is by definition an upper bound of $S$, and thus by the definition of $u$, $u+ \frac{1}{n}>u$, thus $u +\frac{1}{n}$ is also an upper bound of $S$, since $u+\frac{1}{n} > u\  \forall n \in \mathbb{N}$.
+			\\\\ Now, let $\epsilon = \frac{1}{n}$. By Lemma 2.3.4, we have that $\exists s_\epsilon \in S\ \text{s.t.}\ \sup S - \epsilon < s_\epsilon < \sup S$, so
+			$$u-\frac{1}{n} = u-\epsilon < s_\epsilon$$
+			$\therefore u-\frac{1}{n}$ is not an upper bound of $S$.
+		\end{proof}
+		\item[10)] Show that if $A$ and $B$ are bounded subsets of $\mathbb{R}$, then $A \cup B$ is a bounded set. Show that $\sup(A \cup B) = \sup \{\sup A, \sup B\}$.
+		\begin{proof}
+			Let $A, B \subseteq \mathbb{R}$ such that $A, B$ are bounded. We want to show that $A \cup B$ is a bounded set, and that $\sup(A \cup B) = \sup\{\sup A, \sup B\}$.
+			\\\\Since $A$ is bounded, we have that $$\inf A \leq A \leq \sup A,$$ and since $B$ is bounded, we have that $$\inf B \leq B \leq \sup B$$
+			Let $s = \max\{|\inf A|, |\sup A|\}$, and let $t = \max\{|\inf B|, |\sup B|\}$. Let $x \in A \cup B$. Then, by the definition of union, $x \in A$ or $x \in B$.
+			\\\\If $x \in A$, then $|x| \leq s$.
+			\\If $x \in B$, then $|x| \leq t$.
+			\\\\Let $r = \max \{s,t\}$.
+			\\\\Then if $x \in A \cup B$, then $|x| \leq r$.
+			\\\\ $\therefore A \cup B$ is bounded. $\square$
+			\\\\Now, we want to show that $$\sup (A \cup B) = \sup \{\sup A, \sup B\}$$
+			Since $A$ is bounded, $\sup A$ exists by the completeness axiom. Since $B$ is bounded, $\sup B$ exists by the completeness axiom.
+			\\\\Let $w = \sup \{\sup A, \sup B\} = \max \{\sup A, \sup B\}$. Then $w$ is an upper bound for $A \cup B$ since $w \geq |\sup A|$ and $w \geq |\sup B|$. By completeness, $\sup(A \cup B)$ exists. And $\sup (A \cup B) \leq w = \sup \{\sup A, \sup B\}$.
+			\\\\Let $z$ be any upper bound for $A \cup B$. Then $z$ is an upper bound for $A$ and for $B$. So $x \leq \sup A \leq z,\ \forall a \in A$ and $x \leq \sup B \leq z,\ \forall b \in B$. So $\sup \{\sup A, \sup B\} \leq z$.
+			\\\\$\therefore z$ is an upper bound for $A \cup B$, choose $z = \sup (A \cup B)$. So $\sup \{\sup A, \sup B\} \leq \sup (A \cup B)$.
+			\\\\Then $\sup\{\sup A, \sup B\} = \sup (A \cup B)$.
+		\end{proof}
+	\end{enumerate}
+		\item Section 2.4\\
+		\begin{enumerate}
+			\item[4a)]
+			\begin{proof}
+				Let $S$ be a nonempty bounded set in $\mathbb{R}$. Let $a > 0$, and let $aS = \{as: s \in S\}$. We want to show that $$\inf (aS) = a\inf S,\ \text{and}\ \sup (aS) = a\sup S$$
+				\begin{align*}
+				\because \inf S &\leq s,\ \forall s \in S,
+					\\ \Rightarrow a\inf S &\leq aS,\ \forall as \in aS
+				\end{align*}
+				For any $\epsilon > 0, \frac{\epsilon}{s} > 0$. Then we have that $\exists s_0 \in S\ \text{s.t.}\ s_0 \leq \inf S + \frac{\epsilon}{a} \Rightarrow as_0 \leq a\inf S + \epsilon$, where $as_0 \in aS$.
+				\\\\$\therefore \inf (aS) = a\inf S$. $\square$
+				\\\\Now, we want to show that $\sup (aS) = a\sup S$. By the definition of the supremum, we have that $s \leq \sup S,\ \forall s \in S \Rightarrow as \leq a\sup S,\ \forall as \in aS$. So for any $\epsilon > 0, \frac{\epsilon}{a} > 0$, we have that $\exists s' \in S\ \text{s.t.}\ s' = \sup S - \frac{\epsilon}{a}$.
+				\\\\$\therefore \sup (aS) = a\sup S$.
+			\end{proof}
+			\item[5)] Let $S$ be a set of nonnegative real numbers that is bounded above, and let $T := \{x^2: x \in S\}$. Prove that if $u = \sup S$, then $u^2 = \sup T$. Give an example that shows the conclusion may be false if the restriction against negative numbers is removed.
+			\begin{proof}
+				Let $S$ be a set of nonnegative real numbers that is bounded above, and let $T:=\{x^2:x \in S\}$. We want to show that if $u = \sup S$, then $u^2 = \sup T$.
+				\\\\Suppose $u = \sup S$. Then $s \leq u,\ \forall s \in S$.
+				\\$\Rightarrow 0 \leq s \leq u$
+				\\$\Rightarrow 0 \leq s^2 \leq u^2$, because if $a,b \geq 0\ \text{s.t.}\ a \leq b$, then $a^2 \leq b^2$.
+				\\\\So $s^2 \leq u^2, \forall s \in S \Rightarrow t \leq u^2 \ \forall t \in T$.
+				\\\\$\therefore T$ is bounded above, where $u^2$ is an upper bound of $T$. $\square$
+				\\\\Thus we've satisfied one property of the supremum. Now, for the other, suppose $w$ is an upper bound of $T$ and $w \leq u^2$. Then $w \geq 0$, and $\sqrt{w} \leq u$, by the definition of $T$.
+				\\\\Since $u = \sup S$, we have that $\exists s_0 \in S\ \text{s.t.}\ \sqrt{w} \leq s_0$.
+				\\$\Rightarrow w < s^2_0$, which contradicts the fact that $w$ is an upper bound of $T$.
+				\\\\$\therefore \sup T = u^2$.
+			\end{proof}
+		\textbf{Example:} Let $S:= (-2,1)$. Then $\sup S = 1$. Then $T:=(1,4)$, which yields $\sup T = 4$, and $4 \neq 1$.
+			\item [8)] Let $X$ be a nonempty set, and let $f$ and $g$ be defined on $X$ and have bounded ranges in $\mathbb{R}$. Show that $$\sup\{f(x)\ +\ g(x): x \in X\} \leq \sup\{f(x): x \in X\}\ + \ \sup\{g(x): x \in X\}$$
+			\begin{proof}
+				Let $A=\{f(x): x \in X\}, B=\{g(x): x \in X\}$, where $A$ and $B$ are bounded above. Let $C=\{a+b:a \in A, b \in B\}$. Since $A$ and $B$ are bounded, we have that $a \leq \sup A\  \forall\  a \in A$, and $b \leq \sup B\  \forall\  b \in B$. Thus we have that $a + b \in C$, by the definition of $C$. So $a+b\leq \sup A + \sup B \ \forall a \in A$, and $\forall b \in B$. Thus we also have that $a\ +\ b \in C$. Since $a+b \leq \sup A + \sup B \Rightarrow \sup A \ + \sup B$ is an upper bound for $C$. Thus by completeness and the definition of $C$, $\sup C \leq \sup A + \sup B$.
+			\end{proof}
+		\textbf{Example:} Let $X=[-1,1]$ and let $f(x)=x$ and $g(x)=-x$. Then we have $\sup \{f(x):x \in X\} = 1$ and $\sup \{g(x): x \in X\} = 1$. But $\{f(x) + g(x): x \in X\} = \{x - x: x \in X\} = \{0\}$.\\
+		\begin{align*}
+		\therefore \sup\{f(x) + g(x): x \in X\} &\leq \sup \{f(x):x \in X\} + \sup \{g(x): x \in X\} \\ &= 2
+		\end{align*}
+		\item [9a)] Let $X=Y\ :=\{x \in \mathbb{R}: 0 < x < 1\}$. Define $h:X \times Y \rightarrow \mathbb{R}$ by $h(x,y) := 2x + y$. For each $x \in X$, find $f(x) := \sup \{h(x,y): y \in Y \}$; then find $\inf \{f(x): x \in X\}$.\\
+		If $X$ and $Y$ are between 0 and 1, then the range of $f(x) = (0,3)$, thus $\inf(f(x)) = 0$.
+		\item[14)] If $y > 0$, show that $\exists n \in \mathbb{N}$ such that $\frac{1}{2^n} < y$.
+		\begin{proof}
+			Let $y > 0$. By Corollary 2.4.5, $\exists n \in \mathbb{N}$ such that $0 < \frac{1}{n} < y$.\\ Since $n < 2^n$, we have $$0 < \frac{1}{2^n} < \frac{1}{n} < y$$
+		\end{proof}
+		\end{enumerate}
+	\item Section 2.5
+	\begin{enumerate}
+		\item[2)] If $S\subseteq\mathbb{R}$ is nonempty, show that $S$ is bounded if and only if there exists a closed bounded interval $I$ such that $S \subseteq I$.
+		\begin{proof}
+			Let $S \subseteq \mathbb{R}$ be nonempty. We want to show that $S$ is bounded if and only if there exists a closed, bounded interval $I$ such that $S \subseteq I$. We prove it by cases, one for each direction of the "if and only if" condition.
+			\begin{case} ($\Leftarrow$)
+				Assume that there exists a closed, bounded interval $I$ such that $S \subseteq I$; that is, define $I := [a, b],\ \text{where}\ a,b \in \mathbb{R}$. 
+				\\\\Then $\min I = a,\ \text{and}\ \max I = b$. Thus we have that $\forall x \in I, a \leq x$, and so $a$ is a lower bound of $I$. Also, $\forall x \in I, x \leq b$, and so $b$ is an upper bound of $I$. By completeness, we have that $\inf I\ \text{and}\ \sup I$ exist. Specifically, we have that $\min I = \inf I = a,\ \text{and}\ \max I = \sup I = b$.
+				\\\\Since $S \subseteq I$, we know that $\forall s \in S, a \leq s \leq b$. Thus by transitivity, we have that $\because \sup I = b \Rightarrow \sup S = b,\ \text{and}\ \because \inf I = a \Rightarrow \inf S = a$.
+				\\\\$\therefore$ If there exists a closed, bounded interval $I$ such that $S \subseteq I$, then $S$ is bounded. $\square$
+			\end{case}
+			\begin{case} ($\Rightarrow$)
+				Conversely, Assume that $S$ is bounded. Then we have that $\exists x \in S\ \text{s.t.}\ x \leq s,\ \forall s \in S$, and that $\exists y \in S\ \text{s.t.}\ s \leq y,\ \forall s \in S$. Thus by completeness, $\inf S$ and $\sup S$ exist.
+				\\\\Let $\inf S = a$, and let $\sup S = b$. Since this holds, we can explicitly define $S := (a, b)$.
+				\\\\By the Archimedian property, we have that $\forall s \in S,\ \exists n \in \mathbb{N},\ \text{s.t.}\ n \leq s < n+1$.
+				\\\\Define an interval $I := [\lfloor a \rfloor, \lceil b \rceil]$. Thus we now have that $\lfloor a \rfloor \leq \inf S$, and that $\sup S \leq \lceil b \rceil$. Hence $S \subseteq I$.
+				\\\\$\therefore\ I$ is a closed, bounded interval by construction, such that $S \subseteq I$.
+			\end{case}
+		\end{proof}
+		\item[3)] If $S \subseteq \mathbb{R}$ is a nonempty bounded set, and $I_s := [\inf S, \sup S]$, show that $S\subseteq I_s$. Moreover, if $J$ is any closed bounded interval containing $S$, show that $I_s \subseteq J$.
+		\begin{proof}
+			Let $S \subseteq \mathbb{R}$ be a nonempty, bounded set, and let $I_s := [\inf S, \sup S]$. We want to show that $S \subseteq I_s$, and that if $J$ is any closed, bounded interval that contains $S$, then $I_s \subseteq J$.
+			\\\\Let $\inf S = a$ and $\sup S = b$.
+			\\\\First, assume that $\nexists \min S, \max S$. Then we have that $I_s \supset S$. Since $\sup \notin S$ and $\inf \notin S$, by the definition of infimum and supremum, respectively. We know this to be the case since the only time $\inf S \in S$ is if $\exists \min S$, and also $\sup S \in S$ if $\exists \max S$. But since $\inf S \in I_s$, and $\sup S \in I_s$, by the definition of $I_s$, we have that $S \subset I_s$.
+			\\\\Now suppose that $\sup S, \inf S \in S$. Then $I_s = S$, since the bounds are the same. That is, let $\inf S = \alpha$, and let $\sup S = \beta$. Then $S = I_s \iff S:= [\alpha, \beta]$. This is because $\min S = \inf S = \alpha$ and $\max S = \sup S = \beta$.
+			\\\\$\therefore\ S \subseteq I_s$.
+			\\\\Now, let $J$ be a nonempty, bounded, closed set such that $S \subseteq J$. We want to show that $I_s \subseteq J$. Since $J$ is bounded, we can define $J := [a,b]$, where $a,b \in \mathbb{R}$. Similarly as was to be shown above, we know that $\min J = a$, and $\max J = b$. So, we know that $\inf J = \min J = a$, and $\sup J = \max J = b$. Since $S \subseteq J$, we know that if $S \subsetneq J$,
+			\begin{enumerate}
+				\item $\inf S \notin S\ \text{but}\ \inf S \in J$, and
+				\item $\sup S \notin S\ \text{but}\ \sup S \in J$
+			\end{enumerate}
+			Thus since $\inf S, \sup S \in J, I_s \subseteq J$, since $\inf S, \sup S \in I_s$. Also, if $S = I_s$, then clearly $I_s \subseteq J$.
+		\end{proof}
+	\end{enumerate}
+	\item Prove that for every $x \in \mathbb{R}$ and for each $n \in \mathbb{N}$, there exists a rational number $r_n$ such that $|x-r_n| < \frac{1}{n}$.
+	\begin{proof}
+		Let $x \in \mathbb{R}$, and let $n \in \mathbb{N}$. Then we have $x - \frac{1}{n} < x + \frac{1}{n}$. So $x-\frac{1}{n}, x+\frac{1}{n} \in \mathbb{R}$. By Theorem 2.4.8, we have that $\exists r_n \in \mathbb{Q}\ \text{s.t.}\ x-\frac{1}{n} < r_n < \frac{1}{n} \Rightarrow \frac{-1}{n} < r_n - x < \frac{1}{n}$.
+		\\\\ So $|r_n -x| < \frac{1}{n}$ and $|x - r_n| < \frac{1}{n}$.
+	\end{proof}
+	\item A \textit{dyadic rational} is a number of the form $\frac{k}{2^n}$ for some $k,n \in \mathbb{Z}$. Prove that if $a,b \in \mathbb{R}$ and $a < b$, then there exists a dyadic rational $q$ such that $a < q < b$.
+	\begin{proof}
+		Let $a,b \in \mathbb{R}$ such that $a < b$. We want to show that $\exists q = \frac{k}{n}\ \text{s.t.}\ a < q < b$.
+		\\\\By question 14 from Section 2.4, we know that $\forall y > 0, \exists n\ \text{s.t.}\ \frac{1}{2^n} < y$. By the Archimedian property, we have $0 < \frac{1}{2^n} < \frac{1}{n} < y$.
+		\\\\
+			Case 1: Let $a > 0$. So $0 < a < b$. By the Archimedian property again, $\exists n \in \mathbb{N}\ \text{s.t.}\ 0 < \frac{1}{2^n} < \frac{1}{n} < b-a$. So $\frac{1}{2^n} < b-a$. So $1+a*2^n < b*2^n$. By the Archimedian property again, since $a*2^n > 0,\ \exists m \in \mathbb{N}\ \text{s.t.}\ m-1 \leq a*2^n < m$. So $m \leq a*2^n+1 < m+1$.
+			\\\\Now, combine $a*2^n < m \leq a*2^n+1 < b*2^n$. So $a < \frac{m}{2^n} < b$, and $q=\frac{m}{2^n}$. $\square$
+			\\\\
+			Case 2: If $a \leq 0$, choose $p \in \mathbb{Z}\ \text{s.t.}\ p \geq |a|$. Apply Case 1 to $0 < a + p < b +p$ to get $a+p < \frac{m}{2^n} < b+p$. So $a < \frac{m}{2^n}-p < b$. So $a<q<b,\ \text{where}\ q=\frac{m-2^n*p}{2^n} = \frac{k}{2^n}$.
+	\end{proof}
+	\item Prove, if true. Provide a counterexample if false.
+	\begin{enumerate}
+		\item If $A$ and $B$ are nonempty, bounded subsets of $\mathbb{R}$, then $\sup(A \cap B) \leq \sup A$.
+		\begin{proof}
+			Let $A$ and $B$ be nonempty, bounded subsets of $\mathbb{R}$. We want to show that $\sup (A \cap B) \leq \sup A$.
+			\\\\ Consider the case where $A \cap B = \emptyset$. Then $\sup (\emptyset) = -\infty$. Since $A,B \subseteq \mathbb{R}$ and $A,B \nsubseteq \overline{\mathbb{R}}$, we have that since $A$ is nonempty, $A \neq \{-\infty\} \Rightarrow \sup A \neq -\infty$. Thus if $A \cap B = \emptyset \Rightarrow \sup (A \cap B) < \sup A$.
+			\\\\Now, consider the case where $A \cap B \neq \emptyset$.
+			\\\\By the definition of intersection, $\sup(A \cap B) = \sup A \iff A \cap B = A$. Also by the definition of intersection, we have that if $A \cap B \neq A$, then $A \cap B \subset A$ and $A \cap B \subset B$. This means that it's impossible to have a set after the intersection that is larger than both $A$ and $B$. This implies that the resulting set will yield $\sup (A \cap B) < \sup A$, since $\sup (A \cap B) = \sup A \Rightarrow A \cap B = A$.
+			\\\\$\therefore \sup (A \cap B) \leq \sup A$.
+		\end{proof}
+		\item If $A + B=\{a + b: a\in A, b \in B\}$, where $A$ and $B$ are nonempty, bounded subsets of $\mathbb{R}$, then $\sup(A + B) = \sup A + \sup B$.
+		\begin{proof}
+			Let $A$ and $B$ be nonempty bounded subsets of $\mathbb{R}$, and let $A+B = \{a + b: a \in A,b \in B\}$. We want to show that $\sup (A+B) = \sup A + \sup B$.
+			\\\\Since $A$ and $B$ are bounded, we know that $\sup A$ and $\sup B$ exist, and that $x \leq \sup A,\ \forall x \in A$, and $y \leq \sup B,\ \forall y \in B$. So $x+y \in A+B$ and $x+y \leq \sup A + \sup B,\ \forall x \in A,\forall y \in B$. Then by completeness, $\sup (A+B) \leq \sup A + \sup B$. $\square$
+			\\\\Now we must show that $\sup A + \sup B \leq \sup (A+B)$.
+			\\\\Let $y \in B$ be fixed. Since $x+y \leq \sup (A+B)$, then $x \leq \sup (A+B)-y,\ \forall x \in A$. So $\sup (A+B)-y$ is an upper bound for $A$. By completeness, we have that $\sup A \leq \sup (A+B)-y$. Then $y \leq \sup (A+B)-\sup A$. This is true for all $y \in B$.
+			\\\\So $\sup (A+B)-\sup A$ is an upper bound for B, and $\sup B \leq \sup (A+B)- \sup A$.
+			\\\\$\therefore \sup A + \sup B \leq \sup (A+B)$.
+		\end{proof}
+		\item If $A - B=\{a-b:a \in A, b \in B\}$, where $A$ and $B$ are nonempty, bounded subsets of $\mathbb{R}$, then $\sup(A - B)=\sup A - \sup B$.
+		\\\\ \textbf{Counterexample:} Let $A := [-2, 0]$ and let $B := [1,4]$. Then we have that $A-B := [-4, -3]$. Then we have the following:
+		\begin{align*}
+		\sup (A-B) &= \sup A - \sup B
+		\\ \sup ([-4,-3]) &= \sup ([-2, 0]) - \sup ([1,4])
+		\\ -3 &= 0 - 4
+		\\ -3 &\neq -4
+		\end{align*}
+		Thus $\sup (A-B) \neq \sup A - \sup B$.
+	\end{enumerate}
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,503 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 8}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 5.1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 5.1 Questions					%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 1 - 5.1						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[1.] Prove the Sequential Criterion 5.1.3.\\
+			
+			Recall the \textit{Sequential Criterion}:
+			\begin{theorem*}
+				A function $f:A \to \R$ is continuous at the point $c \in A$ if and only if for every sequence $(x_n)$ in $A$ that converges to $c$, the sequence $(f(x_n))$ converges to $f(c)$.
+			\end{theorem*}
+			
+			Let $\varepsilon > 0$ be given. Since we're given that $f$ is continuous, we know that by the definition of continuity, there exists a $\delta >0$ such that if $x \in A$ satisfies $|x-c|<\delta$, then $|f(x)-f(c)|<\varepsilon$. Thus, for that $\delta$, since $x_n \to c,\ \exists\ n_0 \in \N \st n \geq n_0 \implies |x_n-c|<\delta$. Thus we have
+			\begin{align*}
+				n \geq n_0 &\implies |x_n - c|<\delta \\
+				&\implies |f(x_n)-f(c)|<\varepsilon \\
+				&\implies \lim\limits_{n \to \infty} f(x_n)=f(c)
+			\end{align*}
+			Now, suppose that for every sequence $(x_n)$ in $A$ that converges to $c$, $f(x_n)$ converges to $f(c)$. We will now show that the $f$ is continuous at $c$.
+			\begin{proof}
+				We want to show that $f$ is continuous at $c$.\\
+				
+				By way of contradiction, suppose that $f$ is discontinuous at $c$. Then we know that $\exists\ \varepsilon >0\ \forall\ \delta > 0\ |x-c|<\delta$ and $|f(x)-f(c)| \geq \varepsilon$.\\
+				
+				Let $\delta = \frac{1}{n}$. Then we have that $x_n$ is such that $|x-c|<\frac{1}{n}$ and that $|f(x_n)-f(c)| \geq \varepsilon$.\\
+				
+				$\therefore$ We have a sequence $(x_n)$ such that $\lim\limits_{n \to \infty} x_n = c$ and $\lim\limits_{n \to \infty} f(x_n) \neq f(c)$. Notice however that we have a contradiction here, and thus we have that $f$ is continuous at $c$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 - 5.1						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[5.] Let $f$ be defined for all $x \in \R, x \neq 2$, by $f(x)=(x^2+x-6)/(x-2)$. Can $f$ be defined at $x=2$ in such a way that $f$ is continuous at this point?\\
+			
+			Since we have that $f$ is not defined at $x=2$, we know that we have to factor the numerator to evaluate the limit.\\
+			
+			So, for $x \neq 2$:
+			\[f(x)=\frac{x^2+x-6}{x-2}=\frac{\cancel{(x-2)}(x+3)}{\cancel{x-2}}=x+3\]
+			Thus, if we let $f(2):=5$, then $f$ is continuous:
+			
+			\[\lim\limits_{x \to 2} f(x) = \lim\limits_{x \to 2} (x+3) = 5\]
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 7 - 5.1						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[7.] Let $f:\R \to \R$ be continuous at $c$ and let $f(c)>0$. Show that there exists a neighborhood $V_\delta (c)$ of $c$ such that if $x \in V_\delta (c)$, then $f(x)>0$.\\
+			
+			\begin{proof}
+				Let $\varepsilon = \frac{f(c)}{2} > 0$. Since we are given that $f$ is continuous at $c$, we know that there exists $\delta > 0$ such that 
+				\[|x-c|<\delta \implies |f(x)-f(c)|<\varepsilon = \frac{f(c)}{2}\]
+				Thus, if we define $V_\delta (c) := (c-\delta, c+\delta)$ and if we let $x \in V_\delta (c)$, then we have 
+				\begin{align*}
+					x \in V_\delta (c) &\implies |x-c|<\delta \\
+					&\implies |f(x)-f(c)|<\varepsilon \\
+					&\implies -\varepsilon < f(x)-f(c)<\varepsilon \\
+					&\implies f(c)-\frac{f(c)}{2} < f(x) &(\varepsilon = \frac{f(c)}{2}) \\
+					&\implies \frac{1}{2}f(c) < f(x) \\
+					&\implies f(x)>0 &(f(c)>0)
+				\end{align*}
+				Thus we have that there exists a neighborhood $V_\delta(c)$ such that if $x \in V_\delta (c)$, then $f(x)>0$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 11 - 5.1						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[11.] Let $K>0$ and let $f:\R \to \R$ satisfy the condition $|f(x)-f(y)|\leq K|x-y|$ for all $x,y \in \R$. Show that $f$ is continuous at every point $c \in \R$.\\
+			
+			\begin{proof}
+				We want to show that $f$ is continuous at every point $c \in \R$.\\
+				
+				Let $\varepsilon >0$ be given, and let $\delta = \frac{\varepsilon}{k}$. Then, for any $c \in \R$,
+				\begin{align*}
+					|x-c|<\delta &\implies |x-c|<\frac{\varepsilon}{k} \\
+					&\implies k|x-c| < \varepsilon \\
+					&\implies |f(x)-f(c)| \leq k|x-c|<\varepsilon \\
+					&\implies |f(x)-f(c)|<\varepsilon
+				\end{align*}
+				Thus we have that $f$ is continuous for $c \in \R$. Since $c$ is arbitrary, this also shows that $f$ is continuous for all $c \in \R$.
+			\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 12 - 5.1						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[12.] Suppose that $f:\R \to \R$ is continuous on $\R$ and that $f(r)=0$ for every rational number $r$. Prove that $f(x)=0$ for all $x \in \R$.\\
+			
+			\begin{proof}
+				We want to show that $f(x)=0,\ \forall\ x \in \R$.\\
+				
+				Let $x \in \R$. Since we know that $\Q$ is dense in $\R$, we know that we can find a sequence $(x_n)$ of rational numbers such that $(x_n)$ converges to $x$. Thus, by continuity of $f$ at $x$, $(f(x_n))$ converges to $f(x)$. Since $x_n$ is rational, we have that $f(x_n)=0\ \forall\ n \in \N$. Thus we have that $f(x) = \lim f(x_n) = \lim 0 = 0$.\\
+				
+				$\therefore$ We have that $f(x)=0$ for all $x \in \R$.
+			\end{proof}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 2							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\item Use the definition of continuity to show that the given $f$ is continuous.
+		\begin{enumerate}
+			\item Let $f:\R \to \R$ be given by $f(x)=x^2$.\\
+			
+			Recall the definition of continuity:
+			\theoremstyle{definition}
+			\begin{definition}
+				Let $A \subseteq \R$, let $f:A \to \R$, and let $c \in A$. We say that $f$ is \textbf{continuous at} $c$ if, given any number $\varepsilon > 0$, there exists $\delta >0$ such that if $x$ is any point of $A$ satisfying $|x-c|<\delta$, then $|f(x)-f(c)|<\varepsilon$. If $f$ fails to be continuous at $c$, then we say that $f$ is \textbf{discontinuous at} $c$.
+			\end{definition}
+			
+			\begin{proof}
+				In order to show that $f$ is continuous for all $c \in \R$, we must consider two cases: $c\neq 0$, and $c=0$.\\
+				
+				Suppose $c \neq 0$. Then we have the following:
+				\begin{align*}
+					|f(x)-f(c)| &= |x^2 - c^2| \\
+					&=|(x-c)(x+c)| \\
+					&=|x-c||x+c| \\
+					&< |x-c|(|x|+|c|) \\
+					&<\varepsilon
+				\end{align*}
+				Which yields that
+				\[|x-c|<\frac{\varepsilon}{|x|+|c|}< \frac{\varepsilon}{|x|}\]
+				So, for the case when $c \neq 0$, let $\delta=\frac{\varepsilon}{|x|}$.\\
+				
+				Now, suppose that $c=0$. Then we have the following:
+				\begin{align*}
+					|f(x)-f(c)| &= |x^2-0^2| \\
+					&= |x^2| \\
+					&=(|x|)^2 \\
+					&< \varepsilon
+				\end{align*}
+				So, we have now that
+				\[(|x|)^2 < \varepsilon \implies |x|<\sqrt{\varepsilon}\]
+				Thus, let $\delta=\sqrt{\varepsilon}$.\\
+				
+				$\therefore$ Since we have found definitions of $\delta$ that satisfy the definition of continuity, we have that $f$ is continuous $\forall c \in \R$.
+			\end{proof}
+			
+			\item Let $f:(0,\infty) \to \R$ be given by $f(x)=1/x$. \\
+			
+			\begin{proof}
+				Suppose $x>\frac{c}{2}$, since $c>0$. Then we have that
+				\[\abs{f(x)-f(c)}=\abs{\frac{1}{x}-\frac{1}{c}}=\frac{|x-c|}{xc}<\frac{2}{c^2}|x-c|<\varepsilon \implies |x-c|<\frac{c^2\varepsilon}{2}\]
+				So, if we let $\delta < \min \{\frac{c^2\varepsilon}{2}, \frac{c}{2}\}$, then we have that if $|x-c|<\delta,\ x>\frac{c}{2}$, and $\abs{\frac{1}{x}-\frac{1}{c}}<\frac{2}{c^2}\delta \leq \varepsilon$.\\
+				
+				$\therefore$ We have that $f$ is continuous $\forall\ c \in (0,\infty)$.
+			\end{proof}
+			
+			\item Let $f:\R \to \R$ be given by $f(x)=|x|$ (This is Problem 10 in Section 5.1)\\
+			
+			\begin{proof}
+				We must first note the following:
+				\begin{align*}
+					|a| &= |a-b+b| \\
+					&\leq |a-b|+|b| \\
+					&\Downarrow \\
+					|a|-|b| &\leq |a-b|
+				\end{align*}
+				$\implies \pm(|a|-|b|) \leq |a-b|$
+				We also note:
+				\begin{align*}
+					|b| &= |b-a+a| \\
+					&\leq |b-a| + |a| \\
+					&=|a-b|+|a| \\
+					&\Downarrow \\
+					|b|-|a| &\leq |a-b|
+				\end{align*}
+				$\implies ||a|-|b|| \leq |a-b|$
+				\begin{align*}
+					|f(x)-f(c)| &= ||x|-|c|| \\
+					&\leq |x-c| \\
+					&<\varepsilon
+				\end{align*}
+				Thus if we let $\varepsilon = \delta$, then we have that $|x-c|<\delta$.\\
+				
+				$\therefore$ We have that $f(x)$ is continuous $\forall\ c \in \R$.
+			\end{proof}
+		\end{enumerate}
+		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 3							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+		\item Let $f(x)=\begin{cases}
+			3x+2 & \text{if } x \text{ is rational} \\
+			6-x & \text{if } x \text{ is irrational}
+		\end{cases}$
+		\begin{enumerate}
+			\item Determine whether or not $f$ is continuous at $x=1$.\\
+			
+			$f$ is continuous at $x=1$ since we proved in $HW 7$ that $\lim\limits_{x \to 1} f(x)$ exists, $\lim\limits_{x \to 1} f(x)=f(1)=5$.
+			
+			\item Determine whether or not $f$ is continuous at $x=0$.\\
+			
+			$f$ is not continuous for $x \neq 1$ (and not $x = 0$) since from Homework 7 again, $\lim\limits_{x \to c} f(x)$ does not exists for $x \neq 1$.
+		\end{enumerate}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 4							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Let $g(x)=\begin{cases}
+			2x & \text{if } x \text{ is rational} \\
+			x+3 & \text{if } x \text{ is irrational}
+		\end{cases}$ \\
+		Find all points where $g$ is continuous (This is Problem 13 of Section 5.1)\\
+		
+		First, let $c$ be some point of continuity of $g$. Then since both $\Q$ and $\R \setminus \Q$ are dense in $\R$, we can find sequences $(x_n) \subset \Q$ and $(y_n) \subset \R \setminus \Q$ such that $(x_n) \to c$ and $(y_n) \to c$. Then we have the following:
+		\begin{align*}
+			g(c) &= \lim\limits_{n \to \infty} g(x_n) \\
+			&= \lim\limits_{x \to \infty} 2x_n \\
+			&= 2c &(x_n \to c) \\
+			\\
+			g(c) &= \lim\limits_{n \to \infty} g(y_n) \\
+			&= \lim\limits_{n \to \infty} y_n + 3 \\
+			&= c+3 &(y_n \to c) \\
+			\\
+			\implies 2c &= c+3 \\
+			&\Updownarrow \\
+			c &= 3
+		\end{align*}
+		Thus, we have that if $g$ is continuous at a point $c$, then it must be $c=3$. Thus we conjecture that $g$ is continuous only at $3$.\\
+		
+		\begin{proof}
+			\begin{align*}
+				|g(x)-g(3)| &= |g(x)-6| &(3 \in \Q) \\
+				&\leq \sup \{|2x-6|,|(x+3)-6|\} &(x \text{ is either rational or irrational}) \\
+				&= \sup \{2|x-3|,|x-3|\} \\
+				&=2|x-3|
+			\end{align*}
+			Thus $\forall\ \varepsilon >0$ let $\delta=\frac{\varepsilon}{2}$. Then we have that
+			\[|x-3| < \delta \implies |g(x)-g(3)|<\varepsilon\]
+			$\therefore$ We have that $g$ is only continuous at $c=3$.
+		\end{proof}
+		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 5							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Give an example of the following, if possible.
+		\begin{enumerate}
+			\item A function $f$ defined on $\R$ such that it is not continuous at any point in $\R$.\\
+			
+			Consider the Dirichlet function. This function is not continuous at any points.
+			
+			\item A function $f$ defined on $\R$ such that it is continuous at exactly one point in $\R$.\\
+			
+			Consider the function $f(x):= \begin{cases}
+				x, & \text{if } x \in \Q \\
+				0, & \text{if } x \in \R \setminus \Q
+			\end{cases}$ \\
+			Notice that this function is continuous only at $x=0$.
+			
+			\item A function $f$ defined on $\R$ such that it is continuous at exactly two points in $\R$.\\
+			
+			Consider the function $f(x):=\begin{cases}
+				x^2, & \text{if } x \in \Q \\
+				1, &\text{if } x \notin \Q
+			\end{cases}$ \\
+			We notice that this function is continuous only at the points $-1$ and $1$.
+		\end{enumerate}	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Section 5.2							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item \textbf{Section 5.2}
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 2 - 5.2						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[2.] Show that if $f:A \to \R$ is continuous on $A \subseteq \R$ and if $n \in \N$, then the function $f^n$ defined by $f^n(x)=(f(x))^n$, for $x \in A$, is continuous on $A$.\\
+			
+			\begin{proof}
+				We want to show that $f^n$ is continuous. We prove it by method of mathematical induction.\\
+				
+				\textbf{Basis Step:} Let $n=1$. Then we have that $f^1(x)=(f(x))^1=f(x) \implies f^1=f$. Since we are given that $f$ is continuous, we know that $f^1$ is continuous as well.\\
+				
+				\textbf{Inductive Step:} Assume that $f^n(x)=(f(x))^n$ is continuous $\forall\ n \in \N$.\\
+				
+				\textbf{Show:} We want to show that $f^{n+1}(x)=(f(x))^{n+1}$ is continuous $\forall\ n \in \N$. Then we have 
+				\[f^{n+1}=f^n \cdot f\]
+				Recall \textit{Theorem 5.2.1}:
+				\begin{theorem*}
+					Let $A \subseteq \R$, let $f$ and $g$ be functions on $A$ to $\R$, and let $b \in \R$. Suppose that $c \in A$ and that $f$ and $g$ are continuous at $c$.
+					\begin{enumerate}
+						\item Then $f+g,\ f-g,\ fg$, and $bf$ are continuous at $c$.
+						
+						\item If $h:A \rightarrow \R$ is continuous at $c \in A$ and if $h(x) \neq 0$ for all $x \in A$, then the quotient $f/h$ is continuous at $c$.
+					\end{enumerate}
+				\end{theorem*}
+			
+				Since both $f^n$ and $f$ are continuous functions, by \textit{Theorem 5.2.1}, we have that $f^n\cdot f=f^{n+1}$ is a continuous function on $A$ since it is the product of continuous functions on $A$.\\
+				
+				$\therefore$ By the Principle of Mathematical Induction, we have that $f^n$ is continuous $\forall\ n \in \N$ on $A$.
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 - 5.2						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[3.] Give an example of functions $f$ and $g$ that are both discontinuous at a point $c$ in $\R$ such that $(a)$ the sum $f+g$ is continuous at $c$ and $(b)$ the product $fg$ is continuous at $c$.\\
+			
+			Consider the functions $f(x):=\begin{cases}
+			1, & x=0 \\
+			0, & x \neq 0
+			\end{cases}$, and $g(x):=\begin{cases}
+			0, & x=0 \\
+			1, & x \neq 0
+			\end{cases}$ \\
+			We first note that both $f(x)$ and $g(x)$ are discontinuous at $x=0$.
+			\begin{enumerate}
+				\item[(a)] Note that the sum 
+				\[f(x)+g(x):=\begin{cases}
+				1+0, & x=0 \\
+				0+1, & x \neq 0
+				\end{cases} = \begin{cases}
+				1, & x=0 \\
+				1, & x \neq 0
+				\end{cases}=1\]. 
+				Thus, we have that the sum $f(x)+g(x)$ is a constant function, and thus is defined $\forall\ x \in \R$, and thus $f(x)+g(x)$ is continuous at $c$, where $c=0$.
+				
+				\item[(b)] Now, the product $f(x)\cdot g(x)$ is
+				\[f(x) \cdot g(x):= \begin{cases}
+				1 \cdot 0, & x=0 \\
+				0 \cdot 1, & x \neq 0
+				\end{cases} = \begin{cases}
+				0, & x=0 \\
+				0, & x \neq 0
+				\end{cases}=0\]
+				Thus we have that the product of $f(x) \cdot g(x)$ is also a continuous function since $f(x) \cdot g(x)=0$. Thus, we have that $f(x) \cdot g(x)$ is continuous $\forall\ x \in \R$. Hence $f(x) \cdot g(x)$ is continuous at $c$, where $c=0$.
+			\end{enumerate}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 5 - 5.2						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[5.] Let $g$ be defined on $\R$ by $g(1):=0$, and $g(x):=2$ if $x \neq 1$, and let $f(x):=x+1$ for all $x \in \R$. Show that $\lim\limits_{x \to 0} g \circ f \neq (g \circ f)(0)$. Why doesn't this contradict Theorem 5.2.6?\\
+			
+			Recall \textit{Theorem 5.2.6}:
+			\begin{theorem*}
+				Let $A,B \subseteq \R$ and let $f:A \rightarrow \R$ and $g:B \rightarrow \R$ be functions such that $f(A) \subseteq B$. If $f$ is continuous at a point $c \in A$ and g is continuous at $b= f(c) \in B$, then the composition $g \circ f:A \rightarrow \R$ is continuous $c$.
+			\end{theorem*}
+		
+			Note that we have $g(x):=\begin{cases}
+			0, & x=1 \\
+			2, & x \neq 1
+			\end{cases}$, and $f(x):=x+1$.\\
+			
+			Thus $(g \circ f)(x)=g(f(x))=g(x+1)=\begin{cases}
+			0, & x+1=1 \\
+			2, & x+1 \neq 1
+			\end{cases} = \begin{cases}
+				0, & x=0 \\
+				2, & x \neq 0
+			\end{cases}$\\
+			
+			This gives us that $\lim\limits_{x \to 0} (g \circ f)(x) = \lim\limits_{x \to 0} 2 = 2$, since $x \to 0 \implies x \neq 0$\\
+			
+			Thus we have that $\lim\limits_{x \to 0} (g \circ f)(x) \neq (g \circ f)(0)$ since $2 \neq 0$.\\
+			
+			The reason that this does not violate \textit{Theorem 5.2.6} is because $g$ is discontinuous at $f(0)$, since $f(0)=1$. \\
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 7 - 5.2						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[7.] Give an example of a function $f:[0,1] \to \R$ that is discontinuous at every point of $[0,1]$ but such that $|f|$ is continuous on $[0,1]$.\\
+			
+			Let $f(x):=\begin{cases}
+			-1, & x \in \Q \\
+			1, & x \in \R \setminus \Q
+			\end{cases}$\\
+			
+			Recall \textit{Theorem 2.4.8 - The Density Theorem}:
+			\begin{theorem*}[\textbf{The Density Theorem}]
+				If $x$ and $y$ are any real numbers with $x<y$, then there exists a rational number $r \in \Q$ such that $x < r < y$.
+			\end{theorem*}
+			And also recall \textit{Corollary 2.4.9}:
+			\begin{corollary*}
+				If $x$ and $y$ are real numbers with $x < y$, then there exists an irrational number $z$ such that $x < z < y$.
+			\end{corollary*}
+			
+			Recall the \textit{Discontinuity Criterion}:
+			\begin{theorem*}[\textbf{Discontinuity Criterion}]
+				Let $A \subseteq \R$, let $F:A \rightarrow \R$, and let $c \in A$. Then $f$ is discontinuous at $c$ if and only if there exists a sequence $(x_n)$ in $A$ such that $(x_n)$ converges to $c$, but the sequence $(f(x_n))$ does not converge to $f(c)$.
+			\end{theorem*}
+		
+			Consider the sequence $x_n:=(\frac{1}{3}, \frac{1}{3}, \dots, \frac{1}{3})$. Clearly $x_n \in [0,1]\ \forall\ n \in \N$. However, note that $\lim\limits_{x \to \frac{1}{3}} (x_n) = \frac{1}{3}$, but $\lim\limits_{x \to \frac{1}{3}} (f(x_n)) = 1$ but $f(\frac{1}{3})=-1$. Thus we have that $\lim\limits_{x \to \frac{1}{3}} (f(x_n)) \neq f(c)$, where $c=\frac{1}{3}$. Thus by the \textit{Discontinuity Criterion}, since there exists a sequence $(x_n) \in [0,1]$ such that $(x_n) \to c \in [0,1]$ but $(f(x_n)) \nrightarrow f(c)$. Thus we have that $f$ is discontinuous at $c=\frac{1}{3}$. However, note that by the \textit{Density Theorem} and by \textit{Corollary 2.4.9}, we have that $f$ is discontinuous at $c\ \forall c \in [0,1]$.\\
+			
+			However, note that $|f(x)|=1\ \forall\ x \in [0,1]$. Thus we have that $|f|$ is continuous $\forall\ c \in [0,1]$.\\
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 8 - 5.2						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[8.] Let $f,g$ be continuous from $\R$ to $\R$ and suppose that $f(r)=g(r)$ for all rational numbers $r$. Is it true that $f(x)=g(x)$ for all $x \in \R$?\\
+			
+			This is actually true.
+			\begin{proof}
+				Let $x \in \R$ be arbitrary. By the \textit{Density Theorem}, we know that we can find a sequence $(x_n) \subset \Q \st (x_n) \to x$.\\
+				
+				Then we have:
+				\begin{align*}
+					f(x) &= \lim\limits_{n \to \infty} f(x_n) &(f\text{ is continuous}) \\
+					&= \lim\limits_{n \to \infty} g(x_n) &(x_n \in \Q) \\
+					&= g(x) &(g\text{ is continuous}) \\
+					\implies f(x) &= g(x)\ \forall\ x \in \R
+				\end{align*}
+			\end{proof}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 14 - 5.2						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+			\item[14.] Let $g:\R \to \R$ satisfy the relation $g(x+y)=g(x)g(y)$ for all $x,y \in \R$. Show that if $g$ is continuous at $x=0$, then $g$ is continuous at every point of $\R$. Also if we have $g(a)=0$ for some $a \in \R$, then $g(x)=0$ for all $x \in \R$.\\
+			
+			\begin{proof}
+				We first note that since we're given that $g$ is continuous at $x=0$, we have
+				\begin{align*}
+					g(0) &= g(0+0) \\
+					&=g(0) \cdot g(0) &(g(x+y)=g(x)g(y),\ \forall x,y \in \R) \\
+					&=g(0)^2
+				\end{align*}
+				This tells us that we have two cases to consider for $g(0)$: $g(0)=0$ or $g(0)=1$.\\
+				
+				\begin{case}{$g(0)=0$}
+					Let $g(a)=0$ for some $a \in \R$. Then we have that $\forall\ x \in \R$,
+					\[g(x) = g((x-a)+a)=g(x-a) \cdot g(a)=0\]
+					Thus, if $g(a)=0\ \forall\ a \in \R$, then $g \equiv 0$ and thus $g$ is constant. Thus, $g$ is continuous $\forall\ x \in \R$.
+				\end{case}
+			
+				\begin{case}{$g(0)=1$}
+					Let $g(c) \neq 0\ \forall\ c \in \R$. Otherwise we have that $g$ is a zero function, which was shown to be continuous as the result of \textit{Case 1}, and this contradicts the fact that we let $g(0)=1 \neq 0$.\\
+					
+					Let $\varepsilon > 0$ be given, and let $c \in \R$ be arbitrary such that $c \neq 0$. Since $g$ is continuous at 0 and $g(c) \neq 0$, we know that $\exists\ \delta >0 \st \forall\ x \in \R$, we have:
+					\[|x-0|<\delta \implies |g(x)-g(0)|<\frac{\varepsilon}{|g(c)|}\]
+					that is, since $g(0)=1$, 
+					\[|x| < \delta \implies |g(x)-1|<\frac{\varepsilon}{|g(c)|}\]
+					Thus, for $x \in \R \st |x-c|<\delta$, we have
+					\begin{align*}
+						|g(x)-g(c)| &= |g((x-c)+c)-g(c)| \\
+						&=|g(x-c)g(c)-g(c)| &(g(a+b)=g(a)g(b)) \\
+						&= |g(c)(g(x-c)-1)| \\
+						&=|g(c)||g(x-c)-1| \\
+						&= |g(c)||g(h)-1| &(\text{Substitue } h:=x-c) \\
+						&<|g(c)|\frac{\varepsilon}{|g(c)|} &(|h|=|x-c|<\delta) \\
+						&= \varepsilon
+					\end{align*}
+				\end{case}
+				$\therefore$ We have that $g$ is continuous at $c$. Since $c \neq 0$ was arbitrary and $g$ is continuous at 0, we have that $g$ is continuous on $\R$.
+			\end{proof}
+		\end{enumerate}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 7							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Prove or justify if true. Provide a counterexample if false.
+		\begin{enumerate}
+			\item Let $f$ be defined on $[a,b]$. Let $x_n$ be any sequence in $[a,b]$. The sequence $\{f(x_n)\}$ converges to $f(c)$ for $x_n$ converging to $c \in [a,b]$ implies that $f$ is continuous at $x=c$. \\
+			
+			This is true. Recall the \textit{Sequential Criterion for Continuity}:
+			\begin{theorem*}[\textbf{Sequential Criterion for Continuity}]
+				A function $f:A \rightarrow \R$ is continuous at the point $c \in A$ if and only if for every sequence $(x_n)$ in $A$ that converges to $c$, the sequence $(f(x_n))$ converges to $f(c)$.
+			\end{theorem*}
+			This is true by the \textit{Sequential Criterion for Continuity}.\\
+			
+			\item If $f$ is continuous on $D$ and the sequence $x_n$ in $D$ is a converging sequence, then the sequence $\{f(x_n)\}$ converges.\\
+			
+			This statement is false. Consider the function $f:(0,1) \to \Q$ given by $f(x)=\frac{1}{x}$, and consider the sequence $x_n:= (0.1, 0.01,0.001,0.0001, \dots),\ \forall\ n \in \N$. Then we have that $x_n \to 0$, but since $0 \notin (0,1)$ and since $(0,1)$ is not a compact set, this violates the \textit{Sequential Criterion for Continuity} and thus this statement is false.
+		\end{enumerate}	
+	\end{enumerate}
+\end{document}

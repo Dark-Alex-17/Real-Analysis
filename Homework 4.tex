@@ -1,0 +1,345 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amsthm}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newtheorem*{3.1.10}{Theorem 3.1.10}
+\newtheorem*{3.2.3}{Theorem 3.2.3}
+\newtheorem*{3.2.10}{Theorem 3.2.10}
+\newtheorem*{3.2.7}{Squeeze Theorem}
+\newtheorem*{3.2.11}{Theorem 3.2.11}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 4}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item Section 3.1
+		\begin{enumerate}
+			\item[5)] Use the definition of the limit of a sequence to establish the following limits.
+				\begin{enumerate}
+					\item[(a)] $\lim (\frac{n}{n^2+1})=0$
+					\\\\Recall the definition of the limit of a sequence:
+					$$\text{A sequence converges to a limit}\ A\ \text{if}\ \forall \ \varepsilon > 0,\ \exists N_\varepsilon\ \text{s.t.}\ |a_n-A|<\varepsilon\ \forall \ n \geq N_\varepsilon,$$
+					$$n \in \mathbb{N},\ N_\varepsilon \in \mathbb{N},\ \text{written}\ \lim_{n\to\infty} a_n = A$$
+					Thus, what we ultimately want to show here is that $|\frac{n}{n^2+1}-0| < \varepsilon, \forall \ n \geq N_\varepsilon$.
+					\\\\Let's first take care of the denominator. We want to maximize the size of the denominator. So, we have 
+					$$n^2+1 > n^2\ \forall\ n \in \mathbb{N},\ \text{thus we have that}\ \frac{1}{n^2+1} < \frac{1}{n^2}\ \forall \ n \in \mathbb{N}$$
+					Since there's no way to maximize the size of the numerator from what it currently is, combining both the numerator and denominator, we have
+					$$\frac{n}{n^2+1} < \frac{n}{n^2}=\frac{1}{n}\ \forall \ n \in \mathbb{N}$$
+					Now, given that $\varepsilon > 0$, we know that by Corollary 2.4.5 (If $t > 0$, then $\exists n_t \in \mathbb{N}\ \text{s.t.}\ 0 < \frac{1}{n_t} < t$), we know that $\exists N_\varepsilon \in \mathbb{N} \st 0 < \frac{1}{N_\varepsilon} < \varepsilon$, where $n=\varepsilon$. Let $N_0$ be the smallest of these numbers with this property. Then if $n \geq N_0,\ \frac{1}{n} < \frac{1}{N_0} < \varepsilon$. Thus we have 
+					$$\abs{\frac{n}{n^2 + 1}-0}=\abs{\frac{n}{n^2+1}} = \frac{n}{n^2+1} < \frac{1}{n} < \varepsilon$$
+					$\therefore \lim_{n\to\infty} (\frac{n}{n^2+1}) = 0$.
+					
+					\item[(c)] $\lim (\frac{3n+1}{2n+5})=\frac{3}{2}$
+					\\\\We want to show that \(\abs{\frac{3n+1}{2n+5}-\frac{3}{2}} < \varepsilon,\ \forall\ n \geq N_\varepsilon,\ n \in \N,\ N_\varepsilon \in \N,\ \forall\ \varepsilon > 0\)
+					\\\\Since \(n \in \N\), we know that \(\abs{\frac{3n+1}{2n+5}-\frac{3}{2}} = \frac{3n+1}{2n+5}-\frac{3}{2}\). So,
+					\[\frac{3n+1}{2n+5}-\frac{3}{2}=\frac{6n+2}{4n+10}-\frac{6n+15}{4n+10}=-\frac{13}{4n+10} < 0\]
+					and
+					\[\frac{13}{4n+10} < \frac{13}{4n} < \frac{16}{4n} < \frac{4}{n}\ \forall\ n \in \N\]
+					Given $\varepsilon > 0$, and since $\frac{4}{n} < \varepsilon \implies \frac{n}{4} > \varepsilon$, we know that by Corollary 2.4.5 ($t > 0 \implies \exists n_t \in \N \st 0 < \frac{1}{n_t} < t$), then  $\exists N_\varepsilon \in \N \st 0 < \frac{1}{N_\varepsilon} < \frac{\varepsilon}{4}$, where $n = \varepsilon$. Let $N_0 \in \N$ be the smallest of these numbers with this property. Thus, if $n \geq N_0$, we have that $\frac{1}{n} < \frac{1}{N_0} < \frac{\varepsilon}{4}$. This gives us that $\frac{1}{n} < \frac{\varepsilon}{4}\ =\ \frac{4}{n} < \varepsilon$. So
+					\[\abs{\frac{3n+1}{2n+5}-\frac{3}{2}}=\abs{-\frac{13}{4n+10}}=\frac{13}{4n+10}<\frac{4}{n}<\varepsilon\]
+					$\therefore \lim (\frac{3n+1}{2n+5})=\frac{3}{2}$.
+					
+					\item[(d)] $\lim (\frac{n^2-1}{2n^2 + 3})= \frac{1}{2}$
+					\\\\We want to show that $\abs{\frac{n^2-1}{2n^2+3}-\frac{1}{2}} < \varepsilon,\ \forall\ \varepsilon>0,\ \forall\ n \geq N_\varepsilon$, where $n,N_\varepsilon \in \N$. Since
+					\[\frac{n^2-1}{2n^2+3}-\frac{1}{2}=\frac{2n^2-2}{4n^2+6}-\frac{2n^2+3}{4n^2+6}=\frac{-5}{4n^2+6}<0\]
+					So,
+					\[\abs{\frac{n^2-1}{2n^2+3}-\frac{1}{2}}=\abs{\frac{2n^2-2}{4n^2+6}-\frac{2n^2+3}{4n^2+6}}=\abs{\frac{-5}{4n^2+6}}=\frac{5}{4n^2+6}<\frac{5}{4n^2}<\frac{5}{4n}<\frac{5}{n}\]
+					$\forall n \in \N$
+					\\\\Given $\varepsilon >0$, and since $\frac{5}{n},\varepsilon \implies \frac{n}{5} > \varepsilon$, we know that by Corollary 2.4.5 ($t>0 \implies \exists n_t \in \N \st 0<\frac{1}{n_t}<t$), then $\exists N_\varepsilon \in \N \st 0<\frac{1}{N_\varepsilon}<\frac{\varepsilon}{5}$, where $n=\varepsilon$. Let $N_0$ be the smallest of these numbers with this property. Then if $n \geq N_0$, we have that $\frac{1}{n}<\frac{1}{n_0}<\frac{\varepsilon}{5}$. This yields $\frac{1}{n}<\frac{\varepsilon}{5}=\frac{5}{n}<\varepsilon$. So
+					\[\abs{\frac{n^2-1}{2n^2+3}-\frac{1}{2}}=\abs{-\frac{5}{4n^2+6}}=\frac{5}{4n^2+6}<\frac{5}{n}<\varepsilon\]
+					$\therefore \lim (\frac{n^2-1}{2n^2+3})=\frac{1}{2}$
+				\end{enumerate}
+			\item[6)] Show that
+				\begin{enumerate}
+					\item[(a)] $\lim (\frac{1}{\sqrt{n+7}})=0$
+					\\\\We want to show that $\abs{\frac{1}{\sqrt{n+7}}-0}<\varepsilon,\ \forall\ \varepsilon>0,\ \forall\ n \geq N_\varepsilon$, where $n,N_\varepsilon \in \N$.
+					Since $n+7 > n\ \forall\ n \in \N$, we have that $\sqrt{n+7}>\sqrt{n}\ \forall\ n \in \N$ and therefore, $\frac{1}{\sqrt{n+7}}<\frac{1}{\sqrt{n}}\ \forall\ n \in \N$.
+					\\\\Given $\varepsilon>0$, we know by Corollary 2.4.5 ($t>0 \implies \exists n_t \st 0 < \frac{1}{n_t}<t$), then $\exists N_\varepsilon \in \N \st 0 < \frac{1}{N_\varepsilon}<\varepsilon^2$. Thus we have that $\frac{1}{\sqrt{N_\varepsilon}}<\varepsilon$.
+					\\\\Thus if $n \geq N_\varepsilon$, we have that $\sqrt{N_\varepsilon}\leq \sqrt{n}$ which gives us that $\frac{1}{\sqrt{n+7}}<\frac{1}{\sqrt{n}}\leq\frac{1}{\sqrt{N_\varepsilon}}<\varepsilon$. Therefore we have $\abs{\frac{1}{\sqrt{n+7}}-0}=\abs{\frac{1}{n+7}}=\frac{1}{\sqrt{n+7}}<\varepsilon\ \forall\ n \geq N_\varepsilon$.
+					\\\\$\therefore\ \lim (\frac{1}{\sqrt{n+7}})=0$
+				\end{enumerate}
+			\item[9)] Show that if $x_n \geq 0\ \forall\ n \in \mathbb{N}\ \text{and}\ \lim (x_n),\ \text{then}\ \lim (\sqrt{x_n})=0$.
+			\\\\Let $(x_n)$ be a sequence such that $\forall\ n \in \N,\ x_n \geq 0$ and $\lim (x_n)$. We want to show that $\lim (\sqrt{x_n})=0$.
+			\\\\Let $\varepsilon >0$. By the definition of the limit of a sequence, we know that $\exists N_\varepsilon \in \N \st \forall\ n \geq N_\varepsilon$, the following inequality holds:
+			\[\abs{x_n-0}=\abs{x_n}=x_n \geq 0 = x_n < \varepsilon^2\]
+			Thus, if $n \geq N_\varepsilon$, we have that
+			\[\abs{\sqrt{x_n}-0}=\abs{\sqrt{x_n}}=\sqrt{x_n}>\sqrt{\varepsilon^2}=\varepsilon\]
+			and by the definition of the limit of a sequence, again, we have that $\lim (\sqrt{x_n})=0$.
+			
+			\item[11)] Show that $\lim (\frac{1}{n}-\frac{1}{n+1})=0$.
+			\\\\We want to show the following:
+			\[\abs{\left(\frac{1}{n}-\frac{1}{n+1}\right)-0}<\varepsilon,\ \forall\ \varepsilon > 0,\ \forall\ n \geq N_\varepsilon,\ \text{for}\ n,N_\varepsilon \in \N\]
+			Recall Theorem 3.1.10:
+			\begin{3.1.10}
+				Let $(x_n)$ be a sequence of real numbers and let $x \in \R$. If $(a_n)$ is a sequence of positive real numbers with $\lim (a_n) = 0$ and if for some constant $C>0$ and some $m \in \N$ we have 
+				\[\abs{x_n-x}\leq Ca_n\ \forall\ n \geq m,\]
+				then it follows that $\lim (x_n)=x$.
+			\end{3.1.10}
+			We want to find a constant $C>0$ and a sequence $(a_n)$ such that $a_n>0,\ \lim (a_n)=0$, and 
+			\[\abs{\left(\frac{1}{n}-\frac{1}{n+1}\right)-0}\leq Ca_n\ \forall\ n \geq m,\ \text{for some}\ m \in \N\]
+			Let's first find $C$ and $a_n$.
+			\begin{align*}
+				\abs{\left(\frac{1}{n}-\frac{1}{n+1}\right)-0} &= \abs{\frac{1}{n}-\frac{1}{n+1}}
+				\\ &=\frac{1}{n}-\frac{1}{n+1} &\left(\frac{1}{n}>\frac{1}{n+1}\right)
+				\\ &=\frac{(n+1)-n}{n(n+1)}
+				\\ &=\frac{1}{n^2+n}
+			\end{align*}
+			Since $n < n+n^2\ \forall\ n$, we have that $\frac{1}{n^2+n}<\frac{1}{n}$. Thus, choose $C=1$, $(a_n)=\frac{1}{n}$ and $m=1$.
+			\\\\Furthermore, we proved in class that $\lim (\frac{1}{n})=0$.
+			\\\\Now that all of the conditions of Theorem 3.1.10 have been satisfied, apply it to our original sequence of $x_n = \frac{1}{n}-\frac{1}{n+1}$, which yields:
+			\[\lim \left(\frac{1}{n}-\frac{1}{n+1}\right)=0\]
+			
+			\item[12)] Show that $\lim (\sqrt{n^2+1}-n)=0$.
+			\\\\Let $\varepsilon > 0$ be given. Then, we have the following:
+			\begin{align*}
+				\abs{(\sqrt{n^2+1}-n)-0} &= \abs{\sqrt{n^2+1}-n}
+				\\ &= \abs{(\sqrt{n^2+1}-n)*\frac{\sqrt{n^2+1}+n}{\sqrt{n^2+1}+n}}
+				\\ &= \abs{\frac{1}{\sqrt{n^2+1}+n}}
+			\end{align*}
+			Now, let's look at the denominator, $\sqrt{n^2+1}+n$. Then, we know that $n^2+1 > n^2$. So, we have 
+			\begin{align*}
+				n^2+1 &> n^2
+				\\ \sqrt{n^2+1}&> n
+				\\ \sqrt{n^2+1}+n &\geq 2n
+				\\ \frac{1}{\sqrt{n^2 + 1}+n} &\leq \frac{1}{2n} = \varepsilon
+			\end{align*}
+			Choose $N \geq \frac{1}{2\varepsilon}$.
+			\\\\Thus we have that
+			\[\forall\ \varepsilon > 0, \text{ choose } N \geq \frac{1}{2\varepsilon} \text{ then }\abs{a_n-A} < \varepsilon\ \forall\ n \geq N\]
+			
+			\item[13)] Show that $\lim (\frac{1}{3^n})=0$.
+			\\\\Since $n \leq 3n \iff \frac{1}{3^n} \leq \frac{1}{n}$, we have 
+			\[\abs{\frac{1}{3^n}-0}\leq \frac{1}{n}\]
+			Using Theorem 3.1.10 and $\lim \frac{1}{n}=0$ we get
+			\[\lim \frac{1}{3^n}=0\]
+		\end{enumerate}
+		\item Section 3.2
+		\begin{enumerate}
+			\item[1)] For $x_n$ given by the following formulas, establish either the convergence or the divergence of the sequence $X = (x_n)$.
+			
+			\begin{enumerate}
+				\item[(a)] $x_n := \frac{n}{n+1}$
+				\[x_n=\frac{1}{n+1}=\frac{1}{1+\frac{1}{n}}\]
+				\[\lim_{n\to\infty}x_n=\lim_{n\to\infty} \frac{1}{1+\frac{1}{n}}=\frac{1}{1+\lim_{n\to\infty}\frac{1}{n}}=1\]
+				therefore we have that the sequence $\{x_n\}$ converges to 1.
+			\end{enumerate}
+			\item[2)] Give an example of two divergent sequences $X$ and $Y$ such that:
+			\begin{enumerate}
+				\item[(a)] their sum $X + Y$ converges,
+				\\\\Let $X=(0,1,0,1,0,1,...)$ and let $Y=(1,0,1,0,1,0,...)$. Clearly $X$ and $Y$ are divergent because the difference of two consecutive terms is equal to 1.
+				\\Thus, $X+Y=(1,1,1,1,1,....)$, and thus the sequence converges as it's a constant sequence.
+				
+				\item[(b)] their product $XY$ converges.
+				\\\\Let $X=(0,1,0,1,0,1,...)$ and let $Y=(1,0,1,0,1,0,...)$. Once more, these two sequences clearly diverge as the difference of two consecutive terms is equal to 1.
+				\\Thus, $XY=(0,0,0,0,0,...)$, which clearly converges.
+			\end{enumerate}
+			\item[3)] Show that if $X$ and $Y$ are sequences such that $X$ and $X+Y$ are convergent, then $Y$ is convergent.
+			\\\\Recall Theorem 3.2.3:
+			\begin{3.2.3}
+				\begin{enumerate}
+					\item[\textbf{(a)}] Let $X=(x_n)$ and let $Y=(y_n)$ be sequences of real numbers that converge to $x$ and $y$, respectively, and let $c \in \R$. Then the sequences $X+Y,\ X-Y,\ X*Y,$ and $cX$ converge to $x+y,\ x-y,\ xy,$ and $cx$, respectively.
+					\item[\textbf{(b)}] If $X=(x_n)$ converges to $x$ and $Z=(z_n)$ is a sequence of nonzero real numbers that converges to $z$ and $z \neq 0$, then the quotient sequence $X/Z$ converges to $x/z$
+				\end{enumerate}
+			\end{3.2.3}
+			If $X$ and $X+Y$ are convergent, then by Theorem 3.2.3, $Y=(X+Y)-X$. is also convergent.
+			
+			\item[5)] Show that the following sequence is not convergent.
+			\begin{enumerate}
+				\item[(a)] $(2^n)$
+				\\\\$2^n > n$, and $(n)$ is an unbounded sequence. Therefore, $(2^n)$ is also unbounded.
+				\\\\Every convergent sequence must be bounded so we can conclude that $(2^n)$ is unbounded.
+			\end{enumerate}
+			\item[6)] Find the limits of the following sequence:
+			\begin{enumerate}
+				\item[(a)] $\lim ((\frac{2+1}{n})^2)$
+				\begin{align*}
+					\lim \left(\left(2+\frac{1}{n}\right)^2\right) &= \lim \left(\left(2+\frac{1}{n}\right)*\left(2+\frac{1}{n}\right)\right)
+					\\ &= \text{By Theorem 3.2.3 (a): Limit of a product = Product of limits}
+					\\ &= \left(\lim\left(2+\frac{1}{n}\right)\right) * \left(\lim\left(2+\frac{1}{n}\right)\right)
+					\\ &= \text{By Theorem 3.2.3 (a): Limit of a sum = Sum of Limits}
+					\\ &= \left(\lim (2)+\lim\left(\frac{1}{n}\right)\right)*\left(\lim (2) + \lim \left(\frac{1}{n}\right)\right)
+					\\ &= (2+0)*(2+0)
+					\\ &=4
+				\end{align*}
+			\end{enumerate}
+			\item[9)] Let $y_n := \sqrt{n_1}-\sqrt{n}\ \text{for}\ n \in \mathbb{N}$. Show that $(\sqrt{n}y_n)$ converges. Find the limit.
+			\\\\To show that the sequences $(y_n)$ and $(\sqrt{n}y_n)$ converge, we first need to recall Theorem 3.2.10:
+			
+			\begin{3.2.10}
+				Let $X=(x_n)$ be a sequence of real numbers that converges to $x$ and suppose that $x_n \geq 0$. Then the sequence $(\sqrt{x_n})$ of positive square roots converges and $\lim (\sqrt{x_n})=\sqrt{x}$.
+			\end{3.2.10}
+			
+			\begin{align*}
+				y_n=\sqrt{n+1}-\sqrt{n} &= \frac{(\sqrt{n+1}-\sqrt{n})(\sqrt{n+1}+\sqrt{n})}{(\sqrt{n+1}+\sqrt{n})}
+				\\ &= \frac{(n+1)-n}{\sqrt{n+1}+\sqrt{n}}
+				\\ &= \frac{1}{\sqrt{n+1}+\sqrt{n}}
+			\end{align*}
+			$\implies\ |y_n-0|=\frac{1}{\sqrt{n+1}+\sqrt{n}} < \frac{1}{2\sqrt{n}}$. Now we have that $\lim (\frac{1}{n})=0$ implies $\lim (\frac{1}{\sqrt{n}})=0$ by Theorem 3.2.10.
+			\\\\Now, we have
+			\[\sqrt{n}y_n=\frac{\sqrt{n}}{\sqrt{n}+\sqrt{n+1}}=\frac{1}{1+\sqrt{\frac{n+1}{n}}}=\frac{1}{1+\sqrt{1+\frac{1}{n}}}\]
+			Now, by the algebra of limits and of convergent sequences, we have that as $\lim (\frac{1}{n})=0 \implies \lim (1+\frac{1}{n})=1 \implies \lim \sqrt{1+\frac{1}{n}}=\sqrt{1}=1$ and thus $\lim \left(\frac{1}{1+\sqrt{1+\frac{1}{n}}}\right)=\frac{1}{1+\sqrt{1+0}}=\frac{1}{2}$. Therefore $\lim (\sqrt{n}y_n)$ exists and is equal to $\frac{1}{2}$. \\
+			\item[14)] Use the Squeeze Theorem 3.2.7 to determine the limits of the following,
+			\begin{enumerate}
+				\item[(a)] $(n^{1/n^2})$.
+				\\\\Recall Theorem 3.2.7 Squeeze Theorem:
+				
+				\begin{3.2.7}
+					Suppose that $X=(x_n),\ Y=(y_n),$ and $Z=(z_n)$ are sequences of real numbers such that
+					\[x_n \leq y_n \leq z_n\ \forall\ n \in \N\]
+					and that $\lim (x_n)= \lim (z_n)$. Then $Y=(y_n)$ is convergent and 
+					\[\lim(x_n)=\lim(y_n)=\lim(z_n)\]
+				\end{3.2.7}
+			
+				So, notice that 
+				\[1 \leq n^{\frac{1}{n^2}} \leq n^{\frac{1}{n}}\]
+				and $\lim (n^{\frac{1}{n}})=1$. By the Squeeze Theorem,
+				\[1 \leq \lim (n^{\frac{1}{n^2}}) \leq \lim (n^{\frac{1}{n}})=1\]
+				Therefore we have that $\lim (n^{\frac{1}{n^2}}=1)$. \\
+			\end{enumerate}
+			\item[16)] Apply Theorem 3.2.11 to the following sequences, where $a, b$ satisfy $0 < a < 1, b > 1$.
+			\\\\Recall Theorem 3.2.11:
+			\begin{3.2.11}
+				Let $(x_n)$ be a sequence of positive real numbers such that $L := \lim (x_{n+1}/x_n)$ exists. If $L < 1$, then $(x_n)$ converges and $\lim (x_n)=0$.
+				\\
+			\end{3.2.11}
+			\begin{enumerate}
+				\item[(c)] $(\frac{n}{b^n})$
+				\\Since $\frac{n}{b^n}>0\ \forall\ n$, we have that
+				\[\lim \left(\frac{\frac{n+1}{b^{n+1}}}{\frac{n}{b^n}}\right)=\frac{1}{b} < 1\]
+				Thus, let $(x_n)$ be a sequence of positive real numbers such $L:=\lim \left(\frac{x_{n+1}}{x_n}\right)$ exists. If $L<1$, then $(x_n)$ converges and $\lim (x_n)=0$. Therefore we have that $\lim (\frac{n}{b^n}) = 0$.
+				\\
+				
+				\item[(d)] $(2^{3n}/3^{2n})$
+				\\Since $\frac{2^{3n}}{3^{2n}}>0\ \forall\ n \in \N$, we have that
+				\[\lim \left(\frac{\frac{2^{3(n+1)}}{3^{2(n+1)}}}{\frac{2^{3n}}{3^{2n}}}\right)=\frac{8}{9} < 1\]
+				Thus, let $(x_n)$ be a sequence of positive real numbers such that $L:= \lim (\frac{x_{n+1}}{x_n})$ exists. If $L < 1$, then $(x_n)$ converges and $\lim (x_n) = 0$. Therefore $\lim (\frac{2^{3n}}{3^{2n}})=0$.
+			\end{enumerate}
+			\item[17)]
+			\begin{enumerate}
+				\item[(a)] Give an example of a convergent sequence $(x_n)$ of positive numbers with $\lim (x_{n+1}/x_n)=1$.
+				\\\\Let $(x_n)$ be a sequence such that $x_n=1\ \forall\ n \in \N$. This is a constant sequence and is thus convergent and $\lim (\frac{x_{n+1}}{x_n})=1$. \\
+				
+				\item[(b)] Give an example of a divergent sequence with this property. (Thus, this property cannot be used as a test for convergence.)
+				\\\\Let $(x_n)$ be a sequence such that $(x_n)=(n)$. This sequence is divergent because it's not bounded, however $\lim (\frac{x_{n+1}}{x_n})=1$.
+			\end{enumerate}
+			\item[22)] Suppose that if $(x_n)$ is a convergent sequence and $(y_n)$ is such that for any $\varepsilon > 0$ there exists $M$ such that $|x_n-y_n| < \varepsilon$ for all $n \geq M$. Does it follow that $(y_n)$ is convergent?
+			\\\\It does follow that $(y_n)$ is convergent. In fact, $\lim (y_n) = \lim (x_n)$. To show this, let $x=\lim (x_n)$. 
+			\\\\For any $\varepsilon > 0$, choose $M_1,M_2>0 \st$
+			\begin{align*}
+				|x_n-x|<\frac{\varepsilon}{2},\  &\forall\  n\geq M_1 &(a)
+				\\\text{and } |x_n-y_n|< \frac{\varepsilon}{2},\ &\forall\ n \geq M_2 &(b)
+			\end{align*}
+			Choose $M=\max \{M_1, M_2\}$. Then $\forall\ n \geq M$,
+			\begin{align*}
+			|y_n-x| &= |y_n-x_n+x_n-x|
+			\\ &\leq |y_n-x_n|+|x_n-x|
+			\\ &< \frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon &\text{ from (a) and (b)}
+			\end{align*}
+			Thus we have that $\lim (y_n)=x$.
+		\end{enumerate}
+	\item Give an example of each of the following:
+	\begin{enumerate}
+		\item A convergent sequence of rational numbers having an irrational limit.
+		\\\\Let $a_n=\left(1 + \frac{1}{n}\right)^n$ be a sequence of rationals. Then, notice that $a_n \in \mathbb{Q}$, but notice also that $\lim_{n\to\infty} a_n = e$.
+		
+		\item A convergent sequence of irrational numbers having a rational limit.
+		\\\\Let $a_n=\frac{\sqrt{2}}{n}$. Then we have that $a_n \notin \mathbb{Q}$, but we also have that $\lim_{n\to\infty} a_n = 0$, and $0 \in \mathbb{Q}$
+	\end{enumerate}
+	\item Prove: Let $a_n$ and $b_n$ be sequences of real numbers and $A \in \mathbb{R}$. If for some $k > 0$ and some $m \in \mathbb{N}$, we have $|a_n-A|\leq k|b_n|$ for all $n > m$, and if $\lim_{n\to\infty} b_n = 0$, then $\lim_{n\to\infty} a_n = A$.
+	\begin{proof}
+		Let $a_n$ and $b_n$ be sequences of real numbers and let $A \in \R$. Let $k >0$, and some $m \in \N$. We have $\abs{a_n-A}\leq k|b_n|\ \forall\ n > m$, and $\lim_{n\to\infty} b_n = 0$. We want to show that $\lim_{n\to\infty} a_n = A$. 
+		\\\\Let $\varepsilon>0$ be given. Since $\lim b_n=0$, we know that $b_n$ converges. So by the definition of the limit of a sequence, we know that $\exists\ N_1 \st |b_n-0| =|b_n| < \varepsilon\ \forall\ n \geq N_1$. This also means that since $\lim b_n = 0$, we have $k|b_n| < \varepsilon \implies |b_n| < \frac{\varepsilon}{k}$, by algebra.
+		\\\\Recall that we have $|a_n-A|\leq k|b_n|\ \forall\ n > m$. So, let $N=\max \{m,N_1\}$. Then we have that $\forall\ n \geq N,\ |a_n-A|\leq k|b_n| \leq k\left(\frac{\varepsilon}{k}\right)=\varepsilon$. Thus we have that $a_n$ converges since it is also always less than $\varepsilon$. This is by the definition of the limit of a sequence.
+		\\\\$\therefore\ \lim_{n\to\infty} a_n = A$; That is, the sequence $a_n$ converges to $A$.
+	\end{proof}
+	
+	\item (Similar to Section 3.2, problem 7)
+	\begin{enumerate}
+		\item Suppose that $\lim_{n\to\infty} a_n=0$. If $b_n$ is a bounded sequence, prove that $\lim_{n\to\infty} a_nb_n=0$.
+		\begin{proof}
+			Let $b_n$ be a bounded sequence. Then by the definition of a bounded sequence we know that $\exists\ M>0,\ M \in \R \st |b_n| \leq M\ \forall\ n \in \N$.
+			\\\\Let $\varepsilon >0$ be given. Since $a_n$ converges, we know that by the definition of the limit of a sequence, $\exists\ N \st |a_n-0|=|a_n|<\frac{\varepsilon}{M}\ \forall\ n \geq N$, since we know that by the definition of bounded, $|b_n| \leq M$. Thus, by the utilization of the triangle inequality, we have that $|a_nb_n| \leq |a_n||b_n|\leq M\left(\frac{\varepsilon}{M}\right)=\varepsilon,\ \forall\ n \geq N$.
+			\\\\$\therefore$ we have that $a_nb_n$ converges to 0.
+		\end{proof}
+		
+		\item Show by counterexample that the boundedness of $b_n$ is a necessary condition for part (a).
+		\\\\Let $a_n=\frac{1}{n}$, and let $b_n=n^3$. Then we have
+		\[\lim_{n\to\infty} a_n = 0, \text{ and } \lim_{n\to\infty} b_n = \infty\]
+		, since $n^3$ is an unbounded sequence since $n^3$ is not bounded above, and in order to be bounded, the sequence must be both bounded above and bounded below. So, we have the following:
+		\[\lim_{n\to\infty}a_nb_n = \lim_{n\to\infty} \left(\frac{1}{n}\right)(n^3) = \lim_{n\to\infty} \left(\frac{n^3}{n}\right) = \lim_{n\to\infty} n^2 = \infty \neq 0\]
+		$\therefore$ the boundedness of $b_n$ is a necessary condition for part (a) to be true.
+	\end{enumerate}
+
+	\item Prove or justify, if true. Provide a counterexample, if false.
+	\begin{enumerate}
+		\item If $a_n$ converges, then $a_n/n$ also converges.
+		\\\\This is true.
+		\begin{proof}
+			Let $\lim a_n = A$. Let $b_n = n$, and let $\lim b_n = B$. Recall Theorem 3.2.3. Since $n \in \N$, we know that $n \neq 0$, and thus we know that $0 \notin b_n$. Thus by Theorem 3.2.3, we have that $\lim \frac{a_n}{b_n} = \frac{A}{B}$. And thus since the limit exists, we have that $\frac{a_n}{n}$ also converges.
+		\end{proof}
+		
+		\item If $a_n$ does not converge, then $a_n/n$ does not converge.
+		\\\\This is false.
+		\\\\Counterexample: Let $a_n = n$. Then we know that $a_n$ does not converge, however $\frac{a_n}{n} = \frac{n}{n} = 1$, which converges since $\lim 1 = 1$.
+		
+		\item If $a_n$ converges and $b_n$ is bounded, then $a_nb_n$ converges.
+		\\\\This is false.
+		\\\\Counterexample: Let $a_n=(\frac{1}{n} + 1)$, and let $b_n = (-1)^n$. Then we have that $\lim a_n = 1$, and $b_n$ is bounded both above and below, by $-1$ and $1$, respectively. Thus $(-1)^n$ is bounded. So if we multiply the two together, we have
+		\[a_nb_n = (\frac{1}{n}+1)(-1)^n\]
+		which is not convergent since this sequence oscillates. Thus by the fact that a convergent sequence multiplied by a divergent sequence diverges, we have that even though $a_n$ is convergent and $b_n$ is bounded, $a_nb_n$ does not converge.
+		
+		\item If $a_n$ converges to zero and $b_n > 0$ for all $n \in \mathbb{N}$, then $a_nb_n$ converges.
+		\\\\This is false.
+		\\\\Counterexample: Let $a_n=\frac{1}{n}$, and let $b_n = n^3$. Then we have that $\lim a_n = 0$, and that $b_n >0\ \forall\ n \in \N$. Then, we have that $a_nb_n=(\frac{1}{n})(n^3) = \frac{n^3}{n} = n^2$. And thus we have that $\lim a_nb_n = \lim n^2 = \infty$, thus $a_nb_n$ diverges.
+		
+		\item If $a_n \rightarrow A$ and $b_n \rightarrow A$ as $n \rightarrow \infty$, then $a_n = b_n$ for all $n \in \mathbb{N}$.
+		\\\\This is false.
+		\\\\Counterexample: Let $a_n = \frac{n}{3n+1}$, and let $b_n = \frac{1}{n} + 1$. Then we have $\lim a_n = 1$, and $\lim b_n = 1$, thus $\lim a_n = \lim b_n = 1$. However, $a_n \neq b_n$, since $\frac{n}{3n+1} \neq \frac{1}{n} + 1 = \frac{n}{n + 1} \neq \frac{n}{3n+1}$.
+		
+		\item Every convergent sequence is bounded.
+		\\\\This is true.
+		\begin{proof}
+			Refer to proof of Theorem 3.2.2.
+		\end{proof}
+		
+		\item Every bounded sequence is convergent.
+		\\\\This is false.
+		\\\\Counterexample: Let $a_n = (-1)^n$. Then we have that $a_n$ is bounded both above and below, and thus $a_n$ is bounded. However since $a_n$ oscillates, we know that $a_n$ is not convergent. 
+		
+		\item If $a_n \rightarrow 0$ as $n \rightarrow \infty$, then for every $\epsilon > 0$ there exists $N \in \mathbb{N}$ such that if $n >N$, then $a_n < \epsilon$.
+		\\\\This is true.
+		\begin{proof}
+			Since we have that $\lim_{n\to\infty} a_n = 0$, then by the definition of the limit of a sequence, we have
+			\[\forall\ \varepsilon > 0,\ \exists\ N \in \N \st |a_n-A|<\varepsilon,\ \forall\ n \geq N\]
+			Thus we have that
+			\begin{align*}
+				|a_n-0| &<\varepsilon
+				\\ |a_n| &< \varepsilon
+				\\ -\varepsilon &< a_n < \varepsilon
+			\end{align*}
+			Thus we have that if $n > N$, then $a_n < \varepsilon$, by the definition of the limit of a sequence.
+		\end{proof}
+		
+		\item If for every $\epsilon >0 $ there exists $N \in \mathbb{N}$ such that $n > N$ implies $a_n < \epsilon$, then $a_n \rightarrow 0$ as $n \rightarrow \infty$.
+		\\\\This is false.
+		\\\\Counterexample: Let $a_n = -1,\ \forall\ n \in \N$. Then we have that by the definition of the limit of a sequence, for every $\varepsilon > 0$, there exists $N \in \N$ such that $n > N$ implies that $a_n < \varepsilon$, but $a_n$ does not converge to 0 as $n \rightarrow \infty$. Rather, we have that $a_n \rightarrow -1$. 
+		\item Given sequences $a_n$ and $b_n$, if for some $A \in \mathbb{R}, k > 0$ and $m \in \mathbb{N}$ we have $|a_n-A| \leq k|b_n|$ for all $n >m$, then $a_n \rightarrow A$ as $n \rightarrow \infty$.
+		\\\\This is false.
+		\\\\Counterexample: Note the proof of question 4: We showed that the above statement is true if $\lim b_n = 0$ is also given. However, given that this limit is omitted, we have that we can provide a counterexample to disprove said statement.
+		\\\\Suppose $b_n=\frac{1}{n}+1$. Then we have that $\lim b_n=1$. Let $a_n=-2$. Assume for some $A \in \R, k>0, m \in \N$, we have $|-2 - (-2)| \leq k|1|\ \forall\ n > m = 2 \leq k$. However, note that there doesn't exist an $m$ such that $2 \leq k\ \forall\ n > m$, since $m=n\ \forall\ m \in \N,\ n \in \N$.
+	\end{enumerate}
+	\end{enumerate}
+\end{document}

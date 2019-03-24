@@ -1,0 +1,496 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 5}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+	\item For the following sequences, i) write out the first 5 terms, ii) Use the Monotone Sequence Property to show that the sequences converges.
+	\begin{enumerate}
+		\item \textbf{Section 3.3}
+		\begin{enumerate}
+			\item[2)] Let $x_1 > 1$ and $x_{n+1} := 2-1/x_n$ for $n \in \N$. Show that $(x_n)$ is bounded and monotone. Find the limit.
+			\\\\ The first five terms of this sequence are $x_1 \geq 2,x_2 \geq \frac{3}{2}, x_3 \geq \frac{4}{3}, x_4 \geq \frac{5}{4}, x_5 \geq \frac{6}{5}, \dots \approx x_1 \ge 2, x_2 \geq 1.5, x_3 \geq 1.3333, x_4 \geq 1.25, x_5 \geq 1.2, \dots$. This sequence appears to be decreasing.
+			\\\\Recall the Monotone Sequence Property:
+			\begin{theorem*}{Monotone Sequence Property}
+				A monotone sequence of real numbers is convergent if and only if it is bounded. Further,
+				\begin{enumerate}
+					\item If $X=(x_n)$ is a bounded increasing sequence, then
+					\[\lim (x_n) = \sup \{x_n:n \in \N\}\]
+					
+					\item If $Y=(y_n)$ is a bounded decreasing sequence, then
+					\[\lim (y_n) = \inf \{y_n : n \in \N \}\]
+				\end{enumerate}
+			\end{theorem*}
+		
+			To show that this sequence converges, we must first find the possible limit points (fixed points) of this sequence. So,
+			\begin{align*}
+				x&=2-\frac{1}{x} \\
+				x^2 &= 2x -1 \\
+				x^2 - 2x + 1 &= 0 \\
+				(x-1)^2 &= 0
+			\end{align*}
+			Thus, $x=1$ is a possible limit of this sequence.
+			\\\\Now, we will prove that $(x_n)$ is bounded by $1$, and since we hypothesized that $(x_n)$ is decreasing, we say that $(x_n)$ is bounded below by 1. 
+			\begin{proof}
+				We want to show that the sequence $(x_n)$ is bounded below by 1; that is, we want to show that $1 \leq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+				\\\\\textbf{Basis Step:} Let $n=1$. Then
+				\begin{align*}
+					x_n &\geq x_{n+1}, &\text{by the definition of decreasing,} \\
+					x_1 &\geq x_{1+1} \\
+					x_1 &\geq x_2
+				\end{align*}
+				Since $x_1>1 \Rightarrow \frac{1}{x_1} < 1$, we have
+					\[x_2 = 2-\frac{1}{x_1} > 1\]
+					\[\Rightarrow 1 < x_2 < 2.\]
+				Since $x_1>1$ and because $1 < x_2 < 2$, we have that $x_1 \geq x_2$.
+				\\\\\textbf{Inductive Step:} Assume $1 < x_n < 2,\ \forall\ n \in \N$.
+				\\\\\textbf{Show:} Now we want to show that $x_n \leq x_{n+1}$.
+				\\So,
+					\[1 < x_n <2\]
+					\[1 > \frac{1}{x_n} > \frac{1}{2}\]
+					\[-1 < -\frac{1}{x_n} < -\frac{1}{2}\]
+					\[1 < 2-\frac{1}{x_n} < 2-\frac{1}{2} < 2\]
+					\[1 < x_{n+1} < 2\]
+				Thus we have that $(x_n)$ is bounded between 1 and 2.
+			\end{proof}
+		
+			Now we need to show that $(x_n)$ is monotone decreasing; that is, we must show that $x_1 \geq x_2 \geq \dots \geq x_n$.
+			
+			\begin{proof}
+				We want to show that $x_1 \geq x_2 \geq \dots \geq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+				\\\\\textbf{Basis Step:} Let $n=1$. Then since $x_1 >1$ is given, we have that $\frac{1}{x_1} < 1$. This yields $x_2=2-\frac{1}{x_1}>1$, as was determined for the boundedness proof, and thus we have that $1 < x_2 < 2$. This means that $1 > \frac{1}{x_2} > \frac{1}{2}$, and since $\frac{1}{2} \leq \frac{1}{x_n}$, we have $x_2 \geq x_1$.
+				\\\\\textbf{Inductive Step:} Assume $x_n \geq x_{n+1}\ \forall\ n \in \N$.
+				\\\\\textbf{Show:} We now want to show that $x_{n+2} \leq x_{n+1}$.
+				\\So,
+				\[x_{n+2}=2-\frac{1}{x_{x+1}}\]
+				Recall the inductive hypothesis, in that $x_n \geq x_{n+1} \Rightarrow \frac{1}{x_n} \leq \frac{1}{x_{n+1}}$. Thus,
+				\[-\frac{1}{x_n} \geq -\frac{1}{x_{n+1}}\]
+				\[\Rightarrow 2-\frac{1}{x_n} \leq 2 -\frac{1}{x_{n+1}}\]
+				\[x_{n+1} \leq x_{n+2}\]
+				$\therefore$ we have that $x_1 \geq x_2 \geq \dots \geq x_n,\ \forall\ n \in \N$.
+			\end{proof}
+			Thus $(x_n)$ is monotone decreasing.
+			\\\\By the \textit{Monotone Sequence Property}, since we have shown that $(x_n)$ is both bounded (and thus converges), and that $(x_n)$ is monotone decreasing, we have that
+			\begin{align*}
+				\lim (x_n) &= \inf \{x_n: n \in \N\} \\
+				&=\inf (1,2) \\
+				&= 1
+			\end{align*}
+			Hence the sequence converges to the previously found possible limit of 1. \\
+			
+			\item[3)] Let $x_1 > 1$ and $x_{n+1} := 1 + \sqrt{x_n - 1}$ for $n \in \N$. Show that $(x_n)$ is decreasing and bounded below by $2$. Find the limit.
+			\\\\The first 5 terms of this sequence are $x_1 \geq 2, x_2 \geq 2, x_3 \geq 2, x_4 \geq 2, x_5 \geq 2, \dots$. Notice the following, however:
+			\begin{align*}
+				x_{n+1} \leq x_n &\iff 1+\sqrt{x_n - 1} \leq x_n \\
+				&\iff \sqrt{x_n -1} \leq x_n -1
+			\end{align*}
+			which we know is always true since the square root function is a decreasing function.
+			\\\\Now we must find the possible limit points (fixed points) of this sequence. So,
+			\begin{align*}
+				x &= 1 + \sqrt{x-1} \\
+				x-1 &= \sqrt{x-1} \\
+				x-1 &= (x-1)^2 \\
+				x-1 &= x^2 -2x +1 \\
+				(x-1)-(x^2-2x+1) &= 0 \\
+				-x^2+3x-2 &=0 \\
+				-(x^2-3x+2) &= 0 \\
+				-(x-1)(x-2) &= 0 \\
+				(x-1)(x-2) &= 0
+			\end{align*}
+			Thus $x=1$, or $x=2$. These are the possible limits of $(x_n)$. Since we hypothesized that $(x_n)$ is decreasing, then we say that $(x_n)$ is bounded below by 2, since we are given that $x_1 > 1$.
+			\\\\Now we will prove that $(x_n)$ is bounded below by 2.\\
+			\begin{proof}
+				We want to show that $(x_n)$ is bounded below by 1; that is, we want to show that $1 \leq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+				\\\\\textbf{Basis Step:} Let $n=1$. Then we are given that $x_1 \geq 2$.
+				\\\\\textbf{Inductive Step:} Assume that $x_n \geq 2,\ \forall\ n \in \N$.
+				\\\\\textbf{Show:} We now want to show that $x_{n+1} \geq 2,\ \forall\ n \in \N$.
+				\\\\So,
+				\begin{align*}
+					x_{n+1} &= 1+\sqrt{x_n -1} \\
+					&\geq 1+\sqrt{2 -1} \\
+					&=1 + 1 \\
+					&= 2
+				\end{align*}
+				Thus, $x_n \geq 2,\ \forall\ n \in \N$. By the definition of boundedness, we have that $(x_n)$ is bounded below by 2.
+			\end{proof}
+			
+			Since we have also shown earlier that $(x_n)$ is monotone decreasing, we have that by the monotone sequence property, since $(x_n)$ is bounded, $(x_n)$ converges, and since $(x_n)$ is monotone decreasing, we have:
+			\begin{align*}
+				\lim (x_n) &= \inf \{x_n:n \in \N\} \\
+				&=2
+			\end{align*}
+			
+			\item[7)] Let $x_1 := a>0$ and $x_{n+1} := x_n+1/x_n$ for $n \in \N$. Determine whether $(x_n)$ converges or diverges.
+			\\\\The first 5 terms of this sequence are $x_1 \geq 1, x_2 \geq 2, x_3 \geq \frac{5}{2}, x_4 \geq \frac{29}{10}, x_5 \geq \frac{941}{290}, \dots \approx x_1 \geq 1, x_2 \geq 2, x_3 \geq 2.5, x_4 \geq 2.9, x_5 \geq 3.244828, \dots$. This sequence appears to be increasing. We show this to be true as follows:
+			\begin{align*}
+				x_{n+1} \geq x_n &\iff x_n + \frac{1}{x_n} \geq x_n \\
+				&\iff x_n^2 + 1 \geq x_n^2 \\
+				&\iff 1 \geq 0
+			\end{align*}
+			which is true.
+			However, notice that one of the terms of the sequence is $x_n$. We know that $x_n$ is an unbounded sequence. Thus, we can infer that $(x_n)$ is unbounded above. We show this as follows:
+			\begin{align*}
+				x_{n+1}^2 &= \left(x_n + \frac{1}{x_n} \right)^2 \\
+				&= x_n^2+2+\frac{1}{x_n^2} \\
+				&> x_n^2 +2
+			\end{align*}
+			Since:
+			\[x_{n+1}^2 > x_n^2+2 > x_{n-1}^2 +4 > \dots > x_1^2+2 \cdot n = a^2+2 \cdot n\]
+			\[\Downarrow\]
+			\[x_n > \sqrt{a^2 + 2 \cdot (n-1)}\]
+			Since the right hand side of this inequality is unbounded, the left hand side is also unbounded.
+			\\\\Thus we have that this sequence $(x_n)$ is unbounded above.
+			\\\\Since this sequence is increasing and unbounded above, we have that the sequence is divergent.\\
+			
+			\item[8)] Let $(a_n)$ be an increasing sequence, $(b_n)$ be a decreasing sequence, and assume that $a_n \leq b_n$ for all $n \in \N$. Show that $\lim (a_n) \leq \lim (b_n)$, and thereby deduce the Nested Intervals Property 2.5.2 from the Monotone Convergence Theorem 3.3.2.
+			\\\\Since $(a_n)$ is an increasing sequence, we know that $(a_1 \leq a_2 \leq \dots \leq a_n)$, and since $(b_n)$ is a decreasing sequence, we know that $(b_1 \geq b_2 \geq \dots \geq b_n)$. Also, since we have that $a_n \leq b_n,\ \forall\ n \in \N$, we know that $(a_n)$ is bounded above by $(b_1)$. Thus, by the \textit{Monotone Convergence Theorem}, we know that
+			\[\lim (a_n) = \sup \{a_n: n \in \N\}\]
+			Also, since $(b_n)$ is a decreasing sequence such that it is bounded below by $(a_1)$, by the \textit{Monotone Convergence Theorem}, we have
+			\[\lim (b_n) = \inf \{b_n: n \in \N\}\]
+			Recall Theorem 3.2.5:
+			\begin{theorem*}
+				If $X=(x_n)$ and $Y=(y_n)$ are convergent sequences of real numbers and if $x_n \leq y_n\ \forall\ n \in \N$, then $\lim (x_n) \leq \lim (y_n)$.
+			\end{theorem*}
+			Also, recall the \textit{Nested Intervals Property}:
+			\begin{theorem*}
+				If $I_n=[a_n,b_n],\ n \in \N$, is a nested sequence of closed bounded intervals, then there exists a number $\xi \in \R \st \xi \in I_n\ \forall\ n \in \N$.
+			\end{theorem*}
+			Note that we have a nested sequence of closed, bounded intervals: $[a_n, b_n],\ n \in \N$. Since we showed that $\lim (a_n) \leq \lim (b_n)$, (and we are given that $(a_n)$ is increasing and $(b_n)$ is decreasing), we know that there exists $\xi$ such that
+			\[\lim (a_n) \leq \xi \leq \lim (b_n)\]
+			which means that $\xi \in [a_n, b_n],\ \forall\ n \in \N$.
+		\end{enumerate}
+		
+		\item $a_1 = 1,\ a_{n+1}=\frac{a_n^2+5}{2a_n}$
+		\\\\The first 5 terms of this sequence are $1, 3, \frac{7}{3}, \frac{47}{21}, \frac{2207}{987}, \dots \approx 1, 3, 2.3333, 2.2381, 2.2361, \dots$. This is a decreasing sequence.
+		\\\\First, we must find the possible limits (fixed points) of the sequence. So,
+		\begin{align*}
+			a&=\frac{a^2+5}{2a} \\
+			2a^2 &= a^2+5 \\
+			a^2 &= 5 \\
+			a &= \pm \sqrt{5}
+		\end{align*}
+		Since we're given that $a_1=1$, we know that the most likely lower bound will be $\sqrt{5}$.
+		\\\\Now we want to show that $(a_n)$ is bounded below by $\sqrt{5}$.
+		\begin{proof}
+			We want to show that $a_n \geq \sqrt{5},\ \forall\ n \in \N$. We prove it by method of mathematical induction.
+			\\\\\textbf{Basis Step:} Since $1 \geq \sqrt{5}$, we have that $a_1 \geq \sqrt{5}$
+			\\\\\textbf{Inductive Step:} Assume that $a_n \geq \sqrt{5}\ \forall\ n \in \N$.
+			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq \sqrt{5}\ \forall\ n \in \N$. So, 
+			\[a_{n+1} = \frac{a_n^2 + 5}{2a_n}\]
+			\begin{align*}
+				(a_n-\sqrt{5})^2 &\geq 0 \\
+				a_n^2 -2\sqrt{5}a_n +5 &\geq 0 \\
+				a_n^2 +5 &\geq 2\sqrt{5}a_n \\
+				\Downarrow \\
+				\frac{a_n^2+5}{2a_n} &\geq \frac{2\sqrt{5}a_n}{2a_n} \\
+				\frac{a_n^2+5}{2a_n} &\geq \sqrt{5} \\
+				a_{n+1} \geq \sqrt{5}
+			\end{align*}
+			Thus we have that $(a_n)$ is bounded below by $\sqrt{5}$.
+		\end{proof}
+		Now we must show that $(a_n)$ is monotone decreasing.\\
+		\begin{proof}
+			We want to show that $(a_n)$ is monotone decreasing; that is, we want to show that $(a_2 \geq a_3 \geq \dots \geq a_n),\ \forall\ n \geq 2$. We prove it by method of mathematical induction.
+			\\\\\textbf{Basis Step:} Since $3 \geq \frac{7}{3}$, we have that $a_2 \geq a_3$.
+			\\\\\textbf{Inductive Step:} Assume that $a_n \geq a_{n+1},\ \forall\ n \geq 2$.
+			\\\\\textbf{Show:} We want to show that $a_{n+2} \leq a_{n+1},\ \forall\ n \geq 2$.
+			\\So,
+			\[a_{n+2} = \frac{a_{n+1}^2+5}{2a_{n+1}} \leq \frac{a_n^2+5}{2a_n}\]
+			Since we have:
+			\begin{align*}
+				a_{n+1} &\geq \sqrt{5}, &\text{by the previous proof of boundedness} \\
+				a_{n+1}^2 &\geq 5
+			\end{align*}
+			We can equivalently write the inequality as
+			\[\frac{a_{n+1}^2+5}{2a_{n+1}} \leq \frac{a_{n+1}^2+a_{n+1}^2}{2a_{n+1}}=a_{n+1}\]
+			Thus we have that $(a_n)$ is monotone decreasing.
+		\end{proof}
+		Since $(a_n)$ is both monotone decreasing and bounded, we have
+		\begin{align*}
+			\lim (a_n) &= \inf \{a_n:n \in \N\} \\
+			&= \sqrt{5}
+		\end{align*} 
+		
+		\item $a_1 = 5,\ a_{n+1}=\sqrt{4+a_n}$
+		\\\\The first 5 terms of this sequence are 5, 3, $\sqrt{7}$, $ \frac{\sqrt{14}}{2} + \frac{\sqrt{2}}{2} $, $ \frac{\sqrt{2 \cdot (\sqrt{14}+\sqrt{2}+8)}}{2} $, $\dots$, $\approx$ 5, 3, 2.64575131106, 2.57793547457, 2.5647486182, $\dots$. This sequence is decreasing.
+		\\\\First, we must find the possible limits (fixed points) of the sequence. So,
+		\begin{align*}
+			a&=\sqrt{4+a} \\
+			\sqrt{4+a} &= a \\
+			4+a &= a^2 \\
+			-a^2+a+4 &= 0 \\
+			a^2-a-4 &= 0 \\
+			a^2-a&=4 \\
+			a^2-a+\frac{1}{4}&=4+\frac{1}{4} \\
+			a^2-a+\frac{1}{4}&=\frac{17}{4} \\
+			(a-\frac{1}{2})^2&=\frac{17}{4} \\
+			a-\frac{1}{2}&=\pm \frac{\sqrt{17}}{2}
+		\end{align*}
+		So we have that $a=\frac{1}{2} + \frac{\sqrt{17}}{2}$, or $a=\frac{1}{2}-\frac{\sqrt{17}}{2}$. We must now check these solutions for correctness; so, 
+		\begin{align*}
+			a \Rightarrow \frac{1}{2}-\frac{\sqrt{17}}{2} &=\frac{1}{2} \left(1-\sqrt{17}\right) \\
+			&\approx -1.56155 \\\\
+			\sqrt{a+4} &= \sqrt{\left(\frac{1}{2}-\frac{\sqrt{17}}{2}\right)+4} \\
+			&=\frac{\sqrt{9-\sqrt{17}}}{\sqrt{2}} \\
+			&\approx 1.56155
+		\end{align*}
+		Thus, this solution is incorrect. Now we must validate that $a=\frac{1}{2}+\frac{\sqrt{17}}{2}$ is correct. So,
+		\begin{align*}
+			a \Rightarrow \frac{1}{2}+\frac{\sqrt{17}}{2} &= \frac{1}{2}\left(1+\sqrt{17}\right) \\
+			&\approx 2.56155 \\\\
+			\sqrt{a+4} &= \sqrt{\left(\frac{\sqrt{17}}{2}+\frac{1}{2}\right)+4} \\
+			&= \frac{\sqrt{9+\sqrt{17}}}{\sqrt{2}} \\
+			&\approx 2.56155
+		\end{align*}
+		Thus $a=\frac{1}{2}+\frac{\sqrt{17}}{2}$ is a correct solution.
+		\\\\Now we want to show that $(a_n)$ is bounded below by $\frac{1}{2}+\sqrt{17}$.
+		\begin{proof}
+			We want to show that $a_n \geq \frac{1}{2}+\frac{\sqrt{17}}{2},\ \forall\ n \in \N$, by the definition of a lower bound. We prove this by method of mathematical induction.
+			\\\\\textbf{Basis Step:} Since $5 \geq \frac{1}{2}+\frac{\sqrt{17}}{2}$, we have that $a_1 \geq \frac{1}{2}+\frac{\sqrt{17}}{2}$.
+			\\\\\textbf{Inductive Step:} Assume $a_n \geq \frac{1}{2}+\frac{\sqrt{17}}{2},\ \forall\ n \in \N$.
+			\\\\\textbf{Show:} We now want to show that $ a_{n+1} \geq \frac{1}{2}+\frac{\sqrt{17}}{2}\ \forall\ n \in \N$. So,
+			\begin{align*}
+				a_{n+1} &= \sqrt{4+a_n}, &\text{by the definition of the sequence} \\
+				&\geq \sqrt{4+\left(\frac{1}{2}+\frac{\sqrt{17}}{2}\right)}, &\text{by the inductive hypothesis} \\
+				&\geq \sqrt{\frac{8}{2}+\frac{1}{2}+\frac{\sqrt{17}}{2}} \\
+				&\geq \sqrt{\frac{9+\sqrt{17}}{2}} \\
+				&\geq \sqrt{\frac{1}{2}\left(9+\sqrt{17}\right)} \\
+				&\geq \sqrt{\frac{1}{4}+\frac{\sqrt{17}}{2}+\frac{17}{4}}, &\text{by expressing } \frac{9+\sqrt{17}}{2} \text{ as a square} \\
+				&\geq \sqrt{\frac{1+2\sqrt{17}+17}{4}} \\
+				&\geq \sqrt{\frac{1+2\sqrt{17}+(\sqrt{17})^2}{4}} \\
+				&\geq \sqrt{\frac{(\sqrt{17}+1)^2}{4}} \\
+				&\geq \sqrt{\frac{1}{4}\left(1+\sqrt{17}\right)^2} \\
+				&\geq \frac{\sqrt{(1+\sqrt{17})^2}}{\sqrt{4}} \\
+				&\geq \frac{\sqrt{17}+1}{2} \\
+				&\geq \frac{1}{2} + \frac{\sqrt{17}}{2}
+			\end{align*}
+			Thus we have that $ a_{n+1} \geq \frac{1}{2} + \frac{\sqrt{17}}{2}\ \forall\ n \in \N$.
+		\end{proof}
+		Now, we want to show that $ (a_n) $ is monotone decreasing; that is, we want to show that $(a_1 \geq a_2 \geq \dots \geq a_n)$.
+		\begin{proof}
+			We want to show that $(a_1 \geq a_2 \geq \dots \geq a_n),\ \forall\ n \in \N$. We prove this by method of mathematical induction.
+			\\\\\textbf{Basis Step:} Since $5 \geq 3$, we have that $a_1 \geq a_2$.
+			\\\\\textbf{Inductive Step:} Assume $a_n \geq a_{n+1}\ \forall\ n \in \N$.
+			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq a_{n+2}\ \forall\ n \in \N$. So,
+			\begin{align*}
+				a_{n+2} &= \sqrt{4+a_{n+1}} &\text{by the definition of the sequence} \\
+				&\leq \sqrt{4+a_n} &\text{by the inductive hypothesis} \\
+				&=a_{n+1}
+			\end{align*}
+			Thus we have that $a_{n+1} \geq a_{n+2}\ \forall\ n \in \N$.
+		\end{proof}
+	Since $(a_n)$ is both bounded and monotone decreasing, by the \textit{Monotone Convergence Theorem}, we have that $(a_n)$ converges. Also by the \textit{Monotone Sequence Property}, we have that $(a_n)$ converges to the following:
+	\begin{align*}
+		\lim (a_n) &= \inf \{a_n: n \in \N\} \\
+		&= \frac{1}{2}+\frac{\sqrt{17}}{2} \approx 2.56155281281
+	\end{align*}
+	\end{enumerate}
+	
+	\item 
+	\begin{enumerate}
+		\item Show $a_n=\frac{3 \cdot 5 \cdot 7 \cdot \dots (2n-1)}{2 \cdot 4 \cdot 6 \dots (2n)}$ converges to $A$ where $0 \leq A < 1/2$.
+		\\\\First, we note the first few terms of this sequence: $\frac{3}{2}, \frac{15}{8}, \frac{105}{48}, \dots$. Now, since we have that 
+		\[0 <\frac{1 \cdot 3 \cdot 5 \cdot 7 \dots (2n-1)}{2 \cdot 4 \cdot 6 \cdot \dots 2n}<\frac{1}{2} \cdot 1 \cdot 1 \dots \cdot 1=\frac{1}{2}\]
+		We have that $a_n$ is bounded. Also, we note that $a_n$ is strictly decreasing since $\frac{a_{n+1}}{a_n}=\frac{2n-1}{2n}<1$ (i.e. $a_{n+1}<a_n$) Thus by the \textit{Monotone Sequence Property}, we have that $a_n$ converges to $A$ where $0 \leq A < \frac{1}{2}$.
+		
+		\item Show $b_n = \frac{2 \cdot 4 \cdot 6 \dots (2n)}{3 \cdot 5 \cdot 7 \dots (2n+1)}$ converges to $B$ where $0 \leq B < 2/3$.
+		\\\\To begin, note that the first few terms of this sequence are $\frac{2}{3}, \frac{8}{15}, \frac{48}{105}, \dots$. Now, since we have that
+		\[0 < \frac{2 \cdot 4 \cdot 6 \cdot \dots (2n)}{3 \cdot 5 \cdot 7 \cdot \dots (2n-1)}<\frac{2}{3}\cdot 1 \cdot 1 \dots \cdot 1 = \frac{2}{3}\]
+		Thus we have that $b_n$ is bounded, and that it's strictly decreasing since $\frac{b_{n+}1}{b_n}=\frac{2n}{2n+1}<1$. That is, $b_{n+1} < b_n$. Hence by the \textit{Monotone Sequence Property}, we have that $b_n$ converges to $B$ where $0 \leq B < \frac{2}{3}$.
+	\end{enumerate}
+
+	\item \textbf{Section 3.4}
+	\begin{enumerate}
+		\item[1)] Give an example of an unbounded sequence that has a convergent subsequence.
+		\\\\Consider the sequence $(a_n)=(1,1,2,1,3,1,4,1, \dots)$ Clearly, this sequence is bounded below by 1 but is unbounded above, and thus this sequence is unbounded. However, consider the subsequence $(a_{2n-1})$. Then the resulting sequence is $(a_{2n-1})=(1,1,1,1,1, \dots)$. Since this is a constant sequence, we have that $(a_{2n-1})$ converges to 1. And hence we have an unbounded sequence that has a convergent subsequence.
+		
+		\item[3)] Let $(f_n)$ be the Fibonacci sequence of Example 3.1.2(d), and let $x_n := f_{n+1}/f_n$. Given that $\lim (x_n) =L$ exists, determine the value of $L$.
+		\\\\We can rewrite $(x_n)$ as follows:
+		\begin{align*}
+			x_n &= \frac{f_{n+1}}{f_n} \\
+			&=\frac{f_n+f_{n-1}}{f_n} \\
+			&= 1+\frac{f_{n-1}}{f_n} \\
+			&= 1+\frac{\frac{1}{f_n}}{f_{n-1}} \\
+			&= 1+\frac{1}{x_{n-1}}
+		\end{align*}
+		Since we're given that $L=\lim (x_n)$ exists and since we just showed that it's equal to $\lim (x_{n-1})$, we get the following:
+		\begin{align*}
+			x_n &= \left. 1+\frac{1}{x_{n-1}}\ \ \ \ \ \right| \lim \\
+			\lim (x_n) &= 1+\frac{1}{\lim(x_{n-1})} \\
+			L &= \left. 1+\frac{1}{L}\ \ \ \ \ \right| \cdot L \\
+			L^2 &= L + 1 \\
+			L^2-L-1 &= 0 \\
+			L_{1,2} &= \frac{1 \pm \sqrt{1-4 \cdot 1 \cdot (-1)}}{2} \\
+			L_1 &= \frac{1-\sqrt{5}}{2} <0 \\
+			L_2 &= \frac{1+\sqrt{5}}{2}>0
+		\end{align*}
+		Now, since $f_n >0 \Rightarrow x_n >0 \Rightarrow L>0$, we can infer that the proper limit is
+		\[L=\frac{1+\sqrt{5}}{2}\]
+		\\
+		
+		\item[4a)] Show that the sequence $(1-(-1)^n+1/n)$ converges.
+		\\\\ Let $(x_n):=(1-(-1)^n+1/n)$. Let $(z_n)=(x_{2n})$, and $(w_n)=(x_{2n-1})$ be subsequence of $(x_n)$. Then $(z_n)$ is the subsequence of all terms of $(x_n)$ such that $n$ is even, and $(w_n)$ is the subsequence of all terms of $(x_n)$ such that $n$ is odd.
+		\\\\These subsequences yield the following:
+		\[z_n = x_{2n} = 1-(-1)^{2n}+\frac{1}{2n}=1-1+\frac{1}{2n}=\frac{1}{2n}\]
+		\[w_n=x_{2n-1}=1-(-1)^{2n-1}+\frac{1}{2n-1}=1+1+\frac{1}{2n-1}=2+\frac{1}{2n-1}\]
+		Now, if we take the limit of each sequence as $n \rightarrow \infty$ yields
+		\[\lim_{n \to \infty} (z_n) = 0 \neq 2 = \lim_{n \to \infty} (w_n)\]
+		Recall Theorem 3.4.5 \textit{Divergence Criteria}:
+		\begin{theorem*}
+			If a sequence $X=(x_n)$ of real numbers has either of the following properties, then $X$ is divergent.
+			\begin{enumerate}
+				\item $X$ has two convergent subsequences $X'=(x_{n_k})$ and $X''=(x_{r_k})$ whose limits are not equal.
+				
+				\item $X$ is unbounded
+			\end{enumerate}
+		\end{theorem*}
+		Thus by the \textit{Divergence Criteria}, we have that since $(z_n)$ and $(w_n)$ satisfy the first property of the \textit{Divergence Criteria}, we can conclude that the sequence $(x_n)$ is divergent. \\
+		
+		\item[16)] Give an example to show that Theorem 3.4.9 fails if the hypothesis that $X$ is a bounded sequences is dropped.
+		\\\\Recall \textit{Theorem 3.4.9}:
+		\begin{theorem*}
+			Let $X=(x_n)$ be a bounded sequence of real numbers and let $x \in \R$ have the property that every convergent subsequence of $X$ converges to $x$. Then the sequence $X$ converges to $x$.
+		\end{theorem*}
+		Consider the sequence $a_n=(0,-1,0,-2,0,-3,0,-4, \dots)$. Note that the subsequence $a_{2n-1}=(0,0,0,0,0,\dots)$. Thus, $\lim (a_{2n-1}=0)$. However, since $(a_n)$ is not bounded, we have also that $\lim (a_n) \neq 0$, since $(a_n)$ is divergent. It is only bounded above by $0$, but it is not bounded below.
+		
+		\item[18)] Show that if $(x_n)$ is a bounded sequence, then $(x_n)$ converges if and only if $\lim \sup (x_n) = \lim \inf (x_n)$.
+		\begin{proof}
+			Let $(x_n)$ be a bounded sequence. We want to show that $(x_n)$ converges if and only if $\lim \sup (x_n) = \lim \inf (x_n)$.
+			\\\\$(\Rightarrow)$ Suppose that $(x_n)$ is a bounded sequence, and suppose that $(x_n)$ converges. We want to show that $\lim \sup (x_n)=\lim \inf (x_n)$.
+			\\\\Recall \textit{Theorem 3.4.2}:
+			\begin{theorem*}
+				If a sequence $X=(x_n)$ of real numbers converges to a real number $x$, then any subsequence $X'=(x_{n_k})$ of $X$ also converges to $x$.
+			\end{theorem*}
+			By \textit{Theorem 3.4.2}, we have that $(x_n)$ has one and only one limit, $x$. Thus we have that $\lim \sup (x_n)=\lim \inf (x_n)$.
+			\\\\$(\Leftarrow)$ Conversely, suppose that $\lim \sup (a_n)=\lim \inf (a_n)$.
+			Recall the definitions of the supremum and infimum for some nonempty subset $S$ of the real numbers:
+			\[\sup(S)=u \Leftrightarrow\ i)\ \ \forall\ s \in S,\ u \geq s,\ \land\ \ ii)\ \forall\ \varepsilon >0,\ \exists s_\varepsilon \in S \st u-\varepsilon<s_\varepsilon\]
+			and
+			\[\inf (S)=w \Leftrightarrow\ \ i)\ \forall\ s \in S,\ w \leq s,\ \land\ \ ii)\ \forall\ \varepsilon>0,\ \exists\ s_\varepsilon \in S \st s_\varepsilon<w+\varepsilon\]
+			Also, recall the definition of the limit of a sequence for some sequence $(a_n)$:
+			\[\lim (a_n)=A \implies\ \forall\ \varepsilon>0,\ \exists\ K(\varepsilon) \in \N \st |a_n-A|<\varepsilon,\ \forall\ n \geq K(\varepsilon)\]
+			So, if we let $\lim \sup x_n=a$, then we know that there exists a natural number $K(\varepsilon_1)$ such that $x_n<a+\varepsilon,\ \forall\ n \geq K(\varepsilon_1)$. Also, for $\lim \inf (x_n)=a$ yields that $\exists\ K(\varepsilon_2) \in \N \st x_n>a-\varepsilon\ \forall\ n \geq K(\varepsilon_2)$. Now, let $K(\varepsilon)=\max \{K(\varepsilon_1), K(\varepsilon_2)\}$. Then $a-\varepsilon<x_n<a+\varepsilon\ \forall\ n \geq K(\varepsilon)\ \Rightarrow\ |x_n-a|<\varepsilon\ \forall\ n \geq K(\varepsilon)$. Thus, by definition we have that $\lim x_n=a$.
+			$\therefore$ we have that $x_n$ is convergent.
+		\end{proof}
+		
+		\item[19)] Show that if $(x_n)$ and $(y_n)$ are bounded sequences, then
+		\[\lim \sup (x_n + y_n) \leq \lim \sup (x_n) + \lim \sup (y_n).\]
+		Give an example in which the two sides are not equal.
+		\begin{proof}
+			We first note that since $(x_n)$ and $(y_n)$ are bounded sequences of real numbers, we have that $\{x_n+y_n\}$ is also bounded. Let $\lim \sup x_n=a_1, \lim \sup (y_n)=a_2$, and $\lim \sup (x_n+y_n)=p$. Let $\varepsilon > 0$. Since $\lim \sup (x_n)=a_1$, we know that there exists $K(\varepsilon_1) \in \N \st x_n<a_1+\frac{\varepsilon}{2},\ \forall\ n \geq K(\varepsilon_1)$. We also know that since $\lim \sup (y_n)=a_2,\ \exists\ K(\varepsilon_2) \in \N \st y_n<a_2+\frac{\varepsilon}{2},\ \forall\ n \geq K(\varepsilon_2)$.
+			\\Let $K(\varepsilon)=\max \{K(\varepsilon_1), K(\varepsilon_2)\}$. Then we have that $x_n<a_1+\frac{\varepsilon}{2},\ y_n<a_2+\frac{\varepsilon}{2}\ \ \forall\ n \geq K(\varepsilon)\ \Rightarrow\ x_n+y_n<a_1+a_2+\varepsilon,\ \forall\ n \geq K(\varepsilon)$. Hence no subsequential limit of $(x_n+y_n)$ can be greater than $a_1+a_2+\varepsilon$.
+			\\\\Thus $p \leq a_1+a_2+\varepsilon$. Now since $\varepsilon>0$ is arbitrary, we have that $p \leq a_1+a_2$.
+			\\So $\lim \sup (x_n+y_n) \leq \lim \sup (x_n)+\lim \sup (y_n)$.
+		\end{proof}
+		Example: Let $x_n=\sin (\frac{n\pi}{2})$, and let $y_n=\cos(\frac{n\pi}{2})$, for $n \in \N$. Then we have that $(x_n)$ is a sequence of 0, 1, and $-1$. Additionally, $x_{4n+1}=\sin(\frac{(4n+1)\pi}{2})=1,\ \forall\ n \in \N$. Thus $\lim (x_{4n+1})=1$. Therefore we have that 1 is a subsequential limit of $(x_n)$. Also, we have that 1 is the greatest subsequential limit since $1>0$ and $1>-1$. So, $\lim \sup (x_n)=1$ and by similar logic we have that $\lim \sup (y_n)=1$, and $\lim \sup (x_n+y_n)=1$ because $(x_n+y_n)$ and $(y_n)$ are also sequence of $-1, 0, 1$, and $\lim (y_{4n})=\lim \cos 2n\pi=1$, $\lim (x_{4n+1}+y_{4n+1})=1$. Then $\lim \sup (x_n+y_n)=1<2=\lim \sup (x_n)+\lim \sup (y_n)$.	
+	\end{enumerate}
+	\item 
+	\begin{enumerate}
+		\item Show that $x_n=e^{\sin (5n)}$ has a convergent subsequence.
+		\\\\Let $y_n=x_{\frac{n \pi}{10n}+\frac{2 \pi n}{5}}$. 
+		\\\\Then we have that the first 5 terms of is subsequence of $(x_n)$ are $e^{\sin(\frac{5\pi}{2})}$, $e^{\sin(\frac{9\pi}{2})}$, $e^{\sin(\frac{13\pi}{2})}$, $e^{\sin(\frac{17\pi}{2})}$, $e^{\sin(\frac{21\pi}{2})}$, $\dots = e^1, e^1, e^1, e^1, e^1, \dots = e,e,e,e,e,\dots$. Thus we have that the subsequence $(y_n)$ converges to $e$. \\
+		
+		\item Give an example of a bounded sequence with three subsequences converging to three different numbers.
+		\\\\Let $a_n=(n \mod 3 + 1)$ be a bounded sequence. We have that $(a_n)$ is bounded above by $\frac{10}{3}$ and is bounded below by 2. The first five terms of this sequence are $\frac{5}{2}$, $\frac{10}{3}$, 2, $\frac{5}{2}$, $\frac{10}{3}$, $\dots$. Now, let $x_n=a_{3n+1}$, $y_n=a_{3n+2}$, and $z_n=a_{3n+3}$. Thus for each of the sequences, we have the following:
+		\[x_n=(\frac{5}{2}, \frac{5}{2}, \frac{5}{2}, \frac{5}{2}, \frac{5}{2}, \dots)\]
+		\[y_n=(\frac{10}{3}, \frac{10}{3}, \frac{10}{3}, \frac{10}{3}, \frac{10}{3}, \dots)\]
+		\[z_n=(2,2,2,2,2,\dots)\]
+		By this, we can conclude that $(x_n)$ converges to $\frac{5}{2}$, $(y_n)$ converges to $\frac{10}{2}$, and that $(z_n)$ converges to $2$. Hence we have that there exist three different subsequences that converge to three different numbers. \\
+		
+		\item Give an example of a sequence $x_n$ with $\lim \sup x_n = 5$ and $\lim \inf x_n = -3$.
+		\\\\Consider the sequence $a_n=(-3,5,-3,5,-3,5,-3,5,\dots)$. For the subsequences $b_n=a_{2n-1}=(-3,-3,-3,-3,-3,\dots)$, and $c_n=a_{2n}=(5,5,5,5,5,\dots)$. Then we have the following:
+		\begin{align*}
+			\inf (a_n)=-3\ \ \ \ \ \ &\sup (a_n)=5 &\lim \inf (a_n)=-3\ \ \ \ \ \ &\lim \sup (a_n)=5 \\
+			\inf (b_n)=-3\ \ \ \ \ \ &\sup (b_n)=-3 &\lim \inf (b_n)=-3\ \ \ \ \ \ &\lim \sup (b_n)=-3 \\
+			\inf (c_n)=5\ \ \ \ \ \ &\sup (c_n)=5 &\lim \inf (c_n)=5\ \ \ \ \ \ &\lim \sup (c_n)=5
+		\end{align*}
+		
+		\item Let $\lim \sup x_n = 2$. True or False: if $n$ is sufficiently large, then $x_n > 1.99$.
+		\\\\This statement is true. Let $(x_{n_k})$ be a subsequence of $(x_n)$ such that $\lim (x_{n_k})=2$. Then we have that if $(x_{n_k})$ decreases to 2, then any element of $(x_{n_k})$ is going to be greater than 1.99. If $(x_{n_k})$ is a constant sequence, then the same is also true. Lastly, if $(x_{n_k})$ is increasing to 2, then we have that elements of $(x_{n_k})$ must have an arbitrary distance $\varepsilon$ between the elements themselves and the limit of 2. Thus, we have that $\forall\ \varepsilon>0,\ \exists\ K(\varepsilon) \in \N \st |x_{n_k}-2|<\varepsilon,\ \forall\ n_k \geq K(\varepsilon)$, by the definition of the limit of a sequence. 
+		
+		\item Compute the infimum, supremum, limit infimum, and limit supremum for $a_n = 3 - (-1)^n - (-1)^n/n$. 
+		\[\inf (a_n)=1.5\]
+		\[\sup (a_n)=5\]
+		\[\lim \inf (a_n)=2\]
+		\[\lim \sup (a_n)=4\]
+	\end{enumerate}
+
+	\item Prove or justify, if true. Provide a counterexample, if false.
+	\begin{enumerate}
+		\item If $a_n$ and $b_n$ are strictly increasing, then $a_n + b_n$ is strictly increasing.
+		\begin{proof}
+			Since $(a_n)$ and $(b_n)$ are strictly increasing, we have the following:
+			\[a_1<a_2<a_3<\dots a_n\]
+			and
+			\[b_1<b_2<b_3<\dots <b_n\]
+			Thus, the sum of the sequences $(a_n+b_n)$ is
+			\[a_1+b_1<a_2+b_2<a_3+b_3< \dots < a_n+b_n\]
+		\end{proof}
+		
+		\item If $a_n$ and $b_n$ are strictly increasing, then $a_n \cdot b_n$ is strictly increasing.
+		\\\\Let $(a_n)=\frac{-1}{n}$ and let $(b_n)=n$. Then we have the following:
+		\[a_n=-1,\frac{-1}{2},\frac{-1}{3},\frac{-1}{4}, \frac{-1}{5}, \dots \]
+		\[b_n=1,2,3,4,5,\dots \]
+		However, since the product of these two strictly increasing sequences is 
+		\[a_n \cdot b_n = -1,-1,-1,-1,-1, \dots \]
+		we have that the product is not strictly increasing and thus this statement is false.
+		
+		\item If $a_n$ and $b_n$ are monotonic, then $a_n + b_n$ is monotonic.
+		\\\\This is a false statement. Consider the following monotonic sequences:
+		\[a_n=(1,2,2,3,3,\dots)\]
+		\[b_n=(-1,-1,-2,-2,-3, \dots)\]
+		Their sum is the sequence $(a_n+b_n)=(0,1,0,1,0,\dots)$. This sequence is not monotonic since it oscillates between 0 and 1. 
+		
+		\item If $a_n$ and $b_n$ are monotonic, then $a_n \cdot b_n$ is monotonic.
+		\\\\This statement is false. Consider the following monotonic sequences:
+		\[a_n=(1,1,2, \dots)\]
+		\[b_n=(1, \frac{1}{2}, \frac{1}{2}, \dots)\]
+		Then we have that the product of these two monotonic sequences is $a_n \cdot b_n=(1,\frac{1}{2},1,\dots)$, which is an oscillating sequence. Thus we have that the product of two monotonic sequences is not monotonic.
+		
+		\item If a monotone sequence is bounded, then it is convergent.
+		\\\\This statement is true. For proof, consult the proof of the \textit{Monotone Convergence Theorem} (Monotone Sequence Property).
+		
+		\item If a bounded sequence is monotone, then it is convergent.
+		\\\\This statement is true. For proof, consult the proof of the \textit{Monotone Convergence Theorem} (Monotone Sequence Property).
+		
+		\item If a convergent sequence is monotone, then it is bounded.
+		\\\\This statement is true. For proof, consult the proof of \textit{Theorem 3.2.2}:
+		\begin{theorem*}
+			A convergent sequence of real numbers is bounded.
+		\end{theorem*}
+		
+		\item If a convergent sequence is bounded, then it is monotone.
+		\\\\This statement is false. Consider the sequence generated by $a_n=(-1)^n\frac{1}{n}=(-1,\frac{1}{2},\frac{-1}{3},\frac{1}{4},\frac{-1}{5}, j\dots)$. This sequence converges to 0, however since it does oscillate as it converges, we have that $a_n$ is not monotone, yet it is bounded.
+	\end{enumerate}
+	\end{enumerate}
+\end{document}

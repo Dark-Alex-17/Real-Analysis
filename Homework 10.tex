@@ -1,0 +1,872 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{definition*}{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis Homework 10}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 5.4 Questions					%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item \textbf{Section 5.4}
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 5.4 #7							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[7.] If $f(x):=x$ and $g(x):=\sin x$, show that both $f$ and $g$ are uniformly continuous on $\R$, but that their product $fg$ is not uniformly continuous on $\R$.
+			
+			\begin{proof}
+				We want to show that $f(x):=x$ is uniformly continuous on $\R$.\\
+				
+				In the interest of being explicit, recall the definitions of continuity and uniform continuity, respectively, and note their differences if $f:A \subseteq \R \to \R$:\\\\
+				\textit{Continuity:}
+				\[\forall\ x \in A\ \forall\ \varepsilon>0\ \exists\ \delta > 0 \st \forall\ y \in A;\ |x-y|<\delta \implies |f(x)-f(y)|<\varepsilon\]
+				\textit{Uniform Continuity:}
+				\[\forall\ \varepsilon > 0\ \exists\ \delta >0 \st \forall\ x,y \in A;\  |x-y|<\delta \implies |f(x)-f(y)| < \varepsilon\]
+				We note that the difference is that for continuity, one takes an arbitrary point $x \in A$, and thus there must exist a distance $\delta$, whereas for uniform continuity, we have that a single $\delta$ must work uniformly for all points $x$ and $y$.\\
+				
+				So, $\forall\ x,u \in \R$, we have the following:
+				\[|f(x)-f(u)| = |x-u|<\varepsilon\]
+				So, let $\delta = \varepsilon$.\\
+				
+				$\therefore\ f(x):=x$ is uniformly continuous on $\R$.
+			\end{proof}
+		
+			\begin{proof}
+				Now we want to show that $g(x):= \sin x$ is uniformly continuous.\\
+				
+				So, $\forall\ x,y \in \R$:
+				\begin{align*}
+					|g(x)-g(u)| &= |\sin x - \sin u|\\
+					&=\abs{2 \cos \left(\frac{x+u}{2}\right) \sin \left(\frac{x-u}{2}\right)} \\
+					&=2 \abs{\cos \left(\frac{x+u}{2}\right) \sin \left(\frac{x-u}{2}\right)} \\
+					&\leq 2 \abs{\sin \left(\frac{x-u}{2}\right)} & \because\ |\cos (x)| \leq |x|\ \forall\ x \in \R \\
+					&\leq 2 \abs{\frac{x-u}{2}} \\
+					&= \frac{2}{2} |x-u| \\
+					&= |x-u| \\
+					&< \varepsilon
+				\end{align*}
+				So if we choose $\delta = \varepsilon$, we have that $g(x)$ is uniformly continuous.\\
+			\end{proof}
+			
+			Now, we want to show that $fg$ is not uniformly continuous on $\R$. To do this, recall the \textit{Nonuniform Continuity Criteria}:
+			\begin{theorem*}[\textbf{Nonuniform Continuity Criteria}]
+				Let $A \subseteq \R$ and let $f:A \rightarrow \R$. Then the following statements are equivalent:
+				\begin{enumerate}
+					\item $f$ is not uniformly continuous on $A$.
+					
+					\item There exists an $\varepsilon_0 > 0$ such that for every $\delta > 0$ there are points $x_\delta, u_\delta$ in $A$ such that $|x_\delta - u_\delta|<\delta$ and $|f(x_\delta) - f(u_\delta)| \geq \varepsilon_0$.
+					
+					\item There exists an $\varepsilon_0 > 0$ and two sequences $(x_n)$ and $(u_n)$ in $A$ such that $\lim (x_n - u_n)=0$ and $|f(x_n)-f(u_n)|\geq \varepsilon_0=1$ for all $n \in \N$.
+				\end{enumerate}
+			\end{theorem*}
+			So, let $(x_n), (u_n) \subseteq \R$ be given by $x_n:=2n\pi$, and $u_n:=2n\pi + \frac{1}{n}$ for $n \in \N$. Then we have that 
+			\[(x_n-u_n)=2n\pi - (2n\pi + \frac{1}{n})=-\frac{1}{n}\]
+			and thus
+			\[\lim\limits_{n \to \infty} (x_n-u_n)=\lim\limits_{n \to \infty} -\frac{1}{n} = 0\]
+			Now we have the following:
+			\begin{align*}
+				|(fg)(x_n) - (fg)(u_n)| &= \abs{2n\pi \sin (2n\pi) - \left(2n\pi+\frac{1}{n}\right)\sin \left(2n\pi + \frac{1}{n}\right)} \\
+				&=\abs{2n\pi \cdot 0 - \left(2n\pi + \frac{1}{n}\right) \sin \left(2n\pi + \frac{1}{n}\right)} \\
+				&=\abs{-\left(2n\pi + \frac{1}{n}\right) \sin \left(2n\pi + \frac{1}{n}\right)} \\
+				&= \left(2n\pi + \frac{1}{n}\right) \sin \left(2n\pi + \frac{1}{n}\right) \\
+				&= \left(2n\pi + \frac{1}{n}\right) \sin \left(\frac{1}{n}\right) & \because\ \sin(2n\pi) = 0\ \forall\ n \in \N \\
+				&= 2n\pi \sin \left(\frac{1}{n}\right) + \left(\frac{1}{n}\right) \sin \left(\frac{1}{n}\right)
+			\end{align*}
+			Note that $\lim\limits_{n \to \infty} \frac{1}{n}=0$ and $\left(\sin \left(\frac{1}{n}\right)\right)$ is a bounded sequence in $\R$. Then
+			\[\lim\limits_{n \to \infty} \frac{1}{n} \sin \frac{1}{n} = 0\]
+			and
+			\[\lim\limits_{x \to 0} \frac{\sin (x)}{x}=1\ \forall\ x \in \R\]
+			This yields
+			\[\lim\limits_{n \to \infty} 2n\pi \sin \left(\frac{1}{n}\right) = 2\pi \lim\limits_{\frac{1}{n} \to 0} \frac{\sin \left(\frac{1}{n}\right)}{\frac{1}{n}}=2\pi\]
+			Thus $\lim\limits_{n \to \infty} ((fg)(x_n) - (fg)(u_n)) = 2\pi$.\\
+			
+			Let $\varepsilon=\pi$. Then $\exists\ k \in \N \st \forall\ n \geq k$:
+			\begin{align*}
+				2\pi - \varepsilon < (fg)(x_n)-(fg)(u_n) &< 2\pi + \varepsilon \\
+				(fg)(x_n)-(fg)(u_n) &>\pi \\
+				|(fg)(x_n) - (fg)(u_n)| &> \pi \\
+				|(fg)(x_{n+k}) -(fg)(u_{n+k})| &> \pi
+			\end{align*}
+			Now, for $\varepsilon_0 = \pi$ and two sequences $(x_{n+k}), (u_{n+k})$, by the \textit{Nonuniform Continuity Criteria}, $(fg)$ is not uniformly continuous on $\R$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 5.4 #10							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[10.] Prove that if $f$ is uniformly continuous on a bounded subset $A$ of $\R$, then $f$ is bounded on $A$.
+			
+			\begin{proof}
+				Let $f$ be uniformly continuous on a bounded subset $A$ of $\R$. We want to show that $f$ is bounded on $A$.\\
+				
+				Since $f$ is uniformly continuous, we know that $\forall\ \varepsilon > 0,\ \exists\ \delta > 0 \st \forall\ x,y \in A;\ |x-y|<\delta \implies |f(x)-f(y)|<\varepsilon$. We must find a constant $M>0 \st |f(x)|\leq M\ \forall\ x \in A$.\\
+				
+				Let $\varepsilon>0$ be given, and let $\delta>0$ also be given.\\
+				
+				Recall the definitions of a cover, open cover, subcover, and compactness:
+				\theoremstyle{definition}
+				\begin{definition*}
+					Let $A$ be a subset of a topological space $X$. Let $\mathscr{U}=\{{U_\alpha}\cup_{\alpha \in J} U_\alpha\}$ be a collection of subsets of $X$. We say that $\mathscr{U}$ is a \textbf{cover} of $A$ if $A \subseteq \cup_{\alpha \in J} U_\alpha$. $\mathscr{U}$ is called an \textbf{open cover} of $A$ if $\mathscr{U}$ is a cover of $A$ and each element of $\mathscr{U}$ is open. If $\mathscr{U}$ is a cover of $A$, then any subset of $\mathscr{U}$ that is also a cover of $A$ is called a \textbf{subcover} of $A$. A space $X$ is \textbf{compact} if every open cover of $X$ has a finite subcover.
+				\end{definition*}
+				Also recall the following theorem:
+				\begin{theorem*}
+					A compact subset of a metric space is bounded.
+				\end{theorem*}
+				Since $A$ is a subset of $\R$ under the usual metric, defined $d(x,y):=|x-y|$, we have that $A$ is compact. Thus by the definition of compactness, we know that every open cover of $A$ has a finite subcover. In particular, we know that there are finitely many open balls of radius $\delta$. Thus
+				\[\exists n \in \N \st A \subseteq \cup_{i=0}^n B_d(x_i, \delta),\ x_i \in A\]
+				Recall the definition of an open ball:
+				\theoremstyle{definition}
+				\begin{definition*}
+					Let $(M,d)$ be a metric space. Given $x \in M$ and a positive real number $\varepsilon$, the \textbf{open ball} centered at $x$ with radius $\varepsilon$ is
+					\[B_d(x,\varepsilon) := \{y \in M\ |\ d(x,y)<\varepsilon\}\]
+				\end{definition*}
+				Now, define $m$ and $M$ as follows:
+				\[m:= \min\limits_{1 \leq i \leq n} f(x_i),\ M:=\max\limits_{1 \leq i \leq n} f(x_i)\]
+				Let $x \in A$ be arbitrary. Since $A$ is covered with balls $B_d(x_i,\delta)$, we know that $\exists\ x_j \in A \st x \in B_d(x_j, \delta)$.
+				So,
+				\[x \in B_d(x_j, \delta) \implies |x-x_j|<\delta \implies |f(x)-f(x_j)|<\varepsilon \iff -\varepsilon < f(x)-f(x_j)<\varepsilon\]
+				By the definition of $M$, we know that $f(x_j) \leq M$, and thus $f(x)\leq M+\varepsilon$.\\
+				
+				By the definition of $m$, we know that $f(x_j) \geq m$, and thus $f(x) \geq m-\varepsilon$.\\
+				
+				$\therefore\ \forall\ x \in A,$
+				\[f(x) \in [m-\varepsilon, M+\varepsilon]\]
+				$\therefore\ f$ is bounded on $A$.\\
+			\end{proof}
+		
+			\textbf{Alternative Proof:}
+			\begin{proof}
+				By way of contradiction, assume that $f(A)$ is unbounded. Then we know that there exists a sequence $x_n \in A \st |f(x_n)| \geq n\ \forall\ n$.\\
+				
+				Since $(x_n)$ is bounded, we know that there exists a convergent subsequence $x_{n_k} \in A \st x_{n_k} \to x$. Now, since $f$ is uniformly continuous, we know that $f(x_{n_k}) \to f(x)$, which contradicts the fact that $f(A)$ is unbounded. Thus we have that if $f$ is uniformly continuous on $A$, then $f(A)$ is bounded as well.
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 5.4 #14							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[14.] A function $f:\R \to \R$ is said to be \textbf{periodic} on $\R$ if there exists a number $p > 0$ such that $f(x+p)=f(x)$ for all $x \in \R$. Prove that a continuous periodic function on $\R$ is bounded and uniformly continuous on $\R$.\\
+			
+			\begin{proof}
+				Let $f$ be a continuous periodic function on $\R$. Then we know that $\exists\ p>0 \st f(x+p)=f(x)\ \forall\ x \in \R$.
+				
+				Recall \textit{Theorem 5.3.9}:
+				\begin{theorem*}
+					Let $I$ be a closed bounded interval and let $f:I \rightarrow \R$ be continuous on $I$. Then the set $f(I):= \{f(x): x \in I\}$ is a closed bounded interval.
+				\end{theorem*}
+				Also recall the \textit{Uniform Continuity Theorem}:
+				\begin{theorem*}[\textbf{Uniform Continuity Theorem}]
+					Let $I$ be a closed bounded interval and let $f:I \rightarrow \R$ be continuous on $I$. Then $f$ is uniformly continuous on $I$.
+				\end{theorem*}
+				
+				We must first show that $f$ is bounded. Let $f:[0,p] \to \R$ be given by $f([0,p]):= f([np,(n+1)p])\ \forall\ n \in \Z$.\\
+				
+				Since $[0,p]$ is a closed bounded interval, we know that by \textit{Theorem 5.3.9}, $f([0,p])$ is also a closed bounded interval. Thus we have that $f$ is bounded.\\
+				
+				Now we must show that $f$ is uniformly continuous on $\R$. So, by the \textit{Uniform Continuity Theorem}, since $f$ is continuous on $[0,p]$ and since $[0,p]$ is a closed bounded interval, we have that $f$ is uniformly continuous on $[0,p]$. Since $f([0,p])=f([np,(n+1)p])$, we have that $f$ is uniformly continuous on $[np, (n+1)p]$ and thus we have that $f$ is uniformly continuous on $\R$.\\
+			\end{proof}			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 5.4 #15							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[15.] Let $f$ and $g$ be Lipschitz functions on $A$.
+			\begin{enumerate}
+				\item[(a)] Show that the sum $f+g$ is also a Lipschitz function on $A$.
+				
+				\begin{proof}
+					We want to show that $f+g$ is also a Lipschitz function on $A$.\\
+					
+					Recall the definition of a Lipschitz function:
+					\theoremstyle{definition}
+					\begin{definition*}
+						Let $A \subseteq \R$ and let $f:A \rightarrow \R$. If there exists a constant $K > 0$ such that 
+						\[|f(x)-f(u)| \leq K|x-u|\]
+						for all $x,u \in A$, then $f$ is said to be a \textbf{Lipschitz function} (or to satisfy a \textbf{Lipschitz condition}) on $A$.
+					\end{definition*}
+					Since $f$ and $g$ are Lipschitz functions on $A$, we know that $\forall\ x,y \in A$:
+					\[\exists\ M_1 > 0 \st |f(x)-f(y)|<M_1|x-y|\]
+					\[\exists\ M_2 > 0 \st |g(x)-g(y)|<M_2|x-y|\]
+					In order to show that $f+g$ is also a Lipschitz function, we have the following:
+					\begin{align*}
+						|(f+g)(x)-(f+g)(y)| &= |f(x)+g(x)-(f(y)+g(y))| \\
+						&=|f(x)+g(x)-f(y)-g(y)| \\
+						&=|f(x)-f(y)+g(x)-g(y)| \\
+						&\leq |f(x)-f(y)| + |g(x)-g(y)| \\
+						&\leq M_1|x-y| + M_2|x-y| \\
+						&= (M_1+M_2)|x-y|
+					\end{align*}
+					Thus, we have that $|(f+g)(x)-(f+g)(y)| \leq (M_1+M_2)|x-y|$. There by the definition of a Lipschitz function, we have that if $f$ and $g$ are Lipschitz, then $f+g$ is also Lipschitz.\\
+				\end{proof}
+				
+				\item[(b)] Show that if $f$ and $g$ are bounded on $A$, then the product $fg$ is a Lipschitz function on $A$.
+				
+				\begin{proof}
+					Let $f$ and $g$ be bounded on $A$. We want to show that the product $fg$ is a Lipschitz function on $A$.\\
+					
+					Recall the definition of a bounded function:
+					\theoremstyle{definition}
+					\begin{definition*}
+						A function $f:A \rightarrow \R$ is said to be \textbf{bounded on} $A$ if there exists a constant $M > 0$ such that $|f(x)| \leq M$ for all $x \in A$.
+					\end{definition*}
+					So since $f$ and $g$ are bounded on $A$, we know
+					\[\exists\ M_1 > 0 \st |f(x)| \leq M_1\ \forall\ x \in A\]
+					\[\exists\ M_2 > 0 \st |g(x)| \leq M_2\ \forall\ x \in A\]
+					And since $f(x)$ and $g(x)$ are Lipschitz, we know
+					\[\exists\ K_1 \st |f(x)-f(u)|\leq K_1|x-u|\]
+					\[\exists\ K_2 \st |g(x)-g(u) \leq K_2|x-u|\]
+					We must show that $fg$ is Lipschitz. Let $x,y \in A$. Then
+					\begin{align*}
+						|(fg)(x)-(fg)(y)| &= |f(x)g(x)-f(y)g(y)| \\
+						&= |f(x)g(x)-f(x)g(y)+f(x)g(y)-f(y)g(y)| \\
+						&= |f(x)(g(x)-g(y))+ g(y)(f(x)-f(y))| \\
+						& \leq |f(x)(g(x)-g(y))| + |g(y)(f(x)-f(y))| \\
+						& = |f(x)| \cdot |g(x)-g(y)| + |g(y)| \cdot |f(x)-f(y)| \\
+						&< M_1 \cdot |g(x)-g(y)| + M_2 \cdot |f(x)-f(y)| \\
+						&< M_1K_1|x-y| + M_2K_2|x-y| \\
+						&= (M_1K_2+M_2K_1)|x-y|
+					\end{align*}
+					Thus we have that $|(fg)(x)-(fg)(y)|\leq (M_1K_1+M_2K_2)|x-y|\ \forall\ x,y \in A$. Therefore by the definition of a Lipschitz function, we have that $fg$ is Lipschitz.\\
+				\end{proof}
+				
+				\item[(c)] Give an example of a Lipschitz function $f$ on $[0, \infty)$ such that its square $f^2$ is \textit{not} a Lipschitz function.\\
+				
+				Consider the function $f(x):=x$, where $x \geq 0$. Then we have that $\forall\ x,y \geq 0$:
+				\[|f(x)-f(y)|=|x-y| \leq 2|x-y|\]
+				Thus we have that $f(x)$ is Lipschitz on the interval $[0, \infty)$. However, note that $f^2$ is not Lipschitz since $f^2$ is unbounded. Thus $f^2$ cannot be a Lipschitz function.
+			\end{enumerate}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%					Section 6.1 Questions						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item \textbf{Section 6.1}
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 6.1 #1ac						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[1.] Use the definition to find the derivative of each of the following functions:
+			\begin{enumerate}
+				\item[(a)] $f(x):=x^3$ for $x \in \R$.\\
+				
+				Recall the definition of the derivative:
+				\theoremstyle{definition}
+				\begin{definition*}
+					Let $I \subseteq \R$ be an interval, let $f:I \rightarrow \R$, and let $ c \in I$. We say that a real number $L$ is the \textbf{derivative of $f$ at $c$}  if given any $\varepsilon > 0$ there exists $\delta (\varepsilon) > 0$ such that if $x \in I$ satisfies $0 < |x-c|<\delta (\varepsilon)$, then
+					\[\abs{\frac{f(x)-f(c)}{x-c}-L}<\varepsilon.\]
+					In this case we say that $f$ is \textbf{differentiable} at $c$, and we write $f'(c)$ for $L$. In other words, the derivative of $f$ at $c$ is given by the limit
+					\[f'(c) = \lim_{x\to c} \frac{f(x)-f(c)}{x-c}\]
+					provided this limit exists. (We allow the possibility that $c$ may be the endpoint of the interval.)
+				\end{definition*}
+				Let $h:=x-c$. Then $x=c+h$:
+				\begin{align*}
+					\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{(x+h)^3-x^3}{h} \\
+					&= \lim\limits_{h \to 0} \frac{h^3+3h^2x+3hx^2}{h} \\
+					&=\lim\limits_{h \to 0} \frac{h(h^2+3hx+3x^2)}{h} \\
+					&= \lim\limits_{h \to 0} (h^2+3hx+3x^2) \\
+					&= 0^2 + 3 \cdot 0 \cdot x + 3x^2 \\
+					&= 0+0+3x^2 \\
+					&= 3x^2
+				\end{align*}
+				Thus $f'(x) = 3x^2$.\\
+				\item[(c)] $h(x):=\sqrt{x}$ for $x>0$.\\
+				
+				\begin{align*}
+					\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{\sqrt{x+h}-\sqrt{x}}{h} \\
+					&= \lim\limits_{h \to 0} \frac{\sqrt{x+h}-\sqrt{x}}{h} \cdot \frac{\sqrt{x+h}+\sqrt{x}}{\sqrt{x+h}+\sqrt{x}} \\
+					&= \lim\limits_{h \to 0} \frac{x+h-x}{h(\sqrt{x+h}+\sqrt{x})} \\
+					&= \lim\limits_{h \to 0} \frac{h}{h(\sqrt{x+h}+\sqrt{x})} \\
+					&= \lim\limits_{h \to 0} \frac{1}{\sqrt{x+h}+\sqrt{x}} \\
+					&= \frac{1}{\sqrt{x+0}+\sqrt{x}} \\
+					&= \frac{1}{\sqrt{x}+\sqrt{x}} \\
+					&= \frac{1}{2\sqrt{x}}
+				\end{align*}
+				Thus $h'(x)=\frac{1}{2\sqrt{x}}$.\\
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 6.1 #2							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[2.] Show that $f(x):=x^{1/3},\ x \in \R$ is not differentiable at $x=0$.\\
+			
+			\begin{proof}
+				We must show that $f(x)$ is not differentiable at $x=0$. By the definition of the derivative, the function $f(x)$ is differentiable at $x=0$ given that the limit exists. So, let's find the derivative at $x=0$:
+				\begin{align*}
+					\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 0} \frac{f(x)-f(0)}{x-0} \\
+					&= \lim\limits_{x \to 0} \frac{x^{\frac{1}{3}}-0^{\frac{1}{3}}}{x} \\
+					&= \lim\limits_{x \to 0} \frac{x^{\frac{1}{3}}}{x} \\
+					&= \lim\limits_{x \to 0} x^{\frac{1}{3}-1} \\
+					&= \lim\limits_{x \to 0} x^{-\frac{2}{3}} \\
+					&= \lim\limits_{x \to 0} \frac{1}{x^{\frac{2}{3}}} \\
+					&= \frac{1}{0^{\frac{2}{3}}} \\
+					&= \frac{1}{0} \\
+					&= \text{undefined}
+				\end{align*}
+				Since the limit is undefined when $x=0$, we have that the limit does not exist at $x=0$, and thus $f(x)$ is not differentiable at $x=0$.\\
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 6.1 #8a							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[8. (a)] Determine where $f:\R \to \R$ given by $f(x):=|x|+|x+1|$ is differentiable and find the derivative.\\
+			
+			We can redefine $f(x)$ as a piecewise function:
+			\[f(x):=\begin{cases}
+				2x+1, & x \geq 0 \\
+				1, & -1 \leq x < 0 \\
+				-2x - 1, & x < -1
+			\end{cases}\]
+			
+			Thus to find where $f(x)$ is differentiable, we will find the derivatives of each of the three functions defined above in the piecewise definition of $f(x)$.\\
+			
+			For $x \geq 0$, we have
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{2(x+h)+1-(2x+1)}{h} \\
+				&=\lim\limits_{h \to 0} \frac{2x+2h-2x}{h} \\
+				&= \lim\limits_{h \to 0} \frac{2h}{h} \\
+				&= \lim\limits_{h \to 0} 2 \\
+				&= 2
+			\end{align*}
+			Thus $f'(x)=2$ when $x \geq 0$.\\
+			
+			For $-1 \leq x < 0$:
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to c} \frac{1-1}{x-c} \\
+				&= \lim\limits_{x \to c} \frac{0}{x-c} \\
+				&= \lim\limits_{x \to c} 0 \\
+				&= 0
+			\end{align*}
+			Thus $f'(x)=0$ when $-1 \leq x < 0$.\\
+			
+			For $x < -1$ we have:
+			\begin{align*}
+				\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h} &= \lim\limits_{h \to 0} \frac{(-2(x+h)-1)-(-2x-1)}{h} \\
+				&= \lim\limits_{h \to 0} \frac{-2x-2h-1+2x+1}{h} \\
+				&= \lim\limits_{h \to 0} \frac{-2h}{h} \\
+				&= \lim\limits_{h \to 0} -2 \\
+				&= -2
+			\end{align*}
+			Thus $f'(x)=-2$ when $x < -1$.\\
+			
+			Now, we must check for differentiability when $x=-1$ and when $x=0$.\\
+			
+			So when $x=-1$:
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to -1^+} \frac{f(x)-f(-1)}{x+1} \\
+				&= \lim\limits_{x \to -1^+} \frac{1-1}{x+1} \\
+				&= \lim\limits_{x \to -1^+} \frac{0}{x+1} \\
+				&= \lim\limits_{x \to -1^+} 0 \\
+				&= 0
+			\end{align*}
+			And
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to -1^-} \frac{f(x)-f(-1)}{x+1} \\
+				&= \lim\limits_{x \to -1^-} \frac{(-2x-1)-(2 \cdot (-1)-1)}{x+1} \\
+				&= \lim\limits_{x \to -1^-} \frac{-2x-1+3}{x+1} \\
+				&= \lim\limits_{x \to -1^-} \frac{-2x+2}{x+1} \\
+				&= -2
+			\end{align*}
+			So we have that $f'(-1)$ does not exist since 
+			\[\lim\limits_{x \to -1^-} \frac{f(x)-f(-1)}{x+1}=0 \neq -2 = \lim\limits_{x \to -1^+} \frac{f(x)-f(-1)}{x+1}\]
+			
+			Now for when $x=0$:
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 0^+} \frac{f(x)-f(0)}{x-0} \\
+				&= \lim\limits_{x \to 0^+} \frac{(2x+1)-(2 \cdot 0 +1)}{x} \\
+				&= \lim\limits_{x \to 0^+} \frac{2x}{x} \\
+				&= \lim\limits_{x \to 0^+} 2 \\
+				&= 2
+			\end{align*}
+			And
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to 0^-} \frac{f(x)-f(0)}{x-0} \\
+				&= \lim\limits_{x \to 0^-} \frac{1-1}{x} \\
+				&= \lim\limits_{x \to 0^-} \frac{0}{x} \\
+				&= \lim\limits_{x \to 0^-} 0 \\
+				&= 0
+			\end{align*}
+			So we have that $f'(0)$ does not exist since
+			\[\lim\limits_{x \to 0^-} \frac{f(x)-f(0)}{x-0} = 0 \neq -2 = \lim\limits_{x \to 0^+} \frac{f(x)-f(0)}{x}\]
+			Thus we have that the function is not differentiable at $x=0$ or at $x=-1$; That is,
+			\[f'(x):=\begin{cases}
+				2, & x < 0 \\
+				0, & -1 < x < 0 \\
+				-2, & x < -1 \\
+				\text{DNE} & x=1 \text{ or } x=0
+			\end{cases}\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 6.1 #9							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[9.] Prove that if $f:\R \to \R$ is an \textbf{even function} [that is, $f(-x)=f(x)$ for all $x \in \R$] and has a derivative at every point, then the derivative $f'$ is an \textbf{odd function} [that is, $f'(-x)=-f'(x)$ for all $x \in \R$]. Also prove that if $g:\R \to \R$ is a differentiable odd function, then $g'$ is an even function.\\
+			
+			\begin{proof}
+				Let $f:\R \to \R$ be defined such that $f(-x)=f(x)\ \forall\ x \in \R$. Then we have
+				\[f'(c) = \lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c}\]
+				\[f'(-c) = \lim\limits_{x \to -c} \frac{f(x)-f(-c)}{x-(-c)}\]
+				Now if we change every $x$ for $-x$, then if $-x \to -c$ then $x \to c$. So
+				\begin{align*}
+					&= \lim\limits_{x \to c} \frac{f(-x)-f(c)}{-x+c} \\
+					&= \lim\limits_{x \to c} \frac{f(x)-f(c)}{-(x-c)} &\because f(-x)=f(x)\  \forall\ x \in \R \\
+					&= -\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} \\
+					&= -f'(c)
+				\end{align*}
+				Thus we have that $f'(-c)=-f'(c)$, an odd function.\\
+				
+				$\therefore$ If $f$ is an even function, then $f'$ is an odd function.
+			\end{proof}
+		
+			\begin{proof}
+				Let $g: \R \to \R$ be defined such that $g(-x)=-g(x)\ \forall\ x \in \R$. Then
+				\[g'(c) = \lim\limits_{x \to c} \frac{g(x)-g(c)}{x-c}\]
+				And
+				\[g'(-c) = \lim\limits_{x \to -c} \frac{g(x)-g(-c)}{x-(-c)}\]
+				Let us change every $x$ for $-x$ if $-x \to -c$ then $x \to c$. So
+				\begin{align*}
+					&=\lim\limits_{x \to c} \frac{g(-x) - (-g(c))}{-x+c} \\
+					&=\lim\limits_{x \to c} \frac{-g(x)+g(c)}{-x+c} &\because g(-x)=-g(x)\ \forall\ x \in \R \\
+					&=\lim\limits_{x \to c} \frac{-(g(x)-g(c))}{-(x-c)} \\
+					&= \lim\limits_{x \to c} \frac{g(x)-g(c)}{x-c} \\
+					&= g'(c)
+				\end{align*}
+				Thus we have that $g'(-c)=g'(c)$, an even function.\\
+				
+				$\therefore$ If $g$ is an odd function, then $g'$ is an even function.
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Section 6.1 #11ac						%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[11.] Assume that there exists a function $L:(0,\infty) \to \R$ such that $L'(x)=1/x$ for $x>0$. Calculate the derivatives of the following functions:
+			\begin{enumerate}
+				\item[(a)] $f(x):=L(2x+3)$ for $x>0$\\
+				
+				Recall the \textit{Chain Rule}:
+				\begin{theorem*}[\textbf{Chain Rule}]
+					Let $I, J$ be intervals in $\R$, let $g:I \rightarrow \R$ and $f:J \rightarrow \R$ be functions such that $f(J) \subseteq I$, and let $c \in J$. If $f$ is differentiable at $c$ and if $g$ is differentiable at $f(c)$, then the composite function $g \circ f$ is differentiable at $c$ and
+					\[(g \circ f)'(c) = g'(f(c)) \cdot f'(c).\]
+				\end{theorem*}
+				So utilizing the \textit{Chain Rule}:
+				\begin{align*}
+					f'(x) &= (L(2x+3))' \\
+					&= \frac{1}{2x+3} \cdot (2x+3)' \\
+					&= \frac{2}{2x+3}
+				\end{align*}
+				So $f'(x) = \frac{2}{2x+3}$.\\
+				
+				\item[(c)] $h(x):=L(ax)$ for $a >0,x>0$\\
+				
+				Once again utilizing the \textit{Chain Rule}:
+				\begin{align*}
+					h'(x) &= (L(ax))' \\
+					&= \frac{1}{ax} \cdot (ax)' \\
+					&= \frac{1}{\cancel{a}x} \cdot \cancel{a} \\
+					&= \frac{1}{x}
+				\end{align*}
+				So $h'(x)=\frac{1}{x}$.\\
+			\end{enumerate}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 3							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (a)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Show that $e^x=2\cos x+1$ for some $x \in [0, \pi]$\\
+			
+			\begin{proof}
+				Let $h(x):=e^x-2\cos(x)-1$. Then we have that $h(0)=2<0$ and $h(\pi)=e^\pi+1>0$. Since $h$ is continuous, by the \textit{Intermediate Value Theorem}, we know that there exists $c \in (0,\pi) \st h(c)=0$. Thus we have that $e^c=2\cos(c)+1$.\\
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (b)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Let $h(x)=x^3+2x+1$. Compute $h(1),\ h'(1)$ and $[h^{-1}]'(1)$.\\
+			
+			\[h(1) = 1^3+2(1)+1 = 1+2+1 = 4\]
+			So $h(1)=4$.\\
+			
+			Now, as for $h'(1)$:
+			\begin{align*}
+				h'(1) &= \lim\limits_{x \to 1} \frac{f(x)-f(1)}{x-1} \\
+				&= \lim\limits_{x \to 1} \frac{x^3+2x+1-4}{x-1} \\
+				&= \lim\limits_{x \to 1} \frac{x^3+2x-3}{x-1} \\
+				&= \lim\limits_{x \to 1} \frac{\cancel{(x-1)}(x^2+x+3)}{\cancel{x-1}} \\
+				&= \lim\limits_{x \to 1} (x^2+x+3) \\
+				&= 1^2+1+3 \\
+				&= 1 +1 +3 \\
+				&= 5
+			\end{align*}
+			So $h'(1)=5$.\\
+			
+			As for $[h^{-1}]'(1)$:\\
+			
+			We first need to find $h^{-1}$. Since $h(1)=4$, we must solve $x^3+2x+1=1$. So
+			\begin{align*}
+				x^3+2x+1 &= 1 \\
+				x^3+2x &= 0 \\
+				x(x^2+1) &= 0 \\
+				x(x+1)(x-1) &= 0
+			\end{align*}
+			Thus $x=0$.\\
+			
+			Since $h'(1)$ exists and since $h'(1) \neq 0$, we have that 
+			\[[h^{-1}]'(1) = \frac{1}{h'(1)} = \frac{1}{5}\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (c)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Show $f(x)=x^2$ for $x \in (-2,1]$ is a Lipschitz function.\\
+			\begin{proof}
+				To show that $f(x)$ is Lipschitz, we have the following:
+				\begin{align*}
+					\abs{\frac{f(x)-f(u)}{x-u}} &= \abs{\frac{x^2-u^2}{x-u}} \\
+					&= \abs{\frac{\cancel{(x-u)}(x+u)}{\cancel{x-u}}} \\
+					&= |(x+u)| \\
+					&\leq 8
+				\end{align*}
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (d)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Suppose that $f:[a,b] \to \R$ and $g:[a,b] \to \R$ are continuous with $f(a) \leq g(a)$ and $f(b) \geq g(b)$. Prove that $f(c)=g(c)$ for some $c \in [a,b]$.\\
+			
+			\begin{proof}
+				Let $f:[a,b] \to \R$ and $g:[a,b] \to \R$ be continuous functions such that $f(a) \leq g(a)$, and $f(b) \geq g(b)$. We want to show that $f(c)=g(c)$ for some $c \in [a,b]$.\\
+				
+				Let $h(x):=f(x)-g(x)$. Since both $f$ and $g$ are continuous, we know that $h$ is also continuous. And since $h$ is continuous, we know that $h(a)<0$, and $h(b)>0$.\\
+				
+				Recall \textit{Bolzano's Intermediate Value Theorem}:
+				\begin{theorem*}[\textbf{Bolzano's Intermediate Value Theorem}]
+					Let $I$ be an interval and let $f:I \rightarrow \R$ be continuous on $I$. If $a,b \in I$ and if $k \in \R$ satisfies $f(a) < k<f(b)$, then there exists a point $c \in I$ between $a$ and $b$ such that $f(c) = k$.
+				\end{theorem*}
+			
+				Thus by \textit{Bolzano's Intermediate Value Theorem}, we have that $\exists\ c \in (a,b) \st h(c)=0$. Thus we have that $h(c)=0=f(c)-g(c) \implies g(c)=f(c)$. Thus $g(c)=f(c)$.\\
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (e)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Prove: If $f$ is uniformly continuous on $(a,b)$, then for any sequence $x_n$ in $(a,b)$ that converges, then the sequence $(f(x_n))$ is Cauchy.\\
+			
+			\begin{proof}
+				Let $f$ be uniformly continuous on $(a,b)$, and let $(x_n)$ be a sequence in $(a,b)$ such that $(x_n)$ converges.\\
+				
+				Recall the \textit{Cauchy Convergence Criterion}:
+				\begin{theorem*}
+					A sequence of real numbers is convergent if and only if it is a Cauchy sequence.
+				\end{theorem*}
+				Since we have that $(x_n)$ is a convergent sequence, we know that $(x_n)$ is a Cauchy sequence by the \textit{Cauchy Convergence Criterion}.\\
+				
+				Also recall \textit{Theorem 5.4.7}:
+				\begin{theorem*}
+					If $f:A \rightarrow \R$ is uniformly continuous on a subset $A$ of $\R$ and if $(x_n)$ is a Cauchy sequence in $A$, then $(f(x_n))$ is a Cauchy sequence in $\R$.
+				\end{theorem*}
+				Since $(x_n)$ is a sequence in $(a,b)$ and since $f$ is uniformly continuous on $(a,b)$, we have that by \textit{Theorem 5.4.7}, the sequence $(f(x_n))$ is Cauchy.\\
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 3 (f)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item Prove: If $f:[a,b] \to [a,b]$ is a contraction, then $f$ has a unique fixed point $c$ satisfying $f(c)=c$ for some $c \in [a,b]$.\\
+			
+			\begin{proof}
+				Since $f$ is a contraction, we know that $f$ is Lipschitz with $k \in (0,1)$. This in turn implies that $f$ is continuous.\\
+				
+				By the \textit{Brower Fixed Point Theorem}, there exists $c \st f(c)=c$. We want to show the uniqueness of this point.\\
+				
+				Assume that there exists $c_1,c_2 \st f(c_1)=c_1$ and $f(c_2)=c_2$, and $c_1 \neq c_2$.\\
+				
+				Assume without loss of generality that $c_1<c_2$.\\
+			
+				Consider the interval $[c_1,c_2]\leq[a,b]$. Since $f$ is a contraction, we have that
+				\[|f(c_1)-f(c_2)|\leq K|c_1-c_2|<|c_1-c_2|\]
+				Thus we have that $|c_1-c_2|\leq|c_1-c_2|$, which is a contradiction. Thus if $f$ is a contraction, then $f$ has a unique fixed point $c$ satisfying $f(c)=c$.\\
+			\end{proof}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%							Question 4							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Prove or justify, if true; Provide a counterexample, if false. For all parts, assume $f$ is a function defined on the given interval or set.
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (a)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is bounded and continuous on $A$, then $f$ is uniformly continuous on $A$.\\
+			
+			This is a false statement. Consider $f:(0,2) \to \R$ given by $f(x):=\frac{1}{x}$. It is clear that $f$ is continuous in $(0,2)$ as it is the quotient of two polynomials and the denominator is never equal to 0. Let $x,u \in (0,2)$. First, suppose $x > \frac{u}{2}$. So,
+			\begin{align*}
+				|f(x)-f(u)| &= \abs{\frac{1}{x}-\frac{1}{u}} \\
+				&= \abs{\frac{x-u}{xu}} \\
+				&= \frac{|x-u|}{xu} &\because\ x > 0,\ u>0,\ \forall\ x,u \in (0,2) \\
+				&< \frac{2|x-u|}{u \cdot u} &\because\ x > \frac{u}{2} \implies \frac{1}{x} < \frac{2}{u} \\
+				&= \frac{2|x-u|}{u^2} \\
+				&= \frac{2}{u^2}|x-u| \\
+				&< \varepsilon
+			\end{align*}
+			So $|x-u| < \frac{u^2\varepsilon}{2}$. Thus, let $\delta=\min\{\frac{u^2\varepsilon}{2},\frac{u}{2}\}$. Hence $f(x)$ is continuous on $(0,2)$.\\
+			
+			Recall that in order for $f(x)$ to be considered uniformly continuous, $\forall\ \delta>0$ must always satisfy $|x-u|<\delta\ \forall\ \varepsilon > 0$. However, if we let $\varepsilon=1$, then we have that $\forall\ \delta>0$:
+			\[x:=\min\{\delta, 1\},\ u:=\frac{x}{2} \implies |x-u|=\frac{x}{2}<\delta\]
+			but
+			\[\abs{\frac{1}{x}-\frac{1}{u}} = \abs{\frac{1}{x}-\frac{2}{x}}=\abs{\frac{1}{x}} \geq 1 = \varepsilon\]
+			Thus $f(x)$ is both bounded and continuous on $A:=(0,2)$, but $f(x)$ is not uniformly continuous.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (b)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is uniformly continuous on $A$, then $f$ is bounded on $A$.\\
+			
+			This is a false statement. Consider $f:\R \to \R$ given by $f(x):=3x+7$. Then if we let $x,u \in \R$:
+			\begin{align*}
+				|3x+7-(3u+7)| &= |3x+7-3u-7| \\
+				&=|3x-3u| \\
+				&= 3|x-u| \\
+				&< \varepsilon
+			\end{align*}
+			So, let $\delta := \frac{\varepsilon}{3}$. Thus we have that $f(x)$ is uniformly continuous. However, since $\R$ is unbounded, we have that $f$ is not bounded on $A:=\R$ since $\nexists\ M>0 \st |f(x)|\leq M\ \forall\ x \in \R$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (c)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is uniformly continuous on $(a,b)$, then $f$ is bounded on $(a,b)$.\\
+			
+			This is a true statement. We prove it by way of contradiction:
+			\begin{proof}
+				Assume that $f$ is uniformly continuous on $(a,b)$, and suppose by way of contradiction that $f$ is not bounded on $(a,b)$. Then we have that $\forall\ n \in \N$, there exists a corresponding $f(x_n) \st |f(x_n)|>n$, where $x_n \in (a,b)$. By the \textit{Bolzano-Weirstrass Theorem}, there exists a convergent subsequence $(x_{n_k}) \subseteq (x_n)$.\\
+				
+				Recall \textit{Lemma 3.5.2}:
+				\begin{lemma*}
+					If $X=(x_n)$ is a convergent sequence of real numbers, then $X$ is a Cauchy sequence.
+				\end{lemma*}
+				Thus by \textit{Lemma 3.5.2}, $(x_{n_k})$ is a Cauchy sequence.\\
+				
+				Since $f$ is uniformly continuous on $(a,b)$, we know that $f(x_{n_k})$ is also Cauchy. However, this is a contradiction since $f(x_{n_k})$ is clearly divergent. Thus, we have that $f$ is bounded on $(a,b)$.\\
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (d)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is bounded on $A$, then $f$ is uniformly continuous on $A$.\\
+			
+			This is a false statement. Consider $f:(0,2) \to \R$ given by $f(x):=\frac{1}{x}$. It is clear that $f$ is continuous in $(0,2)$ as it is the quotient of two polynomials and the denominator is never equal to 0. Let $x,u \in (0,2)$. First, suppose $x > \frac{u}{2}$. So,
+			\begin{align*}
+			|f(x)-f(u)| &= \abs{\frac{1}{x}-\frac{1}{u}} \\
+			&= \abs{\frac{x-u}{xu}} \\
+			&= \frac{|x-u|}{xu} &\because\ x > 0,\ u>0,\ \forall\ x,u \in (0,2) \\
+			&< \frac{2|x-u|}{u \cdot u} &\because\ x > \frac{u}{2} \implies \frac{1}{x} < \frac{2}{u} \\
+			&= \frac{2|x-u|}{u^2} \\
+			&= \frac{2}{u^2}|x-u| \\
+			&< \varepsilon
+			\end{align*}
+			So $|x-u| < \frac{u^2\varepsilon}{2}$. Thus, let $\delta=\min\{\frac{u^2\varepsilon}{2},\frac{u}{2}\}$. Hence $f(x)$ is continuous on $(0,2)$.\\
+			
+			Recall that in order for $f(x)$ to be considered uniformly continuous, $\forall\ \delta>0$ must always satisfy $|x-u|<\delta\ \forall\ \varepsilon > 0$. However, if we let $\varepsilon=1$, then we have that $\forall\ \delta>0$:
+			\[x:=\min\{\delta, 1\},\ u:=\frac{x}{2} \implies |x-u|=\frac{x}{2}<\delta\]
+			but
+			\[\abs{\frac{1}{x}-\frac{1}{u}} = \abs{\frac{1}{x}-\frac{2}{x}}=\abs{\frac{1}{x}} \geq 1 = \varepsilon\]
+			Thus $f(x)$ is bounded on $A:=(0,2)$, but $f(x)$ is not uniformly continuous on $A$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (e)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item The derivative of $f$ at $x=c$ is defined by $f'(c)=\lim\limits_{x \to c}\frac{f(x)-f(c)}{x-c}$ provided the limits exists.\\
+			
+			This is true since this is the definition of the derivative.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (f)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is continuous at $c$, then $f$ is differentiable at $c$.\\
+			
+			This is a false statement. Consider $f:\R \to \R$ given by 
+			\[f(x):=\begin{cases}
+				\frac{1}{q} & x=\frac{p}{q},\ x \in \Q,\ p \in \Z,\ q \in \N \st \gcd (p,q)=1 \\
+				0 & x \in \R \setminus \Q
+			\end{cases}\]
+			This is Thomae's function, which we know is continuous in the irrationals, and discontinuous in the rationals. So, we know that $f(c)$ is continuous at $c=\sqrt{2}$, but notice that $f$ is not differentiable at $c=\sqrt{2}$. In fact, $f$ is not differentiable for any values of $c$. We know that it's not differentiable when $x \in \Q$ since $f$ is not continuous for any value $x \in \Q$. As for our particular case where $c=\sqrt{2}$:
+			\begin{align*}
+				\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} &= \lim\limits_{x \to \sqrt{2}} \frac{f(x)-f(\sqrt{2})}{x-\sqrt{2}} \\
+				&\Downarrow \\
+				x \in \Q &\implies x=\frac{p}{q},\  p \in \Z,\ q \in \N,\ \gcd (p,q)=1 \\
+				&\Downarrow \\
+				&= \lim\limits_{x \to \sqrt{2}} \frac{\frac{1}{q}-0}{x-0} \\
+				&= \lim\limits_{x \to \sqrt{2}} \frac{\frac{1}{q}}{x} \\
+				&= \lim\limits_{x \to \sqrt{2}} \frac{\frac{1}{q}}{\frac{p}{q}} &\because\ x=\frac{p}{q} \\
+				&= \lim\limits_{x \to \sqrt{2}} \frac{q}{qp} \\
+				&= \lim\limits_{x \to \sqrt{2}} \frac{1}{p} \\
+				&= \text{DNE}
+			\end{align*}
+			Thus the limit does not exist since it is a contradiction that as $x \to \sqrt{2},\ x \in \Q$, and since $\sqrt{2} \notin \Q$, it's impossible to substitute $\sqrt{2}$ for $x$. Additionally, since $p \in \Z$, $p$ can equal 0, and thus the function is undefined at this point, again rendering the limit non-existent. Thus $f$ is continuous at $c=\sqrt{2}$, but $f$ is not differentiable at $c=\sqrt{2}$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (g)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is differentiable at $c$, then $f$ is continuous at $c$.\\
+			
+			This is true by \textit{Theorem 6.1.2}:
+			\begin{theorem*}
+				If $f:I \rightarrow \R$ has a derivative at $c \in I$, then $f$ is continuous at $c$.\\
+			\end{theorem*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (h)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is differentiable on $[a,b]$, then $f$ is uniformly continuous on $[a,b]$.\\
+			
+			This is a true statement.
+			\begin{proof}
+				Let $f: [a,b] \to [a,b]$ be a function such that $f$ is differentiable $\forall\ x \in A$. Let $x,c \in A$, and without loss of generality, let $x \neq c$ (since $f$ is differentiable everywhere, $f$ is also differentiable at $c=0$.).\\
+				
+				Recall \textit{Carathéodory's Theorem}:
+				\begin{theorem*}[\textbf{Carathéodory's Theorem}]
+					Let $f$ be defined on an interval $I$ containing the point $c$. Then $f$ is differentiable at $c$ if and only if there exists a function $\phi$ on $I$ that is continuous at $c$ and satisfies
+					\[f(x)-f(c)=\phi (x)(x-c)\ \ \ \ \text{for}\ \ \ \ x \in I\]
+					In this case, we have $\phi (c)=f'(c)$.
+				\end{theorem*}
+				Since $f$ is differentiable at all points, we know that $\exists\ \phi \st f(x)-f(c)=\phi(x)(x-c)$. Let $\phi$ be given by $\phi(x):= f'(c)$.\\
+				
+				Also, recall the \textit{Mean Value Theorem}:
+				\begin{theorem*}[\textbf{Mean Value Theorem}]
+					Suppose that $f$ is continuous on a closed interval $I:=[a,b]$, and that $f$ has a derivative in the open interval $(a,b)$. Then there exists at least one point $c$ in $(a,b)$ such that
+					\[f(b)-f(a)=f'(c)(b-a)\]
+				\end{theorem*}
+				Thus we have that $f'(c)=\frac{f(x)-f(c)}{x-c} \leq M$ since $f'(x) \leq M\ \forall\ x \in \R$. Thus $|x-c|<\frac{\varepsilon}{M}|f(x)-f(c)|<\varepsilon$.
+				\begin{align*}
+					|f(x)-f(c)|&=\lim\limits_{x \to c} \frac{f(x)-f(c)}{x-c} \cdot (x-c) \\
+					&= \lim\limits_{x \to c} f(x)-f(c) \\
+					&< M \cdot \varepsilon
+				\end{align*}
+				Thus let $\delta = \frac{\varepsilon}{M}$.\\
+				
+				Recall the definition of a \textit{Lipschitz Function}:
+				\theoremstyle{definition}
+				\begin{definition*}
+					Let $A \subseteq \R$ and let $f:A \rightarrow \R$. If there exists a constant $K > 0$ such that 
+					\[(4)\ \ \ \ \ \ \ \ |f(x)-f(u)| \leq K|x-u|\]
+					for all $x,u \in A$, then $f$ is said to be a \textbf{Lipschitz function} (or to satisfy a \textbf{Lipschitz condition}) on $A$.\\
+					
+					The condition $(4)$ that a function $f: I \to \R$ on an interval $I$ is a Lipschitz function can be interpreted geometrically as follows. If we write the condition as
+					\[\abs{\frac{f(x)-f(u)}{x-u}}\leq K,\ x,u \in I,\ x \neq u,\]
+					then the quantity inside the absolute values is the slope of a line segment joining the points $(x,f(x))$ and $(u,f(u))$. Thus a function $f$ satisfies a Lipschitz condition if and only if the slopes of all line segments joining two points on the graph of $y=f(x)$ over $I$ are bounded by some number $K$.
+				\end{definition*}
+				If we let $M \delta=K$, we have that $f$ is a Lipschitz function.\\
+				
+				Now, recall \textit{Theorem 5.4.3}:
+				\begin{theorem}
+					If $f:A \rightarrow \R$ is a Lipschitz function, then $f$ is uniformly continuous on $A$.
+				\end{theorem}
+				Also, recall the \textit{Continuous Extension Theorem}:
+				\begin{theorem*}[\textbf{Continuous Extension Theorem}]
+					A function $f$ is uniformly continuous on the interval $(a,b)$ if and only if it can be defined at the endpoints $a$ and $b$ such that the extended function is continuous on $[a,b]$.
+				\end{theorem*}
+				And recall \textit{Theorem 6.1.1}:
+				\begin{theorem*}
+					If $f:I \to \R$ has a derivative at $c \in I$, then $f$ is continuous at $c$.
+				\end{theorem*}
+				So, by \textit{Theorem 5.4.3} we have that $f$ is uniformly continuous.\\
+				
+				By \textit{Theorem 6.1.1}, since $f$ is differentiable $\forall\ c \in [a,b]$, $f$ is continuous on $[a,b]$. \\
+				
+				Thus by the \textit{Continuous Extension Theorem}, since $f$ is continuous on $[a,b]$, we have that $f$ is uniformly continuous on $(a,b)$.\\
+				
+				Recall the \textit{Uniform Continuity Theorem}:
+				\begin{theorem*}[\textbf{Uniform Continuity Theorem}]
+					Let $I$ be a closed bounded interval and let $f:I \rightarrow \R$ be continuous on $I$. Then $f$ is uniformly continuous on $I$.
+				\end{theorem*}
+				Since $[a,b]$ is a closed interval, and since $f$ is continuous on $[a,b]$, we have that by the \textit{Uniform Continuity Theorem}, $f$ is uniformly continuous on $[a,b]$.\\
+				
+				$\therefore$ If $f$ is differentiable on $[a,b]$, then $f$ is uniformly continuous on $[a,b]$.\\
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%						Question 4 (i)							%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item If $f$ is differentiable on $(a,b)$ and $f(a)=f(b)=0$, then $f$ is uniformly continuous at $[a,b]$.\\
+			
+			This is a false statement. Consider $f:(0,\pi) \to \R$ given by $f(x):=x\sin (x)$. Then we have that
+			\[f(a)=f(0)=0 \sin (0) = 0 \cdot 0 = 0 = \pi \cdot 0 = \pi \sin (\pi) = f(\pi)=f(b)\]
+			Recall \textit{Theorem 6.1.2}:
+			\begin{theorem*}
+				Let $I \subseteq \R$ be an interval, let $c \in I$ , and let $f:I \rightarrow \R$ and $g:I \rightarrow \R$ be functions that are differentiable at $c$. Then:
+				\begin{enumerate}
+					\item If $\alpha \in \R$, then the function $\alpha f$ is differentiable at $c$, and \[(\alpha f)'(c) = \alpha f'(c)\]
+					
+					\item The function $f+g$ is differentiable at $c$, and 
+					\[(f+g)'(c) = f'(c)+g'(c)\]
+					
+					\item (Product Rule) The function $fg$ is differentiable at $c$, and
+					\[(fg)'(c) = f'(c)g(c) + f(c)g'(c).\]
+					
+					\item (Quotient Rule) If $g(c) \neq 0$, then the function $f/g$ is differentiable at $c$, and
+					\[\left( \frac{f}{g}\right)'(c) = \frac{f'(c)g(c)-f(c)g'(c)}{(g(c))^2}\]
+				\end{enumerate}
+			\end{theorem*}
+			So, if we let $g(x):=x$, and $h(x):=\sin (x)$, we then have
+			\begin{align*}
+				\lim\limits_{c \to 0} \frac{f(x+c)-f(x)}{c} &= \lim\limits_{c \to 0} \frac{g(x+c)-g(x)}{c} \cdot h(x) + g(x) \cdot \lim\limits_{c \to 0} \frac{h(x+c)-h(x)}{c} \\
+				&= \lim\limits_{c \to 0} \frac{x+c-x}{c} \cdot \sin (x) + x \cdot \lim\limits_{c \to 0} \frac{\sin (x+c)-\sin (x)}{c} \\
+				&= \lim\limits_{c \to 0} \frac{c}{c} \cdot \sin(x) + x \cdot \lim\limits_{c \to 0} \frac{(\sin (x)\cos (c) + \sin(c)\cos(x))-\sin(x)}{c} \\
+				& (\because\ \sin(a+b)=\sin(a)\cos(b)+\sin(b)\cos(a)) \\
+				&= \lim\limits_{c \to 0} 1 \cdot \sin(x) + x \cdot\lim\limits_{c \to 0} \left(\cos(x)\cdot\frac{\sin(c)}{c}+\sin(x)\cdot\frac{\cos(c)-1}{c}\right) \\
+				&=\sin(x)+x\cdot\lim\limits_{c \to 0} \left(\cos(x) \cdot \frac{\sin(c)}{c} + \sin(x) \cdot \frac{\cos^2(c)-1}{(\cos(c)+1)c}\right) \\
+				&=\sin(x)+x\cdot\lim\limits_{c \to 0} \left(\cos(x)\cdot\frac{\sin(c)}{c}-\sin(x)\cdot\frac{\sin^2(c)}{(\cos(c)+1)c}\right) \\
+				&(\because\ \sin^2(c)+\cos^2(c)=1) \\
+				&= \sin(x)+x\cdot\lim\limits_{c \to 0} \left(\left(\cos(x)-\frac{\sin(x)\sin(c)}{\cos(c)+1}\right)\frac{\sin(c)}{c}\right) \\
+				&= \sin(x)+x\cdot\left(\lim\limits_{c \to 0} \left(\cos(x)-\frac{\sin(x)\sin(c)}{\cos(c)+1}\right)\right)\cdot\left(\lim\limits_{c \to 0} \frac{\sin(c)}{c} \right) \\
+				&=\sin(x)+ x\cdot\cos(x)\left(\lim\limits_{c \to 0} \frac{\sin(c)}{c}\right) \\
+				&(\because\ \lim\limits_{c \to 0} \left(\cos(x)-\frac{\sin(x)\sin(c)}{\cos(c)+1}\right)=\cos(x)-\frac{\sin(x)\sin(0)}{\cos(0)+1}=\cos(x) \\
+				&\text{by continuity} )\\
+				&= \sin(x)+x\cos(x) \\
+				&(\because\ \lim\limits_{c \to 0} \frac{\sin(c)}{c}=1)
+			\end{align*}
+			Thus $x\sin(x)$ is differentiable on $(0,\pi)$.\\
+			
+			Now, let $(x_n),(u_n) \subseteq (0,\pi)$ be given by $x_n:=\pi$, and $u_n:=\pi+\frac{1}{n}$ for $n \in \N$. Then we have
+			\[(x_n-u_n)=\pi-(\pi+\frac{1}{n})=-\frac{1}{n}\]
+			and thus
+			\[\lim\limits_{n \to \infty} (x_n-u_n)=\lim\limits_{n \to \infty} -\frac{1}{n}=0\]
+			Now we have
+			\begin{align*}
+				|f(x_n)-f(u_n)| &= \abs{\pi\sin(\pi)-\left(\pi+\frac{1}{n}\right)\sin(\pi+\frac{1}{n})} \\
+				&= \abs{\pi \cdot 0-\left(\pi+\frac{1}{n}\right)\sin\left(\pi+\frac{1}{n}\right)} \\
+				&= \abs{-\left(\pi+\frac{1}{n}\right)\sin\left(\pi+\frac{1}{n}\right)} \\
+				&= \left(\pi+\frac{1}{n}\right)\sin\left(\pi+\frac{1}{n}\right) \\
+				&= \left(\pi+\frac{1}{n}\right)\sin(\frac{1}{n}) &\because\ \sin(\pi)=0 \\
+				&= \pi\sin\left(\frac{1}{n}\right)+\left(\frac{1}{n}\right)\sin\left(\frac{1}{n}\right)
+			\end{align*}
+			We notice that $\lim\limits_{n \to \infty} \frac{1}{n}=0$ and $(\sin\left(\frac{1}{n}\right))$ is a bounded sequence in $(0,\pi)$. Thus
+			\[\lim\limits_{n \to \infty} \left(\frac{1}{n}\sin\frac{1}{n}\right)=0\]
+			and
+			\[\lim\limits_{x \to 0} \frac{\sin(x)}{x}=1\ \forall\ x \in (0,\pi)\]
+			This yields
+			\[\lim\limits_{n \to \infty} \pi\sin\left(\frac{1}{n}\right)=\pi\lim\limits_{\frac{1}{n}\to 0} \left(\frac{\sin\left(\frac{1}{n}\right)}{\frac{1}{n}}\right)=\pi\]
+			Thus $\lim\limits_{n \to \infty} (f(x_n)-f(u_n))=\pi$.\\
+			
+			Let $\varepsilon=\pi$. Then $\exists\ k \in \N \st \forall\ n \geq k$:
+			\begin{align*}
+				\pi-\varepsilon<f(x_n)-f(u_n)&<\pi+\varepsilon \\
+				f(x_n)-f(u_n)&>\pi \\
+				|f(x_n)-f(u_n)|&>\pi \\
+				|f(x_{n+k})-f(u_{n+k})|&>\pi
+			\end{align*}
+			Thus, for $\varepsilon_0=\pi$, and the two sequences $(x_{n+k}),\ (u_{n+k})$, by the \textit{Nonuniform Continuity Criteria}, $f$ is not uniformly continuous on $(0,\pi)$\\
+			
+			$\therefore$ If $f$ is differentiable on $(a,b)$, and $f(a)=f(b)=0$, then $f$ is \textbf{not} uniformly continuous on $[a,b]$.
+		\end{enumerate}		
+	\end{enumerate}
+\end{document}
