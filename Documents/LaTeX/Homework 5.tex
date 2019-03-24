@@ -1,7 +1,10 @@
 \documentclass[12pt,letterpaper]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
 \usepackage[english]{babel}
 \usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -9,6 +12,8 @@
 \usepackage{array}
 \usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
 \newcommand{\st}{\ \text{s.t.}\ }
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\R}{\mathbb{R}}
@@ -16,419 +21,347 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
 \DeclareMathOperator{\sign}{sgn}
 \newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
 \theoremstyle{case}
 \newtheorem{case}{Case}
+\newtheorem{case*}{Case}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem*{theorem*}{Theorem}
 \newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
 \newtheorem*{remark}{Remark}
 \setlist[enumerate]{font=\bfseries}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \author{Alexander J. Tusa}
-\title{Real Analysis Homework 5}
+\title{Real Analysis II Homework 5}
 \begin{document}
 	\maketitle
 	\begin{enumerate}
-	\item For the following sequences, i) write out the first 5 terms, ii) Use the Monotone Sequence Property to show that the sequences converges.
-	\begin{enumerate}
-		\item \textbf{Section 3.3}
+		\item Find the sum of the following series.
 		\begin{enumerate}
-			\item[2)] Let $x_1 > 1$ and $x_{n+1} := 2-1/x_n$ for $n \in \N$. Show that $(x_n)$ is bounded and monotone. Find the limit.
-			\\\\ The first five terms of this sequence are $x_1 \geq 2,x_2 \geq \frac{3}{2}, x_3 \geq \frac{4}{3}, x_4 \geq \frac{5}{4}, x_5 \geq \frac{6}{5}, \dots \approx x_1 \ge 2, x_2 \geq 1.5, x_3 \geq 1.3333, x_4 \geq 1.25, x_5 \geq 1.2, \dots$. This sequence appears to be decreasing.
-			\\\\Recall the Monotone Sequence Property:
-			\begin{theorem*}{Monotone Sequence Property}
-				A monotone sequence of real numbers is convergent if and only if it is bounded. Further,
-				\begin{enumerate}
-					\item If $X=(x_n)$ is a bounded increasing sequence, then
-					\[\lim (x_n) = \sup \{x_n:n \in \N\}\]
-					
-					\item If $Y=(y_n)$ is a bounded decreasing sequence, then
-					\[\lim (y_n) = \inf \{y_n : n \in \N \}\]
-				\end{enumerate}
-			\end{theorem*}
-		
-			To show that this sequence converges, we must first find the possible limit points (fixed points) of this sequence. So,
+			\item (pr. 3a) $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2+3n+2}$
 			\begin{align*}
-				x&=2-\frac{1}{x} \\
-				x^2 &= 2x -1 \\
-				x^2 - 2x + 1 &= 0 \\
-				(x-1)^2 &= 0
+				\sum_{n=1}^{\infty} \frac{1}{n^2+3n+2} &= \sum_{n=1}^{\infty} \frac{1}{(n+1)(n+2)} \\
+				&\Downarrow \\
+				\frac{1}{n^2+3n+2}&=\frac{A}{n+1} + \frac{B}{n+2} \\
+				1&=A(n+2)+ B(n+2) \\
+				1&=An+2A+Bn+2B \\
+				1&=An+Bn+2A+2B \\
+				1&= (A+B)n+(A+B)2 \\
 			\end{align*}
-			Thus, $x=1$ is a possible limit of this sequence.
-			\\\\Now, we will prove that $(x_n)$ is bounded by $1$, and since we hypothesized that $(x_n)$ is decreasing, we say that $(x_n)$ is bounded below by 1. 
-			\begin{proof}
-				We want to show that the sequence $(x_n)$ is bounded below by 1; that is, we want to show that $1 \leq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
-				\\\\\textbf{Basis Step:} Let $n=1$. Then
-				\begin{align*}
-					x_n &\geq x_{n+1}, &\text{by the definition of decreasing,} \\
-					x_1 &\geq x_{1+1} \\
-					x_1 &\geq x_2
-				\end{align*}
-				Since $x_1>1 \Rightarrow \frac{1}{x_1} < 1$, we have
-					\[x_2 = 2-\frac{1}{x_1} > 1\]
-					\[\Rightarrow 1 < x_2 < 2.\]
-				Since $x_1>1$ and because $1 < x_2 < 2$, we have that $x_1 \geq x_2$.
-				\\\\\textbf{Inductive Step:} Assume $1 < x_n < 2,\ \forall\ n \in \N$.
-				\\\\\textbf{Show:} Now we want to show that $x_n \leq x_{n+1}$.
-				\\So,
-					\[1 < x_n <2\]
-					\[1 > \frac{1}{x_n} > \frac{1}{2}\]
-					\[-1 < -\frac{1}{x_n} < -\frac{1}{2}\]
-					\[1 < 2-\frac{1}{x_n} < 2-\frac{1}{2} < 2\]
-					\[1 < x_{n+1} < 2\]
-				Thus we have that $(x_n)$ is bounded between 1 and 2.
-			\end{proof}
-		
-			Now we need to show that $(x_n)$ is monotone decreasing; that is, we must show that $x_1 \geq x_2 \geq \dots \geq x_n$.
-			
-			\begin{proof}
-				We want to show that $x_1 \geq x_2 \geq \dots \geq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
-				\\\\\textbf{Basis Step:} Let $n=1$. Then since $x_1 >1$ is given, we have that $\frac{1}{x_1} < 1$. This yields $x_2=2-\frac{1}{x_1}>1$, as was determined for the boundedness proof, and thus we have that $1 < x_2 < 2$. This means that $1 > \frac{1}{x_2} > \frac{1}{2}$, and since $\frac{1}{2} \leq \frac{1}{x_n}$, we have $x_2 \geq x_1$.
-				\\\\\textbf{Inductive Step:} Assume $x_n \geq x_{n+1}\ \forall\ n \in \N$.
-				\\\\\textbf{Show:} We now want to show that $x_{n+2} \leq x_{n+1}$.
-				\\So,
-				\[x_{n+2}=2-\frac{1}{x_{x+1}}\]
-				Recall the inductive hypothesis, in that $x_n \geq x_{n+1} \Rightarrow \frac{1}{x_n} \leq \frac{1}{x_{n+1}}$. Thus,
-				\[-\frac{1}{x_n} \geq -\frac{1}{x_{n+1}}\]
-				\[\Rightarrow 2-\frac{1}{x_n} \leq 2 -\frac{1}{x_{n+1}}\]
-				\[x_{n+1} \leq x_{n+2}\]
-				$\therefore$ we have that $x_1 \geq x_2 \geq \dots \geq x_n,\ \forall\ n \in \N$.
-			\end{proof}
-			Thus $(x_n)$ is monotone decreasing.
-			\\\\By the \textit{Monotone Sequence Property}, since we have shown that $(x_n)$ is both bounded (and thus converges), and that $(x_n)$ is monotone decreasing, we have that
+			\[\begin{cases}
+			0=A+B \\
+			1=A+B
+			\end{cases} \implies
+			\begin{cases}
+			A=1 \\
+			B=-1
+			\end{cases}\]
 			\begin{align*}
-				\lim (x_n) &= \inf \{x_n: n \in \N\} \\
-				&=\inf (1,2) \\
-				&= 1
+				&=\sum_{n=1}^{\infty} \frac{1}{n+1}-\frac{1}{n+2} \\
+				&= \left(\frac{1}{2}-\cancel{\frac{1}{3}}\right) + \left(\cancel{\frac{1}{3}}-\cancel{\frac{1}{4}}\right) + \dots + \left(\cancel{\frac{1}{n}}-\cancel{\frac{1}{n+1}}\right)+ \left(\cancel{\frac{1}{n+1}}-\frac{1}{n+2}\right) \\
+				&= \limx{n}{\infty} \frac{1}{2}+\frac{1}{n+2} \\
+				&= \frac{1}{2}
 			\end{align*}
-			Hence the sequence converges to the previously found possible limit of 1. \\
-			
-			\item[3)] Let $x_1 > 1$ and $x_{n+1} := 1 + \sqrt{x_n - 1}$ for $n \in \N$. Show that $(x_n)$ is decreasing and bounded below by $2$. Find the limit.
-			\\\\The first 5 terms of this sequence are $x_1 \geq 2, x_2 \geq 2, x_3 \geq 2, x_4 \geq 2, x_5 \geq 2, \dots$. Notice the following, however:
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{1}{(3n-2)(3n+1)}$
 			\begin{align*}
-				x_{n+1} \leq x_n &\iff 1+\sqrt{x_n - 1} \leq x_n \\
-				&\iff \sqrt{x_n -1} \leq x_n -1
+				\frac{1}{(3n-2)(3n+1)} &= \frac{A}{3n-2} + \frac{B}{3n+1} \\
+				1&= A(3n+1)+B(3n-2) \\
+				1&= 3An+3Bn+A-2B
 			\end{align*}
-			which we know is always true since the square root function is a decreasing function.
-			\\\\Now we must find the possible limit points (fixed points) of this sequence. So,
+			\[\begin{cases}
+			3A+3B=0 \\
+			1A-2B=1
+			\end{cases} \implies \begin{cases}
+			A=\frac{1}{3} \\
+			B=\frac{-1}{3}
+			\end{cases}\]
 			\begin{align*}
-				x &= 1 + \sqrt{x-1} \\
-				x-1 &= \sqrt{x-1} \\
-				x-1 &= (x-1)^2 \\
-				x-1 &= x^2 -2x +1 \\
-				(x-1)-(x^2-2x+1) &= 0 \\
-				-x^2+3x-2 &=0 \\
-				-(x^2-3x+2) &= 0 \\
-				-(x-1)(x-2) &= 0 \\
-				(x-1)(x-2) &= 0
+				\frac{1}{(3n-2)(3n+1)} &= \frac{1}{9n-6} - \frac{1}{9n+3} \\
+				\sum_{n=1}^{\infty} \frac{1}{(3n-2)(3n+1)} &= \sum_{n=1}^{\infty} \frac{1}{9n-6} - \frac{1}{9n+3} \\
+				&= \left(\frac{1}{3}-\cancel{\frac{1}{12}}\right) + \left(\cancel{\frac{1}{12}}-\cancel{\frac{1}{21}}\right) + \dots\\
+				&+ \left(\cancel{\frac{1}{9n-15}}-\cancel{\frac{1}{9n-6}}\right) + \left(\cancel{\frac{1}{9n-6}}-\frac{1}{9n+3}\right) \\
+				&= \limx{n}{\infty} \frac{1}{3}-\frac{1}{9n+3} \\
+				&= \frac{1}{3}
 			\end{align*}
-			Thus $x=1$, or $x=2$. These are the possible limits of $(x_n)$. Since we hypothesized that $(x_n)$ is decreasing, then we say that $(x_n)$ is bounded below by 2, since we are given that $x_1 > 1$.
-			\\\\Now we will prove that $(x_n)$ is bounded below by 2.\\
-			\begin{proof}
-				We want to show that $(x_n)$ is bounded below by 1; that is, we want to show that $1 \leq x_n,\ \forall\ n \in \N$. We prove it by method of mathematical induction.
-				\\\\\textbf{Basis Step:} Let $n=1$. Then we are given that $x_1 \geq 2$.
-				\\\\\textbf{Inductive Step:} Assume that $x_n \geq 2,\ \forall\ n \in \N$.
-				\\\\\textbf{Show:} We now want to show that $x_{n+1} \geq 2,\ \forall\ n \in \N$.
-				\\\\So,
-				\begin{align*}
-					x_{n+1} &= 1+\sqrt{x_n -1} \\
-					&\geq 1+\sqrt{2 -1} \\
-					&=1 + 1 \\
-					&= 2
-				\end{align*}
-				Thus, $x_n \geq 2,\ \forall\ n \in \N$. By the definition of boundedness, we have that $(x_n)$ is bounded below by 2.
-			\end{proof}
-			
-			Since we have also shown earlier that $(x_n)$ is monotone decreasing, we have that by the monotone sequence property, since $(x_n)$ is bounded, $(x_n)$ converges, and since $(x_n)$ is monotone decreasing, we have:
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{e^{n-1}}$
 			\begin{align*}
-				\lim (x_n) &= \inf \{x_n:n \in \N\} \\
-				&=2
+				\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{e^{n-1}} &= \sum_{n=1}^{\infty} \frac{(-1)^n \cdot (-1)^1}{e^n\cdot e^{-1}} \\
+				&=- \sum_{n=1}^{\infty} \frac{(-1)^n \cdot e}{e^n} \\
+				&= - \sum_{n=1}^{\infty} (-1)^n \cdot \frac{e}{e^n} \\
+				&= - \sum_{n=1}^{\infty} (-1)^n \cdot e^{1-n} \\
+				&= \frac{e}{1+e}
 			\end{align*}
-			
-			\item[7)] Let $x_1 := a>0$ and $x_{n+1} := x_n+1/x_n$ for $n \in \N$. Determine whether $(x_n)$ converges or diverges.
-			\\\\The first 5 terms of this sequence are $x_1 \geq 1, x_2 \geq 2, x_3 \geq \frac{5}{2}, x_4 \geq \frac{29}{10}, x_5 \geq \frac{941}{290}, \dots \approx x_1 \geq 1, x_2 \geq 2, x_3 \geq 2.5, x_4 \geq 2.9, x_5 \geq 3.244828, \dots$. This sequence appears to be increasing. We show this to be true as follows:
+			\item $\displaystyle\sum_{n=2}^{\infty} \frac{4^{n+1}}{9^{n-1}}$
 			\begin{align*}
-				x_{n+1} \geq x_n &\iff x_n + \frac{1}{x_n} \geq x_n \\
-				&\iff x_n^2 + 1 \geq x_n^2 \\
-				&\iff 1 \geq 0
+				\sum_{n=2}^{\infty} \frac{4^{n+1}}{9^{n-1}} &= \sum_{n=2}^{\infty} \frac{4^n \cdot 4^1}{9^n\cdot 9^{-1}} \\
+				&= \sum_{n=2}^{\infty} \left(\frac{4}{9}\right)^n \cdot 4^1 \cdot 9^1 \\
+				&= \sum_{n=2}^{\infty} \left(\frac{4}{9}\right)^n \cdot 36 \\
+				&= \sum_{n=2}^{\infty} \left(\frac{4}{9}\right)^n \cdot 36 - 16-36 \\
+				&= a\left(\frac{1}{1-r}\right) \\
+				&= 36 \cdot \left(\frac{1}{1-\left(\frac{4}{9}\right)}\right) -52 \\
+				&= \frac{36 \cdot 9}{5} - 52 \\
+				&= \frac{324}{5} - 52 \\
+				&= \frac{324}{5} - \frac{260}{5} \\
+				&= \frac{64}{5}
 			\end{align*}
-			which is true.
-			However, notice that one of the terms of the sequence is $x_n$. We know that $x_n$ is an unbounded sequence. Thus, we can infer that $(x_n)$ is unbounded above. We show this as follows:
+			\item $\displaystyle\sum_{n=0}^{\infty} \frac{5^{n+1}+(-3)^n}{7^{n+2}}$
 			\begin{align*}
-				x_{n+1}^2 &= \left(x_n + \frac{1}{x_n} \right)^2 \\
-				&= x_n^2+2+\frac{1}{x_n^2} \\
-				&> x_n^2 +2
+				\sum_{n=0}^{\infty} \frac{5^{n+1}+(-3)^n}{7^{n+2}} &= \sum_{n=0}^{\infty} \frac{5^{n+1}}{7^{n+2}}+\frac{(-3)^n}{7^{n+2}} \\
+				&= \sum_{n=0}^{\infty} \frac{5}{49} \cdot \left(\frac{5}{7}\right)^n + \frac{1}{49} \cdot \left(\frac{(-3)}{7}\right)^n \\
+				&= \sum_{n=0}^{\infty} \frac{5}{49} \cdot \left(\frac{5}{7}\right)^n + \sum_{n=0}^{\infty} \frac{1}{49} \cdot \left(\frac{(-3)}{7}\right)^n \\
+				&= \frac{5}{49} \cdot \frac{1}{1-\frac{5}{7}} + \frac{1}{49} \cdot \frac{1}{1-\frac{-3}{7}} \\
+				&= \frac{5}{14} + \frac{1}{70} \\
+				&= \frac{13}{35}
 			\end{align*}
-			Since:
-			\[x_{n+1}^2 > x_n^2+2 > x_{n-1}^2 +4 > \dots > x_1^2+2 \cdot n = a^2+2 \cdot n\]
-			\[\Downarrow\]
-			\[x_n > \sqrt{a^2 + 2 \cdot (n-1)}\]
-			Since the right hand side of this inequality is unbounded, the left hand side is also unbounded.
-			\\\\Thus we have that this sequence $(x_n)$ is unbounded above.
-			\\\\Since this sequence is increasing and unbounded above, we have that the sequence is divergent.\\
-			
-			\item[8)] Let $(a_n)$ be an increasing sequence, $(b_n)$ be a decreasing sequence, and assume that $a_n \leq b_n$ for all $n \in \N$. Show that $\lim (a_n) \leq \lim (b_n)$, and thereby deduce the Nested Intervals Property 2.5.2 from the Monotone Convergence Theorem 3.3.2.
-			\\\\Since $(a_n)$ is an increasing sequence, we know that $(a_1 \leq a_2 \leq \dots \leq a_n)$, and since $(b_n)$ is a decreasing sequence, we know that $(b_1 \geq b_2 \geq \dots \geq b_n)$. Also, since we have that $a_n \leq b_n,\ \forall\ n \in \N$, we know that $(a_n)$ is bounded above by $(b_1)$. Thus, by the \textit{Monotone Convergence Theorem}, we know that
-			\[\lim (a_n) = \sup \{a_n: n \in \N\}\]
-			Also, since $(b_n)$ is a decreasing sequence such that it is bounded below by $(a_1)$, by the \textit{Monotone Convergence Theorem}, we have
-			\[\lim (b_n) = \inf \{b_n: n \in \N\}\]
-			Recall Theorem 3.2.5:
-			\begin{theorem*}
-				If $X=(x_n)$ and $Y=(y_n)$ are convergent sequences of real numbers and if $x_n \leq y_n\ \forall\ n \in \N$, then $\lim (x_n) \leq \lim (y_n)$.
-			\end{theorem*}
-			Also, recall the \textit{Nested Intervals Property}:
-			\begin{theorem*}
-				If $I_n=[a_n,b_n],\ n \in \N$, is a nested sequence of closed bounded intervals, then there exists a number $\xi \in \R \st \xi \in I_n\ \forall\ n \in \N$.
-			\end{theorem*}
-			Note that we have a nested sequence of closed, bounded intervals: $[a_n, b_n],\ n \in \N$. Since we showed that $\lim (a_n) \leq \lim (b_n)$, (and we are given that $(a_n)$ is increasing and $(b_n)$ is decreasing), we know that there exists $\xi$ such that
-			\[\lim (a_n) \leq \xi \leq \lim (b_n)\]
-			which means that $\xi \in [a_n, b_n],\ \forall\ n \in \N$.
+			\item $\displaystyle\sum_{n=2}^{\infty} \ln \frac{n^2-1}{n^2}$
+			\begin{align*}
+				\sum_{n=2}^{\infty} \ln \left(\frac{n^2-1}{n^2}\right) &= \sum_{n=2}^{\infty} \ln \left(\frac{(n-1)(n+1)}{n^2}\right) \\
+				&= \sum_{n=2}^{\infty} \ln \left(\frac{\frac{n-1}{n}}{\frac{n}{n+1}}\right) \\
+				&= \sum_{n=2}^{\infty} \ln \left(\frac{n-1}{n}\right) - \ln\left(\frac{n}{n+1}\right) \\
+				&= \left(\ln \frac{1}{2} - \cancel{\ln \frac{2}{3}}\right) + \left(\cancel{\ln \frac{2}{3}} - \cancel{\ln \frac{3}{4}}\right) +\\
+				&\dots + \left(\cancel{\ln \frac{n-2}{n-1}}-\cancel{\ln \frac{n-1}{n}}\right) + \left(\cancel{\ln \frac{n-1}{n}}-\ln \frac{n}{n+1}\right) \\
+				&= \limx{n}{\infty} \ln \left(\frac{1}{2}\right) - \ln \left(\frac{n}{n+1}\right) \\
+				&= \ln \left(\frac{1}{2}\right) - \limx{n}{\infty} \frac{n+1}{n} \cdot \frac{n+1-n}{(n+1)^2}, &\text{by L'Hospital's Rule} \\
+				&= \ln \left(\frac{1}{2}\right) - \limx{n}{\infty} \frac{1}{n(n+1)} \\
+				&= \ln\left(\frac{1}{2}\right) - 0 \\
+				&= \ln\left(\frac{1}{2}\right) \\
+				&\approx -0.693147
+			\end{align*}
+			\item $\displaystyle\sum_{n=2}^{\infty} \ln \frac{n(n+2)}{(n+1)^2}$
+			\begin{align*}
+				\sum_{n=2}^{\infty} \ln\left(\frac{n(n+2)}{(n+1)^2}\right) &= \sum_{n=2}^{\infty} \ln \left(\frac{\frac{n}{n+1}}{\frac{n+1}{n+2}}\right) \\
+				&= \sum_{n=2}^{\infty} \ln\left(\frac{n}{n+1}\right) - \ln\left(\frac{n+1}{n+2}\right)  \\
+				&= \left(\ln \frac{2}{3}-\cancel{\ln \frac{3}{4}}\right) + \left(\cancel{\ln \frac{3}{4}}-\cancel{\ln \frac{4}{5}}\right) + \dots \\
+				&+ \left(\cancel{\ln \frac{n-1}{n}}-\cancel{\ln\frac{n}{n+1}}\right) + \left(\cancel{\ln \frac{n}{n+1}}-\ln\frac{n+1}{n+2}\right) \\
+				&= \limx{n}{\infty}\ln \left(\frac{2}{3}\right) - \ln \left(\frac{n+1}{n+2}\right) \\
+				&= \ln \left(\frac{2}{3}\right)-\limx{n}{\infty} \frac{n+2}{n+1} \cdot \frac{1\cdot (n+2) - (n+1)\cdot 1}{(n+2)^2}, &\text{by L'Hospital's Rule} \\
+				&= \ln \left(\frac{2}{3}\right)- \limx{n}{\infty} \frac{1}{(n+1)(n+2)} \\
+				&= \ln \left(\frac{2}{3}\right) - 0 \\
+				&= \ln \left(\frac{2}{3}\right) \\
+				&\approx -0.405465
+			\end{align*}
+			\item (pr. 3c) $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n(n+1)(n+2)}$
+			\begin{align*}
+				\frac{1}{n(n+1)(n+2)} &= \frac{A}{n} + \frac{B}{n+1} + \frac{C}{n+2} \\
+				1&=A(n+1)(n+2) + Bn(n+2)+Cn(n+1) \\
+				1&=An^2+3An+2A+Bn^2+2Bn+Cn^2+Cn \\
+				1&= An^2+Bn^2+Cn^2+3An+2Bn+Cn+2A
+			\end{align*}
+			\[\begin{cases}
+			An^2+Bn^2+Cn^2=0 \\
+			3An+2Bn+Cn=0 \\
+			2A=1
+			\end{cases} = \begin{cases}
+			A=\frac{1}{2} \\
+			B=-1 \\
+			C=\frac{1}{2}
+			\end{cases}\]
+			\begin{align*}
+				\sum_{n=1}^{\infty} \frac{1}{n(n+1)(n+2)} &= \sum_{n=1}^{\infty} \frac{1}{2n} -\frac{1}{n+1} + \frac{1}{2n+4} \\
+				&= \left(\frac{1}{2}-\frac{1}{2}+\frac{1}{6}\right) + \left(\frac{1}{4}-\frac{1}{3}+\frac{1}{8}\right) + \left(\frac{1}{6}-\frac{1}{4}+\frac{1}{10}\right) \\
+				&+ \dots + \left(\frac{1}{2n-2}+\frac{1}{2n+2}-\frac{1}{n}\right) + \left(\frac{1}{2n}+\frac{1}{2n+4}-\frac{1}{n+1}\right) \\
+				&= \limx{n}{\infty} \frac{1}{4} + \frac{1}{2(n+1)(n+2)} \\
+				&= \frac{1}{4} + 0 \\
+				&= \frac{1}{4}
+			\end{align*}
+			\item $\displaystyle\frac{1}{1 \cdot 3} + \frac{1}{3 \cdot 5} + \frac{1}{5 \cdot 7} + \dots$
+			\\\\Notice that this is equal to the series $\displaystyle\sum_{n=1}^{\infty} \frac{1}{(2n-1)(2n+1)}$. So,
+			\begin{align*}
+				\sum_{n=1}^{\infty} \frac{1}{(2n-1)(2n+1)} &= \sum_{n=1}^{\infty} \frac{A}{2n-1} + \frac{B}{2n+1} \\
+				&\Downarrow \\
+				1 &= 2An+2Bn+A-B \\
+				\begin{cases}
+				2An+2Bn=0 \\
+				A-B=1
+				\end{cases} 
+				&\implies
+				\begin{cases}
+				A= \frac{1}{2} \\
+				B= \frac{-1}{2}
+				\end{cases} \\
+				&= \sum_{n=1}^{\infty} \frac{1}{4n-2} - \frac{1}{4n+2} \\
+				&= \left(\frac{1}{2}-\cancel{\frac{1}{6}}\right) + \left(\cancel{\frac{1}{6}}-\cancel{\frac{1}{10}}\right) + \\
+				&\dots + \left(\cancel{\frac{1}{4n-5}}-\cancel{\frac{1}{4n-2}}\right) + \left(\cancel{\frac{1}{4n-2}}-\frac{1}{4n+2}\right) \\
+				&=\limx{n}{\infty} \frac{1}{2} -\frac{1}{4n+2} \\
+				&= \frac{1}{2} - 0 \\
+				&= \frac{1}{2}
+			\end{align*}
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{1}{1+2+3+\dots+n}$
+			\begin{align*}
+				\sum_{n=1}^{\infty} \frac{1}{1+2+3+\dots+n} &= \sum_{n=1}^{\infty} \frac{1}{\sum\limits_{i=1}^{n} i} \\
+				&= \sum_{n=1}^{\infty} \frac{2}{n(n+1)} \\
+				&\Downarrow \\
+				\frac{2}{n(n+1)} &= \frac{A}{n} + \frac{B}{n+1} \\
+				2&=An+A+Bn
+			\end{align*}
+			\[\begin{cases}
+			An+Bn=0 \\
+			Bn=2
+			\end{cases}=\begin{cases}
+			A=2 \\
+			B=-2
+			\end{cases}\]
+			\begin{align*}
+				\sum_{n=1}^{\infty} \frac{2}{n(n+1)} &= \sum_{n=1}^{\infty} \frac{2}{n}-\frac{2}{n+1} \\
+				&= \left(\frac{2}{1}-\cancel{\frac{2}{2}}\right) + \left(\cancel{\frac{2}{2}}-\cancel{\frac{2}{3}}\right) + \left(\cancel{\frac{2}{3}}-\cancel{\frac{2}{4}}\right) + \\
+				&\dots + \left(\cancel{\frac{2}{n-1}}-\cancel{\frac{2}{n}}\right) + \left(\cancel{\frac{2}{n}}-\frac{2}{n+1}\right) \\
+				&= \limx{n}{\infty} 2-\frac{2}{n+1} \\
+				&= 2-0 \\
+				&= 2
+			\end{align*}
 		\end{enumerate}
+		\item Prove that each of the following series diverges.
+		\begin{enumerate}
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{n}{2n+1}$
+			\begin{proof}
+				Recall \textit{Theorem 3.7.1 -- The $n^{\text{th}}$-Term Test}: 
+				\begin{theorem*}[\textbf{The $n$th Term Test}]
+					If the series $\sum x_n$ converges, then $\lim (x_n) = 0$.
+				\end{theorem*}
+				Let $a_n$ be the sequence whose terms are obtained by $a_n:=\frac{n}{2n+1}$, for $n \in \N$. Then we have 
+				\[\limx{n}{\infty} a_n = \limx{n}{\infty} \frac{n}{2n+1} = \limx{n}{\infty} \frac{1}{2} \text{ by L'Hospital's Rule} = \frac{1}{2} \neq 0\]
+				Thus since $\limx{n}{\infty} a_n \neq 0$, we know that by \textit{Theorem 3.7.1}, $\displaystyle\sum_{n=1}^{\infty}$ is divergent.
+			\end{proof}
 		
-		\item $a_1 = 1,\ a_{n+1}=\frac{a_n^2+5}{2a_n}$
-		\\\\The first 5 terms of this sequence are $1, 3, \frac{7}{3}, \frac{47}{21}, \frac{2207}{987}, \dots \approx 1, 3, 2.3333, 2.2381, 2.2361, \dots$. This is a decreasing sequence.
-		\\\\First, we must find the possible limits (fixed points) of the sequence. So,
-		\begin{align*}
-			a&=\frac{a^2+5}{2a} \\
-			2a^2 &= a^2+5 \\
-			a^2 &= 5 \\
-			a &= \pm \sqrt{5}
-		\end{align*}
-		Since we're given that $a_1=1$, we know that the most likely lower bound will be $\sqrt{5}$.
-		\\\\Now we want to show that $(a_n)$ is bounded below by $\sqrt{5}$.
-		\begin{proof}
-			We want to show that $a_n \geq \sqrt{5},\ \forall\ n \in \N$. We prove it by method of mathematical induction.
-			\\\\\textbf{Basis Step:} Since $1 \geq \sqrt{5}$, we have that $a_1 \geq \sqrt{5}$
-			\\\\\textbf{Inductive Step:} Assume that $a_n \geq \sqrt{5}\ \forall\ n \in \N$.
-			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq \sqrt{5}\ \forall\ n \in \N$. So, 
-			\[a_{n+1} = \frac{a_n^2 + 5}{2a_n}\]
-			\begin{align*}
-				(a_n-\sqrt{5})^2 &\geq 0 \\
-				a_n^2 -2\sqrt{5}a_n +5 &\geq 0 \\
-				a_n^2 +5 &\geq 2\sqrt{5}a_n \\
-				\Downarrow \\
-				\frac{a_n^2+5}{2a_n} &\geq \frac{2\sqrt{5}a_n}{2a_n} \\
-				\frac{a_n^2+5}{2a_n} &\geq \sqrt{5} \\
-				a_{n+1} \geq \sqrt{5}
-			\end{align*}
-			Thus we have that $(a_n)$ is bounded below by $\sqrt{5}$.
-		\end{proof}
-		Now we must show that $(a_n)$ is monotone decreasing.\\
-		\begin{proof}
-			We want to show that $(a_n)$ is monotone decreasing; that is, we want to show that $(a_2 \geq a_3 \geq \dots \geq a_n),\ \forall\ n \geq 2$. We prove it by method of mathematical induction.
-			\\\\\textbf{Basis Step:} Since $3 \geq \frac{7}{3}$, we have that $a_2 \geq a_3$.
-			\\\\\textbf{Inductive Step:} Assume that $a_n \geq a_{n+1},\ \forall\ n \geq 2$.
-			\\\\\textbf{Show:} We want to show that $a_{n+2} \leq a_{n+1},\ \forall\ n \geq 2$.
-			\\So,
-			\[a_{n+2} = \frac{a_{n+1}^2+5}{2a_{n+1}} \leq \frac{a_n^2+5}{2a_n}\]
-			Since we have:
-			\begin{align*}
-				a_{n+1} &\geq \sqrt{5}, &\text{by the previous proof of boundedness} \\
-				a_{n+1}^2 &\geq 5
-			\end{align*}
-			We can equivalently write the inequality as
-			\[\frac{a_{n+1}^2+5}{2a_{n+1}} \leq \frac{a_{n+1}^2+a_{n+1}^2}{2a_{n+1}}=a_{n+1}\]
-			Thus we have that $(a_n)$ is monotone decreasing.
-		\end{proof}
-		Since $(a_n)$ is both monotone decreasing and bounded, we have
-		\begin{align*}
-			\lim (a_n) &= \inf \{a_n:n \in \N\} \\
-			&= \sqrt{5}
-		\end{align*} 
+			\item $\displaystyle\sum_{n=1}^{\infty} \cos \frac{1}{n^2}$
+			\begin{proof}
+				Let $a_n$ be the sequence whose terms are obtained by $a_n:= \cos \left(\frac{1}{n^2}\right)$, for $n \in \N$. Then we have 
+				\[\limx{n}{\infty} a_n = \limx{n}{\infty} \cos \left(\frac{1}{n^2}\right) = \cos (0) = 1\]
+				By \textit{The $n$th Term Test}, since $\limx{n}{\infty} a_n \neq 0$, the series $\displaystyle\sum_{n=1}^{\infty} \cos \left(\frac{1}{n^2}\right)$ is divergent.
+			\end{proof}
 		
-		\item $a_1 = 5,\ a_{n+1}=\sqrt{4+a_n}$
-		\\\\The first 5 terms of this sequence are 5, 3, $\sqrt{7}$, $ \frac{\sqrt{14}}{2} + \frac{\sqrt{2}}{2} $, $ \frac{\sqrt{2 \cdot (\sqrt{14}+\sqrt{2}+8)}}{2} $, $\dots$, $\approx$ 5, 3, 2.64575131106, 2.57793547457, 2.5647486182, $\dots$. This sequence is decreasing.
-		\\\\First, we must find the possible limits (fixed points) of the sequence. So,
-		\begin{align*}
-			a&=\sqrt{4+a} \\
-			\sqrt{4+a} &= a \\
-			4+a &= a^2 \\
-			-a^2+a+4 &= 0 \\
-			a^2-a-4 &= 0 \\
-			a^2-a&=4 \\
-			a^2-a+\frac{1}{4}&=4+\frac{1}{4} \\
-			a^2-a+\frac{1}{4}&=\frac{17}{4} \\
-			(a-\frac{1}{2})^2&=\frac{17}{4} \\
-			a-\frac{1}{2}&=\pm \frac{\sqrt{17}}{2}
-		\end{align*}
-		So we have that $a=\frac{1}{2} + \frac{\sqrt{17}}{2}$, or $a=\frac{1}{2}-\frac{\sqrt{17}}{2}$. We must now check these solutions for correctness; so, 
-		\begin{align*}
-			a \Rightarrow \frac{1}{2}-\frac{\sqrt{17}}{2} &=\frac{1}{2} \left(1-\sqrt{17}\right) \\
-			&\approx -1.56155 \\\\
-			\sqrt{a+4} &= \sqrt{\left(\frac{1}{2}-\frac{\sqrt{17}}{2}\right)+4} \\
-			&=\frac{\sqrt{9-\sqrt{17}}}{\sqrt{2}} \\
-			&\approx 1.56155
-		\end{align*}
-		Thus, this solution is incorrect. Now we must validate that $a=\frac{1}{2}+\frac{\sqrt{17}}{2}$ is correct. So,
-		\begin{align*}
-			a \Rightarrow \frac{1}{2}+\frac{\sqrt{17}}{2} &= \frac{1}{2}\left(1+\sqrt{17}\right) \\
-			&\approx 2.56155 \\\\
-			\sqrt{a+4} &= \sqrt{\left(\frac{\sqrt{17}}{2}+\frac{1}{2}\right)+4} \\
-			&= \frac{\sqrt{9+\sqrt{17}}}{\sqrt{2}} \\
-			&\approx 2.56155
-		\end{align*}
-		Thus $a=\frac{1}{2}+\frac{\sqrt{17}}{2}$ is a correct solution.
-		\\\\Now we want to show that $(a_n)$ is bounded below by $\frac{1}{2}+\sqrt{17}$.
-		\begin{proof}
-			We want to show that $a_n \geq \frac{1}{2}+\frac{\sqrt{17}}{2},\ \forall\ n \in \N$, by the definition of a lower bound. We prove this by method of mathematical induction.
-			\\\\\textbf{Basis Step:} Since $5 \geq \frac{1}{2}+\frac{\sqrt{17}}{2}$, we have that $a_1 \geq \frac{1}{2}+\frac{\sqrt{17}}{2}$.
-			\\\\\textbf{Inductive Step:} Assume $a_n \geq \frac{1}{2}+\frac{\sqrt{17}}{2},\ \forall\ n \in \N$.
-			\\\\\textbf{Show:} We now want to show that $ a_{n+1} \geq \frac{1}{2}+\frac{\sqrt{17}}{2}\ \forall\ n \in \N$. So,
+			\item $\displaystyle\sum_{n=1}^{\infty} n \sin \frac{1}{n}$
+			\begin{proof}
+				Let $a_n$ be the sequence whose terms are obtained by $a_n:=n\sin\left(\frac{1}{n}\right)$, for $n \in \N$. Then we have
+				\[\limx{n}{\infty} a_n = \limx{n}{\infty} n \sin \left(\frac{1}{n}\right)=\limx{n}{\infty} \frac{\sin\left(\frac{1}{n}\right)}{\frac{1}{n}}=\limx{n}{\infty} \frac{\frac{-\cos\left(\frac{1}{n}\right)}{n^2}}{-\frac{1}{n^2}}=\limx{n}{\infty} \cos\left(\frac{1}{n}\right) = \cos(0) = 1\]
+				By using \textit{L'Hospital's Rule}. Thus by the \textit{$n$th Term Test}, since $\limx{n}{\infty} a_n \neq 0$, the sum $\displaystyle\sum_{n=1}^{\infty} n\sin\left(\frac{1}{n}\right)$ is divergent.
+			\end{proof}
+			\item $\displaystyle\sum_{n=1}^{\infty} \left(1-\frac{1}{n}\right)^n$
+			\begin{proof}
+				Let $a_n$ be the sequence whose terms are obtained by $a_n:=\left(1-\frac{1}{n}\right)^n$, for $n \in \N$. Then, we have
+				\begin{align*}
+					\limx{n}{\infty} a_n &= \limx{n}{\infty} \left(1-\frac{1}{n}\right)^n \\
+					&= \limx{n}{\infty} e^{\ln \left(1-\frac{1}{n}\right)^n} \\
+					&= \limx{n}{\infty} \exp\left\{\ln\left(1-\frac{1}{n}\right)^n\right\} \\
+					&= \limx{n}{\infty} \exp \left\{n\ln\left(1-\frac{1}{n}\right)\right\} \\
+					&= \limx{n}{\infty} \exp\left\{\frac{\ln\left(1-\frac{1}{n}\right)}{\frac{1}{n}}\right\} \\
+					&= \limx{n}{\infty} \exp \left\{\frac{\frac{1}{1-\frac{1}{n}}\cdot \frac{1}{n^2}}{-\frac{1}{n^2}}\right\} \\
+					&= \limx{n}{\infty} \exp \left\{\frac{\frac{1}{n^2-n}}{-\frac{1}{n^2}}\right\} \\
+					&= \limx{n}{\infty} \exp\left\{-\frac{n^2}{n^2-n}\right\} \\
+					&= \limx{n}{\infty} \exp \left\{-\frac{n}{n-1}\right\} \\
+					&= \limx{n}{\infty} \exp \left\{-\frac{1}{1-\frac{1}{n}}\right\} \\
+					&= \exp \left\{-\frac{1}{1-0}\right\} \\
+					&= \exp (-1) \\
+					&= e^{-1} \\
+					&= \frac{1}{e}
+				\end{align*}
+				By using \textit{L'Hospital's Rule}. Thus by the \textit{$n$th Term Test}, since $\limx{n}{\infty} a_n \neq 0$, we have that the sum $\displaystyle\sum_{n=1}^{\infty} \left(1-\frac{1}{n}\right)^n$ diverges.
+			\end{proof}
+		\end{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Give an example of two series $\sum a_k$ and $\sum b_k$ that differ in the first five terms, yet converge to the same value.
+			\\\\Consider $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n$. This series converges to 2. Also notice that $1+2+3+4-10\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n = 2$. Thus the first five terms are different but converge to the same value.\\
+			\item Give an example of two series $\sum a_k$ and $\sum b_k$ that differ in infinitely many terms, yet converge to the same value.
+			\\\\Consider the sums
+			\[\sum_{n=0}^{\infty} \frac{15}{32} \left(\frac{1}{16}\right)^n\ \text{ and }\ \sum_{n=2}^{\infty} \frac{1}{n(n+1)}\]
+			Let $a_n$ and $b_n$ be the sequences whose terms are obtained by $a_n:=\frac{15}{32}\left(\frac{1}{16}\right)^n$, for $n =0,1,2,3,\dots$, and let $b_n:=\frac{1}{n(n+1)}$, for $n \in \N$. Then we have 
+			\[a_n:=\left(\frac{15}{32}, \frac{15}{512}, \frac{15}{8192}, \frac{15}{131072}, \frac{15}{2097152}, \dots\right)\]
+			and
+			\[b_n:=\left(\frac{1}{6}, \frac{1}{12}, \frac{1}{20}, \frac{1}{30}, \frac{1}{42},\dots\right)\]
+			It is clear that since the numerator of each term of $a_n$ is always $15$, and that the numerator of $b_n$ is always $1$, these two sequences are different at every term and thus differ in infinitely many terms, and thus the terms of the sums $\sum a_n$ and $\sum b_n$ also differ in infinitely many terms. Thus the first five terms of $\sum a_n$ are
+			\[\frac{15}{32},\ \frac{255}{512},\ \frac{4095}{8192},\ \frac{65535}{131072},\ \frac{1048575}{2097152},\ \dots\]
+			and the first five terms of $\sum b_n$ are
+			\[\frac{1}{6},\ \frac{1}{4},\ \frac{3}{10},\ \frac{1}{3},\ \frac{5}{14},\ \dots\]
+			However, notice that $\sum a_n$ and $\sum b_n$ converge to the  same value:
 			\begin{align*}
-				a_{n+1} &= \sqrt{4+a_n}, &\text{by the definition of the sequence} \\
-				&\geq \sqrt{4+\left(\frac{1}{2}+\frac{\sqrt{17}}{2}\right)}, &\text{by the inductive hypothesis} \\
-				&\geq \sqrt{\frac{8}{2}+\frac{1}{2}+\frac{\sqrt{17}}{2}} \\
-				&\geq \sqrt{\frac{9+\sqrt{17}}{2}} \\
-				&\geq \sqrt{\frac{1}{2}\left(9+\sqrt{17}\right)} \\
-				&\geq \sqrt{\frac{1}{4}+\frac{\sqrt{17}}{2}+\frac{17}{4}}, &\text{by expressing } \frac{9+\sqrt{17}}{2} \text{ as a square} \\
-				&\geq \sqrt{\frac{1+2\sqrt{17}+17}{4}} \\
-				&\geq \sqrt{\frac{1+2\sqrt{17}+(\sqrt{17})^2}{4}} \\
-				&\geq \sqrt{\frac{(\sqrt{17}+1)^2}{4}} \\
-				&\geq \sqrt{\frac{1}{4}\left(1+\sqrt{17}\right)^2} \\
-				&\geq \frac{\sqrt{(1+\sqrt{17})^2}}{\sqrt{4}} \\
-				&\geq \frac{\sqrt{17}+1}{2} \\
-				&\geq \frac{1}{2} + \frac{\sqrt{17}}{2}
+			\sum_{n=0}^{\infty} \frac{15}{32} \left(\frac{1}{16}\right)^n &= \frac{\frac{15}{32}}{1-\frac{1}{16}} \\
+			&= \frac{\frac{15}{32}}{\frac{15}{16}} \\
+			&= \frac{15 \cdot 16}{15 \cdot 32} \\
+			&= \frac{240}{480} \\
+			&= \frac{1}{2}
 			\end{align*}
-			Thus we have that $ a_{n+1} \geq \frac{1}{2} + \frac{\sqrt{17}}{2}\ \forall\ n \in \N$.
-		\end{proof}
-		Now, we want to show that $ (a_n) $ is monotone decreasing; that is, we want to show that $(a_1 \geq a_2 \geq \dots \geq a_n)$.
-		\begin{proof}
-			We want to show that $(a_1 \geq a_2 \geq \dots \geq a_n),\ \forall\ n \in \N$. We prove this by method of mathematical induction.
-			\\\\\textbf{Basis Step:} Since $5 \geq 3$, we have that $a_1 \geq a_2$.
-			\\\\\textbf{Inductive Step:} Assume $a_n \geq a_{n+1}\ \forall\ n \in \N$.
-			\\\\\textbf{Show:} We want to show that $a_{n+1} \geq a_{n+2}\ \forall\ n \in \N$. So,
+			and
 			\begin{align*}
-				a_{n+2} &= \sqrt{4+a_{n+1}} &\text{by the definition of the sequence} \\
-				&\leq \sqrt{4+a_n} &\text{by the inductive hypothesis} \\
-				&=a_{n+1}
+			\sum_{n=2}^{\infty} \frac{1}{n(n+1)} &= \sum_{n=2}^{\infty} \frac{A}{n} + \frac{B}{n+1} \\
+			1&=An+Bn+A \\
+			\begin{cases}
+			An+Bn=0 \\
+			A=1
+			\end{cases} &\implies \begin{cases}
+			A=1 \\
+			B=-1
+			\end{cases} \\
+			&\Downarrow \\
+			\sum_{n=2}^{\infty} \frac{1}{n(n+1)}&= \sum_{n=2}^{\infty}\frac{1}{n}-\frac{1}{n+1} \\
+			&= \left(\frac{1}{2}-\cancel{\frac{1}{3}}\right) + \left(\cancel{\frac{1}{3}}-\cancel{\frac{1}{4}}\right) + \left(\cancel{\frac{1}{4}}-\cancel{\frac{1}{5}}\right) + \\
+			&\dots + \left(\cancel{\frac{1}{n-1}}-\cancel{\frac{1}{n}}\right) + \left(\cancel{\frac{1}{n}}-\frac{1}{n+1}\right) \\
+			&= \limx{n}{\infty} \frac{1}{2} - \frac{1}{n+1} \\
+			&= \frac{1}{2}-0 \\
+			&= \frac{1}{2}
 			\end{align*}
-			Thus we have that $a_{n+1} \geq a_{n+2}\ \forall\ n \in \N$.
-		\end{proof}
-	Since $(a_n)$ is both bounded and monotone decreasing, by the \textit{Monotone Convergence Theorem}, we have that $(a_n)$ converges. Also by the \textit{Monotone Sequence Property}, we have that $(a_n)$ converges to the following:
-	\begin{align*}
-		\lim (a_n) &= \inf \{a_n: n \in \N\} \\
-		&= \frac{1}{2}+\frac{\sqrt{17}}{2} \approx 2.56155281281
-	\end{align*}
-	\end{enumerate}
+			Thus we have that
+			\[\sum_{n=0}^{\infty} \frac{15}{32} \left(\frac{1}{16}\right)^n = \sum_{n=2}^{\infty} \frac{1}{n(n+1)} = \frac{1}{2}\]
+			\item Give an example of two series $\sum a_k$ and $\sum b_k$ that converge to real numbers $A$ and $B$, respectively, but the series $\sum a_kb_k$ converges to a value different from $AB$.
+			\\\\Consider the series $\displaystyle\sum_{n=0}^{\infty} \left(\frac{1}{2}\right)^n$ and $\displaystyle\sum_{n=0}^{\infty} \left(\frac{1}{3}\right)^n$. Then we have
+			\[\sum_{n=0}^{\infty} \left(\frac{1}{2}\right)^n=\frac{1}{1-\frac{1}{2}}=\frac{2}{1}=2\]
+			and
+			\[\sum_{n=0}^{\infty} \left(\frac{1}{3}\right)^n = \frac{1}{1-\frac{1}{3}} = \frac{3}{2}\]
+			Note that $2 \cdot \frac{3}{2}=\frac{6}{2} = 3$. But the series
+			\[\sum_{n=0}^{\infty} \left(\frac{1}{2}\right)^n\left(\frac{1}{3}\right)^n = \sum_{n=0}^{\infty} \left(\frac{1}{2} \cdot \frac{1}{3}\right)^n = \sum_{n=0}^{\infty} \left(\frac{1}{6}\right)^n = \frac{1}{1-\frac{1}{6}}=\frac{6}{5}\]
+			Thus we have that the product of the sums, 3, is not equal to the sum of the products, $\frac{6}{5}$.\\
+			\item Give an example of a series that diverges and whose sequence of partial sums is bounded.
+			\\\\Consider an alternating series, $\displaystyle\sum_{n=1}^{\infty} (-1)^n$. Then, note that $S_1:=-1,\ S_2:=-1+1=0,\ S_3:=-1+1-1=-1, S_4:=-1+1-1+1=0,\dots$. Then we have that the sequence of partial sums is bounded below by $-1$ and is bounded above by $1$. However, since this is an alternating series, we know that by the \textit{Geometric Series Test}, since $|r| = |-1|=1 \nless 1$, this series is divergent.
+		\end{enumerate}
 	
-	\item 
-	\begin{enumerate}
-		\item Show $a_n=\frac{3 \cdot 5 \cdot 7 \cdot \dots (2n-1)}{2 \cdot 4 \cdot 6 \dots (2n)}$ converges to $A$ where $0 \leq A < 1/2$.
-		\\\\\textbf{TODO}
-		
-		\item Show $b_n = \frac{2 \cdot 4 \cdot 6 \dots (2n)}{3 \cdot 5 \cdot 7 \dots (2n+1)}$ converges to $B$ where $0 \leq B < 2/3$.
-		\\\\\textbf{TODO}
-	\end{enumerate}
-
-	\item \textbf{Section 3.4}
-	\begin{enumerate}
-		\item[1)] Give an example of an unbounded sequence that has a convergent subsequence.
-		\\\\Let $a_n:=(-1)^n$. This sequence diverges since it oscillates between 1 and $-1$, however if we define $b_n:=(a_{2n})$; that is, let $(b_n)$ be the sequence of all terms of $(a_n)$ such that $n$ is even. Thus, $(b_n)$ is a subsequence of $(a_n)$, but $(b_n)$ converges since $a_2=1, a_4=1, \dots, a_{2n}=1$. Thus while $(a_n)$ is a divergent sequence, the subsequence $(b_n)$ of $(a_n)$ converges for all $n \in \N$.\\
-		
-		\item[3)] Let $(f_n)$ be the Fibonacci sequence of Example 3.1.2(d), and let $x_n := f_{n+1}/f_n$. Given that $\lim (x_n) =L$ exists, determine the value of $L$.
-		\\\\We can rewrite $(x_n)$ as follows:
-		\begin{align*}
-			x_n &= \frac{f_{n+1}}{f_n} \\
-			&=\frac{f_n+f_{n-1}}{f_n} \\
-			&= 1+\frac{f_{n-1}}{f_n} \\
-			&= 1+\frac{\frac{1}{f_n}}{f_{n-1}} \\
-			&= 1+\frac{1}{x_{n-1}}
-		\end{align*}
-		Since we're given that $L=\lim (x_n)$ exists and since we just showed that it's equal to $\lim (x_{n-1})$, we get the following:
-		\begin{align*}
-			x_n &= \left. 1+\frac{1}{x_{n-1}}\ \ \ \ \ \right| \lim \\
-			\lim (x_n) &= 1+\frac{1}{\lim(x_{n-1})} \\
-			L &= \left. 1+\frac{1}{L}\ \ \ \ \ \right| \cdot L \\
-			L^2 &= L + 1 \\
-			L^2-L-1 &= 0 \\
-			L_{1,2} &= \frac{1 \pm \sqrt{1-4 \cdot 1 \cdot (-1)}}{2} \\
-			L_1 &= \frac{1-\sqrt{5}}{2} <0 \\
-			L_2 &= \frac{1+\sqrt{5}}{2}>0
-		\end{align*}
-		Now, since $f_n >0 \Rightarrow x_n >0 \Rightarrow L>0$, we can infer that the proper limit is
-		\[L=\frac{1+\sqrt{5}}{2}\]
-		\\
-		
-		\item[4a)] Show that the sequence $(1-(-1)^n+1/n)$ converges.
-		\\\\ Let $(x_n):=(1-(-1)^n+1/n)$. Let $(z_n)=(x_{2n})$, and $(w_n)=(x_{2n-1})$ be subsequence of $(x_n)$. Then $(z_n)$ is the subsequence of all terms of $(x_n)$ such that $n$ is even, and $(w_n)$ is the subsequence of all terms of $(x_n)$ such that $n$ is odd.
-		\\\\These subsequences yield the following:
-		\[z_n = x_{2n} = 1-(-1)^{2n}+\frac{1}{2n}=1-1+\frac{1}{2n}=\frac{1}{2n}\]
-		\[w_n=x_{2n-1}=1-(-1)^{2n-1}+\frac{1}{2n-1}=1+1+\frac{1}{2n-1}=2+\frac{1}{2n-1}\]
-		Now, if we take the limit of each sequence as $n \rightarrow \infty$ yields
-		\[\lim_{n \to \infty} (z_n) = 0 \neq 2 = \lim_{n \to \infty} (w_n)\]
-		Recall Theorem 3.4.5 \textit{Divergence Criteria}:
-		\begin{theorem*}
-			If a sequence $X=(x_n)$ of real numbers has either of the following properties, then $X$ is divergent.
-			\begin{enumerate}
-				\item $X$ has two convergent subsequences $X'=(x_{n_k})$ and $X''=(x_{r_k})$ whose limits are not equal.
-				
-				\item $X$ is unbounded
-			\end{enumerate}
-		\end{theorem*}
-		Thus by the \textit{Divergence Criteria}, we have that since $(z_n)$ and $(w_n)$ satisfy the first property of the \textit{Divergence Criteria}, we can conclude that the sequence $(x_n)$ is divergent. \\
-		
-		\item[16)] Give an example to show that Theorem 3.4.9 fails if the hypothesis that $X$ is a bounded sequences is dropped.
-		\\\\Recall \textit{Theorem 3.4.9}:
-		\begin{theorem*}
-			If $(x_n)$ is a bounded sequence of real numbers, then the following statements for a real number $x^*$ are equivalent:
-			\begin{enumerate}
-				\item $x^*= \lim \sup (x_n)$.
-				
-				\item If $\varepsilon > 0$, there are at most a finite number of $n \in \N$ such that $x^*+\varepsilon<x_n$, but an infinite number of $n \in \N$ such that $x^*-\varepsilon<x_n$.
-				
-				\item If $u_m=\sup \{x_n : n \geq m\}$, then $x^*=\inf \{u_m:m \in \N\}=\lim (u_m)$.
-				
-				\item If $S$ is the set of subsequential limits of $(x_n)$, then $x^*= \sup (S)$.\\
-			\end{enumerate}
-		\end{theorem*}
-		Consider the sequence $((-1)^nn)$. We note that any subsequence of this sequence is unbounded and thus this sequence has no convergent subsequence. Due to this, all of the conditions of \textit{Theorem 3.4.9} are satisfied vacuously, save the condition concerning boundedness. However, this sequence doesn't converge, but both oscillates and diverges towards $\infty$ and $-\infty$. Thus if the boundedness criterion of the theorem is dropped, this theorem fails.
-		
-		\item[18)] Show that if $(x_n)$ is a bounded sequence, then $(x_n)$ converges if and only if $\lim \sup (x_n) = \lim \inf (x_n)$.
-		\begin{proof}
-			Let $(x_n)$ be a bounded sequence. We want to show that $(x_n)$ converges if and only if $\lim \sup (x_n) = \lim \inf (x_n)$.
-			\\\\\textbf{TODO}
-		\end{proof}
-		
-		\item[19)] Show that if $(x_n)$ and $(y_n)$ are bounded sequences, then
-		\[\lim \sup (x_n + y_n) \leq \lim \sup (x_n) + \lim \sup (y_n).\]
-		Give an example in which the two sides are not equal.
-		\\\\\textbf{TODO}
-	\end{enumerate}
-	\item 
-	\begin{enumerate}
-		\item Show that $x_n=e^{\sin (5n)}$ has a convergent subsequence.
-		
-		\item Give an example of a bounded sequence with three subsequences converging to three different numbers.
-		
-		\item Give an example of a sequence $x_n$ with $\lim \sup x_n = 5$ and $\lim \sup x_n = -3$.
-		
-		\item Let $\lim \sup x_n = 2$. True or False: if $n$ is sufficiently large, then $x_n > 1.99$.
-		
-		\item Compute the infimum, supremum, limit infimum, and limit supremum for $a_n = 3 - (-1)^n - (-1)^n/n$. 
-	\end{enumerate}
-
-	\item Prove or justify, if true. Provide a counterexample, if false.
-	\begin{enumerate}
-		\item If $a_n$ and $b_n$ are strictly increasing, then $a_n + b_n$ is strictly increasing.
-		
-		\item If $a_n$ and $b_n$ are strictly increasing, then $a_n \cdot b_n$ is strictly increasing.
-		
-		\item If $a_n$ and $b_n$ are monotonic, then $a_n + b_n$ is monotonic.
-		
-		\item If $a_n$ and $b_n$ are monotonic, then $a_n \cdot b_n$ is monotonic.
-		
-		\item If a monotone sequence is bounded, then it is convergent.
-		
-		\item If a bounded sequence is monotone, then it is convergent.
-		
-		\item If a convergent sequence is monotone, then it is bounded.
-		
-		\item If a convergent sequence is bounded, then it is monotone.
-	\end{enumerate}
+		\item Prove or justify, if true. Provide a counterexample, if false.
+		\begin{enumerate}
+			\item If $a_n$ is strictly decreasing and $\limx{n}{\infty} a_n=0$, then $\sum a_n$ converges.
+			\\\\This is a false statement. Consider the series $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$. Then, we have that $\limx{n}{\infty} \frac{1}{n} =0$, however since this is a harmonic series, we know that it is divergent, thus $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n} = \infty$ is divergent.\\
+			
+			\item If $a_n \neq b_n$ for all $n \in \N$ and if $\sum (a_n+b_n)$ converges, then either $\sum a_n$ converges or $\sum b_n$ converges.
+			\\\\This is a false statement. Consider the series $\displaystyle\sum_{n=1}^{\infty} (-1)^n$ and $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1}$. Then we have that $\displaystyle\sum_{n=1}^{\infty} (-1)^n = -1+1-1+1-1+\dots$, which is divergent by the \textit{Geometric Series Test}, and $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} = 1-1+1-1+1-1+\dots$, which is also divergent by the \textit{Geometric Series Test}. However, $\displaystyle\sum_{n=1}^{\infty} (-1)^n+(-1)^{n+1} = 0+0+0+0+\dots = 0$ and thus converges. However, $a_n \neq b_n$ for all $n \in \N$ since
+			$a_n:= -1,1,-1,1,-1,1,\dots$ and $b_n:=1,-1,1,-1,1,-1,\dots$. Thus for all $n \in \N$, either $a_n=-1 \neq 1 = b_n$, or $a_n=1\neq -1=b_n$. Thus we have that $\sum (a_n+b_n)$ converges but neither $\sum a_n$ nor $\sum b_n$ converge.\\
+			
+			\item Suppose $\sum (a_n+b_n)$ converges. Then $\sum a_n$ converges if and only if $\sum b_n$ converges. 
+			\\\\This is a true statement since if $\sum (a_n+b_n)$ converges, then both $a_n+b_n$ converges, as was covered in our notes.\\
+			
+			\item If $\limx{n}{\infty} a_n=A$, then $\displaystyle\sum_{n=1}^{\infty} (a_n-a_{n+2})=a_1+a_2-2A$.
+			\begin{proof}
+				Notice that we can rewrite the sum $\displaystyle\sum_{n=1}^{\infty} (a_n-a_{n+2})$ as $\displaystyle\sum_{n=1}^{\infty} \left((a_n-a_{n+1})+(a_{n+1}-a_{n+2})\right)$. Now, we have that the $n$th partial sum yields a telescoping series:
+				\[S_n:=[(a_1-\cancel{a_2})+(a_2-\cancel{a_3})]+ [(\cancel{a_2}-\cancel{a_3})+(\cancel{a_3}-\cancel{a_4})] + \dots + [(\cancel{a_n}-a_{n+1})+(\cancel{a_{n+1}}-a_{n+2})]\]
+				So $S_n=a_1+a_2-a_{n+1}-a_{n+2}$, which yields $\limx{n}{\infty} =a_1+a_2-A-A=a_1+a_2-2A$.
+			\end{proof}
+			
+			\item $\sum a_n$ converges if and only if $\limx{n}{\infty} a_n=0$.
+			\\\\This is a false statement. Consider the series $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$. This is the harmonic series, which we know diverges. However, $\limx{n}{\infty} \frac{1}{n} = 0$. Thus the limit is equal to 0, but the series does not converge.\\
+			
+			\item Changing the first few terms in a series may affect the value of the sum of the series.
+			\begin{proof}
+				Suppose $x_n \to x$. Then for all $\varepsilon >0$, there exists some $N \in \N$ such that if $n \geq N$, then $|x_n-x| < \varepsilon$. Now, suppose $x'_n$ is a sequence such that for $n \geq M$, then $x'_n=x_n$.
+				\\\\Let $\varepsilon>0$ be given. Then there exists some $N \in \N$ such that for all $n \geq N$, $|x_n-x|<\varepsilon$. Let $N'=\max (N,M)$. Then if $n \geq N'$, we have that $|x'_n-x|<\varepsilon$. Hence $x'_n \to x$.
+				\\\\Consider a convergent series $\sum x_n$. If we let $s_n=x_1+x_2+\dots +x_n$, then we have that $s_n \to s$.
+				\\\\Consider the series $\sum x'_n$, where for $n \geq M$, then $x'_n=x_n$. Let $s'_n=x'_1+x'_2+\dots+x'_n$. Note that for $n \geq M$, we have $s'_n-s'_{M-1}=x'_M+\dots+x'_n=x_M+\dots + x_n$, and thus $s'_n-s'_{M-1}=s_n-s_{M-1}\to s-s_{M-1}$. Hence $s'_n \to (s-s_{M-1}+s'_{M-1})$.
+			\end{proof}
+			
+			\item Changing the first few terms in a series may affect whether or not the series converges.
+			\\\\This is a false statement. Consider the telescoping series used previously, given by $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n(n+1)}$. We know this series converges to $\frac{1}{2}$. Consider changing the first few terms as follows: 
+			\[\left(\frac{1}{2}-\cancel{\frac{1}{3}}\right) + \left(\cancel{\frac{1}{3}}-\cancel{\frac{1}{4}}\right) + \left(\cancel{\frac{1}{4}}-\cancel{\frac{1}{5}}\right) +\dots \to \left(1-\cancel{\frac{1}{2}}\right) + \left(\cancel{\frac{1}{2}}-\cancel{\frac{1}{4}}\right) + \left(\cancel{\frac{1}{4}}-\cancel{\frac{1}{5}}\right) + \dots\]
+			Now we have that this series converges to 1, not $\frac{1}{2}$. However, despite changing the first few terms of the series, we did not change whether or not it converges. This is because the first few terms of a series can only finitely affect the sum. Thus, if a series converges, a finite change to the terms will still create a finite sum. Likewise, if the series diverges, a finite change will not allow the series to converge to a finite sum.\\
+			
+			\item If $\sum a_n$ converges and $\limx{n}{\infty} \frac{a_n}{b_n}=0$, then $\sum b_n$ converges.
+			\\\\This is a false statement. Consider the series $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n$ and $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$, which we note is the harmonic series. Then we have that $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n = \frac{1}{1-\frac{1}{2}} = 2$ since it is a geometric series. Thus $\sum a_n$ converges. Also, notice that
+			\[\limx{n}{\infty} \left(\frac{\left(\frac{1}{2}\right)^n}{\frac{1}{n}}\right)=0\]
+			However, since $\sum b_n = \displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$, which is the harmonic series, we know that it is divergent, and thus if $\sum a_n$ converges and $\limx{n}{\infty} \frac{a_n}{b_n}=0$, $\sum b_n$ can still be divergent.
+		\end{enumerate}
 	\end{enumerate}
 \end{document}

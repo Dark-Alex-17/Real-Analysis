@@ -1,0 +1,467 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 1}
+\begin{document}
+	\maketitle
+	\textbf{Section 7.1 - The Riemann Integral}
+	\begin{enumerate}
+		\item 
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.1 Question 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			\item[1.] If $I:=[0,4]$, calculate the norms of the following partitions:
+			\begin{enumerate}
+				\item[c.] $\mathcal{P}_3 := (0,1,1.5,2,3.4,4)$
+				\\$||\mathcal{P}_3||=1.4$
+				\item[d.] $\mathcal{P}_4 := (0,.5,2.5,3.5,4)$
+				\\$||\mathcal{P}_4||=2$
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.1 Question 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			\item[2.] If $f(x):=x^2$ for $x \in [0,4]$, calculate the following Riemann sums, where $\dotp_i$ has the same partition points as in Exercise 1, and the tags are selected as indicated.
+			\\$\dotp_1 := (0,1,2,4)$
+			\\$\dotp_2 := (0,2,3,4)$
+			\begin{enumerate}
+				\item[(a)] $\dotp_1$ with the tags at the left endpoints of the subintervals.
+				\\The subintervals are:
+				\[I_1:=[0,1],\ I_2:=[1,2],\ I_3:=[2,4]\]
+				So the tags are:
+				\[t_1:=0,\ t_2:=1,\ t_3:=2\]
+				\begin{align*}
+					S(f,\dotp_1) &= \sum_{i=1}^{n} f(t_i)(x_i-x_{i-1}) \\
+					&= f(0)(x_1-x_0)+f(1)(x_2-x_1)+f(2)(x_3-x_2) \\
+					&= 0^2(1-0)+1^2(2-1)+2^2(4-2) \\
+					&= 1+8 \\
+					&= 9
+				\end{align*}
+				\item[(b)] $\dotp_1$ with the tags at the right endpoints of the subintervals.
+				\\The subintervals are
+				\[I_1:=[0,1],\ I_2:=[1,2],\ I_3:=[2,4]\]
+				So the tags are:
+				\[t_1:=1,\ t_2:=2,\ t_3:=4\]
+				\begin{align*}
+					S(f,\dotp_1)&=\sum_{i=1}^{n}f(t_i)(x_i-x_{i-1}) \\
+					&= f(1)(x_1-x_0)+f(2)(x_2-x_1)+f(4)(x_3-x_2) \\
+					&= 1^2(1-0)+2^2(2-1)+4^2(4-2)\\
+					&= 1+4+32\\
+					&= 37
+				\end{align*}
+				\item[(c)] $\dotp_2$ with the tags at the left endpoints of the subintervals.
+				\\The subintervals are:
+				\[I_1:=[0,2],\ I_2:=[2,3],\ I_3:=[3,4]\]
+				So the tags are:
+				\[t_1:=0,\ t_2:=2,\ t_3:=3\]
+				\begin{align*}
+					S(f,\dotp_2)&= \sum_{i=1}^{n} f(t_i)(x_i-x_{i-1})\\
+					&= f(0)(x_1-x_0)+f(2)(x_2-x_1)+f(3)(x_3-x_2) \\
+					&= 0^2(2-0)+2^2(3-2)+3^2(4-3) \\
+					&= 4+9 \\
+					&= 13
+				\end{align*}
+				\item[(d)] $\dotp_2$ with the tags at the right endpoints of the subintervals.
+				\\So the subintervals are:
+				\[I_1:=[0,2],\ I_2:=[2,3],\ I_3:=[3,4]\]
+				So the tags are:
+				\[t_1:=2,\ t_2:=3,\ t_3:=4\]
+				\begin{align*}
+					S(f,\dotp_2)&= \sum_{i=1}^{n} f(t_i)(x_i-x_{i-1})\\
+					&= f(2)(2-0)+f(3)(3-2)+f(4)(4-3) \\
+					&= 2^2(2)+3^2(1)+4^2(1) \\
+					&= 8+9+16 \\
+					&= 33
+				\end{align*}
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.1 Question 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[6.]
+			\begin{enumerate}
+				\item[(a)] Let $f(x):=2$ if $0 \leq x < 1$ and $f(x):= 1$ if $1 \leq x \leq 2$. Show that $f \in \mathcal{R}[0,2]$ and evaluate its integral.
+				\\\\We estimate by the graph of $f$ that the integral of $f$ is 3. We must now show by the definition of the integral that the integral of $f$ is 3.
+				\begin{proof}
+					Let $\dotp$ be a tagged partition of $[0,2]$. Let $\dotp_1 \subseteq \dotp$ with tags in $[0,1]$, and let $\dotp_2 \subseteq \dotp$ with tags in $[1,2]$. 
+					\\\\We know that
+					\[[0,1-||\dotp||] \subseteq U_1 \subseteq [0,1+||\dotp||]\ \ \ \ (1)\]
+					and
+					\[[1+||\dotp||,2] \subseteq U_2 \subseteq [1-||\dotp||,2]\ \ \ \ (2)\]
+					where $U_1$ and $U_2$ are the union of the subintervals $\dotp_1$ and $\dotp_2$, respectively.
+					\\\\Now, we can calculate $S(f;\dotp_1)$ and $S(f;\dotp_2)$.
+					\begin{align*}
+						S(f;\dotp_1) &= \sum_{I_i \in \dotp_1} f(t_i)(x_i-x_{i-1}) \\
+						&= \sum_{I_i \in \dotp_1} 2(x_i-x_{i-1}) \\
+						&(I_i \in \dotp_1 \implies I_i \subseteq [0,1]\ \text{where the function value is }2)\\
+						&=2\ \sum_{I_i \in \dotp_1} (x_i-x_{i-1}) \\
+						&\in [2(1-||\dotp||), 2(1+||\dotp||)] = [2-2||\dotp||, 2+2||\dotp||]
+					\end{align*}
+					\begin{center}
+						(Because of (1) we know that the range of the subinterval lengths in $\dotp_1$)
+					\end{center}
+					\begin{align*}
+						S(f;\dotp_2)&=\sum_{I_i \in \dotp_2} f(t_i)(x_i-x_{i-1}) \\
+						&= \sum_{I_i \in \dotp_2} 1 (x_i-x_{i-1}) \\
+						&(I_i \in \dotp_2 \implies I_i \subseteq [1,2]\text{ where the function value is }1) \\
+						&= \sum_{I_i \in \dotp_2} (x_i-x_{i-1}) \\
+						&\in [1-||\dotp||, 1+||\dotp||]
+					\end{align*}
+					\begin{center}
+						(Because of (2), we know the range of the subinterval lengths in $\dotp_2$)
+					\end{center}
+					Therefore,
+						\[S(f;\dotp)=S(f;\dotp_1)+S(f;\dotp_2) \in [3(1-||\dotp||),3(1+||\dotp||)]\]
+						\[\Updownarrow\]
+						\[3-3||\dotp||\leq S(f;\dotp) \leq 3+3||\dotp||\]
+						\[\Updownarrow\]
+						\[|S(f;\dotp)-3| \leq 3||\dotp||\]
+						For arbitrary $\varepsilon >0$ we can pick a tagged partition $\dotp$ such that 
+						\[||\dotp||<\frac{\varepsilon}{3}\]
+						Thus $f \in \mathcal{R}[0,2]$.
+				\end{proof}
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.1 Question 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[8.] If $f \in \mathcal{R}[a,b]$ and $|f(x)| \leq M$ for all $x\in [a,b]$, show that $\abs{\int_{a}^{b}f}\leq M (b-a)$.
+			\\Note that
+			\[-M \leq |f(x)| \leq M,\ \forall\ x \in [a,b]\]
+			By \textit{Theorem 7.1.5 c}, and since every constant function on $[a,b]$ is in $\mathcal{R}[a,b]$, we have that
+			\[-M(b-a) \leq \int_{a}^{b} (-M) \leq \int_{a}^{b} f \leq \int_{a}^{b} M = M(b-a)\]
+			Therefore, 
+			\[\abs{\int_{a}^{b}f}\leq M(b-a)\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.1 Question 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[12.] Consider the Dirichlet function, introduced in Example 5.1.6(g), defined by $f(x):=1$ for $x \in [0,1]$ rational and $f(x):=0$ for $x \in [0,1]$ irrational. Use the preceding exercise to show that $f$ is \textit{not} Riemann integrable on $[0,1]$.\\
+			\\Let
+			\[\dotp_n:= \left\{\left[\frac{i-1}{n},\frac{i}{n}\right], \frac{i}{n}\right\}_{i=1}^n,\ n \geq 1\]
+			Then $||\dotp_n||=\frac{1}{n} \to 0$ as $n \to \infty$.
+			\\Then,
+			\[S(f;\dotp_n):=\sum_{i=1}^{n}f\left(\frac{i}{n}\right)\left(\frac{i}{n}-\frac{i-1}{n}\right)=\sum_{i=1}^{n}1 \cdot \frac{i}{n} = 1\]
+			because $\frac{i}{n}$ is rational.
+			\\\\Let 
+			\[\dotq_n:=\left\{\left[\frac{i-1}{n},\frac{i}{n}\right],\alpha_i\right\}_{i=1}^n,\ n \geq 1\]
+			where $\alpha_i$ is an irrational number in the interval $\left[\frac{i-1}{n}, \frac{i}{n}\right]$, for $i=1,2,\dots,n$.
+			\\Then $||\dotq_n||=\frac{1}{n} \to 0$ as $n \to \infty$.
+			\\Then,
+			\[S(f;\dotq_n):=\sum_{i=1}^{n}f(\alpha_i)\left(\frac{i}{n}-\frac{i-1}{n}\right)=\sum_{i=1}^{n}0 \cdot \frac{i}{n}=0\]
+			because $\alpha_i$ is irrational.
+			\\\\Therefore,
+			\[\lim\limits_n S(f; \dotp_n)=1 \neq 0 = \lim\limits_n S(f;\dotq_n)\]
+			By the definition of a Riemann integrable function, for any $\varepsilon>0$, there exists $\delta > 0$ such that for all tagged partitions $\dotp$ with $||\dotp||<\delta$ we have
+			\[\abs{S(f;\dotp)-\int_{a}^{b}f}<\frac{\varepsilon}{2}\]
+			Because $||\dotp_n||\to 0$, there exists $n_1 \in \N$ such that
+			\[n>n_1 \implies ||\dotp_n||<\delta\]
+			Similarly, because $||\dotq_n|| \to 0$, there exists $n_2 \in \N$ such that
+			\[n>n_2 \implies ||\dotq_n||<\delta\]
+			Let $n_0:=\max \{n_1,n_2\}$. Then for all $n > n_0$ we have that
+			\[||\dotp_n||<\delta\ \&\ ||\dotq_n||<\delta\]
+			so we have
+			\[\abs{S(f;\dotp_n)-\int_{a}^{b}f}<\frac{\varepsilon}{2}\ \&\ \abs{S(f;\dotq_n)-\int_{a}^{b}f}<\frac{\varepsilon}{2}\]
+			Therefore, for all $n > n_0$,
+			\begin{align*}
+				\abs{S(f;\dotp_n)-S(f;\dotq_n)}&<\abs{S(f;\dotp_n)-\int_{a}^{b}f}+\abs{S(f;\dotq_n)-\int_{a}^{b}f} \\
+				&< \frac{\varepsilon}{2}+\frac{\varepsilon}{2} \\
+				&= \varepsilon
+			\end{align*}
+			By the definition of the limit of a sequence,
+			\[\lim\limits_n \left[S(f;\dotp_n)-S(f;\dotq_n)\right]=0,\]
+			that is,
+			\[\lim\limits_n S(f;\dotp_n)=\lim\limits_n S(f;\dotq_n)\]
+			which is a contradiction. Therefore $f \notin \mathcal{R}[a,b]$, and hence the Dirichlet function is not Riemann integrable.
+		\end{enumerate}
+	\item 
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[8.] Suppose that $f$ is continuous on $[a,b]$, that $f(x) \geq 0$ for all $x \in [a,b]$ and that $\int_{a}^{b}f=0$. Prove that $f(x)=0$ for all $x \in [a,b]$.
+			\begin{proof}
+				Suppose there exists $c \in [a,b]$ such that $f(c)>0$. Since $f$ is continuous, there exists $\delta >0$ such that $f(x)>\frac{1}{2}f(c)$ for $x \in (c-\delta, c+ \delta) \subseteq [a,b]$. Then
+				\[\int_{a}^{b}f \geq \int_{c-\delta}^{c+\delta} f \geq \frac{1}{2} f(c) \cdot 2 \delta > 0\]
+				which contradicts the fact that $\int_{a}^{b}f=0$. If $c=a$, then there exists $\delta >0$ such that $f(x)>0$ for $x \in [a,a+\delta)$, and thus the same contradiction is present. The same applies for the case in which $a=b$. Therefore we have that $f(x)=0,\ \forall\ x \in [a,b]$.
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[9.] Show that the continuity hypothesis in the preceding exercise cannot be dropped.
+			\\\\Consider the function $f:[0,1] \to \R$ given by
+			\[f(x):=\begin{cases}
+			1, &x = 0\\
+			0, & x \neq 0
+			\end{cases}\]
+			Then, $f$ has a discontinuity at the point $x=0$ and $\int_{0}^{1} f=0$, but $f$ is not zero everywhere. Therefore, continuity is a necessary part of the hypothesis.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[10.] If $f$ and $g$ are continuous on $[a,b]$ and if $\int_{a}^{b}f = \int_{a}^{b}g$, prove that there exists $c \in [a,b]$ such that $f(c)=g(c)$.
+			\begin{proof}
+				Let $f$ and $g$ be continuous functions on $[a,b]$ such that
+				\[\int_{a}^{b}f = \int_{a}^{b} g\]
+				Define $h:[a,b] \to \R$ as $h:=f-g$. Then, $h$ is continuous as a difference of continuous functions and
+				\[\int_{a}^{b}h=\int_{a}^{b} (f-g)=\int_{a}^{b}f-\int_{a}^{b}g=0\]
+				Suppose that there exists $c \in [a,b]$ such that $h(c)=0$ since $(f(c)=g(c))$. Then, since $h$ is continuous, it follows that $h(x)>0,\ \forall\ x \in [a,b]$. or $h(x)<0,\ \forall\ x \in [a,b]$ (recall \textit{Bolzano's Theorem}).
+				\\\\Suppose $h(x)>0,\ \forall\ x \in [a,b]$. Then because $h$ is a continuous function on a segment, by the \textit{Maximum-Minimum Theorem} there exists $m>0$ such that
+				\[h(x)\geq m > 0,\ \forall\ x \in [a,b]\]
+				Then we have
+				\[\int_{a}^{b} h \geq \int_{a}^{b} m=m(b-a)>0\]
+				This is a contradiction with the fact that $\int_{a}^{b} h=0$.
+				\\\\Now, for the case in which $h(x)<0,\ \forall\ x \in [a,b]$, by the \textit{Maximum-Minimum Theorem} we know that there exists $M<0$ such that
+				\[h(x)\leq M < 0\ \forall\ x \in [a,b]\]
+				and thus
+				\[\int_{a}^{b} h \leq \int_{a}^{b} M \leq M(b-a)<0\]
+				which again yields a contradiction.
+				\\\\Therefore, there exists $c \in [a,b]$ such that $h(c)=0$, that is, $f(c)=g(c)$.
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 13 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[13.] Give an example of a function $f:[a,b] \to \R$ that is in $\mathcal{R}[c,b]$ for every $c \in (a,b)$ but which is not in $\mathcal{R}[a,b]$.
+			\\\\Define a function $f$ on $[0,1]$ by
+			\[f(x):=\begin{cases}
+			\frac{1}{x}, &x \in (0,1] \\
+			1, &x=0
+			\end{cases}\]
+			For every $c>0,\ f \in \mathcal{R}[c,1]$ because $f$ is continuous on $[c,1]$.
+			\\\\Now, let's show that $f$ isn't Riemann integrable on $[0,1]$.
+			\\\\Define a tagged partition to be
+			\[\dotp := \left\{\left[\frac{i-1}{n},\frac{i}{n}\right],\frac{i}{n}\right\}_{i=1}^n\]
+			Then
+			\begin{align*}
+				S(f;\dotp) &= \sum_{i=1}^{n} f \left(\frac{i}{n}\right)\left(\frac{i}{n}-\frac{i-1}{n}\right) \\
+				&= \sum_{i=1}^{n}\frac{1}{\frac{i}{n}} \cdot \frac{1}{n} \\
+				&= \sum_{i=1}^{n} \frac{1}{i}
+			\end{align*}
+			As $n \to \infty$, $S(f;\dotp)$ diverges (since it is a harmonic series). Thus, $f$ is not Riemann integrable on $[0,1]$.
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Use the right-endpoint Riemann sums to evaluate the following integrals:
+		\begin{enumerate}
+			\item $\int_{2}^{5}(3x-1)dx$
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sum_{i=1}^{n} f(t_i)\Delta x_i &= \sum_{i=1}^{n} f(a+i\Delta x) \Delta x \\
+				&= \sum_{i=1}^{n} f\left(2+i\left(\frac{3}{n}\right)\right)\cdot \left(\frac{3}{n}\right) \\
+				&= \sum_{i=1}^{n} \left(3 \cdot \left(2+\frac{3i}{n}\right)-1\right) \cdot \left(\frac{3}{n}\right) \\
+				&= \sum_{i=1}^{n} \left(6+\frac{9i}{n}-1\right)\left(\frac{3}{n}\right) \\
+				&= \sum_{i=1}^{n}\left(5+\frac{9i}{n}\right)\left(\frac{3}{n}\right) \\
+				&= \sum_{i=1}^{n} \frac{15}{n} +\frac{27i}{n^2} \\
+				&= \frac{15}{n} \sum_{i=1}^{n} 1 + \frac{27}{n^2} \sum_{i=1}^{n} i \\
+				&= \frac{15}{\cancel{n}} \cdot \cancel{n} + \frac{27}{n^2} \cdot \frac{n(n+1)}{2} \\
+				&= 15 + \frac{27}{n^2} \cdot \frac{n^2+n}{2} \\
+				&= 15 + \frac{27n^2+27n}{2n^2} \\
+				\int_{2}^{5} (3x-1)dx &= \lim\limits_{n \to \infty} 15+\frac{27n^2+27n}{2n^2}\\
+				&= 15+\frac{27}{2}\\
+				&=28.5
+			\end{align*}
+			\item $\int_{0}^{4} (x^2+2x)dx$
+			\begin{align*}
+				\int_{0}^{4} (x^2+2x)dx &= \lim\limits_{n \to \infty} \sum_{i=1}^{n} f(t_i)\Delta x \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} f\left(a+i\Delta x\right) \Delta x \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} f\left(0+i\left(\frac{4}{n}\right)\right)\cdot \left(\frac{4}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left[\left(\frac{4i}{n}\right)^2+2\left(\frac{4i}{n}\right) \cdot \right]\left(\frac{4}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(\frac{16i^2}{n^2}+\frac{8i}{n}\right)\cdot \left(\frac{4}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(\frac{64i^2}{n^3}+\frac{32i}{n^2}\right) \\
+				&= \lim\limits_{n \to \infty} \left(\frac{64}{n^3}\ \sum_{i=1}^{n} i^2 + \frac{32}{n^2}\ \sum_{i=1}^{n} i\right) \\
+				&= \lim\limits_{n \to \infty} \left(\frac{64}{n^3}\cdot\frac{n(n+1)(n+2)}{6}+\frac{32}{n^2}\cdot \frac{n(n+1)}{2}\right) \\
+				&= \lim\limits_{n \to \infty} \left(\frac{64n^3+192n^2+128n}{6n^3}+\frac{32n^2+32n}{2n^2}\right) \\
+				&= \frac{64}{6} + 16 \\
+				&\approx 26.6667
+			\end{align*}
+			\item $\int_{0}^{2} (2x^3+x)dx$
+			\begin{align*}
+				\int_{0}^{2} (2x^3+x)dx &= \lim\limits_{n \to \infty} \sum_{i=1}^{n} f(t_i)\Delta x \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} f(a+i\Delta x)\Delta x \\
+				&=\lim\limits_{n \to \infty} \sum_{i=1}^{n} f\left(\frac{2i}{n}\right)\left(\frac{2}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(2\left(\frac{2i}{n}\right)^3+\frac{2i}{n}\right)\left(\frac{2}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(\frac{32i^3}{n^4}+\frac{4i}{n^2}\right) \\
+				&= \lim\limits_{n \to \infty} \left[\frac{32}{n^4}\ \sum_{i=1}^{n}i^3+\frac{4}{n^2}\ \sum_{i=1}^{n}i\right] \\
+				&= \lim\limits_{n \to \infty} \left[\frac{32}{n^4}\cdot\frac{n^2(n+1)^2}{4}+\frac{4}{n^2}\cdot\frac{n(n+1)}{2}\right] \\
+				&= \lim\limits_{n \to \infty} \left[\frac{32n^4+64n^3+32n^2}{4n^4}+\frac{4n^2+4n}{2n^2}\right] \\
+				&= 8+2 \\
+				&= 10
+			\end{align*}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Express each of the following as a definite integral. Then use calculus to evaluate the integral.
+		\begin{enumerate}
+			\item $\lim\limits_{|P| \to 0}\ \sum\limits_{i=1}^{n} \left(\frac{3}{w_i^2}\right) \Delta x_i$ where $P$ is a partition of $[1,3]$.
+			\begin{align*}
+				\lim\limits_{|P| \to 0}\ \sum\limits_{i=1}^{n} \left(\frac{3}{w_i^2}\right) \Delta x_i &= \int_{1}^{3} x dx \\
+				&= \left.\frac{x^2}{2} \right|_1^3 \\
+				&= \frac{3^2}{2} - \frac{1^2}{2} \\
+				&= \frac{9}{2} - \frac{1}{2} \\
+				&= \frac{8}{2} \\
+				&= 4
+			\end{align*}
+			\item $\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \left(3 + \frac{2i}{n}\right)^2\cdot \left(\frac{2}{n}\right)$
+			\begin{align*}
+				\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \left(3 + \frac{2i}{n}\right)^2\cdot \left(\frac{2}{n}\right) &= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(a+i\Delta x\right)^2\cdot \left(\Delta x\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(a+i\left(\frac{b-a}{n}\right)\right)^2 \cdot \left(\frac{b-a}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(3+i\left(\frac{2}{n}\right)\right)^2 \cdot \left(\frac{2}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(3+i\left(\frac{5-3}{n}\right)\right)^2\cdot \left(\frac{5-3}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} f(t_i)\cdot \Delta x \\
+				&= \int_{3}^{5} f(t_i) dx \\
+				&= \int_{3}^{5} x^2 dx \\
+				&= \left. \frac{x^3}{3} \right|_{3}^{5} \\
+				&= \frac{5^3}{3}-\frac{3^3}{3} \\
+				&= \frac{125}{3} - \frac{27}{3} \\
+				&= \frac{125}{3} - 9 \\
+				&\approx 32.66667
+			\end{align*}
+			\item $\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \left(1 + \frac{4(i-1)}{n}\right)^5\cdot \left(\frac{4}{n}\right)$
+			\begin{align*}
+				\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \left(1 + \frac{4(i-1)}{n}\right)^5\cdot \left(\frac{4}{n}\right) &= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(a+i\Delta x\right)^5\cdot \left(\Delta x\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(a+i\left(\frac{b-a}{n}\right)\right)^5 \cdot \left(\frac{b-a}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(1+\frac{4i-4}{n}\right)^5\cdot\left(\frac{4}{n}\right)\\
+				&=\int_{1}^{5} f(t_i)dx \\
+				&= \int_{1}^{5} x^5 dx \\
+				&= \left. \frac{x^6}{6} \right|_1^5 \\
+				&= \frac{5^6}{6}-\frac{1^6}{6} \\
+				&= \frac{15625}{6}-\frac{1}{6} \\
+				&= \frac{15624}{6} \\
+				&= \frac{7812}{3} \\
+				&= 2604
+			\end{align*}
+			\item $\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \frac{i^2}{n^3}$
+			\begin{align*}
+				\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \frac{i^2}{n^3} &= \lim\limits_{n \to \infty} \sum_{i=1}^{n} (a+i\Delta x)\Delta x \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(a+i\left(\frac{b-a}{n}\right)\right)\cdot\left(\frac{b-a}{n}\right) \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \left(0+i\left(\frac{1-0}{n}\right)\right)^2 \cdot \left(\frac{1-0}{n}\right) \\
+				&= \int_{0}^{1} f(t_i)dx \\
+				&= \int_{0}^{1} x^2 dx \\
+				&= \left.\frac{x^3}{3}\right|_0^1 \\
+				&= \frac{1^3}{3} - \frac{0^3}{3} \\
+				&= \frac{1}{3}
+			\end{align*}
+			\item Show that $\lim\limits_{n \to \infty}\ \sum\limits_{i=1}^{n} \frac{n}{n^2+i^2}=\frac{\pi}{4}$
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sum_{i=1}^{n} \frac{n}{n^2+i^2} &= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \frac{n}{n^2+i^2}\cdot \frac{\frac{1}{n^2}}{\frac{1}{n^2}} \\
+				&= \lim\limits_{n \to \infty} \sum_{i=1}^{n} \frac{1}{1+(\frac{i}{n})^2} \cdot \frac{1}{n} \\
+				&= \int_{0}^{1} \frac{1}{x^2} dx \\
+				&= \arctan(x) |_0^1 \\
+				&= \arctan(1)-\arctan(0) \\
+				&= \frac{\pi}{4} - 0 \\
+				&= \frac{\pi}{4}
+			\end{align*}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Give examples of functions $f:[0,1] \to \R$ such that
+		\begin{enumerate}
+			\item $f \notin \mathcal{R}[0,1]$, but $|f|$ and $f^2$ are both in $\mathcal{R}[0,1]$.
+			\\\\Consider the function $f:[0,1] \to \R$ given by $f(x):=\begin{cases}
+			1 &x \in \Q \\
+			-1 &x \in \R\setminus\Q
+			\end{cases}$, and let $P:=\{x_0,x_1,\dots, x_n\}$ be any partition of $[0,1]$. Then $M_i=1$ and $m_i=-1$ for all $i=1,2,\dots,n$. thus $U(f,P)=1$ and $L(f,P)=-1$ for all $P$. Thus $U(f)=1$ and $L(f)=-1$. Thus $f$ is not integrable.
+			\\\\However, $|f|(x)=1$ for all $x \in [0,1]$. Since $|f|$ is a continuous function $|f|$ is integrable on $[0,1]$, and also since $f^2(x)=1$ is also a continuous function, we have that $f^2$ is also integrable on $[0,1]$.\\
+			\item $f$ is bounded, but $f \notin \mathcal{R}[0,1]$.
+			\\\\Consider the function $f:[0,1] \to \R$ given by $f(x):=\begin{cases}
+			1 &x \in \Q \\
+			0 &x \in \R\setminus\Q
+			\end{cases}$. Let $P$ be any partition of $[0,1]$, then
+			\[U(P;f):=\sum M_i \Delta x_i = \sum 1 \Delta x_i = b-a\]
+			and
+			\[L(P;f)=\sum m_i \Delta x_i = \sum 0 \Delta x_i = 0(b-a)=0\]
+			Hence
+			\[\overline{\int_{0}^{1}} fdx=b-a \neq 0 = \underline{\int_{0}^{1}} f dx \]
+			Hence $f$ is not Riemann integrable.
+			\item $f \in \mathcal{R}[0,1]$ and $f$ is not monotone.
+			\\\\Consider the function $f:[0,1] \to \R$ given by $f(x):=\begin{cases}
+			3 & 0 \leq x < \frac{1}{3} \\
+			1 & \frac{1}{3} \leq x < \frac{2}{3} \\
+			3 & \frac{2}{3} \leq x \leq 1
+			\end{cases}$. The function $f$ is non-monotonic on $[0,1]$.
+			\\\\The upper Riemann integral of $f$ is
+			\[\overline{\int_{[0,1]}}f=\inf \left\{\int_{[0,1]} g: g \text{ is a piecewise constant on }[0,1] \text{ and } g(x) \geq f(x)\ \forall\ x \in [0,1]\right\}\]
+			\[=\frac{7}{3}\]
+			Similarly, the lower integral of $f$ is given by
+			\[\underline{\int_{[0,1]}}f = \sup \left\{\int_{[0,1]} g: g \text{ is a piecewise constant on } [0,1] \text{ and } g(x) \leq f(x)\ \forall\ x \in [0,1]\right\}\]
+			\[=\frac{7}{3}\]
+			Since $\displaystyle\overline{\int_{[0,1]}}f=\underline{\int_{[0,1]}} f$, the function $f$ is Riemann integrable on $[0,1]$ and $\displaystyle\int_{[0,1]} f=\frac{7}{3}$.
+			\item $f \in \mathcal{R}[0,1]$ and $f$ is neither monotone nor continuous.
+			\\\\Consider the function $f:[0,1] \to \R$ given by $f(x):=\begin{cases}
+			0 & x \in \{0,1\}\cup([0,1]\setminus\Q) \\
+			\frac{1}{q} & x \in (0,1) \cap \Q,\ x=\frac{p}{q},\ p,q \in \N, \text{ and}\\
+			& \text{$p,q$ are relatively prime}
+			\end{cases}$. We note that $f$ is known as the Riemann function. Thus it is well known that this function is not piecewise continuous nor is it monotone.
+		\end{enumerate}	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Prove or justify, if true or provide a counterexample, if false.
+		\begin{enumerate}
+			\item If $f(x) \leq g(x) \leq h(x)$ for all $x \in [a,b]$, and $f,h \in \mathcal{R}[a,b]$, then so is $g \in \mathcal{R}[a,b]$.\\\\
+			This is true by the \textit{Squeeze Theorem}.\\
+			\item If $f \in \mathcal{R}[a,b]$, then $f$ is continuous on $[a,b]$.
+			\\\\This is a false statement. Consider $f:[0,3] \to \R$ given by $f(x):=\begin{cases}
+			2,\ &0 \leq x \leq 1 \\
+			3,\ &1 < x \leq 3
+			\end{cases}$
+			Then we have that $\int_{0}^{3} f(x)=8$, and thus $f \in \mathcal{R}[0,3]$, but $f$ is not continuous.\\
+			\item If $|f| \in \mathcal{R}[a,b]$, then $f \in \mathcal{R}[a,b]$.
+			\\\\This is a false statement. Consider the function $f:[0,1] \to \R$ given by $f(x):=\begin{cases}
+			1 &x \in \Q \\
+			-1 &x \in \R\setminus\Q
+			\end{cases}$, and let $P:=\{x_0,x_1,\dots, x_n\}$ be any partition of $[0,1]$. Then $M_i=1$ and $m_i=-1$ for all $i=1,2,\dots,n$. thus $U(f,P)=1$ and $L(f,P)=-1$ for all $P$. Thus $U(f)=1$ and $L(f)=-1$. Thus $f$ is not integrable.
+			\\\\However, $|f|(x)=1$ for all $x \in [0,1]$. Since $|f|$ is a continuous function $|f|$ is integrable on $[0,1]$.\\
+			\item Let $f$ be bounded on $[a,b]$. If $P$ and $Q$ are partitions of $[a,b]$, then $P \cup Q$ is a refinement of both $P$ and $Q$.
+			\\\\This is a true statement because this satisfies the definition of a refinement, since both $P \subseteq P \cup Q$ and $Q \subseteq P \cup Q$.\\
+			\item If $f$ is continuous on $[a,b)$ and on $[b,c]$, then $f \in \mathcal{R}[a,c]$.
+			\\\\This is a false statement. Consider the function $f:[0,5] \to \R$ given by $f(x):= \begin{cases}
+			\frac{x}{x-2}, &0 \leq x < 2 \\
+			0, & 2 \leq x \leq 5
+			\end{cases}$. Since an asymptote exists and is unbounded on $[0,5]$, we have that $f$ is not Riemann integrable.
+			\item If $f,g\in\mathcal{R}[a,b]$, then $f-g \in \mathcal{R}[a,b]$.
+			\\\\This is true by \textit{Theorem 7.1.5 c}, since it can be rewritten as $f+(-g)$.\\
+			\item If $f$ is monotone on $[a,b]$, then $f \in \mathcal{R}[a,b]$.
+			\\\\This is a true statement by \textit{Theorem 7.2.6}:
+			\begin{theorem*}
+				If $f:[a,b]\to\R$ is monotone on $[a,b]$, then $f \in \mathcal{R}[a,b]$.
+			\end{theorem*}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

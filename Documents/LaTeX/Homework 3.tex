@@ -1,0 +1,521 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 3}
+\begin{document}
+	\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 16 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{enumerate}
+		\item 
+		\begin{enumerate}
+			\item[16.] If $f$ is continuous on $[a,b],a<b$, show that there exists $c \in [a,b]$ such that we have $\displaystyle\int_{a}^{b}f=f(c)(b-a)$. This result is sometimes called the \textit{Mean Value Theorem for Integrals}.
+			\begin{proof}
+				Let $m:=\inf \{f(x) : x \in [a,b]\}$ and $M:=\sup \{f(x): x \in [a,b]\}$. Then we know from \textit{Theorem 7.1.5 (c)} that
+				\[m(b-a) \leq \int_{a}^{b} f \leq M(b-a)\]
+				Then, dividing the inequality by $(b-a) > 0$, we have
+				\[m \leq \frac{\int_{a}^{b} f}{b-a} \leq M\]
+				By \textit{Bolzano's Theorem}, we can conclude that there exists $c \in [a,b] \st$
+				\[f(c):=\frac{\int_{a}^{b}f}{b-a}\]
+				which can be equivalently written as
+				\[\int_{a}^{b} f = f(c)(b-a)\]
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 19 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[19.] Suppose that $a>0$ and that $f \in \mathcal{R}[-a,a]$.
+			\begin{enumerate}
+				\item[(a)] If $f$ is \textit{even} (that is, if $f(-x)=f(x)$ for all $x \in [0,a]$), show that $\displaystyle\int_{-a}^{a}f=2\int_{0}^{a}f$.
+				\begin{proof}
+					Since $f$ is even, we have
+					\begin{align*}
+						\int_{-a}^{b} f &= \int_{-a}^{0} f(x)\ dx + \int_{0}^{a} f(x)\ dx \\
+						&= -\int_{a}^{0} f(-y)\ dy + \int_{0}^{a} f(x)\ dx
+					\end{align*}
+					where $y=-x$ for the first integral. Thus $x \mapsto -y,\ -a\mapsto a,\ 0 \mapsto 0$.
+					\begin{align*}
+						&= -\int_{a}^{0} f(y)\ dy + \int_{0}^{a} f(x)\ dx &\text{($f$ is even so $f(-y)=f(y)$} \\
+						&= \int_{0}^{a} f(y)\ dy + \int_{0}^{a} f(x)\ dx
+					\end{align*}
+					since flipping the limits of integration changes the sign of the integral
+					\begin{align*}
+						&= 2 \int_{0}^{a} f(x) \\
+						&= 2 \int_{0}^{a} f
+					\end{align*}
+				\end{proof}
+				\item[(b)] If $f$ is \textit{odd} (that is, if $f(-x)=-f(x)$ for all $x \in [0,a]$), show that $\int_{-a}^{a} f=0$.
+				\begin{proof}
+					Since $f$ is odd, we have
+					\begin{align*}
+						\int_{-a}^{a} f &= \int_{-a}^{0} f(x)\ dx + \int_{0}^{a} f(x)\ dx \\
+						&= -\int_{a}^{0} f(-y)\ dy + \int_{0}^{a} f(x)\ dx
+					\end{align*}
+					where $y=-x$, thus giving us $x \mapsto -y,\ -a \mapsto a,\ 0 \mapsto 0$.
+					\begin{align*}
+						&= -\int_{a}^{0} (-f(y))\ dy + \int_{0}^{a} f(x)\ dx &\text{since $f$ is odd, $f(-x)=-f(x)$} \\
+						&= \int_{0}^{a} (-f(y))\ dy + \int_{0}^{a} f(x)\ dx \\
+						&= -\int_{0}^{a} f(y)\ dy + \int_{0}^{a} f(x)\ dx
+					\end{align*}
+					since flipping the limits of integration changes the sign of the integral,
+					\begin{align*}
+						&= 0
+					\end{align*}
+					since both integrals cancel each other out. 
+				\end{proof}
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.2 Question 20 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[20.] If $f$ is continuous on $[-a,a]$, show that $\int_{-a}^{a}f(x^2)dx=2\int_{0}^{a}f(x^2)dx$.
+			\begin{proof}
+				Since $f$ is continuous on $[-a,a]$, and $x^2$ is a continuous function, we know that $f(x^2)$ is a continuous function since the composition of continuous functions is continuous. That is, $f(x^2)$ is a continuous function since it is the composition of the continuous functions$f(x)$, and $x \mapsto x^2$. 
+				\\\\Let $g:[a,b] \to \R$ be given by $g(x):=f(x^2)$, then $g$ is also continuous as it is a composition of the continuous functions $x \mapsto f(x)$ and $x \mapsto x^2$. Notice, however, that $g(-x)=f((-x)^2)=f(x^2)=g(x)$. This means that $g$ is an even function.
+				\\\\So by the preceding problem, we know that
+				\[\int_{-a}^{a} g(x)\ dx = 2\int_{0}^{a} g(x)\ dx\]
+				Therefore
+				\[\int_{-a}^{a} f(x^2)\ dx = 2\int_{0}^{a} f(x^2)\ dx\]
+			\end{proof}
+		\end{enumerate}
+		\item 
+		\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[3.] If $g(x):=x$ for $|x| \geq 1$ and $g(x):=-x$ for $|x|<1$ and if $G(x):=\frac{1}{2}|x^2-1|$, show that $\int_{-2}^{3}g(x)dx=G(3)-G(-2)=\frac{5}{2}$. Also sketch the graphs of $g$ and $G$.
+			\begin{proof}
+				Let $g(x):=\begin{cases}
+				x, &|x| \geq 1 \\
+				-x, &|x| < 1
+				\end{cases}$, and let $G(x):=\frac{1}{2} \abs{x^2-1}$. We want to show that $\int_{-2}^{3} g(x)\ dx=G(3)-G(-2)=\frac{5}{2}$.
+				\\\\Notice that since $G$ is a composition of continuous functions, namely $|x^2-1|$ and $x^2$, we know that $G$ is also continuous. Also, notice that $g$ has a finite number of discontinuities, namely at $x=-1$ and $x=1$. Thus, $g \in \mathcal{R}[-2,3]$.
+				\\\\Lastly, note that
+				\[G'(x):=\begin{cases}
+				x, &|x| \geq 1 \\
+				-x, &|x| < 1
+				\end{cases}=g(x),\ \forall\ x \in [-2,3]\setminus\{-1,1\}\]
+				Thus, by the Fundamental Theorem of Calculus, we have
+				\[\int_{-2}^{3} g(x)\ dx = G(3)-G(-2) = \frac{1}{2} |9-1| - \frac{1}{2}|4-1| = \frac{8}{2}-\frac{3}{2}=\frac{5}{2}\]
+			\end{proof}
+			\begin{tikzpicture}
+			\begin{axis}[
+				axis x line=middle, axis y line=middle,
+				ymin=-2, ymax=3, ylabel={$g(x)$},
+				xmin=-2, xmax=3, xlabel={$x$},
+				domain=-2:3
+			]
+			
+			\addplot[blue,thick][domain=-2:-1]{x};
+			\addplot[blue,thick][domain=-1:1]{-x};
+			\addplot[blue,thick][domain=1:3]{x};
+			\end{axis}
+			\end{tikzpicture}
+			\begin{tikzpicture}
+				\begin{axis}[
+				axis x line=middle, axis y line=middle,
+				ymin=-2, ymax=3, ylabel={$G(x)$},
+				xmin=-2, xmax=3, xlabel={$x$},
+				domain=-2:3
+				]
+				
+				\addplot[blue,thick][domain=-2:3, samples=150]{1/2 * abs(x^2-1)};
+				\end{axis}
+			\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			\item[9.] Let $f \in \mathcal{R}[a,b]$ and define $F(x):=\displaystyle\int_{a}^{x}f$ for $x \in [a,b]$.
+			\begin{enumerate}
+				\item[(a)] Evaluate $G(x):=\displaystyle\int_{c}^{x}f$ in terms of $F$, where $c \in [a,b]$.
+				\begin{align*}
+					G(x)&=\int_{c}^{x} f \\
+					&=\int_{a}^{c} f + \int_{c}^{x} f - \int_{a}^{c} f \\
+					&= \int_{a}^{x} f-\int_{a}^{c} f \\
+					&= F(x)-F(c)
+				\end{align*}
+				\item[(b)] Evaluate $H(x):=\displaystyle\int_{x}^{b} f$ in terms of $F$.
+				\begin{align*}
+					H(x)&=\int_{x}^{b} f \\
+					&= \int_{a}^{x} f + \int_{x}^{b} f- \int_{a}^{x} f \\
+					&= F(b)-F(x)
+				\end{align*}
+				\item[(c)] Evaluate $S(x):=\displaystyle\int_{x}^{\sin x} f$ in terms of $F$.
+				\begin{align*}
+					S(x)&= \int_{x}^{\sin x} f \\
+					&= \int_{a}^{x} f + \int_{x}^{\sin x} f - \int_{a}^{x} f \\
+					&= \int_{a}^{\sin x} f - \int_{a}^{x} f \\
+					&= F(\sin x) - F(x)
+				\end{align*}
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 11 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[11.] Find $F'(x)$ when $F$ is defined on $[0,1]$ by:
+			\begin{enumerate}
+				\item[(a)] $F(x):=\displaystyle\int_{0}^{x^2} (1+t^3)^{-1}\ dt$.
+				\\\\Since $x^2$ is continuous and differentiable on $[0,1]$, we can use \textit{Leibniz's Rule} to find $F'(x)$, where $f(x)=\frac{1}{1+x^3}$, $h(x):=x^2$, and $g(x):=0$. So,
+				\begin{align*}
+					F'(x)&= f(h(x))\cdot h'(x)-f(g(x))\cdot g'(x) \\
+					&= \frac{1}{1+(x^2)^3}\cdot 2x - \frac{1}{1+(0)^3}\cdot 0 \\
+					&= \frac{2x}{1+x^6}-0 \\
+					&= \frac{2x}{1+x^6}
+				\end{align*}
+				\item[(b)] $F(x):=\displaystyle\int_{x^2}^{x} \sqrt{1+t^2}\ dt$.
+				\\\\Since both $x$ and $x^2$ are continuous and differentiable on $[0,1]$, we can use \textit{Leibniz's Rule} to find $F'(x)$, where $f(x):=\sqrt{1+x^2},\ h(x):=x,$ and $g(x):=x^2$. So, we must first rewrite $F(x)$ as
+				\[F(x):=\int_{x^2}^{x} \sqrt{1+x^2}\ dx = \int_{0}^{x} \sqrt{1+x^2}\ dx - \int_{0}^{x^2} \sqrt{1+x^2}\ dx\]
+				\begin{align*}
+					F'(x)&=f(h(x))\cdot h'(x) - f(g(x))\cdot g'(x) \\
+					&= \sqrt{1+x^2} \cdot 1 - \sqrt{1+(x^2)^2} \cdot 2x \\
+					&= \sqrt{1+x^2} - 2x \cdot \sqrt{1+x^4}
+				\end{align*}
+			\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[12.] Let $f:[0,3] \to \R$ be defined by $f(x):=x$ for $0 \leq x < 1$, $f(x):=1$ for $1 \leq x < 2$ and $f(x):=x$ for $2 \leq x \leq 3$. Obtain formulas for $F(x):=\int_{0}^{x} f$ and sketch the graphs of $f$ and $F$. Where is $F$ differentiable? Evaluate $F'(x)$ at all such points.
+			\\\\Let $f(x):=\begin{cases}
+			x, &0 \leq x < 1 \\
+			1, &1 \leq x < 2 \\
+			x, &2 \leq x \leq 3
+			\end{cases}$
+			\\Then we have the following: When $x \in [0,1)$:
+			\begin{align*}
+				F(x) &= \int_{0}^{x} f(t)\ dt \\
+				&= \int_{0}^{x} t\ dt \\
+				&= \frac{x^2}{2}
+			\end{align*}
+			When $x \in [1,2)$:
+			\begin{align*}
+				F(x) &= \int_{0}^{x} f(t)\ dt \\
+				&= \int_{0}^{1} t\ dt + \int_{1}^{x} 1\ dt \\
+				&= \frac{1}{2} + (x-1) \\
+				&= x-\frac{1}{2}
+			\end{align*}
+			When $x \in [2,3]$:
+			\begin{align*}
+				F(x) &= \int_{0}^{x} t\ dt \\
+				&= \int_{0}^{1} t\ dt + \int_{1}^{2} 1\ dt + \int_{2}^{3} t\ dt \\
+				&= \frac{1}{2} + 1 + \left(\frac{x^2}{2}-\frac{2^2}{2}\right) \\
+				&= \frac{x^2}{2} - \frac{1}{2}
+			\end{align*}
+			Therefore, we have
+			\[F(x)=\begin{cases}
+			\frac{x^2}{2}, &0 \leq x < 1 \\
+			x-\frac{1}{2}, &1 \leq x < 2 \\
+			\frac{x^2}{2} - \frac{1}{2}, &2 \leq x \leq 3 
+			\end{cases}\]
+			\begin{tikzpicture}
+				\begin{axis}[
+					axis x line*=bottom, axis y line*=left,
+					ymin=0, ymax=4, ytick distance=1, ylabel={$F(x)$},
+					xmin=0, xmax=3, xtick distance=1
+				]
+				
+				\addplot[blue,thick][domain=0:1]{x^2/2};
+				\addplot[blue,thick][domain=1:2]{x-1/2};
+				\addplot[blue,thick][domain=2:3]{x^2/2 - 1/2};
+				\end{axis}
+			\end{tikzpicture}\\
+			\begin{tikzpicture}
+				\begin{axis}[
+				axis x line*=bottom, axis y line*=left,
+				ymin=0, ymax=4, ytick distance=1, ylabel={$f(x)$},
+				xmin=0, xmax=3, xtick distance=1
+				]
+				
+				\addplot[blue,thick][domain=0:1]{x};
+				\addplot[blue,thick][domain=1:2]{1};
+				\addplot[blue,thick][domain=2:3]{x};
+				\end{axis}
+			\end{tikzpicture}
+			\\$F$ is definitely differentiable at points $x \in (0,1) \cup (1,2) \cup (2,3)$ since at those points, $f$ is equal to a polynomial. So, we must now check for the differentiability of $f$ at $x=1$ and $x=2$.
+			\[\limx{x}{1^-}\frac{F(x)-F(1)}{x-1}=\limx{x}{1^-}\frac{\frac{x^2}{2}-\frac{1}{2}}{x-1}=\frac{1}{2} \limx{x}{1^-}\frac{\cancel{(x-1)}(x+1)}{\cancel{(x-1)}}=\frac{1}{2} \cdot (1+1) = 1\]
+			\[\limx{x}{1^+}\frac{F(x)-F(1)}{x-1}=\limx{x}{1^+}\frac{\left(x-\frac{1}{2}\right)-\frac{3}{2}}{x-1} = 1\]
+			Therefore, $F$ is differentiable at $x=1$ and $F'(x)=1$. As for when $x=2$,
+			\[\limx{x}{2^-}\frac{F(x)-F(2)}{x-1}=\limx{x}{2^-}\frac{\left(x-\frac{1}{2}\right)-\frac{3}{2}}{x-2}=1\]
+			\[\limx{x}{2^+}\frac{F(x)-F(2)}{x-2}=\limx{x}{2^+}\frac{\left(\frac{x^2}{2}-\frac{1}{2}\right)-\frac{1}{2}}{x-2}=2\]
+			Therefore, $F$ is not differentiable at $x=2$. Thus,
+			\[F'(x):=\begin{cases}
+			x, &0 \leq x < 1 \\
+			1, &1 \leq x < 2 \\
+			x, &2 < x \leq 3
+			\end{cases}\]
+			And notice that $F'(x)=f(x)$ for $x \in [0,1] \setminus \{2\}$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 13 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[13.] The function $g$ is defined on $[0,3]$ by $g(x):=-1$ if $0 \leq x < 2$ and $g(x):=1$ if $2 \leq x \leq 3$. Find the indefinite integral $G(x)=\int_{0}^{x} g$ for $0 \leq x \leq 3$, and sketch the graphs of $g$ and $G$. Does $G'(x)=g(x)$ for all $x \in [0,3]$?
+			\[g(x):=\begin{cases}
+			-1, &0 \leq x < 2 \\
+			1, & 2 \leq x \leq 3
+			\end{cases}\]
+			Then we have the following: when $x \in [0,2)$:
+			\begin{align*}
+				G(x) &= \int_{0}^{x} g(t)\ dt \\
+				&= \int_{0}^{x} -1\ dt \\
+				&= -x
+			\end{align*}
+			When $x \in [2,3]$:
+			\begin{align*}
+				G(x)&= \int_{0}^{x} g(t)\ dt \\
+				&= \int_{0}^{2} -1\ dt + \int_{2}^{x} 1\ dt \\
+				&= -2+x-2 \\
+				&= x-4
+			\end{align*}
+			Therefore,
+			\[F(x)=\begin{cases}
+			-x, &0 \leq x < 2 \\
+			x-4, &2 \leq x \leq 3
+			\end{cases}\]
+			\\\\\begin{tikzpicture}
+				\begin{axis}[
+					axis x line=middle, axis y line=left,
+					ymin=-2, ymax=1, ytick distance=1, ylabel={$g(x)$},
+					xmin=0, xmax=3, xtick distance=1
+				]
+				
+				\addplot[red,thick][domain=0:2]{-1};
+				\addplot[red,thick][domain=2:3]{1};
+				\end{axis}
+			\end{tikzpicture}\\
+			\begin{tikzpicture}
+				\begin{axis}[
+					axis x line=middle, axis y line=middle,
+					ymin=-3, ymax=3, ytick distance=1, ylabel={$G(x)$},
+					xmin=0, xmax=3, xtick distance=1
+				]
+				
+				\addplot[blue,thick][domain=0:2]{-x};
+				\addplot[blue,thick][domain=2:3]{x-4};
+				\end{axis}
+			\end{tikzpicture}
+			\\\\Now, if it is possible, let $G'(x)=g(x)\ \forall\ x \in [0,3]$. Then
+			\[\limx{x}{2^-}\frac{G(x)-G(2)}{x-2}=\limx{x}{2^-}\frac{-x+2}{x-2} = -1\]
+			\[\limx{x}{2^+}\frac{G(x)-G(2)}{x-2}=\limx{x}{2^+}\frac{x-2}{x-2}=1\]
+			So,
+			\[\limx{x}{2^-} \frac{G(x)-G(2)}{x-2}\neq \limx{x}{2^+}\frac{G(x)-G(2)}{x-2}\]
+			Thus we have that the limit does not exist, and hence $G$ is not differentiable at $x=2$. Thus $G'(x) \neq g(x)$ for some $x \in [0,3]$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 16 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[16.] If $f:[0,1] \to \R$ is continuous and $\int_{0}^{x} f=\int_{x}^{1} f$ for all $x \in [0,1]$, show that $f(x)=0$ for all $x \in [0,1]$.
+			\begin{proof}
+				Let $F(x)=\displaystyle\int_{0}^{x} f(t)\ dt$ for $x \in [0,1]$. $F$ is well defined since $f$ is continuous on $[0,1]$, and thus is also integrable on $[0,1]$. $F$ is also differentiable since $f$ is continuous and $F'(x)=f(x)\ \forall\ x \in [0,1]$. So,
+				\begin{align*}
+					\int_{0}^{x} f = \int_{x}^{1} f &\Leftrightarrow \int_{0}^{x} f=\int_{0}^{1} f -\int_{0}^{x} f \\
+					&\Leftrightarrow 2 \int_{0}^{x} f = \int_{0}^{1} f \\
+					&\Leftrightarrow 2F(x)=F(1)
+				\end{align*}
+				And differentiating the last relation with respect to $x$, we get
+				\[2F'(x)=0 \Leftrightarrow F'(x)=0 \Leftrightarrow f(x)=0,\ \forall\ x \in [0,1]\]
+			\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Section 7.3 Question 18c %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\item[18.] Use the Substitution Theorem 7.3.8 to evaluate the following integral:
+			\begin{enumerate}
+				\item[(c)] $\int_{1}^{4} \frac{\sqrt{1+\sqrt{t}}}{\sqrt{t}} dt$
+				\\\\Let $\phi(t)=1+\sqrt{t}$ for $t \in [1,4]$, and let $f(u)=\sqrt{u}$ for $u \in [2,3]$. $f$ is continuous on $[2,3]$ and $\phi$ has a continuous derivative (namely, $\phi'(t)=\frac{1}{2\sqrt{t}}$) on $[1,4]$. Thus we have
+				\begin{align*}
+					\int_{1}^{4} \frac{\sqrt{1+\sqrt{t}}}{\sqrt{t}}\ dt &= 2\int_{1}^{4} \frac{\sqrt{1+\sqrt{t}}}{\sqrt{t}}\ dt \\
+					&= 2 \int_{1}^{4} \phi'(t)\cdot f(\phi(t))\ dt \\
+					&= 2 \int_{\phi(1)}^{\phi(4)} f(u)\ dt &\text{by the \textit{Substitution Theorem}} \\
+					&= 2 \int_{\phi(1)}^{\phi(4)} \sqrt{u}\ du \\
+					&= 2 \int_{2}^{3} \sqrt{u}\ du \\
+					&= 2 \cdot \left.\frac{2}{3}u^{\frac{3}{2}}\right|_{u=2}^{u=3} \\
+					&= \frac{4}{3}\left(3^{\frac{3}{2}}-2^{\frac{3}{2}}\right)
+				\end{align*}
+			\end{enumerate}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\item Let $f:[0,1] \to \R$ given by $f(x)=\begin{cases}
+		\frac{1}{n}\ &\text{if } x \in \left(\frac{1}{n+1},\frac{1}{n}\right] \\
+		0\ &\text{if }x=0
+		\end{cases}$. Sketch the graph of $f$ and show that $f \in \mathcal{R}[0,1]$.\\
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis x line=bottom, axis y line=left,
+				ymin=0, ymax=4, ytick distance= 1, ytick={1,2,3,4}, yticklabels={$\dots$,$\frac{1}{3}$, $\frac{1}{2}$, $1$},
+				xmin=0, xmax=4, xtick distance=1, xtick={1,2,3,4},
+				xticklabels={$\dots$,$\frac{1}{3}$, $\frac{1}{2}$, $1$}
+			]
+			
+			\addplot[blue,thick][domain=3:4]{4};
+			\addplot[blue,thick][domain=2:3]{3};
+			\addplot[blue,thick][domain=1:2]{2};
+			\addplot[blue,thick][mark=*] coordinates{(4,4)};
+			\addplot[blue,thick][mark=*,fill=white] coordinates{(3,4)};
+			\addplot[blue,thick][mark=*] coordinates{(3,3)};
+			\addplot[blue,thick][mark=*,fill=white] coordinates{(2,3)};
+			\addplot[blue,thick][mark=*] coordinates{(2,2)};
+			\addplot[blue,thick][mark=*,fill=white] coordinates{(1,2)};
+			\addplot[blue,thick][mark=*] coordinates{(0,0)};
+			\end{axis}
+		\end{tikzpicture}
+		\\Since $f$ is monotone, by \textit{Theorem 7.2.8}, $f \in \mathcal{R}[0,1]$.
+		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item
+		\begin{enumerate}
+			\item Give an example of two functions $f,g:[a,b] \to \R$ that are not Riemann integrable, but $fg \in \mathcal{R}[a,b]$.
+			\\\\Consider 
+			\[f(x):=\begin{cases}
+			1, &x \in \Q \\
+			0, &x \in \R\setminus\Q
+			\end{cases}\ \ \ \ \text{  and  }\ \ \ \ g(x):=\begin{cases}
+			0, &x \in \Q \\
+			1, &x \in \R\setminus\Q
+			\end{cases}\]
+			Since these are both Dirichlet and modified Dirichlet functions, we know that they are not Riemann integrable, however,
+			\[fg:=\begin{cases}
+			0, x \in \Q \\
+			0, x \in \R\setminus\Q
+			\end{cases}=0\]
+			and thus $fg$ is a constant function, which is Riemann integrable. Thus we have that $f,g \notin \mathcal{R}[a,b]$, but $fg \in \mathcal{R}[a,b]$.\\
+			\item Give an example of two functions $f,g:[a,b] \to \R$ where $f \in \mathcal{R}[a,b]$ and $g \notin \mathcal{R}[a,b]$, but $fg \in \mathcal{R}[a,b]$.\\\\
+			Consider
+			\[f(x):=0,\ \forall\ x \in [a,b],\ \ \ \ \text{  and  }\ \ \ \ g(x):=\begin{cases}
+			1, &x \in \Q \\
+			0, &x \in \R\setminus\Q
+			\end{cases}\]
+			Then since $f$ is a constant function, $f \in \mathcal{R}[a,b]$, and since $g$ is the Dirichlet function, we know that $g \notin \mathcal{R}[a,b]$. However,
+			\[fg=\begin{cases}
+			0, &x \in \Q \\
+			0, &x \in \R\setminus\Q
+			\end{cases}=0\]
+			And thus $fg$ is a constant function and is thus Riemann integrable. Thus we have that $f \in \mathcal{R}[a,b]$, $g \notin \mathcal{R}[a,b]$, and $fg \in \mathcal{R}[a,b]$.\\
+			\item Let $f:[a,b] \to \R$, $f \in \mathcal{R}[a,b]$. Let $F:[a,b] \to \R$ be given by $F(x)=\displaystyle\int_{a}^{x} f(t)dt$. Prove that $F$ is Lipschitz.
+			\begin{proof}
+				Since $f \in \mathcal{R}[a,b]$, $f$ is bounded; that is, there is some $M \st |f(x)| \leq M\ \forall\ x \in [a,b]$. Now, if $y < x$, we have
+				\[|F(x)-F(y)|=\abs{\int_{y}^{x} f(t)\ dt} \leq \int_{y}^{x} |f(t)|\ dt \leq \int_{y}^{x} M\ dt = M(x-y)=M|x-y|\]
+				Similarly, $|F(x)-F(y)| \leq M(y-x)=M|x-y|$ if $y > x$. So, we see that for any $x,y \in [a,b]$, if we let $K=M$, we have
+				\[|F(x)-F(y)| \leq K|x-y|\]
+%				Thus, $F$ is Lipschitz since the above statement is the definition of a Lipschitz function.
+			\end{proof}
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Let $f(t):=\begin{cases}
+		t\ &\text{for } 0 \leq t \leq 2 \\
+		3\ &\text{for } 2 < t \leq 4
+		\end{cases}$
+		\begin{enumerate}
+			\item Find an explicit expression for $F(x)=\int_{0}^{x}f(t)dt$.
+			\\\\When $x \in [0,2]$:
+			\begin{align*}
+				F(t)&= \int_{0}^{x} f(t)\ dt \\
+				&= \int_{0}^{x} t\ dt \\
+				&= \frac{x^2}{2}
+			\end{align*}
+			and when $x \in (2,4]$:
+			\begin{align*}
+				F(t)&= \int_{0}^{x} f(t)\ dt \\
+				&= \int_{0}^{2} t\ dt + \int_{2}^{x} 3\ dt \\
+				&= 2+3x-6 \\
+				&= 3x-4
+			\end{align*}
+			Thus,
+			\[F(x):=\begin{cases}
+			\frac{x^2}{2}, &0 \leq x \leq 2 \\
+			3x-4, &2 < t \leq 4
+			\end{cases}\]
+			\item Sketch $F$ and determine where $F$ is differentiable.\\\\
+			\begin{tikzpicture}
+				\begin{axis}[
+					axis x line=bottom, axis y line=left,
+					ymin=0, ymax=8, ytick distance=1,
+					xmin=0, xmax=4, xtick distance=1
+				]
+				
+				\addplot[blue,thick][domain=0:2]{x^2/2};
+				\addplot[blue,thick][domain=2:4]{3*x -4};
+				\end{axis}
+			\end{tikzpicture}
+			\\\\Based on the graph, we can tell that the only place in which $F$ is not differentiable is at $x=2$, which we can see as follows:
+			\[\limx{x}{2^-} \frac{F(x)-F(x)}{x-2} = \limx{x}{2^-} \frac{\frac{x^2}{2}-2}{x-2}=2\]
+			\[\limx{x}{2^+}\frac{F(x)-F(2)}{x-2}=\limx{x}{2^+} \frac{3x-4-2}{x-2}=\limx{x}{2^+} \frac{3x-2}{x-2} = 3\]
+			Since $\limx{x}{2^-} \frac{F(x)-F(2)}{x-2} \neq \limx{x}{2^+} \frac{F(x)-F(2)}{x-2}$, we have that $F$ is not differentiable when $x=2$.\\
+			\item Find formula for $F'(x)$ wherever $F$ is differentiable.
+			\\\\Since the only place in which $F$ is not differentiable is when $x=2$, we need only change one of the inequalities of $f$. So,
+			\[F'(x):=\begin{cases}
+			x, &0 \leq x < 2 \\
+			3, &2<x\leq 4
+			\end{cases}\]
+		\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Question 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\item Prove or justify, if true or provide a counterexample, if false.
+		\begin{enumerate}
+			\item If $f \in \mathcal{R}[a,b]$, then $|f| \in \mathcal{R}[a,b]$ and $\displaystyle\int_{a}^{b} |f| \leq \abs{\int_{a}^{b}f}$.
+			\\\\This is false since the inequality is flipped from how it appears in \textit{Corollary 7.3.15} to the \textit{Composition Theorem}. Consider $f:[0,2\pi] \to R$ given by $f(x):=\sin x$. Then we have
+			\[\abs{\int_{0}^{2\pi} \sin x\ dx} = \abs{0} = 0 \leq 4=\int_{0}^{2\pi} \abs{\sin x}\ dx\]
+			and thus
+			\[\abs{\int_{0}^{2\pi} \sin x\ dx} \leq \int_{0}^{2\pi} \abs{\sin x}\ dx\]
+			\item If $f,g \in \mathcal{R}[a,b]$ and $f$ is continuous, then there exists a $c \in [a,b]$ such that $\displaystyle\int_{a}^{b}f(x)g(x)dx=f(c)\int_{a}^{b}g(x)dx$.
+			\\\\This is a false statement. Consider $f,g:[-1,1] \to \R$ given by $f(x):=x+2$ and $g(x):=x$. Then we have the following:
+			\[\int_{-1}^{1} fg = \int_{-1}^{1} x^2+2x\ dx = \frac{2}{3} \neq 0\cdot (x+2)=f(c) \int_{-1}^{1} x\ dx\]
+			Thus $\nexists\ c \in [a,b] \st \displaystyle\int_{-1}^{1} f(x)g(x)=f(c) \cdot \int_{-1}^{1} g(x)\ dx$ for $f,g$ as given.
+			\item If $f \in C^1(\R)$, then $\frac{d}{dx}\displaystyle\int_{0}^{x}f(t)dt = \int_{0}^{x}\left[\frac{d}{dx}f(t)\right]dt$.\\\\
+			This is a false statement, consider the function $f(x):=\cos x$. Then,
+			\[\frac{d}{dx}\int_{0}^{x} \cos x\ dx = \frac{d}{dx} (\sin x)=\cos x\]
+			and
+			\[\int_{0}^{x}\left[\frac{d}{dx}\cos x\right]\ dx = \int_{0}^{x} -\sin x\ dx = \cos x-1\]
+			Hence we have that equality does not hold.\\
+			\item If $f'(x)=\sin x - \cos x$, then $f(x)=\displaystyle\int_{0}^{x} (\sin t - \cos t) dt$.
+			\\\\This is a false statement. Note the following:
+			\[\int_{0}^{x} (\sin t - \cos t)\ dt = (-\sin x - \cos x + 1)\]
+			but
+			\[f(x)=\int (\sin x - \cos x)\ dx = -\cos x- \sin x\]
+			Hence
+			\[-\sin x - \cos x + 1 \neq -\sin x - \cos x\]
+			\item If $f,g:[a,b] \to \R$ are such that $f,fg \in \mathcal{R}[a,b]$ and $f$ is strictly monotone on $[a,b]$, then $g \in \mathcal{R}[a,b]$?
+			\\\\This is a false statement. Consider $f,g:[-1,1] \to \R$ given by $f(x)=x$ and $g(x)=\frac{1}{x}$. Then both $f, fg \in \mathcal{R}[-1,1]$ since $x$ is integrable and $fg=x \cdot \frac{1}{x} = \frac{x}{x}=1$ is also integrable. However, since $\limx{x}{0^-} g(x)=-\infty$ and $\limx{x}{0^+} g(x)=\infty$, we have that $g(x) \notin \mathcal{R}[-1,1]$.
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

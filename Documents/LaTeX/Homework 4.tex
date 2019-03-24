@@ -1,0 +1,199 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 4}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item Evaluate
+		\begin{enumerate}
+			\item $\displaystyle\lim\limits_{h \to 0} \frac{1}{h} \int_{x}^{x+h} \sqrt{t+1}\cos t\ dt$ \\
+			\begin{align*}
+				\limx{h}{0}\frac{1}{h} \int_{x}^{x+h} \sqrt{t+1}\cos t\ dt &= \limx{h}{0} \frac{\displaystyle\int_{0}^{x+h}\sqrt{t+1} \cos t\ dt - \int_{0}^{x} \sqrt{t+1}\cos t\ dt}{h} \\
+				&=\limx{h}{0} \frac{F(x+h)-F(x)}{h},\  \text{where $F(x):=\int_{0}^{x}\sqrt{t+1}\cos t\ dt$} \\
+				F'(x) &= \frac{d}{dx} \int_{0}^{x} \sqrt{t+1}\cos t\ dt \\
+				&\text{let } h(x)=x,\ g(x)=0,\text{ and } f(x):=\sqrt{x+1}\cos x\text{ then} \\
+				F'(x) &= f(h(x))\cdot h'(x) - f(g(x))\cdot g'(x) \\
+				&= \sqrt{x+1}\cos x \cdot 1 -\sqrt{0+1}\cos 0 \cdot 0 \\
+				&= \sqrt{x+1}\cos x		
+			\end{align*}
+			Thus $F'(x)=\sqrt{x+1}\cos x$.\\
+			\item $\displaystyle\lim\limits_{x \to a} \frac{x}{x-a} \int_{a}^{x} t^2\ dt$ \\
+			\begin{align*}
+				\limx{x}{a} \frac{x}{x-a} \int_{a}^{x} t^2\ dt &= \limx{x}{a} \frac{x \cdot \displaystyle\int_{a}^{x} t^2\ dt}{x-a} \\
+				&= \lim\limits_{x \to a} \frac{x(x^2\cdot 1 -a^2\cdot 0)}{1-0} \\
+				&= a^3
+			\end{align*}
+			\item $\displaystyle\lim\limits_{x \to 0} \frac{1}{x} \int_{0}^{x} \sqrt{9 + t^2}\ dt$
+			\begin{align*}
+				\limx{x}{0} \frac{1}{x} \int_{0}^{x} \sqrt{9+t^2}\ dt &= \limx{x}{0} \frac{\displaystyle\int_{0}^{x} \sqrt{9+t^2}\ dt}{x} \\
+				&= \limx{x}{0} \frac{\sqrt{9+x^2}\cdot 1 - \sqrt{9+0^2}\cdot 0}{1}, &\text{by L'Hospital's Rule and Leibniz's Rule} \\
+				&= \limx{x}{0} \sqrt{9+x^2} \\
+				&= \sqrt{9} \\
+				&= 3
+			\end{align*}
+		\end{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Show that $(x^2\sin x) /2$ is not an antiderivative of $x \cos x$.
+			\begin{proof}
+				We want to show that $\frac{x^2\sin x}{2} \neq \int x\cos x $ So, we note that we can use \textit{Theorem 7.3.17 Integration by Parts}. So, let $u=x$ and $dv=\cos x\ dx$. Then
+				\[du = u'dx=1\cdot dx = dx\]
+				and
+				\[v=\int \cos x\ dx = \sin x + C\]
+				for some arbitrary constant $C$. Then,
+				\begin{align*}
+					\int x \cos x\ dx &= uv - \int v\ du \\
+					&= x\sin x - \int \sin x\ dx \\
+					&= x\sin x - (-\cos x + C) \\
+					&= x\sin x + \cos x + C
+				\end{align*}
+				for some arbitrary constant $C$. And thus we have that the antiderivative of $x \cos x=x\sin x +\cos x$, which we note is \textit{not} equal to $\frac{x^2\sin x}{2}$. That is,
+				\[\int x \cos x = x \sin x +\cos x \neq \frac{x^2\sin x}{2}\]
+			\end{proof}
+			\item If $x^2 \cos x= \displaystyle\int_{0}^{x} f(t)\ dt$, find $f(x)$.
+			\\\\Since $\displaystyle\int_{0}^{x} f(t)\ dt = x^2\cos x$, we know that $x^2\cos x=F(x)$. Thus, in order to find $f(x)$, we must find $F'(x)=f(x)$. So,
+			\[\frac{d}{dx} x^2\cos x = 2x\cos(x)-x^2\sin(x)\]
+			And thus we have that $f(x)=2x\cos(x)-x^2\sin(x)$.\\
+			\item Let $F(x)=\displaystyle\int_{0}^{x} xe^{t^2}\ dt$ for $x \in [0,1]$. find $F''(x)$ for $x \in [0,1]$. (Note: $F'(x) \neq xe^{x^2}$) 
+			\begin{align*}
+				F(x) &= x \int_{0}^{x} e^{t^2}\ dt \\
+				F'(x) &= x \cdot e^{x^2} + \int_{0}^{x} e^{t^2}\ dt \\
+				F''(x) &= x \cdot e^{x^2} \cdot 2x + e^{x^2}+e^{x^2} \\
+				&= 2(x^2+1)e^{x^2}
+			\end{align*}
+			So $F''(x)=2(x^2+1)e^{x^2}$.\\
+		\end{enumerate}
+		\item Suppose $f$ is nonnegative and continuous on $[1,2]$ and that $\displaystyle\int_{1}^{2} x^k f(x)\ dx=5+k^2$ for $k=0,1,2$.
+		\\Prove each of the following:
+		\begin{enumerate}
+			\item $\displaystyle\int_{1}^{4} f(\sqrt{x})\ dx \leq 20$.\\\\
+			Let $u=\sqrt{x}$, then $du = u'dx = \frac{1}{2\sqrt{x}}\ dx$ and thus $dx = 2\sqrt{x}\ du$. So, 
+			\[\int_{1}^{4} f(\sqrt{x})\ dx = \int_{1}^{2} f(u)\ 2\ \sqrt{x}\ du = 2 \int_{1}^{2} \sqrt{x} f(u)\ du = 2 \int_{1}^{2} u f(u)\ du=2(5+1)=12\]
+			Thus $12 \leq 20$.\\
+			\item $\displaystyle\int_{1/\sqrt{2}}^{1} f(1/x^2)\ dx \leq 5/2$.\\\\
+			Substitute $u=\frac{1}{x^2}$ and $du=\frac{-2}{x^3}\ dx$. $\frac{1}{x^3}\ dx = \frac{-1}{2}\ du$.\\
+			We know $\frac{1}{\sqrt{2}} \leq x \leq 1$ and $\frac{1}{2\sqrt{2}} \leq x^3 \leq 1$. So $2\sqrt{2} \geq \frac{1}{x^3} \geq 1$. Thus $1 \leq \frac{1}{x^3}$ and $\displaystyle\int_{\frac{1}{\sqrt{2}}}^{1} 1 f \left(\frac{1}{x^2}\right) \leq \displaystyle\int_{\frac{1}{\sqrt{2}}}^{1} \frac{1}{x^3} f\left(\frac{1}{x^2}\right)\ dx$. So
+			\[\int_{\frac{1}{\sqrt{2}}}^{1} \frac{1}{x^3} f \left(\frac{1}{x^2}\right)\ dx = \int_{2}^{1} \frac{-1}{2} f(u)\ du = \frac{1}{2} \int_{1}^{2} u^0 f(u)\ du = \frac{1}{2} \cdot 5 = \frac{5}{2}\]
+			Thus $\displaystyle\int_{\frac{1}{\sqrt{2}}}^{1} \frac{1}{x^3} f \left(\frac{1}{x^2}\right)\ dx \leq \frac{5}{2}$.
+			\item $\displaystyle\int_{0}^{1} x^2 f(x+1)\ dx =2$. \\\\
+			Let $u=x+1$. Then $du=u'dx=1dx=dx$. Then,
+			\[\int_{0}^{1} x^2 f(x+1)\ dx = \int_{1}^{2} x^2 f(u)\ du\]
+			\begin{align*}
+				\int_{0}^{1} x^2 f(x+1)\ dx &= \int_{1}^{2} x^2 f(u)\ du \\
+				&= \int_{1}^{2} (u-1)^2f(u)\ du \\
+				&= \int_{1}^{2} (u^2-2u+1) f(u)\ du \\
+				&= \int_{1}^{2} u^2 f(u)\ du -2uf(u)+f(u)\ du \\
+				&= \int_{1}^{2} u^2f(u)\ du -2\int_{1}^{2} uf(u)\ du +\int_{1}^{2} f(u)\ du \\
+				&= (5+2^2)-2(5+1^2)+(5+0^2) \\
+				&= 9-12+5 \\
+				&= 2
+			\end{align*}
+			$\therefore\ \displaystyle\int_{0}^{1} x^2f(x+1)\ dx = 2$.\\
+		\end{enumerate}
+		\item Suppose that $f \in \mathcal{R}[1/2, 2]$ and that $\displaystyle\int_{1/2}^{1} x^k f(x)\ dx = \displaystyle\int_{1}^{2} x^kf(x)\ dx + 2k^2 = 3+k^2$ for $k=0,1,2$. Compute the exact values of the following integrals:
+		\begin{enumerate}
+			\item $\displaystyle\int_{0}^{1} x^3 f(x^2+1)\ dx$\\\\
+			Let $u=x^2+1$. Then $du=u'dx = 2x\ dx$. Thus $dx=\frac{du}{2x}$. Note that $x^2=u-1$. So, we have
+			\begin{align*}
+				\int_{0}^{1} x^3 f(x^2+1)\ dx &= \int_{0}^{1} x^3 f(u)\ \frac{du}{2x} \\
+				&= \int_{1}^{2} x^2 f(u)\ \frac{du}{2} \\
+				&= \frac{1}{2}\ \int_{1}^{2} (u-1) f(u)\ du \\
+				&= \frac{1}{2}\ \int_{1}^{2} uf(u)-f(u)\ du \\
+				&= \frac{1}{2}\ \int_{1}^{2} uf(u)\ du - \frac{1}{2}\ \int_{1}^{2} f(u)\ du \\
+				&= \frac{1}{2}\ \int_{1}^{2} uf(u)\ du - \frac{1}{2} \cdot (3+0) \\
+				&= \frac{1}{2} \left[\int_{1}^{2} uf(u)\ du + 3\right] \\
+				&= \frac{1}{2} \left[\int_{1}^{2} u f(u)\ du + 2 - 5\right] \\
+				&= \frac{1}{2} [3+1-5] \\
+				&= -\frac{1}{2}
+			\end{align*}
+			$\therefore\ \displaystyle\int_{0}^{1} x^3f(x^2+1)\ dx = -\frac{1}{2}$.\\
+			\item $\displaystyle\int_{0}^{\sqrt{3}/2} \frac{x^3}{\sqrt{1-x^2}} f(\sqrt{1-x^2})\ dx$\\\\
+			Let $u=\sqrt{1-x^2}$. Then $du=u'dx = \frac{-2x}{2\sqrt{1-x^2}}\ dx$. Thus
+			$dx=\frac{-2\sqrt{1-x^2}}{2x}\ du$. So,
+			\begin{align*}
+				\int_{0}^{\frac{\sqrt{3}}{2}} \frac{x^3}{\sqrt{1-x^2}}f(\sqrt{1-x^2})\ dx &= \int_{1}^{\frac{1}{2}} \frac{x^3}{\cancel{u}} f(u) \cdot \frac{-2\cancel{u}}{2x}\ du \\
+				&= \int_{1}^{\frac{1}{2}} \frac{-x^3 f(u)}{x}\ du \\
+				&= \int_{1}^{\frac{1}{2}} -x^2f(u)\ du \\
+				&= -\int_{\frac{1}{2}}^{1} (u^2-1) f(u)\ du \\
+				&= \int_{\frac{1}{2}}^{1} (1-u^2) f(u)\ du \\
+				&= \int_{\frac{1}{2}}^{1} f(u)\ du - \int_{\frac{1}{2}}^{1} u^2 f(u)\ du \\
+				&= (3+0^2)-(3+2^2) \\
+				&= 3-7 \\
+				&= -4
+			\end{align*}
+			$\therefore\ \displaystyle\int_{0}^{\frac{\sqrt{3}}{2}} \frac{x^3}{\sqrt{1-x^2}} f(\sqrt{1-x^2})\ dx = -4$.
+		\end{enumerate}
+		\item Suppose that $f,g$ are differentiable on $[0,e]$ and that $f', g' \in \mathcal{R}[0,e]$.
+		\begin{enumerate}
+			\item If $\displaystyle\int_{1}^{e} \frac{f(x)}{x}\ dx < f(e)$, prove that $\displaystyle\int_{1}^{e} f'(x) \ln x\ dx > 0$.
+			\\\[\int_{1}^{e} f'(x)\cdot \ln (x)\ dx = \left.f(x)\ln(x)\right|_1^e - \int_{1}^{e} f(x) \cdot \frac{1}{x}\ dx\]
+			where $u=\ln (x)$, $dv=f'(x)\ dx$, $du=\frac{1}{x}\ dx$, $v=f(x)$. So 
+			\[\left.\int_{1}^{e} f'(x)\cdot \ln (x)\ dx = f(x)\ln(x)\right|_1^e - \int_{1}^{e} f(x) \cdot \frac{1}{x}\ dx=f(e)-\int_{1}^{e} \frac{1}{x}\ dx > 0\]
+			Since $\int_{1}^{e} \frac{f(x)}{x}\ dx < f(e)$.\\
+			\item If $f(0)=f(1)=0$, prove that $\displaystyle\int_{0}^{1} e^x [f(x)+f'(x)]\ dx =0$.
+			\begin{proof}
+				\[\int_{0}^{1}e^x \left[f(x)+f'(x)\right]\ dx = \int_{0}^{1} e^xf(x)\ dx +\int_{0}^{1} e^xf'(x)\ dx\]
+				Let us use \textit{Integration by Parts} on the second integral containing $f'(x)$. Let $u=e^x$. Then $du=e^x\ dx$, $dv=f'(x)\ dx$, and $v=f(x)$. Then we have the following:
+				\begin{align*}
+					\int_{0}^{1} e^xf(x)\ dx + \int_{0}^{1} f'(x)\ dx &= \left.\cancel{\int_{0}^{1} e^xf(x)\ dx} + e^xf(x)\right|_0^1 - \cancel{\int_{0}^{1} f(x)e^x\ dx} \\
+					&= e^1f(1)-e^0f(0) \\
+					&= e\cdot 0 - 1 \cdot 0 \\
+					&= 0 - 0 \\
+					&= 0
+				\end{align*}
+				$\therefore\ \displaystyle\int_{0}^{1} e^x\left[f(x)+f'(x)\right]\ dx = 0$.
+			\end{proof}
+		\end{enumerate}
+		\item
+		\begin{enumerate}
+			\item Let $f:[0,b] \to \R,\ b>0$ be continuous and $f(x) \neq 0$ for all $x \in (0,b)$. Further, suppose $[f(x)]^2 = 2 \displaystyle\int_{0}^{x} f(t)\ dt$ for all $x \in [0,b]$. Prove that $f(x)=x$ for all $x \in [0,b]$.\\\\We have
+			\[2f(x)f'(x)=2f(x)\]
+			which implies $f(x)[f'(x)-1]=0$. Since $f(x) \neq 0$, then $f'(x)-1=0$. So $f'(x)=1$ and $f(x)=x+C$ for some arbitrary constant $C$. But $f(0)=0$ since $[f(0)]^2=0\implies f(0)=0$. So $f(x)=x$.\\
+			\item Suppose that $f$ is defined on $[0,1]$ with $f(0)=0$ and $0<f'(x) \leq 1$. Prove that $\left[\displaystyle\int_{0}^{1} f(x)\ dx\right]^2 \geq \displaystyle\int_{0}^{1} [f(x)]^3\ dx$. 
+			\begin{proof}
+				Let $x \in [0,1]$. Then $F(x):=\big[\int_{0}^{x} f\big] ^2 - \int_{0}^{3} f^3$. So $f(0)=0$. Thus $F'(x)=2\left[\int_{0}^{x} f\right] \cdot f(x) - f^3(x)=f(x)\left[2\int_{0}^{x} f-f^2\right]$ since $f(0)=0$ and $0 \leq f'(x) \leq 1$ which implies that $f$ is strictly increasing. So $f(x)\geq 0$.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

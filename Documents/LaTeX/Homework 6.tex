@@ -1,0 +1,307 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 6}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 3.7}
+		\begin{enumerate}
+			\item[6.]
+			\begin{enumerate}
+				 \item Calculate the value of $\displaystyle\sum_{n=2}^{\infty} \left(\frac{2}{7}\right)^n$. (Note the series starts at $n=2$)
+				 
+				 \begin{align*}
+				 	\sum_{n=2}^{\infty} \left(\frac{2}{7}\right)^n &= \sum_{n=1}^{\infty} \left(\frac{2}{7}\right)^{n+2} \\
+				 	&= \sum_{n=1}^{\infty} \left(\frac{2}{7}\right)^n-\frac{2}{7} - 1 \\
+				 	&= \frac{1}{1-\frac{2}{7}} -\frac{2}{7} -1\\
+				 	&= \frac{1}{\frac{5}{7}} - \frac{2}{7} -1\\
+				 	&= \frac{7}{5} - \frac{2}{7} -1\\
+				 	&= \frac{4}{35}
+				 \end{align*}
+				 
+				 \item Calculate the value of $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{3}\right)^{2n}$. (Note the series starts at $n=1$)
+				 
+				 \begin{align*}
+				 	\sum_{n=1}^{\infty} \left(\frac{1}{3}\right)^{2n} &= \sum_{n=1}^{\infty} \left(\frac{1}{9}\right)^n \\
+				 	&= \sum_{n=1}^{\infty}\left(\frac{1}{9}\right)^n-1 \\
+				 	&= \frac{1}{1-\frac{1}{9}}-1 \\
+				 	&= \frac{1}{\frac{8}{9}} - 1 \\
+				 	&= \frac{9}{8} - 1 \\
+				 	&= \frac{1}{8}
+				 \end{align*}
+			\end{enumerate}
+			\item[7.] Find a formula for the series $\displaystyle\sum_{n=1}^{\infty} r^{2n}$ when $|r| < 1$.
+			\\\\Let $S_n = r^2+r^4+r^6+\dots+r^{2(n-1)}+r^{2n}$. Then, we notice that $S_n=(r^2)^1+(r^2)^2+(r^2)^3+\dots + (r^2)^{n-1} + (r^2)^n$ which in turn yields $S_n=r^2[1+r^2+(r^2)^2+(r^2)^3+\dots+(r^2)^{n-1}]$ yielding $S_n=r^2 \cdot \frac{1-(r^2)^n}{1-r^2}=\frac{r^2}{1-r^2} \cdot (1-(r^2)^n)$. Since $|r|<1$, we know that $|r^2|<1$, and thus $\limx{n}{\infty} (r^2)^n=0$. So $\lim S_n=\frac{r^2}{1-r^2} \cdot (1-0)=\frac{r^2}{1-r^2}$. Thus $\displaystyle\sum_{n=1}^{\infty} r^{2n}$ converges and is equal to $\frac{r^2}{1-r^2}$.
+			\item[9.]
+			\begin{enumerate}
+				\item Show that the series $\displaystyle\sum_{n=1}^{\infty} \cos n$ is divergent.
+				\\\\We note that if the series converges, then $\limx{n}{\infty} \cos n = 0$. Consider the subsequence $n_k=2k\pi$, for some $k \in \N$. Then $\limx{k}{\infty} \cos (2k\pi)=1$. And for the subsequence $n_k=\frac{\pi}{2}+2k\pi$, for some $k \in \N$, then we have that $\limx{k}{\infty} \cos \left(\frac{\pi}{2}+2k\pi\right)=0$. And since $0 \neq 1$, we can conclude that $\cos n$ does not converge and that $\limx{n}{\infty} \cos n \neq 0$. Therefore, by the \textit{nth Term Test}, $\displaystyle\sum_{n=1}^{\infty} \cos n$ diverges.
+				 
+				\item Show that the series $\displaystyle\sum_{n=1}^{\infty} \frac{\cos n}{n^2}$ is convergent.
+				\\\\We note that $\abs{\frac{\cos n}{n^2}} \leq \frac{1}{n^2}$, and since $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^2}$ is a convergent $p$-series, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{\cos n}{n^2}$ is also convergent.
+			\end{enumerate}
+			\item[11.] If $\sum a_n$ with $a_n>0$ is convergent, then is $\sum a^2_n$ always convergent? Either prove it or give a counterexample.
+			\begin{proof}
+				Since $\sum a_n$ is convergent, we know that by the \textit{nth Term Test}, $\lim a_n=0$. This yields that for $\varepsilon=1>0$, there exists $N \in \N$ such that for all $n \geq N$, we have
+				\begin{align*}
+					|a_n-0| &<\varepsilon \\
+					|a_n|&<\varepsilon \\
+					|a_n|&<1 
+				\end{align*}
+				\[0<a_n<1\]
+				since $a_n > 0,\ \forall n$. Since we know that $x^2<x$ for $0 < x < 1$, we have that $0<a_n^2<a_n<1,\ \forall n \geq N$. Thus, by the \textit{Comparison Test}, since $0 \leq a_n^2 \leq a_n$ and since $\sum a_n$ converges, we have that $\sum a_n^2$ converges.
+			\end{proof}
+			
+			\item[12.] If $\sum a_n$ with $a_n>0$ is convergent, then is $\sum \sqrt{a_n}$ always convergent? Either prove it or give a counterexample.
+			\\\\This is a false statement. Consider $\sum a_n = \sum \frac{1}{n^2}$. Then we have that $\sum \sqrt{a_n} = \sum \frac{1}{n}$, which is a harmonic series, which we know diverges. Thus if $\sum a_n$ converges, then $\sum \sqrt{a_n}$ does not necessarily converge.\\
+			
+			\item[13.] If $\sum a_n$ with $a_n>0$ is convergent, then is $\sum \sqrt{a_na_{n+1}}$ always convergent? Either prove it or give a counterexample.
+			\begin{proof}
+				We first notice that 
+				\[\frac{a_n+a_{n+1}}{2} > \sqrt{a_na_{n+1}}\]
+				So, we then have
+				\[\frac{a_1}{2}+\sum_{n=1}^{\infty} \left(\frac{a_n+a_{n+1}}{2}\right)=\frac{a_1}{2}+\frac{a_1}{2}+\frac{a_2}{2}+\frac{a_2}{2} + \frac{a_3}{2} + \frac{a_3}{2} + \dots = a_1+a_2+a_3+\dots = \sum_{n=1}^{\infty}a_n\]
+				thus, since $\frac{a_1}{2}+ \displaystyle\sum_{n=1}^{\infty} \left(\frac{a_n+a_{n+1}}{2}\right)=\displaystyle\sum_{n=1}^{\infty}a_n$, and since we're given that $\sum a_n$ converges, then $\displaystyle\sum_{n=1}^{\infty} \left(\frac{a_n+a_{n+1}}{2}\right)$ converges. Thus by the \textit{Comparison Test}, we have that 
+				\[a_n > \left(\frac{a_n+a_{n+1}}{2}\right)>\sqrt{a_na_{n+1}}\]
+				yields that $\displaystyle\sum_{n=1}^{\infty} \sqrt{a_na_{n+1}}$ also converges.
+			\end{proof}
+			
+			\item[16.] Use the \textit{Cauchy Condensation Test} to discuss the $p$-series $\displaystyle\sum_{n=1}^{\infty} (1/n^p)$ for $p>0$.
+			\\\\By the \textit{Cauchy Condensation Test}, we must show that the series $\displaystyle\sum_{n=0}^{\infty}2^n\cdot a(2^n)$ converges. So,
+			\begin{align*}
+				\sum_{n=0}^{\infty} 2^na(2^n) ^= \sum_{n=0}^{\infty} \left[2^n\frac{1}{(2^n)^p}\right] \\
+				&= \sum_{n=0}^{\infty} 2^n \left[\frac{1}{2^{np}}\right] \\
+				&= \sum_{n=0}^{\infty} 2^n (2^{-np}) \\
+				&= \sum_{n=0}^{\infty} 2^{n(1-p)} \\
+				&= \sum_{n=0}^{\infty} (2^{1-p})^n
+			\end{align*}
+			We notice that this is now a geometric series, with $|r|=|2^{1-p}|$. Then we note that if $|2^{1-p}| \leq 1$, the series converges, and otherwise the series diverges.\\\\
+		
+			\item[17.] Use the \textit{Cauchy Condensation Test} to establish the divergence of the series:
+			\begin{enumerate}
+				\item $\displaystyle\sum \frac{1}{n \ln n}$
+				\\\\By the \textit{Cauchy Condensation Test}, we have
+				\begin{align*}
+					\sum \frac{1}{n \ln n} &= \sum 2^n \cdot \frac{1}{2^n \cdot \ln 2^n} \\
+					&= \sum \frac{1}{\ln 2^n} \\
+					&= \sum \frac{1}{n \ln 2} \\
+					&= \frac{1}{\ln 2} \sum \frac{1}{n}
+				\end{align*}
+				Since $\sum \frac{1}{n}$ is a harmonic series, we know that the series diverges. Thus we have that $\sum 2^n \cdot \frac{1}{2^n \cdot \ln 2^n}$ diverges as well. Thus by the \textit{Cauchy Condensation Test}, we have that $\sum \frac{1}{n \ln n}$ diverges also.\\
+				
+				\item $\displaystyle\sum \frac{1}{n(\ln n)(\ln\ln n)}$
+				\\\\By the \textit{Cauchy Condensation Test}, we have
+				\begin{align*}
+					\sum \frac{1}{n (\ln n)(\ln \ln n)} &= \sum 2^n \frac{1}{2^n\cdot (ln 2^n) \cdot (\ln (\ln 2^n))} \\
+					&= \sum \frac{1}{\ln 2^n \cdot \ln \ln 2^n} \\
+					&= \sum \frac{1}{(n \ln 2) \cdot (\ln (n \ln 2))} \\
+					&= \sum \frac{1}{(n \ln 2) \cdot (\ln n+\ln\ln 2)} \\
+					&> \sum \frac{1}{n \cdot (\ln 2 + \ln \ln 2} &(\ln 2 < 1) \\
+					&> \sum \frac{1}{n \cdot \ln n}
+				\end{align*}
+				Since we showed in part (a) that $\sum 2^n \cdot \frac{1}{n \ln n}$ diverges, and thus by the \textit{Comparison Test}, since $0 \leq \frac{1}{n(\ln n)(\ln\ln n)} < \frac{1}{n \ln n}$, since $\sum \frac{1}{n \ln n}$ diverges, then so does $\sum \frac{1}{(\ln 2^n)(\ln\ln 2^n)}$.\\
+			\end{enumerate}
+		\end{enumerate}
+	
+		\item Use the tests in section 3.7 to test the given series for convergence or divergence. State clearly which test is used. Also, for parts a-f, write out the first three terms of each series.
+		\begin{enumerate}
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{2n+5}{3n^2+2n-1}$
+			\\\\First three terms:
+			\[\sum_{n=1}^{\infty} \frac{2n+5}{3n^2+2n-1} = \frac{7}{4}+\frac{3}{5}+\frac{11}{32}+\dots\]
+			Note that $2n<2n+5$ and that $3n^2+2n-1<4n^2 \implies \frac{1}{3n^2+2n-1} > \frac{1}{4n^2}$, and thus $\frac{2n}{4n^2} = \frac{1}{2n} < \frac{2n+5}{3n^2+2n-1}$. Since $\sum \frac{1}{2n} = \frac{1}{2} \sum \frac{1}{n}$ yields a half times the harmonic series, which we know is divergent, we have that by the \textit{Comparison Test}, $\sum \frac{2n+5}{3n^2+2n-1}$ also diverges.\\
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{n-1}{n2^n}$
+			\\\\The first three terms:
+			\[\sum_{n=1}^{\infty} \frac{n-1}{n2^n} = 0+ \frac{1}{8} + \frac{1}{12}+\dots\]
+			We note that $\displaystyle\sum_{n=1}^{\infty} \frac{n-1}{n2^n}$ looks similar to $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n$, which is a geometric series. We also note that the series $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n$ converges since $\abs{\frac{1}{2}} < 1$. Then, by the \textit{Limit Comparison Test}, we have $\limx{n}{\infty} \left(\frac{\frac{n-1}{n2^n}}{\left(\frac{1}{2}\right)^n}\right)=1 \neq 0$, and thus since $\displaystyle\sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n$ converges, then $\displaystyle\sum_{n=1}^{\infty} \frac{n-1}{n2^n}$ must also converge.\\
+			
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{\sqrt{n} + \pi}{2+\sqrt[5]{n^8}}$
+			\\\\The first three terms of this series are:
+			\[\sum_{n=1}^{\infty} \frac{\sqrt{n} + \pi}{2+\sqrt[5]{n^8}} = \frac{\pi + 1}{3} + \frac{\pi + \sqrt{2}}{2+2 \sqrt[5]{8}}+\frac{\pi + \sqrt{3}}{2+3\sqrt[5]{27}}+ \dots\]
+			We note that $\sqrt{n}+\pi < \sqrt{n}$ and that $2+\sqrt[5]{n^8} > n^{\frac{7}{4}} \implies \frac{1}{2+\sqrt[5]{n^8}} < \frac{1}{n^{\frac{7}{4}}}$. Thus we have that
+			\[\frac{\sqrt{n}+\pi}{2+\sqrt[5]{n^8}}< \frac{\sqrt{n}}{n^{\frac{7}{4}}}=\frac{1}{n^\frac{5}{4}}\]
+			We note that $\sum \frac{1}{n^\frac{5}{4}}$ converges because it is a $p$-series where $p > 1$. Thus by the \textit{Comparison Test}, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{\sqrt{n}+\pi}{2+\sqrt[5]{n^8}}$ must also converge.\\
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^{\ln n}}$
+			\\\\The first three terms are:
+			\[\sum_{n=1}^{\infty} \frac{1}{n^{\ln n}}=1+\frac{1}{e^{(\ln 2)^2}}+\frac{1}{e^{(\ln 3)^2}}+\dots\]
+			We note that $\frac{1}{n^{\ln n}}$ looks like $\frac{1}{n^{\ln 3}}$ and that $0 < \displaystyle\frac{1}{n^{\ln n}} \leq \frac{1}{n^{\ln 3}}$. By the \textit{Comparison Test}, since $\displaystyle\frac{1}{n^{\ln 3}}$ is a convergent $p$-series since $\ln 3 \geq 1$, $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^{\ln n}}$ must also be convergent. \\
+			
+			\item $\displaystyle\sum_{n=2}^{\infty} \frac{1}{\ln n}$
+			\\\\The first three terms of the series are:
+			\[\sum_{n=2}^{\infty} \frac{1}{\ln n}=\frac{1}{\ln (2)} + \frac{1}{\ln (3)} + \frac{1}{\ln (4)} + \dots\]
+			We note that $n > \ln n \implies \frac{1}{n} < \frac{1}{\ln n}$. Then by the \textit{Comparison Test}, since $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n}$ is the Harmonic series, we know that it diverges, and thus by the \textit{Comparison Test}, since $\sum \frac{1}{n} \leq \frac{1}{\ln n}$, we have that $\displaystyle\sum_{n=2}^{\infty} \frac{1}{\ln n}$ must also diverge.\\
+			\item $\displaystyle\sum_{n=2}^{\infty} \frac{n+\ln n}{n^2+1}$
+			\\\\The first three terms of the series are:
+			\[\sum_{n=2}^{\infty} \frac{n+\ln n}{n^2+1}=\frac{\ln(2)+2}{5}+\frac{\ln(3)+3}{10} + \frac{\ln(4)+4}{17}+\dots\]
+			We notice that $\displaystyle\frac{n+\ln n}{n^2+1}$ looks like $\displaystyle\frac{1}{n}$. So, by the \textit{Limit Comparison Test}, we have
+			\begin{align*}
+				\limx{n}{\infty} \frac{\frac{n+\ln n}{n^2+1}}{\frac{1}{n}} &= \limx{n}{\infty} \frac{n^2+n\ln n}{n^2 +1} \\
+				&= \limx{n}{\infty} \frac{1+\frac{\ln n}{n}}{1+\frac{1}{n^2}} \\
+				&= \frac{1+0}{1+0} \\
+				&= \frac{1}{1} \\
+				&= 1
+			\end{align*}
+			Thus by the \textit{Limit Comparison Test}, since $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n}$ diverges, we have that $\displaystyle\sum_{n=2}^{\infty} \frac{n+\ln n}{n^2 + 1}$ diverges. \\
+			
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{n+1}{n^2}$
+			\\\\We note that $n < n+1$ and that $n^2 > \frac{n^2}{2} \implies \frac{1}{n^2}<\frac{2}{n^2}$ and gives us that
+			\[\frac{2n}{n^2}=\frac{2}{n}<\frac{n+1}{n^2}\]
+			Since $\displaystyle 2 \sum_{n=1}^{\infty} \frac{1}{n}$ is a harmonic series, it is divergent. Thus by the \textit{Comparison Test}, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{n+1}{n^2}$ is also divergent.\\
+			
+			\item $\displaystyle\sum_{n=2}^{\infty} \frac{1}{(\ln n)^n}$
+			\\\\By the \textit{Cauchy Ratio Test}, we have the following:
+			\[\limx{n}{\infty} \abs{\frac{\frac{1}{\ln(n+1)^{n+1}}}{\frac{1}{\ln(n)^n}}}=\limx{n}{\infty} \abs{\frac{\ln(n)^n}{\ln(n+1)^{n+1}}}=0\]
+			Thus by the \textit{Cauchy Ratio Test}, since $L=0<1$, we have that $\displaystyle\sum_{n=1}^{\infty}\frac{1}{\ln (n)^n}$ is a convergent series. \\
+			
+			\item $\displaystyle\sum_{n=2}^{\infty} \frac{\ln n}{n^2}$
+			\\\\Notice that $\frac{\ln n}{n^2} < \frac{1}{n^2}$. So, we must note that $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n^2}$ is a convergent series since it is a $p$-series with $p=2$ and $p>0$. Thus by the \textit{Comparison Test}, we have that the series $\displaystyle\sum_{n=2}^{\infty} \frac{\ln (n)}{n^2}$  is a convergent series.\\
+			
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{\ln n}{n}$
+			\\\\We notice that $\frac{\ln n}{n}$ looks like $\frac{1}{n}$. So, by the \textit{Limit Comparison Test}, we have
+			\[\limx{n}{\infty}\frac{\frac{\ln n}{n}}{\frac{1}{n}}= \limx{n}{\infty} \ln n = \infty\]
+			Since $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$ is the harmonic series, we know that it diverges, and thus by the \textit{Limit Comparison Test}, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{\ln n}{n}$ diverges as well.\\
+			
+			\item $\displaystyle\sum_{n=3}^{\infty} \frac{\sqrt{n}}{\sqrt{n^3}+1}$
+			\\\\Notice that $\sqrt{n^3} < 2\sqrt{n^3} \implies \frac{1}{\sqrt{n^3}+1} > \frac{1}{2\sqrt{n^3}}$, which gives us that
+			\[\frac{\sqrt{n}}{2\sqrt{n^3}}<\frac{\sqrt{n}}{\sqrt{n^3}+1}\]
+			Since the series $\displaystyle \frac{1}{2}\sum_{n=3}^{\infty} \frac{1}{n}$ is a harmonic series ,we know that it diverges, and thus we know that by the \textit{Comparison Test} we have that the series $\displaystyle\sum_{n=3}^{\infty} \frac{\sqrt{n}}{\sqrt{n^3}+1}$ is also divergent.\\
+			
+			\item $\displaystyle\sum_{n=1}^{\infty} \frac{n}{e^n}$
+			\\\\By the \textit{McClaurin Integral Test}, we have
+			\[\int_{1}^{\infty}\frac{x}{e^x}\ dx = \int_{1}^{\infty}xe^{-x}\ dx\]
+			By \textit{Integration by Parts}, let $u=x,\ dv=e^{-x}dx,\ du=dx,\ v=-e^{-x}$. Then we have
+			\begin{align*}
+				\int_{1}^{\infty} xe^{-x}\ dx &= -xe^{-x}+\int_{1}^{\infty} e^{-x}\ dx \\
+				&= \left.-xe^{-x}-e^{-x}\right|_1^\infty \\
+				&= \frac{-\infty}{e^\infty}-\frac{1}{e^\infty} +\frac{1}{e}+\frac{1}{e} \\
+				&= \frac{2}{e}
+			\end{align*}
+			Thus, since $\displaystyle\int_{1}^{\infty} \frac{x}{e^x}\ dx$ converges to $\frac{2}{e}$, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{n}{e^n}$ converges.
+		\end{enumerate}
+	
+		\item Write the given expressions as a quotient of two integers.
+		\begin{enumerate}
+			\item $3+1+\frac{1}{2} + \frac{1}{3} + \frac{1}{9} + \frac{1}{27} + \dots $
+			\begin{align*}
+				&= 3+1+\frac{1}{2}+\sum_{n=1}^{\infty} \frac{1}{3^n} \\
+				&= 3+1+\frac{1}{2}+\frac{\frac{1}{3}}{1-\frac{1}{3}} \\
+				&= 3+1+\frac{1}{2}+\frac{\frac{1}{3}}{\frac{2}{3}} \\
+				&= 3+1+\frac{1}{2}+\frac{3}{6} \\
+				&= 3+1+\frac{1}{2}+\frac{1}{2} \\
+				&= 3+1+1 \\
+				&= 5
+			\end{align*}
+			
+			\item $3.2\overline{15}$
+			\begin{align*}
+				3.2\overline{15} &= 3+ \frac{2}{10} + \left(\frac{15}{1000}+\frac{15}{100000}+\frac{15}{10^7}+\dots\right) \\
+				&= 3+\frac{2}{10}+\frac{15}{1000}\left(1+\frac{1}{10^2}+\frac{1}{10^3}+\dots\right)\\
+				&= 3+\frac{2}{10} + \frac{\frac{15}{1000}}{1-\frac{1}{100}} \\
+				&= 3+\frac{2}{10} + \frac{1}{66} \\
+				&= \frac{1061}{330}
+			\end{align*}
+		\end{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Let $a_n$ be a sequence of real numbers and $b_n=a_n-a_{n-1}$ for all $n \in \N$. Prove: $\sum b_k$ converges if and only if the sequence $a_n$ converges. In this case, find the sum of $\sum b_k$.
+			\begin{proof}
+				Let $(a_n)\subseteq \R$ and let $b_n:=a_n-a_{n-1}\ \forall\ n \in \N$.
+				\begin{itemize}
+					\item[$(=>)$] Assume $\sum b_k$ converges. Then by the \textit{Cauchy Criterion for Series}, we have
+					\[\forall\ \varepsilon>0,\ \exists\ M(\varepsilon)\in \N \st \text{if}\ m>n\geq M(\varepsilon) \implies |s_m-s_n|<\varepsilon\]
+					This yields that
+					\begin{align*}
+						|s_m-s_n|&= |(\cancel{a_{n+1}}-a_n)+(\cancel{a_{n+2}}-\cancel{a_{n+1}})+\dots+(\cancel{a_{m-1}}-\cancel{a_{m-2}})+(a_m-\cancel{a_{m-1}})| \\
+						&= |a_m-a_n| \\
+						&<\varepsilon
+					\end{align*}
+					Thus by the definition of a \textit{Cauchy Sequence}, $a_n$ is a Cauchy sequence and thus by the \textit{Cauchy Convergence Criterion}, $a_n$ is a convergent sequence.
+					
+					\item[$(<=)$] Similarly, suppose $a_n$ is a convergent sequence. Then by the \textit{Cauchy Convergence Criterion}, $a_n$ is a Cauchy sequence. So $\forall\ \varepsilon>0,\ \exists\ H(\varepsilon) \in \N \st \forall\ m>n\geq H(\varepsilon),\ n,m \in \N,\ |a_m-a_n|<\varepsilon$. So,
+					\begin{align*}
+						|a_m-a_n| &= |(a_{n+1}-a_n)+(a_{n+2}-a_{n+1})+\dots+(a_{m-1}-a_{m-2})+(a_m-a_{m-1})| \\
+						&= |(s_{m-1}+a_m)-(s_{n-1}+a_n)|, \\
+						&\text{by the definition of the infinite series generated by $(a_n)$}\\
+						&=|s_{m-1}+a_m-s_{n-1}-a_n|\\
+						&= |s_m-s_n| \\
+						&<\varepsilon
+					\end{align*}
+					Thus by the \textit{Cauchy Criterion for Series}, since $|s_m-s_n|<\varepsilon$ for all $m>n\geq H(\varepsilon), H(\varepsilon),m,n\in \N$, the series $\sum a_n-a_{n-1}$ converges, which implies that the series $\sum b_n$ converges.
+				\end{itemize}
+			\end{proof}
+			Thus, we have that $\sum b_n=\limx{n}{\infty} (b_n)=\limx{n}{\infty} (a_n-a_{n-1})$, by \textit{Theorem 3.7.3}, and thus by the \textit{$n$th Term Test}, since $\sum b_n$ converges, we have that $\limx{n}{\infty} (a_n-a_{n-1})=0$. Thus $\sum b_n=0$.\\
+			
+			\item Let $a_n$ be a sequence of real numbers. If $\limx{n}{\infty} a_n=A$, find the sum of \[\displaystyle\sum_{n=1}^{\infty} (a_{n+1}-2a_n+a_{n-1})\]
+			By the \textit{Cauchy Convergence Criterion for Series}, we have that $\forall\ \varepsilon>0,\ \exists\ M(\varepsilon) \in \N \st \text{if } m,n \in \N,\ m>n\geq M(\varepsilon) \implies |s_m-s_n|=|a_{n+1}+a_{n+2}+\dots + a_m|<\varepsilon$. So,
+			\begin{align*}
+				|s_m-s_n|&=|(\cancel{a_{n+2}}-\cancel{2}a_{n+1}+a_n)+(\cancel{a_{n+3}}-\cancel{2a_{n+2}}+\cancel{a_{n+1}}) \\
+				&+(\cancel{a_{n+4}}-\cancel{2a_{n+3}}+\cancel{a_{n+2}})+(\cancel{a_{n+5}}-\cancel{2a_{n+4}}+\cancel{a_{n+3}})\\
+				&+\dots\\
+				&+(\cancel{a_m}-\cancel{2a_{m-1}}+\cancel{a_{m-2}})+(a_{m+1}-\cancel{2}a_m+\cancel{a_{m-1}})| \\
+				&= |a_n-a_{n+1}+a_{m+1}-a_m| \\
+				&<\varepsilon
+			\end{align*}
+			This yields that the sequence of partial sums of $a_{n+1}-2a_n+a_{n-1}$ is bounded. Thus by \textit{Theorem 3.7.3}, $\displaystyle\sum_{n=1}^{\infty}(a_{n+1}-2a_n+a_{n-1})=\limx{n}{\infty} (a_{n+1}-2a_n+a_{n-1}) = A-2A+A = 0$. \\
+			
+			\item If $\displaystyle\sum_{k=1}^{n} (k\ a_k)=\frac{n+1}{n+2}$ for $n \in \N$, show that $\displaystyle\sum_{k=1}^{\infty} a_k=\frac{3}{4}$.
+			\begin{proof}
+				If $n=1$, then $\displaystyle\sum_{k=1}^{1} 1\cdot a_1 = \frac{2}{3}$. 
+				\\\\If $n \geq 2$, then
+				\begin{align*}
+					\sum_{k=1}^{n} ka_k &= a_1+a_2+\dots+(n-1)a_{n-1}+na_n \\
+					&= \frac{n+1}{n+2} \\
+					&\Downarrow \\
+					na_n &= \frac{n+1}{n+2} - \frac{n}{n+1} \\
+					&= \frac{1}{(n+1)(n+2)}
+				\end{align*}
+				So $a_n=\frac{1}{n(n+1)(n+2)}$, thus we have the following:
+				\begin{align*}
+					\sum_{n=2}^{\infty} &= \sum_{n=2}^{\infty} \frac{1}{n(n+1)(n+2)} \\
+					&= \frac{1}{2} \sum_{n=2}^{\infty} \left[\frac{1}{n(n+1)}-\frac{1}{(n+1)(n+2)}\right] \\
+					&= \frac{1}{12} &\text{as we did on the previous homework}
+				\end{align*}
+				So $\displaystyle\sum_{n=1}^{\infty} a_n=\frac{2}{3}+\frac{1}{12} = \frac{3}{4}$.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

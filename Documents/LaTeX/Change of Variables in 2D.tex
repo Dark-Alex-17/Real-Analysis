@@ -1,0 +1,58 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Change of Variables in 2D}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item Evaluate $\displaystyle\int \int_R\ dA$ where $R$ is the region bounded by the lines $x+y=1$, $x+y=2$, $2x-3y=2$, and $2x-3y=5$. Use the transformation $u=x+y$ and $v=2x-3y$. Draw the region $R$ in the $xy$-plane and the new region $S$ in the $uv$-plane. also, compute $x=x(u,v),\ y=y(u,v)$.
+
+		\item Evaluate $\displaystyle\int\int_R \frac{2x-y}{2}\ dA$ where $R$ is the region bounded by the lines $y=2x$, $y=2x-2$, $y=0$, and $y=4$. Use the transformation $u=2x-y$ and $v=y$. Draw the region $R$ in the $xy$-plane and the new region $S$ in the $uv$-plane. Also, computer $x=x(u,v),$ and $y=y(u,v)$.
+		
+		\item Evaluate $\displaystyle\int\int_R 2(x-y)\ dA$ where $R$ is the region bounded by the lines $x=0$, $x=-3$, $y=x$ and $y=x+1$. Use the transformation $u=-x$ and $v=-x+y$. Draw the region $R$ in the $xy$-plane and the new region $S$ in the $uv$-plane. Also, compute $x=x(u,v)$, and $y=y(u,v)$.
+		
+		\item Evaluate $\displaystyle\int\int_R (2x^2-xy-y^2)\ dA$ where $R$ is the region bounded by the lines $y=-2x+4,\ y=-2x+7,\ y=x-2,$ and $y=x+1$ in the first quadrant. Use the transformation $u=x-y$, and $v=2x+y$. Draw the region $R$ in the $xy$-plane and the new region $S$ in the $uv$-plane. Also, compute $x=x(u,v)$ and $y=y(u,v)$.
+		
+		\item Evaluate $\displaystyle\int\int_R (3x^2+14xy+8y^2)\ dA$ where $R$ is the region bounded by the lines $y=-3/2x+1,\ y=-3/2x+3,\ y=-x/4,$ and $y=-x/4+1$. Use the transformation $u=3x+2y$ and $v=x+4y$. Draw the region $R$ in the $xy$-plane and the new region $S$ in the $uv$-plane. Also, compute $x=x(u,v)$, and $y=y(u,v)$.
+	\end{enumerate}
+\end{document}

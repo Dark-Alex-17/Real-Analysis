@@ -1,0 +1,395 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 8}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 9.2}
+		\begin{enumerate}
+			\item[2. (c)] Establish the convergence or divergence of the series whose $n$th term is $n!/n^n$.
+			\\\\Since
+			\begin{align*}
+				\abs{\frac{a_{n+1}}{a_n}} &= \frac{\frac{(n+1)!}{(n+1)^{n+1}}}{\frac{n!}{n^n}} \\
+				&= \frac{(n+1)!\cdot n^n}{(n+1)^{n+1}\cdot n!} \\
+				&= \frac{n^n}{(n+1)^n} \\
+				&\Downarrow \\
+				\limx{n}{\infty} \abs{\frac{a_{n+1}}{a_n}} &= \frac{1}{\limx{n}{\infty} \left(1+\frac{1}{n}\right)^n} \\
+				&= \frac{1}{e} \\
+				&<1
+			\end{align*}
+			By the \textit{Ratio Test}, and by \textit{Corollary 9.2.5}, we have that $\sum \frac{n!}{n^n}$ converges.\\
+			
+			\item[5.] Show that the series $1/1^2+1/2^3+1/3^2+1/4^3+\dots$ is convergent, but that both the Ratio and the Root Tests fail to apply.
+			\\\\We notice that the specified series yields $S=\sum a_n$, where
+			\[a_{2n}=\frac{1}{(2n)^3},\ \text{ and }\ a_{2n-1}=\frac{1}{(2n-1)^2},\ \text{ for }\ n \in \N\]
+			\\\\First we show that the \textit{Ratio Test} fails. To do so, we must consider two cases:
+			\begin{align*}
+				\abs{\frac{a_{2n+1}}{a_{2n}}} &= \frac{\frac{1}{(2n+1)^2}}{\frac{1}{(2n)^3}} \\
+				&= \frac{8n^3}{4n^2+4n+1} \cdot \frac{\frac{1}{n^3}}{\frac{1}{n^3}} \\
+				&= \frac{8}{\frac{4}{n}+\frac{4}{n^2}+\frac{1}{n^3}} \\
+				&\Downarrow \\
+				\limx{n}{\infty} \frac{8}{\frac{4}{n}+\frac{4}{n^2}+\frac{1}{n^3}} = \infty
+			\end{align*}
+			and
+			\begin{align*}
+				\abs{\frac{a_{2n}}{a_{2n-1}}} &= \frac{\frac{1}{(2n)^3}}{\frac{1}{(2n-1)^2}} \\
+				&= \frac{4n^2-4n+1}{8n^3} \cdot \frac{\frac{1}{n^3}}{\frac{1}{n^3}} \\
+				&= \frac{\frac{4}{n}-\frac{4}{n^2}+\frac{1}{n^3}}{8} \\
+				&\Downarrow \\
+				\limx{n}{\infty} \frac{\frac{4}{n}-\frac{4}{n^2}+\frac{1}{n^3}}{8} &= 0
+			\end{align*}
+			And thus we can see that the \textit{Ratio Test} is ineffective on this series.
+			\\\\As for the \textit{Root Test}, we must also consider two cases:
+			\[\abs{a_{2n}}^{\frac{1}{2n}}=\left(\frac{1}{8n^3}\right)^{\frac{1}{2n}}=\frac{1}{8^\frac{2}{n}}\cdot \left(\frac{1}{n^{\frac{2}{n}}}\right)^3\implies \limx{n}{\infty} \frac{1}{8^\frac{2}{n}}\cdot \left(\frac{1}{n^{\frac{2}{n}}}\right)^3 = \frac{1}{1} \cdot \left(\frac{1}{1}\right)^3=1\]
+			and
+			\[\abs{a_{2n-1}}^{\frac{1}{2n-1}}=\left(\frac{1}{(2n-1)^2}\right)^{\frac{1}{2n-1}}=\left(\frac{1}{2n-1}\right)^{\frac{2}{2n-1}} \implies \limx{n}{\infty} \left(\frac{1}{2n-1}\right)^{\frac{2}{2n-1}}=1\]
+			And thus we see that the \textit{Root Test} is ineffective on this series as well.
+			\\\\Now, we'll show that the series does converge by the \textit{Comparison Test}:
+			\\\\We notice that
+			\[a_{2n}=\frac{1}{8n^3}<\frac{1}{n^3}<\frac{1}{n^2}\]
+			\[a_{2n-1}=\frac{1}{(2n-1)^2}<\frac{1}{n^2}\]
+			and thus by the \textit{Comparison Test}, we have that since $\frac{1}{n^2}$ is a convergent $p$-series with $p=2>1$, the series $\sum a_n$ must also converge.\\
+			
+			\item[7.] Discuss the series whose $n$th term is
+			\begin{enumerate}
+				\item[(a)] $\displaystyle\frac{n!}{3\cdot5\cdot7\cdot\dots\cdot(2n+1)}$
+				\\\\By the \textit{Ratio Test}, we have:
+				\begin{align*}
+					\abs{\frac{a_{n+1}}{a_n}} &= \frac{\displaystyle\frac{(n+1)!}{3 \cdot 5 \cdot 7 \cdot \dots \cdot (2(n+1)+1)}}{\displaystyle\frac{n!}{3 \cdot 5 \cdot 7 \cdot \dots \cdot (2n+1)}} \\
+					&= \frac{(n+1)!\cdot 3 \cdot 5 \cdot 7 \cdot \dots \cdot (2n+1)}{n! \cdot 3 \cdot 5 \cdot 7 \cdot \dots \cdot (2n+1)\cdot(2n+3)} \\
+					&= \frac{n+1}{2n+3} \leq \frac{n+1}{2n+2} \\
+					&= \frac{n+1}{2(n+1)} \\
+					&= \frac{1}{2} \\
+					&< 1
+				\end{align*}
+				And thus by the \textit{Ratio Test}, we have that the series is absolutely convergent.\\
+				
+				\item[(b)] $\displaystyle\frac{(n!)^2}{(2n)!}$
+				\\\\By the \textit{Ratio test}, we have:
+				\begin{align*}
+					\abs{\frac{a_{n+1}}{a_n}} &= \frac{\displaystyle\frac{\big((n+1)!\big)^2}{\big(2(n+1)\big)!}}{\displaystyle\frac{(n!)^2}{(2n)!}} \\
+					&= \frac{(n+1)! \cdot (n+1)! \cdot (2n)!}{(2n+2)!\cdot n! \cdot n!} \\
+					&= \frac{(n+1)(n+1)}{(2n+1)(2n+2)} \\
+					&= \frac{n+1}{2(2n+1)} \\
+					&= \frac{n+1}{4n+2} \\
+					&\leq \frac{n+1}{4n} \\
+					&= \frac{1}{4} + \frac{1}{4n} \\
+					&\leq \frac{1}{4}+\frac{1}{4} \\
+					&= \frac{1}{2} \\
+					&< 1
+				\end{align*}
+				And thus by the \textit{Ratio Test}, we have that the series is absolutely convergent.\\
+				
+				\item[(c)] $\displaystyle\frac{2\cdot4\cdot\dots\cdot(2n)}{3\cdot5\cdot\dots\cdot(2n+1)}$
+				\\\\By the \textit{Ratio Test}, we have:
+				\begin{align*}
+					\abs{\frac{a_{n+1}}{a_n}} &= \frac{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n) \cdot (2n+2)}{3 \cdot 5 \cdot \dots \cdot (2n+1) \cdot (2n+3)}}{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n)}{3 \cdot 5 \cdot \dots \cdot (2n+1)}} \\
+					&= \frac{2n+2}{2n+3} \\
+					&\Downarrow \\
+					\limx{n}{\infty} \abs{\frac{2n+2}{2n+3}} &= 1
+				\end{align*}
+				Thus by \textit{Corollary 9.2.5}, the \textit{Ratio Test} is ineffective on this series.
+				\\\\By \textit{Raabe's Test}, we have:
+				\begin{align*}
+					\abs{\frac{a_{n+1}}{a_n}} &= \frac{2n+2}{2n+3} \\
+					&= \frac{(2n+3)-1}{2n+3} \\
+					&= 1-\frac{1}{2n+3} \\
+					&\geq 1-\frac{1}{2n} \\
+					&= 1-\frac{\frac{1}{2}}{n}
+				\end{align*}
+				Thus by \textit{Raabe's Test}, since $a=\frac{1}{2}$, we have that the series is divergent.\\
+				
+				\item[(d)] $\displaystyle\frac{2\cdot4\cdot\dots\cdot(2n)}{5\cdot7\cdot\dots\cdot(2n+3)}$
+				\\\\By the \textit{Ratio Test}, we have:
+				\begin{align*}
+					\abs{\frac{a_{n+1}}{a_n}} &= \frac{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n)\cdot (2n+2)}{5 \cdot 7 \cdot \dots \cdot (2n+3) \cdot (2n+5)}}{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n)}{5 \cdot 7 \cdot \dots \cdot (2n+3)}} \\
+					&= \frac{2n+2}{2n+5} \\
+					&\Downarrow \\
+					\limx{n}{\infty} \frac{2n+2}{2n+5} &= 1
+				\end{align*}
+				Thus by \textit{Corollary 9.2.5}, the \textit{Ratio Test} is ineffective on this series.
+				\\\\By \textit{Corollary 9.2.9}, we have:
+				\begin{align*}
+					a &= \limx{n}{\infty} \left(n \left(1-\abs{\frac{a_{n+1}}{a_n}}\right)\right) \\
+					&= \limx{n}{\infty} \left(n \left(1-\frac{2n+2}{2n+5}\right)\right) \\
+					&= \limx{n}{\infty} \left(n \cdot \frac{3}{2n+5}\right) \\
+					&= \limx{n}{\infty} \left(\frac{3}{2+\frac{5}{n}}\right) \\
+					&= \frac{3}{2}
+				\end{align*}
+				Thus by \textit{Corollary 9.2.9}, since $a=\frac{3}{2} > 1$, we have that the series is absolutely convergent.
+			\end{enumerate}
+		\end{enumerate}
+	
+		\item \textbf{Section 9.3}
+		\begin{enumerate}
+			\item[1.] Test the following series for convergence and for absolute convergence:
+			\begin{enumerate}
+				\item[(a)] $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^2+1}$
+				\\\\By the \textit{Alternating Series Test}, we have that $\limx{n}{\infty} \frac{1}{n^2+1}=0$. And by the \textit{Limit Comparison Test}, we notice that $\frac{1}{n^2+1}$ looks like $\frac{1}{n^2}$, which we note is a convergent $p$-series with $p=2>1$, which yields:
+				\[\limx{n}{\infty} \frac{\displaystyle\frac{1}{n^2+1}}{\displaystyle\frac{1}{n^2}}= \limx{n}{\infty} \frac{n^2}{n^2+1} = 1 \neq 0\]
+				And thus since $\sum \frac{1}{n^2}$ is convergent, by the \textit{Limit Comparison Test}, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^2+1}$ is absolutely convergent.\\
+				
+				\item[(b)] $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n+1}$
+				\\\\By the \textit{Alternating Series Test}, we have that $\limx{n}{\infty} \frac{1}{n+1} = 0$, and thus the series is convergent. And by the \textit{Limit Comparison Test}, we note that the series looks like $\sum \frac{1}{n}$, which we note is a harmonic series and thus diverges, which yields
+				\[\limx{n}{\infty} \frac{\displaystyle\frac{1}{n+1}}{\frac{1}{n}} = \limx{n}{\infty} \frac{n}{n+1} = 1 \neq 0\]
+				And since $\sum \frac{1}{n}$ is a harmonic series and thus diverges, since the limit is not equal to 0, we have that by the \textit{Limit Comparison Test}, the series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n+1}$ is conditionally convergent.\\
+				
+				\item[(c)] $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}n}{n+2}$
+				\\\\By the \textit{Alternating Series Test}, we have that $\limx{n}{\infty} \frac{n}{n+2} = 1 \neq 0$, and thus the series is divergent.\\
+				
+				\item[(d)] $\displaystyle\sum_{n=1}^{\infty} (-1)^{n+1} \frac{\ln n}{n}$
+				\\\\By the \textit{Alternating Series Test}, we have that $\limx{n}{\infty} \frac{\ln n}{n} = 0$, which yields that the series is convergent. And by the \textit{Integral Test}, we have that
+				\[\int_{1}^{\infty} \frac{\ln n}{n}\ dn = \int_{1}^{\infty} \frac{u}{n}\cdot n\ du = \int_{1}^{\infty} u\ du = \left.\frac{u^2}{2}\right|_1^\infty = \left.\frac{(\ln n)^2}{2}\right|_1^\infty = \frac{(\ln \infty)^2}{2} - \frac{(\ln 1)^2}{2}\]
+				\[= \infty - 0 = \infty\]
+				Thus by the \textit{Integral Test}, we have that this series is divergent. Thus the series is conditionally convergent.\\
+				
+			\end{enumerate}
+		
+			\item[3.] Give an example to show that the Alternating Series Test 9.3.2 may fail if $(z_n)$ is not a decreasing sequence.
+			\\\\Let $\sum a_n$ be the series defined as
+			\[\left(1-\frac{1}{2}+\frac{1}{2}-\frac{1}{4}+\frac{1}{3}-\frac{1}{6}+\dots+\frac{1}{n}-\frac{1}{2n}+\dots\right)\]
+			Let $A_n$ be the partial sums of the series $\sum a_n$. Then since $a_n$ is an alternating sequence that converges to 0 and isn't decreasing, we have
+			\[A_{2n}=\sum_{n=1}^{\infty} \left(\frac{1}{n}-\frac{1}{2n}\right) = \sum_{n=1}^{\infty} \left(\frac{1}{2n}\right)\]
+			As $A_{2n}$ diverges, we have that $A_n$ diverges and thus the series $\sum a_n$ is divergent.\\
+			
+			\item[5.] Consider the series
+			\[1-\frac{1}{2}-\frac{1}{3}+\frac{1}{4}+\frac{1}{5}-\frac{1}{6}-\frac{1}{7}++--\dots,\]
+			where the signs come in pairs. Does it converge?
+			\\\\We notice that $\frac{1}{n}$ is a monotone decreasing sequence that converges to 0. Then we notice that the series $\displaystyle\sum_{n=1}^{\infty} a_n$ where for every $n \in \N$, we have $a_1=1, a_{4n}=1, a_{4n-1}=-1=a_{4n+1}$. Now, let $s_n=a_1+a_2+\dots+a_n$. Then $s_{2n}=0$ and $s_{2n+1}=\pm 1$. This yields that $|s_n| \leq 1$. By \textit{Dirichlet's Test}, we have that $\displaystyle\sum_{n=1}^{\infty} a_n$ is convergent. Thus we have
+			\[\sum_{n=1}^{\infty} \frac{a_n}{n}=1-\frac{1}{2}-\frac{1}{3}+\frac{1}{4}+\frac{1}{5}-\frac{1}{6}-\frac{1}{7}++--\dots\]
+			is also convergent.
+		\end{enumerate}
+	
+		\item Give an example of a series $\sum a_n$ that consists of nonzero terms with $\limx{n}{\infty} \abs{\frac{a_{n+1}}{a_n}}=1$ for each of the following conditions:
+		\begin{enumerate}
+			\item $\sum a_n$ converges absolutely
+			\\\\Consider Problem 7d from Section 9.2: $\displaystyle\sum_{n=1}^{\infty}\frac{2\cdot4\cdot\dots\cdot(2n)}{5\cdot7\cdot\dots\cdot(2n+3)}$
+			\\\\By the \textit{Ratio Test}, we have:
+			\begin{align*}
+			\abs{\frac{a_{n+1}}{a_n}} &= \frac{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n)\cdot (2n+2)}{5 \cdot 7 \cdot \dots \cdot (2n+3) \cdot (2n+5)}}{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n)}{5 \cdot 7 \cdot \dots \cdot (2n+3)}} \\
+			&= \frac{2n+2}{2n+5} \\
+			&\Downarrow \\
+			\limx{n}{\infty} \frac{2n+2}{2n+5} &= 1
+			\end{align*}
+			Thus by \textit{Corollary 9.2.5}, the \textit{Ratio Test} is ineffective on this series.
+			\\\\By \textit{Corollary 9.2.9}, we have:
+			\begin{align*}
+			a &= \limx{n}{\infty} \left(n \left(1-\abs{\frac{a_{n+1}}{a_n}}\right)\right) \\
+			&= \limx{n}{\infty} \left(n \left(1-\frac{2n+2}{2n+5}\right)\right) \\
+			&= \limx{n}{\infty} \left(n \cdot \frac{3}{2n+5}\right) \\
+			&= \limx{n}{\infty} \left(\frac{3}{2+\frac{5}{n}}\right) \\
+			&= \frac{3}{2}
+			\end{align*}
+			Thus by \textit{Corollary 9.2.9}, since $a=\frac{3}{2} > 1$, we have that the series is absolutely convergent.\\
+			
+			\item $\sum a_n$ converges conditionally
+			\\\\Consider problem 1b from Section 9.3: $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n+1}$
+			\\\\By the \textit{Ratio Test}, we have:
+			\begin{align*}
+			\limx{n}{\infty} \abs{\frac{a_{n+1}}{a_n}} &= \limx{n}{\infty} \frac{\displaystyle\frac{1}{n+3}}{\displaystyle\frac{1}{n+1}} \\
+			&= \limx{n}{\infty} \frac{n+1}{n+3} \\
+			&= 1
+			\end{align*}
+			Thus by \textit{Corollary 9.2.5}, the \textit{Ratio Test} is ineffective on this series.
+			\\\\By the \textit{Alternating Series Test}, we have that $\limx{n}{\infty} \frac{1}{n+1} = 0$, and thus the series is convergent. And by the \textit{Limit Comparison Test}, we note that the series looks like $\sum \frac{1}{n}$, which we note is a harmonic series and thus diverges, which yields
+			\[\limx{n}{\infty} \frac{\displaystyle\frac{1}{n+1}}{\frac{1}{n}} = \limx{n}{\infty} \frac{n}{n+1} = 1 \neq 0\]
+			And since $\sum \frac{1}{n}$ is a harmonic series and thus diverges, since the limit is not equal to 0, we have that by the \textit{Limit Comparison Test}, the series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n+1}$ is conditionally convergent.\\
+			
+			\item $\sum a_n$ diverges.
+			\\\\Consider Problem 7c from Section 9.2: $\displaystyle\sum_{n=1}^{\infty}\frac{2\cdot4\cdot\dots\cdot(2n)}{3\cdot5\cdot\dots\cdot(2n+1)}$
+			\\\\By the \textit{Ratio Test}, we have:
+			\begin{align*}
+			\abs{\frac{a_{n+1}}{a_n}} &= \frac{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n) \cdot (2n+2)}{3 \cdot 5 \cdot \dots \cdot (2n+1) \cdot (2n+3)}}{\displaystyle\frac{2 \cdot 4 \cdot \dots \cdot (2n)}{3 \cdot 5 \cdot \dots \cdot (2n+1)}} \\
+			&= \frac{2n+2}{2n+3} \\
+			&\Downarrow \\
+			\limx{n}{\infty} \abs{\frac{2n+2}{2n+3}} &= 1
+			\end{align*}
+			Thus by \textit{Corollary 9.2.5}, the \textit{Ratio Test} is ineffective on this series.
+			\\\\By \textit{Raabe's Test}, we have:
+			\begin{align*}
+			\abs{\frac{a_{n+1}}{a_n}} &= \frac{2n+2}{2n+3} \\
+			&= \frac{(2n+3)-1}{2n+3} \\
+			&= 1-\frac{1}{2n+3} \\
+			&\geq 1-\frac{1}{2n} \\
+			&= 1-\frac{\frac{1}{2}}{n}
+			\end{align*}
+			Thus by \textit{Raabe's Test}, since $a=\frac{1}{2}$, we have that the series is divergent.\\
+			
+		\end{enumerate}
+	
+		\item Prove or justify, if true. Provide a counterexample, if false.
+		\begin{enumerate}
+			\item If $\sum |a_n|$ diverges, then $\sum a_n$ is conditionally convergent.
+			\\\\This is a false statement. Consider the sequence $a_n=(0,\frac{1}{2},0,\frac{1}{4},0,\dots)$. we note that all of the terms are greater than or equal to 0. We also note that the sequence can be defined piecewise as follows:
+			\[a_n:=\begin{cases}
+			0, &n\text{ is odd} \\
+			\frac{1}{n}, &n\text{ is even}
+			\end{cases}\]
+			for all $n \in \N$. By this definition, we have
+			\begin{align*}
+				\sum_{n=1}^{\infty} |a_n| &= \sum_{n=1}^{\infty} a_n \\
+				&= 0+\frac{1}{2}+0+\frac{1}{4}+0+\frac{1}{6}+\dots \\
+				&= \frac{1}{2}+\frac{1}{4}+\frac{1}{6}+\dots \\
+				&= \sum_{n=1}^{\infty} \frac{1}{2n} \\
+				&= \infty
+			\end{align*}
+			Thus we have that $\sum |a_n|$ diverges since it yields a harmonic series, and since all terms of $a_n$ are greater than or equal to 0, we have that the series $\sum |a_n|=\sum a_n$. Thus $\sum a_n$ also diverges.\\
+			
+			\item If $\sum |a_n|$ diverges, then $\sum |a_n|$ is conditionally convergent.
+			\\\\This is a false statement. Refer to the previous problem's counterexample: Consider the sequence $a_n=(0,\frac{1}{2},0,\frac{1}{4},0,\dots)$. we note that all of the terms are greater than or equal to 0. We also note that the sequence can be defined piecewise as follows:
+			\[a_n:=\begin{cases}
+			0, &n\text{ is odd} \\
+			\frac{1}{n}, &n\text{ is even}
+			\end{cases}\]
+			for all $n \in \N$. By this definition, we have
+			\begin{align*}
+			\sum_{n=1}^{\infty} |a_n| &= \sum_{n=1}^{\infty} a_n \\
+			&= 0+\frac{1}{2}+0+\frac{1}{4}+0+\frac{1}{6}+\dots \\
+			&= \frac{1}{2}+\frac{1}{4}+\frac{1}{6}+\dots \\
+			&= \sum_{n=1}^{\infty} \frac{1}{2n} \\
+			&= \infty
+			\end{align*}
+			Thus we have that $\sum |a_n|$ diverges since it yields a harmonic series, and since all terms of $a_n$ are greater than or equal to 0, we have that the series $\sum |a_n|=\sum a_n$. Thus $\sum a_n$ also diverges.\\
+			
+			\item If $\sum |a_n|$ diverges, then $\sum a_n$ diverges.
+			\\\\This is a false statement. Consider the series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$. Then, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = \ln 2$, but $\displaystyle\sum_{n=1}^{\infty} \abs{\frac{(-1)^{n+1}}{n}} = \displaystyle\sum_{n=1}^{\infty} \frac{1}{n} = \infty$, since this is a harmonic series. Thus we have that $\sum |a_n|$ diverges since it yields the harmonic series, but $\sum a_n$ converges to $\ln 2$, hence $\sum a_n$ is conditionally convergent.\\
+			
+			\item If $\sum |a_n|$ converges, then $\sum a_n$ is absolutely convergent.
+			\\\\This is true since it is the definition of \textit{Absolute Convergence}.\\
+			
+			\item If $a_n \leq b_n$ for all $n \in \N$ and $\sum b_n$ is absolutely convergent, then $\sum a_n$ converges.
+			\\\\This is true by the \textit{Comparison Test}.\\
+			
+			\item If $\sum a_n$ is absolutely convergent, then $\sum a_n^2$ is absolutely convergent.
+			\\\\This is a true statement.
+			\begin{proof}
+				Let $\sum a_n$ be an absolutely convergent series. Then $\limx{n}{\infty} a_n=0$ by the \textit{$n$th Term Test}. Thus, we know that $\exists\ N \in \N \st 0 < a_n < 1,\ \forall\ n \geq N$, and thus $0 < a_n^2<a_n<1,\ \forall\ n \geq N$, and thus by the \textit{Comparison Test}, the series $\sum a_n^2$ is also absolutely convergent.
+			\end{proof}
+			
+			\item If $\lim a_n = 0$, then $\sum (-1)^na_n$ converges.
+			\\\\This is a false statement. Consider the example given in Problem 3 of Section 9.3:
+			\\\\Let $\sum a_n$ be the series defined as
+			\[\left(1-\frac{1}{2}+\frac{1}{2}-\frac{1}{4}+\frac{1}{3}-\frac{1}{6}+\dots+\frac{1}{n}-\frac{1}{2n}+\dots\right)\]
+			Let $A_n$ be the partial sums of the series $\sum a_n$. Then since $a_n$ is an alternating sequence that converges to 0 and isn't decreasing, we have
+			\[A_{2n}=\sum_{n=1}^{\infty} \left(\frac{1}{n}-\frac{1}{2n}\right) = \sum_{n=1}^{\infty} \left(\frac{1}{2n}\right)\]
+			As $A_{2n}$ diverges, we have that $A_n$ diverges and thus the series $\sum a_n$ is divergent.\\
+			
+			\item If $\lim a_n=0$ and $a_n \geq 0$ for all $n \in \N$, then $\sum (-1)^n a_n$ converges.
+			\\\\This is a false statement. Consider the sequence $a_n=(1,0,\frac{1}{3},0,\frac{1}{5},0,\dots)$. we note that all of the terms are greater than or equal to 0. We also note that the sequence can be defined piecewise as follows:
+			\[a_n:=\begin{cases}
+			0, &n\text{ is even} \\
+			\frac{1}{n}, &n\text{ is odd}
+			\end{cases}\]
+			for all $n \in \N$. By this definition, we have that $\lim a_n=0$.
+			\\\\However, notice 
+			\begin{align*}
+				\sum_{n=1}^{\infty}(-1)^n a_n &= -1 + 0 -\frac{1}{3}+0-\frac{1}{5}+0-\frac{1}{7}+0-+-+\dots \\
+				&= -1-\frac{1}{3}-\frac{1}{5}-\frac{1}{7}-\dots \\
+				&= -\sum_{n=1}^{\infty} \frac{1}{2n-1} \\
+				&= -\infty
+			\end{align*}
+			Yields a negative harmonic series, which diverges. Hence $\sum (-1)^na_n$ diverges. \\
+			
+			\item If $\lim a_n=0$ and $\sum (-1)^n a_n$ converges, then $a_n$ is decreasing.
+			\\\\This is a false statement. Consider the sequence $a_n=(0,\frac{1}{4},0,\frac{1}{16},0,\dots)$. we note that all of the terms are greater than or equal to 0. We also note that the sequence can be defined piecewise as follows:
+			\[a_n:=\begin{cases}
+			0, &n\text{ is odd} \\
+			\frac{1}{n^2}, &n\text{ is even}
+			\end{cases}\]
+			for all $n \in \N$. By this definition, we have that $\lim a_n=0$.
+			\\\\However, notice 
+			\begin{align*}
+			\sum_{n=1}^{\infty}(-1)^n a_n &= -0 +\frac{1}{4}-0+\frac{1}{16}-0+\frac{1}{36}-0+-+-\dots \\
+			&= \frac{1}{4}+\frac{1}{16}+\frac{1}{36}+\dots \\
+			&= \frac{1}{4} \left(1+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}+\frac{1}{25}+\dots\right) \\
+			&= \frac{1}{4} \sum_{n=1}^{\infty} \frac{1}{n^2} \\
+			&= \frac{1}{4} \cdot \frac{\pi^2}{6} \\
+			&= \frac{\pi^2}{24}
+			\end{align*}
+			Thus we have that $\sum (-1)^na_n$ converges. However, the sequence $a_n$ is not a decreasing sequence. Thus $\lim a_n=0$, and $\sum (-1)^na_n$ converges, but $a_n$ is not decreasing.
+			
+			\item If $a_n \geq 0$ for all $n$ and $\sum a_n$ converges, then $\sum \sin a_n$ converges.
+			\\\\This is a false statement. Consider $a_n=(0,0,0,0,\dots)$. Then we have that $\sum a_n=0+0+0+0+\dots=0$. Thus $\sum a_n$ converges. However, $\sum \sin a_n= \sin(0)+\sin(0)+\sin(0)+\sin(0)+\dots = 1 + 1 + 1 + 1 + \dots = \infty$, and thus $\sum \sin a_n$ diverges.\\
+		\end{enumerate}
+	
+		\item Assume that $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$. Prove that:
+		\begin{enumerate}
+			\item $\displaystyle \sum \frac{1}{(2n-1)^2}=\frac{\pi^2}{8}$.
+			\begin{align*}
+				\sum \frac{1}{n^2} &= 1+\frac{1}{2^2} +\frac{1}{3^2}+\frac{1}{4^2} + \frac{1}{5^2}+\frac{1}{6^2} \dots \\
+				&= 1+\frac{1}{3^2}+\frac{1}{5^2}+\dots+\frac{1}{2^2}+\frac{1}{4^2}+\frac{1}{6^2}+\dots \\
+				&= \sum \frac{1}{(2n-1)^2} + \frac{1}{4}\left(1+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}+\dots\right) \\
+				&= \sum \frac{1}{(2n-1)^2} + \frac{1}{4}\left(1+\frac{1}{2^2}+\frac{1}{3^2}+\frac{1}{4^2}+\dots\right) \\
+				&= \sum \frac{1}{(2n-1)^2} + \frac{1}{4} \sum \frac{1}{n^2} \\
+				&= \sum \frac{1}{(2n-1)^2} + \frac{1}{4} \cdot \frac{\pi^2}{6} \\
+				&= \sum \frac{1}{(2n-1)^2} + \frac{\pi^2}{24} \\
+				&\Downarrow \\
+				\sum \frac{1}{(2n-1)^2} &= \sum \frac{1}{n^2} - \frac{1}{4} \sum \frac{1}{n^2} \\
+				&= \frac{\pi^2}{6} - \frac{\pi^2}{24} \\
+				&= \frac{\pi^2}{8}
+			\end{align*}
+			
+			\item $\displaystyle\frac{\pi^2}{24}=\frac{1}{2^2} + \frac{1}{4^2} + \frac{1}{6^2}+\dots$
+			\begin{align*}
+				\sum \frac{1}{(2n)^2} &= \frac{1}{2^2} + \frac{1}{4^2}+\frac{1}{6^2}+ \dots \\
+				&= \frac{1}{4} \left(1+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}+\dots\right) \\
+				&= \frac{1}{4} \left(1+\frac{1}{2^2}+\frac{1}{3^2}+\frac{1}{4^2}+\dots\right) \\
+				&= \frac{1}{4}\sum_{n=1}^{\infty} \frac{1}{n^2} \\
+				&= \frac{1}{4} \cdot \frac{\pi^2}{6} \\
+				&= \frac{\pi^2}{24}
+			\end{align*}
+			
+			\item $\displaystyle \frac{\pi^2}{12} = 1 -\frac{1}{2^2}+\frac{1}{3^2} - \frac{1}{4^2} + \dots$
+			\begin{align*}
+				\sum \frac{(-1)^{n+1}}{n^2} &= 1-\frac{1}{2^2}+\frac{1}{3^2}-\frac{1}{4^2}+\frac{1}{5^2}-\frac{1}{6^2}+\dots \\
+				&= 1+\frac{1}{3^2}+\frac{1}{5^2}+\dots+\frac{1}{(2n-1)^2} -\frac{1}{2^2}-\frac{1}{4^2}-\frac{1}{6^2}-\dots-\frac{1}{(2n)^2} \\
+				&= \sum \frac{1}{(2n-1)^2} -\left(\frac{1}{2^1}+\frac{1}{4^2}+\frac{1}{6^2}+\dots+\frac{1}{(2n)^2}\right) \\
+				&= \sum \frac{1}{(2n-1)^2} - \sum \frac{1}{(2n)^2} \\
+				&= \frac{\pi^2}{8} -\frac{\pi^2}{24} \\
+				&= \frac{\pi^2}{12}
+			\end{align*}
+			By our previous answers for part (a) and (b).
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

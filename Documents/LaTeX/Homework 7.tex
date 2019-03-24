@@ -1,0 +1,258 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\limx}[2]{\displaystyle\lim\limits_{#1 \to #2}}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 7}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 9.1}
+		\begin{enumerate}
+			\item[7.]
+			\begin{enumerate}
+				\item If $\sum a_n$ is absolutely convergent and $(b_n)$ is a bounded sequence, show that $\sum a_nb_n$ is absolutely convergent.
+				\begin{proof}
+					We want to show that $\sum (a_nb_n)$ is also absolutely convergent.\\
+					Since $(b_n)$ is bounded, we know that there is a $M > 0$ such that $|b_n| \leq M,\ \forall\ n$. Then we have that
+					\[|a_nb_n|=|a_n|\cdot|b_n|\leq M \cdot |a_n|\]
+					Since $\sum a_n$ is absolutely convergent, $M \cdot \sum |a_n|$ is also convergent. And since $|a_nb_n| \leq M \cdot |a_n|$ we know that $\sum |a_nb_n|$ is also convergent, and therefore $\sum (a_nb_n)$ is absolutely convergent.
+				\end{proof}
+			
+				\item Give an example to show that if the convergence of $\sum a_n$ is conditional and $(b_n)$ is a bounded sequence, then $\sum a_nb_n$ may diverge.
+				\\\\Consider the series $\sum a_n=\sum\displaystyle\frac{(-1)^n}{n}$ and the bounded sequence  $(b_n)=(-1)^n$. We know that $\sum a_n$ is conditionally convergent and $(b_n)$ is bounded by 1. And since $\sum (a_nb_n) = \sum \displaystyle\frac{(-1)^n}{n}\cdot(-1)^n=\sum \frac{1}{n}$, we have that the product series is a harmonic series, and thus diverges.\\\
+			\end{enumerate}
+			\item[8.] Give an example of a convergent series $\sum a_n$ such that $\sum a^2_n$ is not convergent. (Compare this with Exercise 3.7.11)
+			\\\\Consider the series $\sum a_n=\sum \displaystyle\frac{(-1)^n}{\sqrt{n}}$, which we know is convergent. But, $\sum (a_n)^2 = \sum \frac{1}{n}$, which is a harmonic series, and thus diverges.\\
+			\item[9.] If $(a_n)$ is a decreasing sequence of strictly positive numbers and if $\sum a_n$ is convergent, show that $\lim (na_n)=0$.
+			\begin{proof}
+				Let $(a_n)$ be a sequence such that $a_1 \geq a_2 \geq \dots \geq a_n \geq 0$, and let $\sum a_n$ be convergent, and let $s_n=a_1+a_2+\dots+a_n$.
+				\\\\Let $\varepsilon>0$ be given. Since $\sum a_n$ is convergent, we know that $\limx{n}{\infty} s_n=0$ by the \textit{$n$th-Term Test}. By the \textit{Cauchy Criterion for Series}, $\exists\ M(\varepsilon) \in \N \st$ if $m > n \geq M(\varepsilon)$, then $|s_m-s_n| = |a_{n+1}+a_{n+2}+\dots+a_m|<\varepsilon$. Now, since $(a_n)$ is a decreasing sequence, we have
+				\begin{align*}
+					s_{2n}-s_n &= (a_1+\dots+a_{2n}) - (a_1+\dots+a_n) \\
+					&= a_{n+1}+\dots + a_{2n} \\
+					&\geq a_{2n}+\dots+a_{2n} \\
+					&= n \cdot a_{2n}\\
+					&> 0
+				\end{align*}
+				Additionally, we note that
+				\begin{align*}
+					s_{2n-1}-s_n &= (a_1+\dots +a_{2n-1}) -(a_1+\dots+a_n) \\
+					&= a_{n+1}+\dots + a_{2n-1} \\
+					&\geq a_{2n-1}+\dots+a_{2n-1} \\
+					&=(n-1)\cdot a_{2n} \\
+					&> 0
+				\end{align*}
+				Notice that if we let $n>M(\varepsilon)$, then $|s_{2n}-s_n| < \varepsilon$ and $|s_{2n-1}-s_n| <\varepsilon$.
+				\\\\Choose $\delta = 2M(\varepsilon)$ and for $n > \delta$, we get $n\cdot a_{2n} \cdot (n-1)\cdot a_{2n} = na_n < \varepsilon$, and thus by the definition of a limit, we have that 
+				\[\limx{n}{\infty} na_n=0\]
+			\end{proof}
+		
+			\item[10.] Give an example of a divergent series $\sum a_n$  with $(a_n)$ decreasing and such that $\lim (na_n)=0$.
+			\\\\Consider the series $\sum a_n=\sum \frac{1}{n \ln n}$. We showed on the previous homework that this series diverges. And the sequence $(a_n)$ is decreasing since $n \ln n<(n+1)\ln(n+1)$. Thus, we have
+			\[\limx{n}{\infty} na_n = \limx{n}{\infty} n \cdot \frac{1}{n \ln n} = \limx{n}{\infty} \frac{1}{\ln n} = 0\]
+			
+			\item[11.] If $(a_n)$ is a sequence and if $\lim (n^2a_n)$ exists in $\R$, show that $\sum a_n$ is absolutely convergent.
+			\begin{proof}
+				Since $\lim na^2_n$ exists, we know that the sequence $(n^2a_n)$ is bounded. Thus we know that there exists $M>0$ such that 
+				\[|n^2a_n| \leq M \implies |a_n| \leq \frac{M}{n^2},\ \forall\ n\]
+				Since we know that $\sum \frac{M}{n^2}$ is convergent, by the \textit{Comparison Test}, we know that $\sum |a_n|$ is also convergent, which yields that $\sum a_n$ is absolutely convergent.
+			\end{proof}
+		
+			\item[12.] Let $a > 0$. Show that the series $\sum (1+a^n)^{-1}$ is divergent if $0<a\leq 1$ and is convergent if $a>1$.
+			\begin{proof}
+				Let $a > 0$. We want to show that the series $\displaystyle \sum a_n=\sum\frac{1}{1+a^n}$ is divergent when $0 < a \leq 1$ and is convergent when $a > 1$.
+				\begin{case}[$0<a<1$]
+					We notice that
+					\[\limx{n}{\infty} a_n = \limx{n}{\infty} \frac{1}{1+a^n}=\frac{1}{1+\limx{n}{\infty}a^n} = \frac{1}{1+0}=1 \neq 0\]
+					And thus by the \textit{$n$th Term Test}, we have that $\sum a_n$ is divergent when $0 < a < 1$.
+				\end{case}
+				\begin{case}[$a=1$]
+					We notice that
+					\[\limx{n}{\infty} a_n = \limx{n}{\infty} \frac{1}{1+1^n}=\limx{n}{\infty} \frac{1}{2} = \frac{1}{2} \neq 0\]
+					and thus by the \textit{$n$th Term Test}, the sum $\sum a_n$ is divergent when $a=1$.
+				\end{case}
+				\begin{case}[$a>1$]
+					We notice that 
+					\[\frac{1}{1+a^n}<\frac{1}{a^n}=\left(\frac{1}{a}\right)^n\]
+					which yields a geometric series, and since $a > 1 \implies \left(\frac{1}{a}\right) < 1$, by the \textit{Geometric Series Test}, the series $\sum \left(\frac{1}{a}\right)^n$ converges, and by the \textit{Comparison Test}, the series $\sum \frac{1}{1+a^n}$ must also converge.
+				\end{case}
+			\end{proof}
+			\item[13.]
+			\begin{enumerate}
+				\item Does the series $\displaystyle\sum_{n=1}^{\infty} \left(\frac{\sqrt{n+1}-\sqrt{n}}{\sqrt{n}}\right)$ converge?
+				\begin{align*}
+					\sum_{n=1}^{\infty} \left(\frac{\sqrt{n+1}-\sqrt{n}}{\sqrt{n}}\right) &= \sum_{n=1}^{\infty} \frac{\sqrt{n+1}-\sqrt{n}}{\sqrt{n}} \cdot \frac{\sqrt{n+1}+\sqrt{n}}{\sqrt{n+1}+\sqrt{n}} \\
+					&= \sum_{n=1}^{\infty} \frac{(n+1)-n}{\sqrt{n}\cdot (\sqrt{n+1}+\sqrt{n})} \\
+					&= \sum_{n=1}^{\infty} \frac{1}{\sqrt{n}\cdot (\sqrt{n+1}+\sqrt{n})} \\
+					&= \sum_{n=1}^{\infty} \frac{1}{\sqrt{n(n+1)}+n}
+				\end{align*}
+				We notice that $\displaystyle\frac{1}{\sqrt{n(n+1)}+n} \approx \frac{1}{2n}$ and that
+				\begin{align*}
+					\limx{n}{\infty} \frac{\frac{1}{\sqrt{n(n+1)}+n}}{\frac{1}{2n}} &= \limx{n}{\infty} \frac{2n}{\sqrt{n(n+1)}+n} \\
+					&= \limx{n}{\infty} \frac{2n}{\sqrt{n(n+1)}+n} \cdot \frac{\frac{1}{n}}{\frac{1}{n}} \\
+					&= \limx{n}{\infty} \frac{2}{\sqrt{1(1+\frac{1}{n})+1}} \\
+					&= \frac{2}{\sqrt{1(1+0)}+1} \\
+					&= 1
+				\end{align*}
+				Thus we know that since $\sum \frac{1}{n}$ is a harmonic series, it diverges, and thus by the \textit{Comparison Test}, we have that $\displaystyle\sum_{n=1}^{\infty} \frac{\sqrt{n+1}-\sqrt{n}}{\sqrt{n}}$ diverges.\\\\
+				
+				\item Does the series $\displaystyle\sum_{n=1}^{\infty} \left(\frac{\sqrt{n+1}-\sqrt{n}}{n}\right)$ converge?
+				\begin{align*}
+					\sum_{n=1}^{\infty} \frac{\sqrt{n+1}-\sqrt{n}}{n} &= \sum_{n=1}^{\infty} \frac{\sqrt{n+1}-\sqrt{n}}{n} \cdot \frac{\sqrt{n+1}+\sqrt{n}}{\sqrt{n+1}+\sqrt{n}} \\
+					&= \sum_{n=1}^{\infty} \frac{(n+1)-n}{n\cdot (\sqrt{n+1}+\sqrt{n})} \\
+					&= \sum_{n=1}^{\infty} \frac{1}{n\cdot(\sqrt{n+1}+\sqrt{n})}
+				\end{align*}
+				We notice that 
+				\[\frac{1}{n \cdot (\sqrt{n+1}+\sqrt{n})} \leq \frac{1}{n \cdot \sqrt{n}}=\frac{1}{n^{\frac{3}{2}}}\]
+				And since we know that $\displaystyle\sum \frac{1}{n^{\frac{3}{2}}}$ is a convergent $p$-series, we have that by the \textit{Comparison Test}, the series $\displaystyle\sum_{n=1}^{\infty} \frac{\sqrt{n+1}-\sqrt{n}}{n}$ must also be convergent.
+			\end{enumerate}
+		\end{enumerate}
+	
+		\item 
+		\begin{enumerate}
+			\item  If $a_n \geq 0$ for all $n \in \N$ and $\displaystyle\sum_{n=1}^{\infty} a_n$ converges, prove that $\displaystyle\sum_{n=1}^{\infty}\frac{a_n}{n^p}$ converges for all $p \geq 0$.
+			\begin{proof}
+				We notice that the series $\displaystyle\sum \frac{a_n}{n^p}$ looks like $\displaystyle\sum \frac{1}{n^p}$, which is a convergent $p$-series when $p > 1$. So, by the \textit{Limit Comparison Test}, we have for $p >1$:
+					\[\limx{n}{\infty} \frac{\frac{a_n}{n^p}}{\frac{1}{n^p}}=\limx{n}{\infty} \frac{a_nn^p}{n^p} = \limx{n}{\infty} a_n = 0\] 
+				Since by the \textit{$n$th Term Test}, since $\sum a_n$ converges, $\limx{n}{\infty} a_n = 0$. And since $\sum \frac{1}{n^p}$ is a convergent $p$ series, by the \textit{Limit Comparison Test}, the series $\displaystyle\sum_{n=1}^{\infty} \frac{a_n}{n^p}$ is convergent when $p > 1$.
+				\\\\As for the case in which $0 \leq p \leq 1$, consider the following subcases:
+				\begin{case}[$p=0$]
+					\[\sum_{n=1}^{\infty} \frac{a_n}{n^p} = \sum_{n=1}^{\infty} \frac{a_n}{n^0} = \sum_{n=1}^{\infty} \frac{a_n}{1} = \sum_{n=1}^{\infty} a_n\]
+					Which since we assumed that $\sum a_n$ converges, we have that when $p=0$, $\sum \frac{a_n}{n^p}$ converges.
+				\end{case}
+				\begin{case}[$p=1$] We notice that $\frac{a_n}{n} \leq \frac{na_n}{n}$, and thus we have that by the \textit{Comparison Test}, $\sum \frac{na_n}{n} = \sum a_n$, which we know converges, and thus by the \textit{Comparison Test}, $\sum \frac{a_n}{n}$ must also converge.
+				\end{case}
+				\begin{case}[$0<p<1$]
+					We notice that $0\leq\frac{a_n}{n^p} < \frac{a_n\cdot \sqrt{n^p}}{\sqrt{n^p}}$. So, by the \textit{Comparison Test}, we have
+					\[\sum_{n=1}^{\infty} \frac{a_n \cdot \sqrt{n^p}}{\sqrt{n^p}} = \sum_{n=1}^{\infty} a_n\]
+					And since $\sum a_n$ converges, we have that by the \textit{Comparison Test}, $\sum \frac{a_n}{n^p}$ must also converge.
+				\end{case}
+			Therefore $\forall\ p \geq 0$, if $\sum a_n$ converges, then $\sum \frac{a_n}{n^p}$ converges.
+			\\\\Alternatively, we notice that $p \geq 0$ implies that $n^p \geq 1$. This yields that $0 \leq \frac{1}{n^p} \leq 1$. Then, since $\sum a_n$ converges, by the \textit{Comparison Test}, we have that $\sum \frac{a_n}{n^p}$ must also converge.
+			\end{proof}
+			
+			\item Let $a_k$ be a sequence of nonnegative real numbers. Prove: If $\sum a_n$ converges, then its sequence of partial sums is bounded.
+			\begin{proof}
+				Refer to \textit{Theorem 3.7.3}:
+				\begin{theorem*}
+					Let $(x_n)$ be a sequence of nonnegative real numbers. Then the series $\sum x_n$ converges if and only if the sequence $S=(s_k)$ of partial sums is bounded. In this case,
+					\[\sum_{n=1}^{\infty} x_n = \lim (x_n) = \sup \{s_k:k \in \N\}\]
+				\end{theorem*}
+			\end{proof}
+			\item Give an example of a series that diverges and whose sequence of partial sums is bounded.
+			\\\\Consider the series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n}{n}$ where $\frac{(-1)^n}{n}\neq 0$. This is an alternating series, whose sequence of partial sums is
+			\[(s_k)=\left(-1,-\frac{1}{2},-\frac{5}{6}, -\frac{7}{12}, \dots\right)\]
+			We have that this sequence is bounded below by -1, and is bounded above by 0, however this series diverges since by the \textit{Alternating Series Test}, $\limx{n}{\infty} \frac{1}{n} = \infty$, and thus the series diverges but the sequence of partial sums is bounded.\\
+			
+			\item Prove: If $\sum |a_n|$ converges and a sequence $b_n$ is bounded, then $\sum a_nb_n$ converges.
+			\begin{proof}
+				Refer to Problem 7a from Section 9.1:
+				
+				We want to show that $\sum (a_nb_n)$ is also absolutely convergent.\\
+				Since $(b_n)$ is bounded, we know that there is a $M > 0$ such that $|b_n| \leq M,\ \forall\ n$. Then we have that
+				\[|a_nb_n|=|a_n|\cdot|b_n|\leq M \cdot |a_n|\]
+				Since $\sum a_n$ is absolutely convergent, $M \cdot \sum |a_n|$ is also convergent. And since $|a_nb_n| \leq M \cdot |a_n|$ we know that $\sum |a_nb_n|$ is also convergent, and therefore $\sum (a_nb_n)$ is absolutely convergent.
+				\\\\By \textit{Theorem 9.1.1}, since $\sum |a_nb_n|$ is absolutely convergent, then the series $\sum a_nb_n$ is also convergent.
+			\end{proof}
+		\end{enumerate}
+	
+		\item (pr. 18a, Sec. 3.7) Find the positive values of $p$ such that the logarithmic $p$-series $\displaystyle\sum_{k=2}^{\infty} \frac{1}{k(\ln k)^p}$ converges using a) the integral test and b) the Cauchy condensation test.
+		\\\\Since the terms are decreasing, we can use the \textit{Cauchy Condensation Test}.
+		\begin{align*}
+			\sum_{n=1}^{\infty} a_n &= \sum_{n=1}^{\infty}\frac{1}{n(\ln n)^p} \\
+			\sum_{n=1}^{\infty} 2^na_{2n} &= \sum_{n=1}^{\infty} 2^n\cdot \frac{1}{2^n(\ln 2^n)^p} \\
+			&= \sum_{n=1}^{\infty} \frac{1}{(n \ln 2)^p} &(\ln a^b = b \ln a) \\
+			&= \sum_{n=1}^{\infty} \frac{1}{(\ln 2)^p} \cdot \frac{1}{n^p} \\
+			&= \frac{1}{(\ln 2)^p} \sum_{n=1}^{\infty} \frac{1}{n^p}
+		\end{align*}
+		Now, since $\sum \frac{1}{n^p}$ is a $p$-series, the only way for the series to converge is if $p >1$ by the \textit{$p$-Series Test}, and thus we have that by the \textit{Cauchy Condensation Test} and by the \textit{Comparison Test}, $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n (\ln n)^p}$ converges if and only if $p > 1$.
+		\\\\So, by the \textit{Integral Test}, let $u=\ln k$ and $du = k\ dk$. Then we have:
+		\[\int_{2}^{\infty} \frac{1}{k(\ln k)^p}\ dk = \int_{2}^{\infty} \frac{1}{u^p}\ du = \int_{\ln 2}^{\infty} u^{-p}\ du = \limx{b}{\infty} \left.\frac{u^{-p+1}}{1-p}\right|_{\ln 2}^b=\limx{b}{\infty} \frac{b^{-p+1}}{1-p}-\frac{(\ln 2)^{-p+1}}{1-p}\]
+		which we have converges only when $p > 1$ since only then will the $b$ term go to 0.
+		\\\\And by the \textit{Cauchy Condensation Test}, we have $\displaystyle\sum_{n=2}^{\infty} \frac{2^n}{2^n(\ln 2^n)^p}=\sum_{n=2}^{\infty} \frac{1}{(\ln 2^n)^p}=\sum_{n=2}^{\infty} \frac{1}{(n \ln 2)^p} = \frac{1}{(\ln 2)^p} \sum_{n=2}^{\infty} \frac{1}{n^p}$, and by the definition of a $p$-series this converges when $p>1$.
+		
+		\item Give an example of two series $\sum a_n$ and $\sum b_n$ that converge but $\sum a_nb_n$ diverges. (Similar to pr. 8, Sec. 9.1)
+		\\\\Consider the series $\sum a_n=\sum \displaystyle\frac{(-1)^n}{\sqrt{n}}$ and $\sum a_n=\sum \displaystyle\frac{(-1)^{n+1}}{\sqrt{n}}$ which we know is convergent. But, $\sum (a_nb_n) = \sum -\frac{1}{n}$, which is a negative harmonic series, and thus diverges.\\
+		
+		\item Prove or justify, if true; Provide a counterexample, if false.
+		\begin{enumerate}
+			\item Let $a_k$ and $b_k$ be sequences of positive real numbers. If $\sum a_n$ and $\sum b_n$ converge, then $\sum a_nb_n$ converges.
+			\\\\This is a true statement.
+			\begin{proof}
+				Since $\sum a_n$ converges, by the \textit{$n$th Term Test}, $\lim a_n = 0$. So there must exists some $N \in \N \st\ \forall\ n \geq N,\ a_n \leq 1$. So, $0 \leq a_n \leq 1$, which yields that $0 \leq a_nb_n \leq b_n\ \forall\ n \geq N$. Thus, since $\sum b_n$ converges, by the \textit{Comparison Test}, we have that $\sum a_nb_n$ converges.
+			\end{proof}
+			
+			\item Let $a_k$ and $b_k$ be sequences of positive real numbers. If $\sum a_nb_n$ converges, then $\sum a_n$ and $\sum b_n$ converge. 
+			\\\\This is a false statement. Consider the series $\sum \frac{1}{n^3}$ and $\sum n$. Then we have that $\sum \frac{1}{n^3} \cdot n = \sum \frac{1}{n^2}$, which is a convergent $p$ series with $p=2>1$. However, we have that while $\sum \frac{1}{n^3}$ converges since it is a convergent $p$-series with $p=3>1$, but $\sum n$ diverges.\\
+			
+			\item Let $a_k$ and $b_k$ be sequences of positive real numbers. If $\sum a_n$ and $\sum b_n$ converge, then $\sum\sqrt{(a_n)^2+(b_n)^2}$ converges.
+			\\\\This is a true statement.
+			\begin{proof}
+				Let $\sum a_n$ and $\sum b_n$ be convergent series, and let $a_n$ and $b_n$ be positive sequence of real numbers. Then by \textit{Theorem 3.7.3}, we know that the sequences of partial sums $(s_k)$ and $(t_k)$ of $\sum a_n$ and $\sum b_n$, respectively, must be bounded. And since the sequences of partial sums converges, we know that by the  \textit{Cauchy Convergence Criterion}, $(s_k)$ and $(t_k)$ are Cauchy sequences. Additionally, by \textit{Theorem 3.2.3}, since both $(s_k)$ and $(t_k)$ converge, then $(s_k)+(t_k)$ must also converge. This yields that $\forall\ \varepsilon>0,\ \exists\ K(\varepsilon) \in \N\ \st \forall\ n>m\geq K(\varepsilon),$ by the \textit{Triangle Inequality}, we have 
+				\[\sqrt{(s_n-s_m)^2+(t_n-t_m)^2} \leq \sqrt{(s_n-s_m)^2} + \sqrt{(t_n-t_m)^2} = |s_n-s_m|+|t_n-t_m| < \varepsilon\]
+				And thus since this is the definition of the \textit{Cauchy Criterion for Series}, we have that this is equal to the series $\sum \sqrt{(a_n)^2+(b_n)^2}$. Therefore the series $\sum \sqrt{(a_n)^2+(b_n)^2}$ converges.
+			\end{proof}
+		
+			\item Let $a_k$ and $b_k$ be sequences of positive real numbers. If $\sum \sqrt{(a_n)^2 + (b_n)^2}$ converges, then $\sum a_n$ and $\sum b_n$ converge.
+			\\\\This is a true statement.
+			\begin{proof}
+				By the \textit{Comparison Test}, since $0 \leq a_n^2 \leq a_n^2+b_n^2$, we have that $0 \leq a_n \leq \sqrt{a_n^2+b_n^2}$, and thus $\sum a_n$ converges. Similarly, by the \textit{Comparison Test}, we have that since $0 \leq b_n^2 \leq a_n^2+b_n^2$, we have that $0 \leq b_n \leq \sqrt{a_n^2+b_n^2}$, and thus $\sum b_n$ converges.
+			\end{proof}
+			
+			\item If $\sum a_n$ converges and $0 \leq b_n \leq a_n$ , then $\sum b_n$ converges.
+			\\\\This is true since it is the \textit{Comparison Test}.\\
+			
+			\item If $\limx{n}{\infty} a_n=0,\ a_n \geq 0$ and $\sqrt{a_{n+1}} \leq a_n$ for all $n \in \N$, then $\sum a_n$ converges.
+			\begin{proof}
+				Since $\lim a_n = 0$, we know that $\exists\ N \in \N \st \forall\ n \geq N,\ |a_n|\leq \frac{1}{2}$. (That is, let $\varepsilon = \frac{1}{2}$). Also, since $\sqrt{a_{n+1}} \leq a_n$, we know that $a_{n+1} \leq a_N^2 \leq \frac{1}{4}$. So $a_{n+1} \leq \frac{1}{4}$. So, we have
+				\begin{align*}
+					a_{n+2} &\leq a_{n+1}^2\leq \frac{1}{16} = \frac{1}{4^2} \\
+					&\dots \\
+					a_{n+3} &\leq \frac{1}{4^4}
+				\end{align*}
+				So, we have that
+				\[|a_n| \leq \left(\frac{1}{4}+\frac{1}{4^2}+\frac{1}{4^3}+\dots+\frac{1}{4^{n-N}}\right)\]
+				since $a_n=a_{N(n-N)}$. So, we have that $0 \leq |a_n| \leq \frac{1}{4}$, which is a convergent geometric series. Therefore by the \textit{Comparison Test}, we have that $\sum a_n$ is convergent.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

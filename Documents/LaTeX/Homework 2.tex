@@ -1,0 +1,469 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[left=2cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dotp}{\dot{\mathcal{P}}}
+\newcommand{\dotq}{\dot{\mathcal{Q}}}
+\newcommand{\dist}{\text{dist}}
+\DeclareMathOperator{\sign}{sgn}
+\newtheoremstyle{case}{}{}{}{}{}{:}{ }{}
+\theoremstyle{case}
+\newtheorem{case}{Case}
+\newtheorem{case*}{Case}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{remark}{Remark}
+\setlist[enumerate]{font=\bfseries}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\author{Alexander J. Tusa}
+\title{Real Analysis II Homework 2}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item \textbf{Section 7.4}
+		\begin{enumerate}
+			\item[1.] Let $f(x):=|x|$ for $-1 \leq x \leq 2$. Calculate $L(f;P)$ and $U(f,P)$ for the following partitions:
+			\begin{enumerate}
+				\item[(a)] $\mathcal{P}_1 :=(-1,0,1,2)$
+				\\\\Our terms are:
+				\[x_0:= -1,\ \ x_1:=0,\ \ x_2:=1,\ \ x_3:=2\]
+				and our intervals are:
+				\[I_1:=[-1,0],\ \ I_2:=[0,1],\ \ I_3:=[1,2]\]
+				thus $L(f,\mathcal{P}_1)$ is:
+				\begin{align*}
+					L(f,\mathcal{P}_1) &= \sum_{i=1}^{n} m_i(x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} \left(\inf\{f(x):x \in [x_{i-1},x_i]\}\right) (x_i-x_{i-1}) \\
+					&= (\inf \{|x|:x \in [-1,0]\})(0-(-1))\\ 
+					&+ (\inf \{|x|: x \in [0,1]\})(1-0)\\
+					&+(\inf \{|x|: x\in [1,2]\})(2-1) \\
+					&= 0 \cdot 1 + 0 \cdot 1 + 1 \cdot 1 \\
+					&= 0+0+1 \\
+					&= 1
+				\end{align*}
+				and
+				\begin{align*}
+					U(f,\mathcal{P}_1) &= \sum_{i=1}^{n} M_i (x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} sup \{f(x): x \in [x_{i-1},x_i]\} (x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} \sup \{|x|: x \in [x_{i-1},x_i]\} (x_i-x_{i-1}) \\
+					&= (\sup \{|x|:x \in [-1,0]\})(0-(-1)) \\
+					&+ (\sup \{|x| : x \in [0,1]\})(1-0) \\
+					&+ (\sup \{|x|: x \in [1,2]\})(2-1) \\
+					&= 1 \cdot 1 + 1 \cdot 1 + 2 \cdot 1 \\
+					&= 1 + 1 +2 \\
+					&= 4
+				\end{align*}
+				So, $L(f,\mathcal{P}_1)=1$ and $U(f,\mathcal{P}_1)=4$\\
+				\item[(b)] $\mathcal{P}_2 := (-1,-1/2,0,1/2,1,3/2,2)$.
+				\\\\Our terms are:
+				\[x_0:=-1,\ \ x_1:=-\frac{1}{2},\ \ x_2:=0,\ \ x_3:=\frac{1}{2},\ \ x_4:= 1,\ \ x_5:=\frac{3}{2},\ \ x_6:=2\]
+				and our intervals are:
+				\[I_1:=\left[-1,-\frac{1}{2}\right],\ \ I_2:=\left[-\frac{1}{2},0\right],\ \ I_3:=\left[0,\frac{1}{2}\right],\ \ I_4:=\left[\frac{1}{2},1\right],\ \ I_5:=\left[1,\frac{3}{2}\right],\ \ I_6:=\left[\frac{3}{2}, 2\right]\]
+				So $L(f,\mathcal{P}_2)$ is
+				\begin{align*}
+					L(f,\mathcal{P}_2) &= \sum_{i=1}^{n} m_i(x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} \inf \{f(x): x \in [x_{i-1}, x_i]\}(x_i-x_{i-1}) \\
+					&= \inf\left\{|x|: x \in \left[-1,-\frac{1}{2}\right]\right\}\left(-\frac{1}{2}-(-1)\right) \\
+					&+ \inf\left\{|x|: x \in \left[-\frac{1}{2}, 0\right]\right\} \left(0-\left(-\frac{1}{2}\right)\right) \\
+					&+ \inf\left\{|x|: x \in \left[0,\frac{1}{2}\right]\right\}\left(\frac{1}{2}-0\right) \\
+					&+ \inf \left\{|x|: x \in \left[\frac{1}{2}, 1\right]\right\}\left(1-\frac{1}{2}\right) \\
+					&+ \inf\left\{|x|: x \in \left[1,\frac{3}{2}\right]\right\}\left(\frac{3}{2}-1\right) \\
+					&+ \inf \left\{|x|: x \in \left[\frac{3}{2}, 2\right]\right\}\left(2 - \frac{3}{2}\right) \\
+					&= \frac{1}{2} \cdot \frac{1}{2} + 0 \cdot \frac{1}{2} + 0 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{2} + 1 \cdot \frac{1}{2} + \frac{3}{2} \cdot \frac{1}{2} \\
+					&=\frac{1}{4} + 0 + 0+ \frac{1}{4} + \frac{1}{2} + \frac{3}{4} \\
+					&= \frac{7}{4}
+				\end{align*}
+				and
+				\begin{align*}
+					U(f,\mathcal{P}_2) &= \sum_{i=1}^{n} M_i(x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} \sup \{f(x): x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+					&= \sup \left\{|x|: x \in \left[-1,-\frac{1}{2}\right]\right\}\left(-\frac{1}{2}-(-1)\right) \\
+					&+ \sup\left\{|x|: x \in \left[-\frac{1}{2},0\right]\right\}\left(0-\left(-\frac{1}{2}\right)\right) \\
+					&+ \sup\left\{|x|: x \in \left[0,\frac{1}{2}\right]\right\}\left(\frac{1}{2}-0\right) \\
+					&+ \sup\left\{|x|: x \in \left[\frac{1}{2}, 1\right]\right\}\left(1-\frac{1}{2}\right) \\
+					&+ \sup\left\{|x|: x \in \left[1, \frac{3}{2}\right]\right\}\left(\frac{3}{2}-1\right) \\
+					&+ \sup\left\{|x|: x \in \left[\frac{3}{2}, 2\right]\right\}\left(2-\frac{3}{2}\right) \\
+					&= 1 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{2} + 1 \cdot \frac{1}{2} + \frac{3}{2} \cdot \frac{1}{2} + 2 \cdot \frac{1}{2} \\
+					&= \frac{1}{2} + \frac{1}{4} + \frac{1}{4}+ \frac{1}{2} + \frac{3}{4} + 1 \\
+					&= \frac{13}{4}
+				\end{align*}
+				So $L(f,\mathcal{P}_2) = \frac{7}{4}$ and $U(f,\mathcal{P}_2) = \frac{13}{4}$\\
+			\end{enumerate}
+			\item[2.] Prove if $f(x):=c$ for $x \in [a,b]$, then its Darboux integral is equal to $c(b-a)$.
+			\begin{proof}
+				Let $\mathcal{P} := (x_0, x_1, \dots, x_n)$ be a partition of $[a,b]$ where
+				\[a=x_0 < x_1 < x_2 < \dots < x_n=b\]
+				then $M_i:= \sup f(x)=c$ since $f$ is constant, for all $x \in [x_{i-1}, x_i]$, and $m_i:= \inf f(x)=c$ again since $f$ is constant, for all $x \in [x_{i-1},x_i]$.
+				\\\\Then we have that
+				\begin{align*}
+					U(f, \mathcal{P}) &= \sum_{i=1}^{n} M_i (x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} c (x_i-x_{i-1}) \\
+					&= c \sum_{i=1}^{n} (x_i-x_{i-1}) \\
+					&= c (x_n-x_0) \\
+					&= c (b-a), &\text{as both $b$ and $a$ were defined for $\mathcal{P}$}
+				\end{align*}
+				So $U(f,\mathcal{P}):= c(b-a)$. As for $L(f,\mathcal{P})$:
+				\begin{align*}
+					L(f,\mathcal{P}) &= \sum_{i=1}^{n} m_i (x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} c (x_i-x_{i-1}) \\
+					&= c \sum_{i=1}^{n} (x_i-x_{i-1}) \\
+					&= c (x_n-x_0) \\
+					&= c(b-a), &\text{as both $b$ and $a$ were defined for $\mathcal{P}$}
+				\end{align*}
+				and thus $L(f,\mathcal{P}) = c(b-a)$.
+				\\\\Now we must find the Darboux integral of $f(x)$. So we have that the upper Darboux integral of $f(x)$ is 
+				\begin{align*}
+					U(f) &= \inf \{U(f,\mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} \\
+					&= \inf \{c(b-a): \mathcal{P} \in \mathscr{P}[a,b]\} \\
+					&= c(b-a)
+				\end{align*}
+				and the lower Darboux integral is
+				\begin{align*}
+					L(f) &= \sup \{L(f, \mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} \\
+					&= \sup \{c(b-a) : \mathcal{P} \in \mathscr{P}[a,b]\} \\
+					&= c(b-a)
+				\end{align*}
+				Thus we have that $U(f)=L(f)$, which yields that $f$ is Darboux integrable on $[a,b]$ and the Darboux integral of $f$ is $c(b-a)$.
+			\end{proof}
+			\item[3.] Let $f$ and $g$ be bounded functions on $I:=[a,b]$. If $f(x) \leq g(x)$ for all $x \in I$, show that $L(f) \leq L(g)$ and $U(f) \leq U(g)$.
+			\begin{proof}
+				Let $f,g$ be bounded on $I:=[a,b]$ such that $f(x) \leq g(x)\ \forall\ x \in I$, and let $\mathcal{P}:=(x_0,x_1,\dots, x_n)$ be a partition of $[a,b]$ where
+				\[a=x_0<x_1<\dots<x_n=b\]
+				Let $M_{i_1}:=\sup \{f(x): x \in [x_{i-1},x_i]\}$, and let $m_{i_1}:=\inf \{f(x): x \in [x_{i-1},x_i]\}$, and $M_{i_2} := \sup \{g(x): x \in [x_{i-1},x_i]\}$ and $m_{i_2}:=\inf\{g(x):x\in[x_{i-1},x_i]\}$. Then since $f(x) \leq g(x)$, we know that $\sup f(x) \leq \sup g(x)$ and that $\inf f(x) \leq \inf g(x)$. This in turn means that
+				\[\sup \{f(x): x \in [x_{i-1},x_i]\} \leq \sup \{g(x): x \in [x_{i-1},x_i]\}\]
+				and
+				\[\inf \{f(x): x \in [x_{i-1},x_i]\} \leq \inf \{g(x): x \in [x_{i-1},x_i]\}\]
+				which implies that $M_{i_1} \leq M_{i_2}$ and $m_{i_1} \leq m_{i_2}$ for $i=1,2, \dots, n$.
+				\\\\Then we have the following:
+				\[L(f,\mathcal{P}) = \sum_{i=1}^{n} m_{i_1} (x_i-x_{i-1}) \leq \sum_{i=1}^{n} m_{i_2} (x_i-x_{i-1})= L(g,\mathcal{P})\]
+				So $L(f,\mathcal{P}) \leq L(g,\mathcal{P})$ and
+				\[U(f,\mathcal{P})=\sum_{i=1}^{n} M_{i_1} (x_i-x_{i-1}) \leq \sum_{i=1}^{n} M_{i_2}(x_i-x_{i-1})=U(g,\mathcal{P})\]
+				So $U(f,\mathcal{P}) \leq U(g,\mathcal{P})$.
+				\\\\Now, we have that
+				\[L(f)=\sup \{L(f,\mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} \leq \sup \{L(g,\mathcal{P}): \mathcal{P} \in \mathscr{P}\}=L(g)\]
+				And so $L(f) \leq L(g)$. Also,
+				\[U(f)=\inf \{U(f,\mathcal{P}): \mathcal{P} \in \mathscr{P}\} \leq \inf \{U(g,\mathcal{P}): \mathcal{P} \in \mathscr{P}\}=U(g)\]
+				And thus $U(f) \leq U(g)$.\\\\
+				$\therefore$ If $f(x) \leq g(x)$, then $L(f) \leq L(g)$ and $U(f) \leq U(g)$.
+			\end{proof}
+			\item[5.] Let $f,g,h$ be bounded functions on $I:=[a,b]$ such that $f(x) \leq g(x) \leq h(x)$ for all $x \in I$. Show that if $f$ and $h$ are Darboux integrable and if $\displaystyle\int_{a}^{b} f=\displaystyle\int_{a}^{b} h$, then $g$ is also Darboux integrable with $\displaystyle\int_{a}^{b} g = \displaystyle\int_{a}^{b} f$.
+			
+			\begin{proof}
+				Let $f,g,h:[a,b] \to \R$ be bounded functions such that $f(x) \leq g(x) \leq h(x)\ \forall\ x \in [a,b]$, and suppose $f$ and $h$ are both Darboux integrable, and $\displaystyle\int_{a}^{b} f = \displaystyle\int_{a}^{b} h$. We want to show that $g$ is also Darboux integrable and that $\displaystyle\int_{a}^{b} g = \displaystyle\int_{a}^{b} f$.
+				\\\\Since $f$ and $h$ are Darboux integrable, we know that $U(f)=L(f)$ and $U(h)=L(h)$. Thus by the theorem posed in \textit{Problem 3}, we know that $U(f) \leq U(h)$ and $L(f) \leq L(h)$. We also know that $L(f)=U(f)=\displaystyle\int_{a}^{b} f$ and that $L(h)=U(h)=\displaystyle\int_{a}^{b} h=\int_{a}^{b} f$.\\\\
+				Again, by \textit{Problem 3}, we have that $L(f) \leq L(g) \leq L(h)$ and $U(f) \leq U(g) \leq U(h)$. Thus we have that $\displaystyle\int_{a}^{b} f \leq L(g) \leq \int_{a}^{b} f$ and $\displaystyle\int_{a}^{b} f \leq U(g) \leq \int_{a}^{b} f$, which thus yields that $L(g) = \int_{a}^{b} f$, and that $U(g) =\int_{a}^{b} f$. Hence $L(g)=U(g)=\displaystyle\int_{a}^{b} f$.
+				\\\\$\therefore$ $g$ is Darboux integrable and $\displaystyle\int_{a}^{b} g = \int_{a}^{b} f$.
+			\end{proof}
+			\item[6.] Let $f$ be defined on $[0,2]$ by $f(x):=1$ if $x \neq 1$ and $f(1) := 0$. Show that the Darboux integral exists and find its value.
+			\begin{proof}
+				Let $f(x):=\begin{cases}
+				1, &x \in [0,2]\setminus\{1\} \\
+				0, &x=1
+				\end{cases}$
+				\\Thus $f$ is bounded on $[0,2]$ Now, let $g:[0,2] \to \R$ be given by $g(x):=1$. Then since $g$ is a constant function, we know that $g$ is continuous on $[0,2]$, and thus by \textit{Theorem 7.2.7}, $g \in \mathcal{R}[0,2]$.
+				\\\\So, $\displaystyle\int_{0}^{2} 1\ dx= 2-0=2$. And since $f(x)=g(x)\ \forall\ x \in [0,2]\setminus\{1\}$, we have that $f \in \mathcal{R}[0,2]$. Also, $\displaystyle\int_{0}^{2} f=\int_{0}^{2} g=2$.
+				\\\\$\therefore$ By the \textit{Equivalence Theorem}, since $f\in\mathcal{R}[0,2]$, $f$ is Darboux integrable and $\displaystyle\int_{0}^{2} f =2$.\\
+			\end{proof}
+			\item[7.]
+			\begin{enumerate}
+				\item[a.] Prove that if $g(x):=0$ for $0 \leq x \leq \frac{1}{2}$ and $g(x):=1$ for $\frac{1}{2} < x \leq 1$, then the Darboux integral of $g$ on $[0,1]$ is equal to $\frac{1}{2}$.
+				\begin{proof}
+					Let $g(x):=\begin{cases}
+					0, &0 \leq x \leq \frac{1}{2} \\
+					1, &\frac{1}{2} < x \leq 1
+					\end{cases}$. We want to show that the Darboux integral of $g$ on $[0,1]$ is equal to $\frac{1}{2}$.
+					\\\\Since $g$ on the interval $\left[0,\frac{1}{2}\right]$ is a constant function, we know that $g$ is continuous on that interval, and is thus Riemann integrable, whose evaluation yields $\displaystyle\int_{0}^{\frac{1}{2}} g = \int_{0}^{\frac{1}{2}} 0 = 0$. 
+					\\\\Now, let $\varphi(x):= 1\ \forall\ x \in \left[\frac{1}{2},1\right]$. Then we have that $\varphi$ is a constant function and is thus continuous, and again by \textit{Theorem 7.2.7}, $\varphi$ is thus Riemann integrable, whose evaluation yields $\displaystyle\int_{\frac{1}{2}}^{1} 1 = 1-\frac{1}{2}=\frac{1}{2}$. Thus, $g=\varphi$ except at $\frac{1}{2}$. Hence $g$ is integrable on the interval $[0,1]$, and evaluates to $\displaystyle\int_{0}^{1} g = \int_{0}^{\frac{1}{2}} g + \int_{\frac{1}{2}}^{1} g = \frac{1}{2}$. Thus, by the \textit{Equivalence Theorem}, we have that $g$ is Darboux integrable.
+				\end{proof}
+				\item[b.] Does the conclusion hold if we change the value of $g$ at the point $\frac{1}{2}$ to $13$?
+				\\\\If we were to change $g$ at the one point then Riemann integrability is not affected, thus if $g(\frac{1}{2})=13$, then $g$ remains integrable on $[0,1]$ and $\displaystyle\int_{0}^{1} g = \frac{1}{2}$. Thus, $g$ is still Darboux integrable on $[0,1]$ with $\displaystyle\int_{0}^{1} g = \frac{1}{2}$.\\
+			\end{enumerate}
+			\item[9.] Let $f_1$ and $f_2$ be bounded functions on $[a,b]$. Show that $L(f_1)+L(f_2) \leq L(f_1 + f_2)$.
+			\begin{proof}
+				Consider the partitions $\mathcal{P}_1$ of $f_1$ on $[a,b]$, and  $\mathcal{P}_2$ of $f_2$ on $[a,b]$, and let $\mathcal{P}:=\mathcal{P}_1 \cup \mathcal{P}_2$ of $[a,b]$, where $\mathcal{P}:=(x_0,x_1,\dots,x_n)$ such that
+				\[a=x_0<x_1<\dots<x_n=b\]
+				
+				and let $m_{i_1} := \inf \{f_1(x): x \in [x_{i-1},x_i]\}$, $m_{i_2} := \inf \{f_2(x):x \in [x_{i-1},x_i]\}$, and let $m_{i_3}:=\inf \{f_1(x)+f_2(x):x \in [x_{i-1},x_i]\}$.
+				\\\\We note that $m_{i_1} + m_{i_2} \leq f_1(x)+f_2(x)\ \forall\ x \in [x_{i-1},x_i]$.
+				\\\\Then we have the following:
+				\begin{align*}
+					L(f_1,\mathcal{P}) + L(f_2,\mathcal{P}) &= \sum_{i=1}^{n} m_{i_1} (x_i-x_{i-1}) + \sum_{i=1}^{n} m_{i_2} (x_i-x_{i-1}) \\
+					&= \sum_{i=1}^{n} (m_{i_1}+m_{i_2}) (x_i-x_{i-1}) \\
+					&\leq \sum_{i=1}^{n} m_{i_3} (x_i-x_{i-1}), &\text{as was noted previously,} \\
+					&= L(f_1+f_2, \mathcal{P}) \leq L(f_1+f_2)
+				\end{align*}
+				Then we have that $\sup \{L(f_1,\mathcal{P}) + L(f_2, \mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} \leq L(f_1+f_2)$. Thus,
+				\begin{align*}
+					L(f_1)+L(f_2) &=\sup\{L(f_1,\mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} + \sup \{L(f_2, \mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} \\ 
+					&\leq \sup \{L(f_1+f_2,\mathcal{P}): \mathcal{P} \in \mathscr{P}[a,b]\} \\
+					&=L(f_1+f_2)
+				\end{align*}
+				Thus we have that $L(f_1)+L(f_2) \leq L(f_1+f_2)$.
+			\end{proof}
+			\item[10.] Give an example to show that strict inequality can hold in the preceding exercise.
+			\\\\Consider the functions $f_1,f_2:[0,1] \to \R$ given by $f_1(x):=\begin{cases}
+			0, &x \in \Q \\
+			1, &x \in \R\setminus\Q
+			\end{cases}$, and $f_2(x):=\begin{cases}
+			1, &x \in \Q \\
+			0, &x \in \R\setminus\Q
+			\end{cases}$
+			\\Then we have that $L(f_1)=0$, and that $L(f_2)=0$, and thus $L(f_1)+L(f_2)=0$.
+			\\\\However, we now note that $(f_1+f_2)(x)=1\ \forall\ x \in [0,1]$, and thus we have that $L(f_1+f_2)=U(f_1+f_2)=\displaystyle\int_{0}^{1} 1 = 1 - 0=1$. Thus we have that $0=L(f_1)+L(f_2) < L(f_1+f_2) = 1$.
+		\end{enumerate}
+		\item Let $f(x)=x^2$ on $[1,3.5]$.
+		\begin{enumerate}
+			\item Find $L(f,P)$ and $U(f,P)$ when $P=\{1,2,3,3.5\}$.
+			\\\\Our terms are:
+			\[x_0:=1,\ \ x_1:=2,\ \ x_2:=3,\ \ x_3:=3.5\]
+			and our subintervals are
+			\[I_1:=[1,2],\ \ I_2:=[2,3],\ \ I_3:=[3,3.5]\]
+			So for $L(f,\mathcal{P})$ we have
+			\begin{align*}
+				L(f,\mathcal{P}) &= \sum_{i=1}^{n} m_i (x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \inf \{f(x): x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \inf \{x^2: x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \inf \{x^2: x \in [1,2]\}(2-1) \\
+				&+ \inf \{x^2: x \in [2,3]\}(3-2) \\
+				&+ \inf \{x^2: x \in [3,3.5]\}(3.5-3) \\
+				&= 1 \cdot 1 + 4 \cdot 1 + 9 \cdot \frac{1}{2} \\
+				&= 1 + 4 + \frac{9}{2} \\
+				&= \frac{19}{2}
+			\end{align*}
+			So $L(f,\mathcal{P}) = \frac{19}{2}$, and
+			\begin{align*}
+				U(f,\mathcal{P}) &= \sum_{i=1}^{n} M_i (x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \sup\{f(x): x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \sup \{x^2: x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \sup \{x^2: x \in [1,2]\}(2-1) \\
+				&+ \sup \{x^2: x \in [2,3]\}(3-2) \\
+				&+ \sup \{x^2: x \in [3,3.5]\}(3.5-3) \\
+				&= 4 \cdot 1 + 9 \cdot 1 + 12.25 \cdot \frac{1}{2} \\
+				&= 4 +9 + 6.125 \\
+				&= 19.125
+			\end{align*}
+			And so $U(f,\mathcal{P})=19.125$.\\\\
+			Thus $L(f,\mathcal{P})= \frac{19}{2}$ and $U(f,\mathcal{P})=19.125$.\\ 
+			\item Find $L(f,P)$ and $U(f,P)$ when $P=\{1,1.5,2,2.5,3,3.5\}$.
+			\\\\Our terms are:
+			\[x_0:=1,\ \ x_1:= 1.5,\ \ x_2:= 2,\ \ x_3:=2.5,\ \ x_4:=3,\ \ x_5:=3.5\]
+			and so our intervals are
+			\[I_1:=[1,1.5],\ \ I_2:=[1.5,2],\ \ I_3:=[2,2.5],\ \ I_4:=[2.5,3],\ \ I_5:=[3,3.5]\]
+			So we have for $L(f,\mathcal{P})$:
+			\begin{align*}
+				L(f,\mathcal{P}) &= \sum_{i=1}^{n} m_i (x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \inf \{f(x): x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \inf \{x^2: x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \inf \{x^2: x \in [1,1.5]\}(1.5-1) + \inf \{x^2: x \in [1.5,2]\}(2-1.5) \\
+				&+ \inf \{x^2: x \in [2,2.5]\}(2.5-2) + \inf \{x^2: x \in [2.5,3]\}(3-2.5) \\
+				&+ \inf \{x^2: x \in [3,3.5]\}(3.5-3) \\
+				&= 1 \cdot \frac{1}{2} + 2.25 \cdot \frac{1}{2} + 4 \cdot \frac{1}{2} + 6.25 \cdot \frac{1}{2} + 9 \cdot \frac{1}{2} \\
+				&= .5 +1.125 + 2+3.125 + 4.5 \\
+				&= 11.25
+			\end{align*}
+			thus $L(f,\mathcal{P})=11.25$ and 
+			\begin{align*}
+				U(f,\mathcal{P}) &= \sum_{i=1}^{n} M_i (x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \sup \{f(x): x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \sup\{x^2: x \in [x_{i-1},x_i]\}(x_i-x_{i-1}) \\
+				&= \sup \{x^2: x \in [1,1.5]\}(1.5-1) + \sup \{x^2: x \in [1.5,2]\}(2-1.5) \\
+				&+ \sup \{x^2: x \in [2,2.5]\}(2.5-2) + \sup \{x^2: x \in [2.5,3]\}(3-2.5) \\
+				&+ \sup \{x^2: x \in [3,3.5]\}(3.5-3) \\
+				&= 2.25 \cdot 0.5 + 4 \cdot 0.5 + 6.25 \cdot 0.5 + 9 \cdot 0.5 + 12.25 \cdot 0.5 \\
+				&= 16.875
+			\end{align*}
+			Thus $U(f,\mathcal{P}) = 16.875$.\\
+			Therefore $L(f,\mathcal{P}) = 11.25$ and $U(f,\mathcal{P})=16.875$.\\
+		\end{enumerate}
+		\item Use upper and lower Darboux sums to evaluate the following integrals.
+		\begin{enumerate}
+			\item $\displaystyle\int_{1}^{3} (2x+3)\ dx$
+			\\\\Let $\mathcal{P}_n :=\left(0, \frac{3}{n}, \frac{6}{n}, \dots,
+			 \frac{3n-1}{n}, 3\right)$. Then $\Delta x_i := \frac{3}{n}$. Since $2x+3$ is increasing on $[1,3]$,  we have that on $[x_{i-1},x_i] = \left[\frac{3i-1}{n}, \frac{3i}{n}\right]$, $M_i$ = occurs at the right endpoint = $f(\frac{3i}{n})=\frac{6i}{n} + 3$ and $m_i$ occurs at the left endpoint, $f\left(\frac{3i-1}{n}\right)=\frac{6i-2}{n}+3$.
+			 \\\\So, we also note that in order to get the correct answer, we must calculate $\displaystyle\int_{0}^{3} 2x+3\ dx - \int_{0}^{1} 2x+3\ dx$, and thus we choose $\mathcal{P}_1 := \left(0,\frac{1}{n},\dots,\frac{n-1}{n}, 1\right)$ with $\Delta x_{i_1} :=\frac{1}{n}$, with $M_{i_1}:= \frac{2i}{n}+3$, and $m_{i_1}:= \frac{2i-2}{n}+3$, and thus:
+			 \begin{align*}
+			 	U(f,\mathcal{P}_n)-U(f,\mathcal{P}_1) &= \sum_{i=1}^{n} M_i \Delta x_i - M_{i_1} \Delta x_{i_1} \\
+			 	&= \sum_{i=1}^{n} \left(\frac{6i}{n} + 3\right) \cdot \left(\frac{3}{n}\right) - \left[\left(\frac{2i}{n}+3\right)\cdot \left(\frac{1}{n}\right)\right]\\
+			 	&= \sum_{i=1}^{n} \frac{18i}{n^2} + \frac{9}{n} -
+			 	\frac{2i}{n^2}-\frac{3}{n}\\
+			 	&= \frac{18}{n^2}\ \sum_{i=1}^{n} i + \frac{9}{n} \sum_{i=1}^{n} 1 -\frac{2}{n^2}\ \sum_{i=1}^{n} i - \frac{3}{n} \sum_{i=1}^{n} 1\\
+			 	&= \frac{18}{n^2} \cdot \frac{n(n+1)}{2} + \frac{9\cancel{n}}{\cancel{n}} -\frac{2}{n^2}\cdot \frac{n(n+1)}{2}-\frac{3\cancel{n}}{\cancel{n}}\\
+			 	&= \frac{18n^2+18n}{2n^2} + 9 - \frac{2n^2+2n}{2n^2}-3 \\
+			 	&= \lim\limits_{n \to \infty} \frac{18n^2+18n}{2n^2} + 9 - \frac{2n^2+2n}{2n^2}-3 \\
+			 	&= 9+9-1-3 \\
+			 	&= 14 \\
+			 	&\geq U(f)
+			 \end{align*}
+			 and
+			 \begin{align*}
+			 	L(f,\mathcal{P}_n)-L(f,\mathcal{P}_1) &= \sum_{i=1}^{n} m_i \Delta x_i -m_{i_1} \Delta x_{i_1}\\
+			 	&= \sum_{i=1}^{n} \left(\frac{6i-2}{n}+3\right)\cdot \left(\frac{3}{n}\right) -\left[\left(\frac{2i-2}{n}+3\right)\cdot \left(\frac{1}{n}\right)\right]\\
+			 	&= \sum_{i=1}^{n} \frac{18i-6}{n^2} + \frac{9}{n} - \frac{2i-2}{n^2}-\frac{3}{n}\\
+			 	&= \sum_{i=1}^{n} \frac{6(3i-1)}{n^2} + \frac{9}{n}\ \sum_{i=1}^{n} 1 - \frac{2}{n^2}\ \sum_{i=1}^{n} (i-1) - \frac{3}{n}\ \sum_{i=1}^{n} 1 \\
+			 	&= \frac{6}{n^2}\ \left(3\ \sum_{i=1}^{n} i - \sum_{i=1}^{n} 1\right)+\frac{9\cancel{n}}{\cancel{n}} - \frac{2}{n^2} \cdot \frac{(n-1)((n-1)+1)}{2} -\frac{3\cancel{n}}{\cancel{n}}\\
+			 	&= \frac{6}{n^2}\cdot \left(\frac{3n(n+1)}{2}-n\right) + 9 - \frac{2}{n^2} \cdot \frac{n^2-n}{2} - 3\\
+			 	&= \frac{6}{n^2} \cdot \left(\frac{3n^2+3n}{2}-n\right) + 9 - \frac{2n^2-2n}{2n^2}-3\\
+			 	&= \frac{18n^2+18n}{2n^2} - \frac{6n}{n^2} +9 - \frac{2n^2-2n}{2n^2}-3 \\
+			 	&= \lim\limits_{n \to \infty} \frac{18n^2+18n}{2n^2} -\lim\limits_{n \to \infty} \frac{6}{n} + \lim\limits_{n \to \infty} 9 - \lim\limits_{n \to \infty} \frac{2n^2-2n}{2n^2} - \lim\limits_{n \to \infty} 3\\
+			 	&= 9-0+9-1-3 \\
+			 	&= 14 \\
+			 	&\leq L(f)
+ 			 \end{align*}
+ 			 So,
+ 			 \[14 \leq L(f) \leq U(f) \leq 14\]
+ 			 So $L(f)=U(f)=14$.\\
+			\item $\displaystyle\int_{0}^{2} (x^2+1)\ dx$
+			\\\\Let $\varepsilon > 0$ be given, and let $\mathcal{P}:= (0, \frac{2}{n}, \frac{4}{n}, \dots, \frac{2n-1}{n}, 2)$, and we note that $\Delta x_i := \frac{2}{n}$.
+			\\\\Since $f$ is increasing on $[0,2]$, then on $[x_{i-1},x_i] = \left[\frac{2i-1}{n}, \frac{2i}{n}\right]$, $M_i$ occurs at the right endpoint, and is thus $f\left(\frac{2i}{n}\right)=\frac{4i^2}{n^2}+1$. Also, $m_i$ occurs at the left endpoint and is thus $f\left(\frac{2i-1}{n}\right)=\left(\frac{4i^2-4i+1}{n^2}+1\right)$.
+			\begin{align*}
+				U(f,\mathcal{P}_n) &= \sum_{i=1}^{n} M_i \Delta x_i \\
+				&= \sum_{i=1}^{n} \left(\frac{4i^2}{n^2}+1\right) \cdot \left(\frac{2}{n}\right) \\
+				&= \sum_{i=1}^{n} \frac{8i^2}{n^3} + \frac{2}{n} \\
+				&= \frac{8}{n^3}\ \sum_{i=1}^{n} i^2 + \frac{2}{n}\ \sum_{i=1}^{n} 1 \\
+				&= \frac{8}{n^3} \cdot \frac{n(n+1)(2n+1)}{6} + \frac{2 \cancel{n}}{\cancel{n}} \\
+				&= \frac{8}{n^3} \cdot \frac{2n^3+3n^2+n}{6} + 2 \\
+				&= \frac{16n^3+24n^2+8n}{6n^3} + 2 \\
+				&= \lim\limits_{n \to \infty}\frac{16n^3+24n^2+8n}{6n^3} + 2 \\
+				&= \frac{16}{6} + 2 \\
+				&= \frac{8}{3} + 2 \\
+				&= \frac{14}{3} \\
+				&\geq U(f)
+			\end{align*}
+			and
+			\begin{align*}
+				L(f,\mathcal{P}_n) &= \sum_{i=1}^{n} m_i \Delta x_i \\
+				&= \sum_{i=1}^{n} \left(\frac{4i^2-4i+1}{n^2}+1\right) \cdot \left(\frac{2}{n}\right) \\
+				&= \sum_{i=1}^{n} \frac{8i^2-8i+2}{n^3} + \frac{2}{n} \\
+				&= \sum_{i=1}^{n} \frac{2(2i-1)^2}{n^3} + \frac{2}{n}\ \sum_{i=1}^{n} 1 \\
+				&= \frac{8}{3}-\frac{2}{3n^2} + \frac{2 \cancel{n}}{\cancel{n}} \\
+				&= \lim\limits_{n \to \infty} \frac{8}{3} -\frac{2}{3n^2} + 2 \\
+				&= \frac{8}{3} -0 + 2 \\
+				&= \frac{8}{3} + 2 \\
+				&= \frac{14}{3} \\
+				&\leq L(f)
+			\end{align*}
+			So $\frac{14}{3} \leq L(f) \leq U(f) \leq \frac{14}{3}$. So $L(f)=U(f)=\frac{14}{3}$
+		\end{enumerate}
+		\item
+		\begin{enumerate}
+			\item Prove that if $f,g:[a,b] \to \R$ are bounded, then $U(f+g, \mathcal{P}) \leq U(f,\mathcal{P})+U(g,\mathcal{P})$ for every partition $\mathcal{P}$ of $[a,b]$.
+			\begin{proof}
+				Since $f$ and $g$ are bounded, we know that $\sup(f+g) \leq \sup (f) + \sup(g)$. Then $M_{f+g,i}:=\sup \{f+g:x \in [x_{i-1},x_i]\}$. And so $M_{f+g,i} \leq M_{f,i} + M_{g,i}$, and thus
+				\[U(f+g,\mathcal{P}):=\sum_{i=1}^{n} M_{f+g,i}\Delta x_i \leq \sum_{i=1}^{n} M_{f,i}\Delta x_i +\sum_{i=1}^{n} M_{g,i}\Delta x_i=U(f,\mathcal{P})+U(g,\mathcal{P})\]
+			\end{proof}
+			\item Find examples of bounded functions $f,g:[a,b] \to \R$ such that $U(f+g,\mathcal{P}) < U(f, \mathcal{P}) + U(g,\mathcal{P})$ for some partition of $[a,b]$.
+			\\\\Consider the functions $f,g:[a,b] \to \R$ given by $f(x):=\begin{cases}
+			1, &x \in \R\setminus\Q \\
+			0, &x \in \Q
+			\end{cases}$  and  $g(x):=\begin{cases}
+			-1, &x \in \R\setminus\Q \\
+			0, &x \in \Q
+			\end{cases}$
+			\\Thus, we have that $(f+g)(x) = 0\ \forall\  x$, and thus $U(f+g)=0$. However, we note that $U(f,\mathcal{P})+U(g,\mathcal{P})=1+0 = 1$. Thus, $0=U(f+g,\mathcal{P})<U(f,\mathcal{P})+U(g,\mathcal{P})=1$.
+		\end{enumerate}
+		\item Prove or justify, if true or provide a counterexample, if false.
+		\begin{enumerate}
+			\item Let $f$ be bounded on $[a,b]$. The upper and lower sums for $f$ form a bounded set.
+			\\\\This is a true statement.
+			\begin{proof}
+				Since $f$ is bounded, we know that $\exists\ m,M \st m \leq f(x) \leq M\ \forall\ x \in [a,b]$.\\
+				By the definitions of $L(f,\mathcal{P}),$ and $U(f,\mathcal{P})$, we have
+				\[L(f,\mathcal{P}):= \sum_{i=1}^n\inf (f)\cdot\Delta x_i\ \ \ \text{and}\ \ \ U(f,\mathcal{P}):= \sum_{i=1}^{n} \sup (f)\cdot\Delta x_i\]
+				This yields that 
+				\[m(b-a)\leq L(f,\mathcal{P})\leq U(f,\mathcal{P})\leq M(b-a)\]
+				So $L(f,\mathcal{P}),$ and $U(f,\mathcal{P})$ are bounded.
+			\end{proof}
+			\item Let $f$ be bounded on $[a,b]$. $f \in \mathcal{R}[a,b]$ if and only if its lower and upper sums are equal.
+			\\\\This is a false statement. Consider the function and partition given in \textit{Problem 1 (a)}:
+			Let $f(x):=|x|$ for $-1 \leq x \leq 2$. Calculate $L(f;P)$ and $U(f,P)$ for the following partition: $\mathcal{P}_1 :=(-1,0,1,2)$
+				\\\\Our terms are:
+				\[x_0:= -1,\ \ x_1:=0,\ \ x_2:=1,\ \ x_3:=2\]
+				and our intervals are:
+				\[I_1:=[-1,0],\ \ I_2:=[0,1],\ \ I_3:=[1,2]\]
+				thus $L(f,\mathcal{P}_1)$ is:
+				\begin{align*}
+				L(f,\mathcal{P}_1) &= \sum_{i=1}^{n} m_i(x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \left(\inf\{f(x):x \in [x_{i-1},x_i]\}\right) (x_i-x_{i-1}) \\
+				&= (\inf \{|x|:x \in [-1,0]\})(0-(-1))\\ 
+				&+ (\inf \{|x|: x \in [0,1]\})(1-0)\\
+				&+(\inf \{|x|: x\in [1,2]\})(2-1) \\
+				&= 0 \cdot 1 + 0 \cdot 1 + 1 \cdot 1 \\
+				&= 0+0+1 \\
+				&= 1
+				\end{align*}
+				and
+				\begin{align*}
+				U(f,\mathcal{P}_1) &= \sum_{i=1}^{n} M_i (x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \sup \{f(x): x \in [x_{i-1},x_i]\} (x_i-x_{i-1}) \\
+				&= \sum_{i=1}^{n} \sup \{|x|: x \in [x_{i-1},x_i]\} (x_i-x_{i-1}) \\
+				&= (\sup \{|x|:x \in [-1,0]\})(0-(-1)) \\
+				&+ (\sup \{|x| : x \in [0,1]\})(1-0) \\
+				&+ (\sup \{|x|: x \in [1,2]\})(2-1) \\
+				&= 1 \cdot 1 + 1 \cdot 1 + 2 \cdot 1 \\
+				&= 1 + 1 +2 \\
+				&= 4
+				\end{align*}
+				So, $L(f,\mathcal{P}_1)=1$ and $U(f,\mathcal{P}_1)=4$\\
+			\item Let $f$ be bounded on $[a,b]$. If $P$ and $Q$ are partitions of $[a,b]$, then $L(f,P) \leq U(f,Q)$.
+			\\\\This is a true statement by \textit{Lemma 7.4.3}:
+			\begin{lemma*}
+				Let $f:I\to\R$ be bounded. If $\mathcal{P}_1,\mathcal{P}_2$ are any two partitions of $I$, then $L(f;\mathcal{P}_1)\leq U(f;\mathcal{P}_2)$.
+			\end{lemma*}
+			\item When $\displaystyle\int_{a}^{b} f(x)\ dx$ exists, it is the unique number that lies between $L(f,P)$ and $U(f,P)$ for all partitions $P$ of $[a,b]$.
+			\\\\This is true since if $f \in \mathcal{R}[a,b]$, and if we let $I:=[a,b]$, then $f$ is Darboux integrable, by the \textit{Equivalence Theorem}. Then, by the definition of the Darboux integral, $U(f)=\inf \{U(f,\mathcal{P}) : \mathcal{P} \in \mathscr{P}(I)\}$ and $L(f) := \sup \{L(f,\mathcal{P}) : \mathcal{P} \in \mathscr{P}(I)\}$, and by \textit{Theorem 7.1.1}:
+			\begin{theorem*}
+				If $f \in \mathcal{R}[a,b]$, then the value of the integral is uniquely determined.
+			\end{theorem*}
+			, we have that the value $L$ of $\displaystyle\int_{a}^{b} f(x)\ dx=L$ is uniquely determined for all partitions $\mathcal{P} \in \mathscr{P}(I)$.
+			\\\\That is, this statement is a combination of \textit{Theorem 7.4.1} and \textit{Theorem 7.1.2}.\\
+			\item Let $f$ be bounded on $[a,b]$. Then $L(f,P) \leq \displaystyle\int_{a}^{b} f(x)\ dx \leq U(f,P)$.
+			\\\\This is false. Consider the Dirichlet function on the interval $[0,1]$: $f:[0,1] \to \R$ given by $f(x):=\begin{cases}
+			0, &x \in \Q \\
+			1, &x \in \R\setminus\Q
+			\end{cases}$\\
+			Then we have that $L(f,\mathcal{P}) = 0$ and $U(f,\mathcal{P}):=1$, so we have that $L(f,\mathcal{P}) \leq U(f,\mathcal{P})$, but we know that the Dirichlet function is not integrable. Thus we have that this is a false statement.\\
+			\item If $f \in \mathcal{R}[a,b]$, then for all $\varepsilon > 0$, there exists a partition $P$ of $[a,b]$ such that $L(f,P) > U(f,P)-\varepsilon$.
+			\\\\This is a true statement.
+			\begin{proof}
+				Let $f \in \mathcal{R}[a,b]$. Recall the \textit{Equivalence Theorem}:
+				\begin{theorem*}{\textbf{Equivalence Theorem}}
+					A function $f$ on $I=[a,b]$ is Darboux integrable if and only if it is Riemann integrable.
+				\end{theorem*}
+				Thus by the \textit{Equivalence Theorem}, $f$ is also Darboux integrable.
+				\\\\Also, recall the \textit{Integrability Criterion}:
+				\begin{theorem*}{\textbf{Integrability Criterion}}
+					Let $I:=[a,b]$ and let $f:I \to \R$ be a bounded function on $I$. Then $f$ is Darboux integrable on $I$ if and only if for each $\varepsilon > 0$ there is a partition $\mathcal{P}_\varepsilon$ of $I$ such that 
+					\[U(f;\mathcal{P}_\varepsilon)-L(f;\mathcal{P}_\varepsilon)<\varepsilon\]
+				\end{theorem*}
+				Note that we can rewrite the inequality as follows:
+				\begin{align*}
+					U(f,\mathcal{P}_\varepsilon) -L(f,\mathcal{P}_\varepsilon) < \varepsilon &\equiv -L(f,\mathcal{P}_\varepsilon) < \varepsilon-U(f,\mathcal{P}_\varepsilon) \\
+					&\equiv L(f,\mathcal{P}\varepsilon) > U(f,\mathcal{P}_\varepsilon) -\varepsilon
+				\end{align*}
+				Thus by the \textit{Integrability Criterion}, we have that $L(f,\mathcal{P})>U(f,\mathcal{P})-\varepsilon$.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
